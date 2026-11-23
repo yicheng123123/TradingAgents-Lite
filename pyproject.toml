@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tradingagents-lite"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["langgraph>=1,<2", "pydantic>=2,<3", "openai>=2,<4"]
+
+[project.scripts]
+talite = "tradingagents_lite.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["tradingagents_lite"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

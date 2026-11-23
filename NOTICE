@@ -1,0 +1,10 @@
+TradingAgents-Lite
+
+Design reference: TradingAgents by Tauric Research and contributors
+https://github.com/TauricResearch/TradingAgents
+Reviewed revision: 9fa1196fffbcfd9de5146d2dd2869df84ab99838
+
+The original graph orchestration, tool limits, date guards and settlement
+informed the design. No upstream Python or prompts were copied. LICENSE is
+the Apache-2.0 license text carried from the reviewed upstream revision.
+Third-party dependencies and market data retain their own terms.

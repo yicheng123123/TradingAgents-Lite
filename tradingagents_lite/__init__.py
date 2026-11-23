@@ -1,0 +1,1 @@
+"""TradingAgents-Lite research harness."""

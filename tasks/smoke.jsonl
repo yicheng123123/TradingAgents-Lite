@@ -1,0 +1,4 @@
+{"task_id":"smoke-01","symbol":"AAPL","decision_date":"2024-01-09","horizon_sessions":3}
+{"task_id":"smoke-02","symbol":"MSFT","decision_date":"2024-01-16","horizon_sessions":3}
+{"task_id":"smoke-03","symbol":"AAPL","decision_date":"2024-01-23","horizon_sessions":3}
+{"task_id":"smoke-04","symbol":"MSFT","decision_date":"2024-01-30","horizon_sessions":3}
