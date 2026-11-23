@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae",
+  "market_calendar_manifest_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+  "evidence_sha256": "b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532",
+  "count": 49,
+  "filing_window": [
+    "2023-11-01",
+    "2024-04-16"
+  ],
+  "news_window": [
+    "2024-01-07",
+    "2024-04-16"
+  ],
+  "apple_archive_pages": [
+    40,
+    41,
+    42,
+    43,
+    44
+  ],
+  "lookback_days_by_eligibility": {
+    "sec_filing": 180,
+    "news": 30
+  },
+  "sec_user_agent": "declared_project_default",
+  "availability": "Proxy at 16:15 America/New_York on the next observed session. No verified first-public timestamp authenticated.",
+  "source_status": [
+    {
+      "provider": "SEC EDGAR",
+      "ticker": "AAPL",
+      "source_type": "sec_filing",
+      "status": "available",
+      "requested": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "sha256": "f001022596bb110c821112a8b12f794e0d5c545475b7d5f0ccfb42d9b431e57b",
+          "bytes": 164356,
+          "ingested_at": "2026-11-23T12:15:35.683263+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000104/aapl-20231102.htm",
+          "sha256": "93fda3b3b3810fede758111f5bba8bf4d6f5b2b81b0622669a50d13fb7bfb5b5",
+          "bytes": 42826,
+          "ingested_at": "2026-11-23T14:11:50.152648+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+          "sha256": "4637b81f1c7a9fd9e00d492c42c7ec4ef6fb68c72a9a5e49755afdc22e7665b8",
+          "bytes": 1559395,
+          "ingested_at": "2026-11-23T14:11:55.725123+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000005/aapl-20240201.htm",
+          "sha256": "939f84a9d25fd30663f2c5cadf5ddb85f78ad10b08d342a2a3b6c5250b421f59",
+          "bytes": 41102,
+          "ingested_at": "2026-11-23T14:11:58.450901+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000006/aapl-20231230.htm",
+          "sha256": "855990f6b3d8c4aff1cb142fc6caa8e6ac1219e1866cc2c45fa412e5b90334d4",
+          "bytes": 732644,
+          "ingested_at": "2026-11-23T14:12:02.869730+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000114036124010155/ny20022580x1_8k.htm",
+          "sha256": "3711905778a77b6a1ae669d0fc83e122242de89a670654ac0971ac5035c205f1",
+          "bytes": 89067,
+          "ingested_at": "2026-11-23T14:12:06.056862+00:00",
+          "retention": "raw"
+        }
+      ],
+      "failures": [],
+      "candidates": 5,
+      "records": 5
+    },
+    {
+      "provider": "SEC EDGAR",
+      "ticker": "MSFT",
+      "source_type": "sec_filing",
+      "status": "available",
+      "requested": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+          "sha256": "0c7415804bdda6f5daea74122223596eecc02ee5fe23de8e83cf4e2630ff03e0",
+          "bytes": 186831,
+          "ingested_at": "2026-11-23T12:15:45.182641+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312523271376/d566386d8k.htm",
+          "sha256": "30f94c30e80572af9843a2126541922e56b025b353e244c3ae2b54929729dc2e",
+          "bytes": 61409,
+          "ingested_at": "2026-11-23T14:12:09.144443+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312523291720/d636199d8k.htm",
+          "sha256": "d6a07dfb6516e3a4d236aad7177de000f4e3d08c2c632b572d877753ea2c4ba8",
+          "bytes": 105791,
+          "ingested_at": "2026-11-23T14:12:12.338345+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524011295/d708866d8k.htm",
+          "sha256": "97010693b5a94da1b93861d999dbfd5eabec176205f57b2a95893bc6b49d242c",
+          "bytes": 29422,
+          "ingested_at": "2026-11-23T14:12:15.148700+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024008814/msft-20231231.htm",
+          "sha256": "8994256cde52ddc4e82596f495f3ec221bdaabaa9c190ff376ed2e058450c966",
+          "bytes": 5673771,
+          "ingested_at": "2026-11-23T14:12:19.560305+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024008809/msft-20240130.htm",
+          "sha256": "f7a8c9d9623cec09965beacb52cee42c04c1f2372170bcb47bec9b7c2ddd6691",
+          "bytes": 54517,
+          "ingested_at": "2026-11-23T14:12:22.643015+00:00",
+          "retention": "raw"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312524062997/d808756d8ka.htm",
+          "sha256": "47df053459a06c5e44ad693717c6ed3b48ce0dcbfdf3c6d1f7142b4c297ba753",
+          "bytes": 33689,
+          "ingested_at": "2026-11-23T14:12:29.546370+00:00",
+          "retention": "raw"
+        }
+      ],
+      "failures": [],
+      "candidates": 6,
+      "records": 6
+    },
+    {
+      "provider": "Apple Newsroom",
+      "ticker": "AAPL",
+      "source_type": "news",
+      "requested": [
+        {
+          "url": "https://www.apple.com/newsroom/archive/?page=40",
+          "source_sha256": "d5ace3b5c7dcfab75e4dc1e1fd41ab5a23e5f0030e27fb08355e4009264fee9a",
+          "bytes": 324068,
+          "ingested_at": "2026-11-23T12:15:57.221254+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "ecf57b80a49b7d1d6933d5da1bfb326d78590b7550708d2aa36bcd608bdd9eeb"
+        },
+        {
+          "url": "https://www.apple.com/newsroom/archive/?page=41",
+          "source_sha256": "47ba78814aaba54bf82b0cb4836895af422114158cf28b9820881bb0d443eb7e",
+          "bytes": 323691,
+          "ingested_at": "2026-11-23T12:16:00.590818+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "2ed9174576e49e3b5b10a8e602d723eaabd059f449f8eb3cccacfe2563d3eb42"
+        },
+        {
+          "url": "https://www.apple.com/newsroom/archive/?page=42",
+          "source_sha256": "7362565a1f4b47cd40090057133a99a3744a6b06e11814f4655a1fb418a1c640",
+          "bytes": 323626,
+          "ingested_at": "2026-11-23T12:16:03.143739+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "b2e337bfc03c632fcd37f27f8082cf17e0f07c9b38b1246eee408d995a8eca2d"
+        },
+        {
+          "url": "https://www.apple.com/newsroom/archive/?page=43",
+          "source_sha256": "eb0861cd34ce0cc55a88b26a6b1f92c3ad6ff1b2eb772616df45c910d6ba2bb3",
+          "bytes": 323692,
+          "ingested_at": "2026-11-23T12:16:05.538455+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "69670d88b207f2e63ea8be511005326175b7ee9e7b86ecedfa73431df8e243b4"
+        },
+        {
+          "url": "https://www.apple.com/newsroom/archive/?page=44",
+          "source_sha256": "d0021e065c4e03dd7d888aa16ea3b9893cc2770022d052be0cb7d74d2910d2c0",
+          "bytes": 323592,
+          "ingested_at": "2026-11-23T12:16:07.871750+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "efc49acc464d5719031e55e93f1c577e344ba81c87250f00a684c38d7eddf7e9"
+        }
+      ],
+      "failures": [],
+      "records": 34,
+      "status": "available",
+      "scope": "issuer archive dated headlines only"
+    },
+    {
+      "provider": "Microsoft Security Blog",
+      "ticker": "MSFT",
+      "source_type": "news",
+      "requested": [
+        {
+          "url": "https://www.microsoft.com/en-us/security/blog/2024/01/25/midnight-blizzard-guidance-for-responders-on-nation-state-attack/",
+          "source_sha256": "0f10c97ebef7138fd8b48f38bc2fb2bc949c44476b44aa5e9eaaff1d7d92a8b8",
+          "bytes": 303326,
+          "ingested_at": "2026-11-23T12:16:12.723682+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "007db2c1f7f7ec2f8cf04c22d8422df949d3a51b7cd9c96438104ae9247589f2"
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/security/blog/2024/02/14/cyber-signals-navigating-cyberthreats-and-strengthening-defenses-in-the-era-of-ai/",
+          "source_sha256": "7ad1bec5c13acad11d816159d88bc34a704effd3448cfbbd7640cc34f217837f",
+          "bytes": 276728,
+          "ingested_at": "2026-11-23T12:16:17.379847+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "bd1c1849d31454286a6e9817095caba9b126624c4a3242b33bd7b21f5592d883"
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/security/blog/2024/03/13/microsoft-copilot-for-security-is-generally-available-on-april-1-2024-with-new-capabilities/",
+          "source_sha256": "a8081c718dc95d41b2657ce846a0c99dda2169decaf74e848ed445554584c945",
+          "bytes": 303426,
+          "ingested_at": "2026-11-23T12:16:22.688186+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "e98147cafd59f7672de758ab8b929c6dfdeb2efbb916f90e586a8784a2a58e4e"
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/security/blog/2024/04/03/get-end-to-end-protection-with-microsofts-unified-security-operations-platform-now-in-public-preview/",
+          "source_sha256": "4124baa7f8e39414d9a7992d1248180e4da94906b42a79795f66327130931ef0",
+          "bytes": 291659,
+          "ingested_at": "2026-11-23T12:16:27.431237+00:00",
+          "retention": "metadata_only",
+          "projection_sha256": "006c95101bfb7aceb1793bf58ee84c75470a3ff32c3fb766352d14da535f87d1"
+        }
+      ],
+      "failures": [],
+      "records": 4,
+      "status": "unavailable",
+      "unavailable_versions": 4,
+      "scope": "four preselected issuer security posts, not a market news index"
+    },
+    {
+      "provider": "Microsoft corporate blogs / Source",
+      "ticker": "MSFT",
+      "source_type": "news",
+      "status": "unavailable",
+      "reason": "no_validated_historical_archive",
+      "requested": [
+        {
+          "url": "https://blogs.microsoft.com/blog/2024/02/",
+          "code": "archive_content_not_validated",
+          "source_sha256": "a8117e86efdb1eeff26aad9b6a630c4168370b64192d159fc83ad6bdfbf500d4",
+          "bytes": 117579
+        },
+        {
+          "url": "https://news.microsoft.com/source/2024/02/",
+          "code": "archive_content_not_validated",
+          "source_sha256": "ba6ed1d80afc613cd84fe94b324426ea2fca99ce2ed33ab0686ca7d43d8e27cc",
+          "bytes": 161778
+        }
+      ],
+      "records": 0
+    }
+  ]
+}

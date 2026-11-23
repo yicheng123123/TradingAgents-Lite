@@ -1,0 +1,20 @@
+{
+  "tasks": 20,
+  "counts": {
+    "sec_filing": {
+      "available": 20,
+      "verified": 0,
+      "proxy": 20,
+      "unavailable": 0
+    },
+    "news": {
+      "available": 10,
+      "verified": 0,
+      "proxy": 10,
+      "unavailable": 10
+    }
+  },
+  "evidence_sha256": "b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532",
+  "tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae",
+  "source_manifest_sha256": "b46f9ef2ebc1c08022500282147940985eb9d3ceabe8cdaf78eec6efa190e4dc"
+}

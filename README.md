@@ -4,6 +4,12 @@
 
 上游为 [TauricResearch/TradingAgents](https://github.com/TauricResearch/TradingAgents)，设计取舍和授权记录见 [上游审计](docs/upstream-audit.md) 和 [NOTICE](NOTICE)。项目处于第一阶段，后续模块见 [路线图](docs/roadmap.md)。
 
+## A0.5：历史财报与新闻证据
+
+在 Development 的 20 个决策时点，SEC 历史代理覆盖 20/20，Apple 发行人新闻标题代理覆盖 10/20。其余新闻记录显式标为不可用，严格版本时点认证为 0。数据 replay、哈希和日期口径见[时点证据协议](docs/point-in-time.md)和[逐题覆盖](results/evidence-dev-a05-001/REPORT.md)。
+
+`talite run --evidence data/financial-evidence-dev-003` 可将财报和新闻工具接到相同 Agent。证据目录与市场快照的日历哈希必须一致。离线动量策略仍只用行情；真实模型留待 B1。
+
 ## 运行
 
 ```sh

@@ -12,6 +12,7 @@ import subprocess
 from time import perf_counter
 
 from .data import HistoricalData, read_tasks, sha256
+from .evidence import EvidenceStore
 from .schema import Action, Budget, Decision
 from .workflow import build_workflow
 
@@ -83,10 +84,11 @@ def _git(*args: str) -> str:
 
 
 def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_config: dict,
-        budget: Budget, seed: int, react: bool) -> dict:
+        budget: Budget, seed: int, react: bool, evidence_path: Path | None = None) -> dict:
     """Run fixed tasks without sharing outcomes or context across cells."""
     tasks = read_tasks(tasks_path)
     market = HistoricalData(data_path)
+    financial = EvidenceStore.load(evidence_path) if evidence_path is not None else None
     provenance = {
         "started_at": datetime.now(UTC).isoformat(), "code_git_sha": _git("rev-parse", "HEAD"),
         "code_worktree_dirty": bool(_git("status", "--porcelain")),
@@ -94,10 +96,16 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
         "lock_sha256": sha256(Path("uv.lock")) if Path("uv.lock").exists() else None,
         "tasks_sha256": sha256(tasks_path), "snapshot_sha256": sha256(data_path / "manifest.json"),
         "snapshot": market.manifest, "config": model_config, "statistics_seed": seed,
-        "budget": budget.model_dump(), "react": react, "ablation": "A0",
+        "budget": budget.model_dump(), "react": react,
+        "ablation": "A0.5" if financial is not None else "A0",
         "execution": "next shared session open to horizon-th shared session close, OHLC price return",
         "alpha": "position direction × (asset price return − SPY price return); no costs",
     }
+    if financial is not None:
+        evidence_manifest = evidence_path / "source_manifest.json"
+        if json.loads(evidence_manifest.read_text())["market_calendar_manifest_sha256"] != provenance["snapshot_sha256"]:
+            raise ValueError("Financial evidence was gated with a different market calendar snapshot")
+        provenance["evidence_manifest_sha256"] = sha256(evidence_manifest)
     out.mkdir(parents=True, exist_ok=False)
     (out / "run.json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
     rows = []
@@ -114,7 +122,9 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                 try:
                     # The analyst closure receives only the clipped MarketView.
                     view = market.view(task)
-                    state = build_workflow(view, backend, budget, react).invoke({}, {"recursion_limit": 30})
+                    state = build_workflow(view, backend, budget, react,
+                        financial=financial.view(task) if financial is not None else None).invoke(
+                        {}, {"recursion_limit": 30})
                     decision = Decision.model_validate(state["decision"])
                     status = "workflow_error" if state["errors"] else "ok"
                     outcome = market.outcome(task)
@@ -146,12 +156,12 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
         writer.writeheader()
         writer.writerow({k: json.dumps(v) if isinstance(v, (list, dict)) else v for k, v in result.items()})
     with (out / "REPORT.md").open("x", encoding="utf-8") as f:
-        f.write("# TradingAgents-Lite historical smoke report\n\n"
-                f"Backend: {model_config['backend']}. Run is Lite A0.\n\n"
+        f.write("# TradingAgents-Lite historical evaluation\n\n"
+                f"Backend: {model_config['backend']}. Run is Lite {provenance['ablation']}.\n\n"
                 "These are OHLC snapshot research results. Historical provider revisions, corporate-action "
                 "adjustments, hindsight universe and model pretraining are outside the cutoff guarantee. "
                 "No transaction costs, dividend cash flows, borrow or executable portfolio are modelled. "
-                "Intervals are descriptive. Four tasks do not establish a general effect. "
+                "Intervals are descriptive, especially for small samples. "
                 "The day bootstrap keeps same-day instruments together but does not model serial dependence. "
                 "Null rates indicate absent denominators or unavailable modules.\n\n"
                 "| Metric | Value |\n|---|---|\n")
