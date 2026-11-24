@@ -366,7 +366,7 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
         for variant in ("B1-M", "B1-E"):
             for ticker in [*requested_tickers, "ALL"]:
                 summary_rows.append({"variant": variant, "scope": scope, "ticker": ticker,
-                    "status": "not_run_missing_api_key", "requested_tasks": len(selected),
+                    "status": "not_run_missing_api_key", "requested_tasks": (len(selected) if ticker == "ALL" else sum(task.symbol == ticker for task in selected)),
                     "tasks": 0, "completed_tasks": None, "directional_n": None,
                     "directional_hit_rate": None, "mean_alpha": None,
                     "evidence_citation_valid_rate": None, "llm_calls": None,
