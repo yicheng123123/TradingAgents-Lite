@@ -9,7 +9,7 @@
 - **A0**：4 题确定性五日动量 smoke，结果保存在 results/smoke-a0-001。该归档保持不变。
 - **A0.5**：20 个 Development 时点的历史证据层。SEC 财报为 20/20 历史代理可用；Apple Newsroom 标题为 10/20；Microsoft 新闻显式缺失；严格版本时点认证为 0/20。逐题证据见 [A0.5 覆盖报告](results/evidence-dev-a05-001/REPORT.md)。
 - **B0**：20 题确定性 Development 基线，独立保存于 results/b0-development-001。
-- **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。调用、对照和逐题轨迹已实现；当前真实 API smoke 需在 WSL 配置 API Key 后执行。没有 API Key 时不生成模型成绩。状态见 [B1 smoke 报告](results/b1-smoke-001/REPORT.md)。
+- **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。调用、对照和逐题轨迹已实现；当前真实 API smoke 需在 WSL 配置 API Key 后执行。没有 API Key 时不生成模型成绩。状态见 [B1 smoke 报告](results/b1-smoke-003/REPORT.md)。
 
 B1 当前默认模型为 GLM-5.3，OpenAI Chat Completions Base URL 为 https://open.bigmodel.cn/api/paas/v4。智谱官方文档列出了此模型、兼容协议与 Function Calling；本机尚未通过账户认证或收到模型响应，因此账号权限和响应中的实际模型身份仍待两题 smoke 实测。参考[模型文档](https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3)与[工具调用文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
 
@@ -55,7 +55,7 @@ uv run --locked talite b0   --tasks tasks/development.jsonl   --data data/yahoo-
 read -rsp "TALITE_API_KEY: " TALITE_API_KEY
 printf '\n'
 export TALITE_API_KEY
-uv run --locked talite b1   --scope smoke   --output results/b1-smoke-002
+uv run --locked talite b1   --scope smoke   --budget-cap-cny 9.59488   --output results/b1-smoke-004
 unset TALITE_API_KEY
 ~~~
 
