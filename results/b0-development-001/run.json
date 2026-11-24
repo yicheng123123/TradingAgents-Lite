@@ -1,0 +1,74 @@
+{
+  "started_at": "2026-11-24T10:17:58.265119+00:00",
+  "code_git_sha": "8e22ad1d12b743092614ed3013ef7a1358362a6d",
+  "code_worktree_dirty": true,
+  "dependencies": {
+    "langgraph": "1.2.24",
+    "pydantic": "2.14.4",
+    "openai": "3.57.0"
+  },
+  "lock_sha256": "397302e71bb2a18242c19504e4b1d6b49055d1a6573b87021ee2164edcb2f025",
+  "tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae",
+  "snapshot_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+  "snapshot": {
+    "source": "Yahoo Finance chart daily quote OHLCV",
+    "retrieved_at": "2026-11-23T12:00:00.292008+00:00",
+    "start": "2023-11-01",
+    "end": "2024-04-30",
+    "benchmark": "SPY",
+    "data_class": "retrospective vendor snapshot; revision and split history not authenticated point-in-time",
+    "assets": {
+      "AAPL": {
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?period1=1698811200&period2=1714536000&interval=1d&events=div%2Csplits",
+        "rows": 124,
+        "first_day": "2023-11-01",
+        "last_day": "2024-04-30",
+        "raw_sha256": "5673fe715ea798c50ed357c0b9b9d675927660e6ba406f08a2feeb37782d3af2",
+        "bars_sha256": "921046442c6150f880b74b742d54cfcd9c96e6291f4708036d191e1ae69b6894",
+        "split_events_reported": 0,
+        "dividend_events_reported": 2
+      },
+      "MSFT": {
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1698811200&period2=1714536000&interval=1d&events=div%2Csplits",
+        "rows": 124,
+        "first_day": "2023-11-01",
+        "last_day": "2024-04-30",
+        "raw_sha256": "26e7fac31b9576ef388ed5436da76ebe07244eb5e3cdaced50d493e132b1bc06",
+        "bars_sha256": "8449a44de9cbac0fe8d30d1253f32c92604681e8ed48ada3e850b4ac46b4a2cb",
+        "split_events_reported": 0,
+        "dividend_events_reported": 2
+      },
+      "SPY": {
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/SPY?period1=1698811200&period2=1714536000&interval=1d&events=div%2Csplits",
+        "rows": 124,
+        "first_day": "2023-11-01",
+        "last_day": "2024-04-30",
+        "raw_sha256": "75ee13df32e54ed382a3c022961cb94c84488feac2dcfcc4f7bdef8990ecf827",
+        "bars_sha256": "69cffaefc7c3f720b353f383267ba8d4c1dbdf03b2305ea3de7a5f399955cf7d",
+        "split_events_reported": 0,
+        "dividend_events_reported": 2
+      }
+    }
+  },
+  "config": {
+    "backend": "offline",
+    "policy": "deterministic_momentum_5",
+    "model": null,
+    "api_calls": 0
+  },
+  "statistics_seed": 42,
+  "budget": {
+    "max_tool_rounds": 2,
+    "max_tokens": 1200,
+    "momentum_threshold": 0.006,
+    "volatility_limit": 0.04
+  },
+  "react": true,
+  "ablation": "B0",
+  "execution": "next shared session open to horizon-th shared session close, OHLC price return",
+  "alpha": "position direction × (asset price return − SPY price return); no costs",
+  "protocol_metadata": {},
+  "finished_at": "2026-11-24T10:17:58.523290+00:00",
+  "status": "completed",
+  "actual_models_observed": []
+}

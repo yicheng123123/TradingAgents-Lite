@@ -1,0 +1,67 @@
+{
+  "experiment": "B1 Real LLM Development Baseline",
+  "scope": "smoke",
+  "status": "blocked_missing_api_key",
+  "started_at": "2026-11-24T10:26:03.769592+00:00",
+  "code_git_sha": "f6a81dfc23c00afa6063ca508371bdd81508dd59",
+  "code_worktree_dirty": true,
+  "full_tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae",
+  "selected_tasks_sha256": "16b24fbb7d5fae912993e3444af777d7b45f2e6e935f0d7f1b97dbf4714226e7",
+  "selected_task_ids": [
+    "dev-01",
+    "dev-02"
+  ],
+  "market_manifest_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+  "evidence_manifest_sha256": "b46f9ef2ebc1c08022500282147940985eb9d3ceabe8cdaf78eec6efa190e4dc",
+  "evidence_sha256": "b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532",
+  "prompt_hashes": {
+    "market_analyst_system": "b69b8d8a9ede3e7070f5c7abece218e8c0d0514802edce169bd5193cbb72e93d",
+    "trader_system": "e8f6b4e6a21bf93628e8552037cd3fdeaf33a06e3e774e8856fd3ee72818140e",
+    "combined_core": "9b2181b5c519d5e434ec66882548132d5401be9ab60fc41023568588af75d956"
+  },
+  "protocol": {
+    "model_requested": "glm-5.3",
+    "base_url": "https://open.bigmodel.cn/api/paas/v4",
+    "temperature": 0.0,
+    "max_tokens_per_model_call": 1200,
+    "max_tool_rounds": 2,
+    "max_tool_calls_per_round": 2,
+    "tool_retries": 0,
+    "model_max_retries": 1,
+    "model_timeout_seconds": 25,
+    "max_prompt_bytes": 32768,
+    "provider_generation_seed": null,
+    "statistics_seed": 42,
+    "reasoning_effort": "low",
+    "thinking": "enabled",
+    "settlement": "next shared session open to horizon-th shared session close; alpha vs SPY; no costs",
+    "holdout_accessed": false
+  },
+  "cost_ceiling": {
+    "tasks_per_condition": 2,
+    "conditions": 2,
+    "max_logical_calls": 16,
+    "max_http_attempts_including_retries": 32,
+    "max_prompt_bytes_per_attempt": 32768,
+    "protocol_token_allowance_per_attempt": 512,
+    "input_token_upper_bound": 1064960,
+    "max_output_tokens_per_attempt": 1200,
+    "output_token_upper_bound": 38400,
+    "list_price_cost_ceiling_cny": 9.59488,
+    "price_cny_per_million": {
+      "input": 8.0,
+      "output": 28.0
+    },
+    "price_as_of": "2026-11-24",
+    "price_source": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+    "note": "Conservative byte/token envelope; provider invoice and cached-token rates may differ."
+  },
+  "budget_cap_cny": null,
+  "b0_reference": "results/b0-development-001",
+  "blocker": "missing_api_key",
+  "finished_at": "2026-11-24T10:26:03.772754+00:00",
+  "b1_m_and_b1_e": {
+    "status": "not_run",
+    "reason": "missing_api_key"
+  }
+}
