@@ -104,7 +104,13 @@ def _summary_rows(variant: str, scope: str, metrics: dict, status: str = "comple
 
 
 def _write_summary_csv(path: Path, rows: list[dict]):
-    fields = list(rows[0]) if rows else ["variant", "scope", "ticker", "status"]
+    fields = []
+    for row in rows:
+        for key in row:
+            if key not in fields:
+                fields.append(key)
+    if not fields:
+        fields = ["variant", "scope", "ticker", "status"]
     with path.open("x", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()

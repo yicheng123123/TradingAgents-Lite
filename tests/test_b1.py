@@ -1,13 +1,14 @@
 from datetime import UTC, date, datetime
 from pathlib import Path
 import json
+import csv
 from types import SimpleNamespace
 
 import pytest
 from pydantic import ValidationError
 
 from test_stage1 import TASK, bars
-from tradingagents_lite.b1 import request_cost_ceiling
+from tradingagents_lite.b1 import _write_summary_csv, request_cost_ceiling
 from tradingagents_lite.data import HistoricalData, MarketView, read_tasks
 from tradingagents_lite.evidence import Evidence, EvidenceStore
 from tradingagents_lite.provider import ModelBackend, ModelCallError
@@ -234,3 +235,16 @@ def test_cost_ceiling_covers_fixed_smoke_and_development_protocols():
     assert smoke["list_price_cost_ceiling_cny"] == pytest.approx(9.59488)
     assert development["list_price_cost_ceiling_cny"] == pytest.approx(95.9488)
     assert smoke["max_http_attempts_including_retries"] == 32
+    assert development["max_http_attempts_including_retries"] == 320
+
+
+def test_summary_csv_unions_columns_across_status_rows(tmp_path):
+    path = tmp_path / "summary.csv"
+    _write_summary_csv(path, [
+        {"variant": "B0"},
+        {"variant": "B1-M", "requested_tasks": 2},
+    ])
+    with path.open(newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    assert rows[0]["requested_tasks"] == ""
+    assert rows[1]["requested_tasks"] == "2"
