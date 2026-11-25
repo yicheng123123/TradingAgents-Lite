@@ -1,0 +1,33 @@
+{
+  "issuers": {
+    "AAPL": {
+      "cik": "0000320193",
+      "company_facts_sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+      "rows": 757,
+      "sha256": "8623a67b445f087f7ec0f9edd5c49a0a15694f9c0e628052dd85442078129b9c",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "AMD": {
+      "cik": "0000002488",
+      "company_facts_sha256": "dcde3491321ccee802ee64ede0c7253ea4f7e4708709122b685ba2a1d7488be8",
+      "rows": 757,
+      "sha256": "dc99648e649d99b0283ed5735eeecd411d58b4a9f0e85ee5d2e2efb34d77e35b",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json"
+    },
+    "MSFT": {
+      "cik": "0000789019",
+      "company_facts_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+      "rows": 829,
+      "sha256": "dace10736740e32b062b6f63eb698d6c9b0583df7ea50c8a8c53d50647461426",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    "NVDA": {
+      "cik": "0001045810",
+      "company_facts_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "rows": 707,
+      "sha256": "e33034b0609d736adb7118a250bd6067cf82b6b06cbf34f6de2c11eef245082c",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json"
+    }
+  },
+  "version": "sec-fundamentals-v2"
+}

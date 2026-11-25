@@ -1,0 +1,1328 @@
+{
+  "cache_bytes_used": 33540410,
+  "cache_hits": 29,
+  "company_facts": {
+    "AAPL": {
+      "cik": "0000320193",
+      "company_facts_sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+      "rows": 757,
+      "sha256": "8623a67b445f087f7ec0f9edd5c49a0a15694f9c0e628052dd85442078129b9c",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "AMD": {
+      "cik": "0000002488",
+      "company_facts_sha256": "dcde3491321ccee802ee64ede0c7253ea4f7e4708709122b685ba2a1d7488be8",
+      "rows": 757,
+      "sha256": "dc99648e649d99b0283ed5735eeecd411d58b4a9f0e85ee5d2e2efb34d77e35b",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json"
+    },
+    "MSFT": {
+      "cik": "0000789019",
+      "company_facts_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+      "rows": 829,
+      "sha256": "dace10736740e32b062b6f63eb698d6c9b0583df7ea50c8a8c53d50647461426",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    "NVDA": {
+      "cik": "0001045810",
+      "company_facts_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "rows": 707,
+      "sha256": "e33034b0609d736adb7118a250bd6067cf82b6b06cbf34f6de2c11eef245082c",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json"
+    }
+  },
+  "distinct_document_hashes": 11,
+  "document_count": 11,
+  "documents_by_ticker": {
+    "AAPL": 5,
+    "MSFT": 6
+  },
+  "documents_sha256": "1bba393493104be621c972d3948b538f91cd3c76fb16c1ec0a8ce797ff0a26b6",
+  "downloads": 0,
+  "elapsed_seconds": 3.053,
+  "evidence_sha256": "4218ad37259ed558fecdd86ac6177304f4e81c7cd1150bec4bd7fc1af07e24da",
+  "failures": [
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-008.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-009.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-010.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-011.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-012.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-013.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-014.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-015.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-016.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-017.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-018.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-019.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-020.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-021.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-022.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-023.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-024.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-025.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-026.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-027.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-028.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-029.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-030.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-031.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-032.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-033.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-034.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-035.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-036.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-037.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-038.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-039.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-040.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-041.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-042.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-043.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-044.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-045.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-046.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-047.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-048.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-049.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-050.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000019617-submissions-051.json",
+      "stage": "submissions_segment",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "company_facts",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "BAC"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "GS"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "JNJ"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "PFE"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "UNH"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "AMZN"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "TSLA"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "KO"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "WMT"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "XOM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "CVX"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "CAT"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "BA"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "GOOGL"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "META"
+    },
+    {
+      "accession": "0001045810-20-000147",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-20-047996",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-20-000164",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-20-000096",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-20-000189",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-21-002316",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-21-000010",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001628280-21-001185",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-21-000010",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-21-020891",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-21-000056",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-21-000056",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-21-000064",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000002488-21-000116",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-21-000065",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-21-039151",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001045810-21-000131",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-21-051992",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-21-000178",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-21-000105",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-21-000163",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-22-002324",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000007",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-22-000016",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-22-000036",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-22-015675",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000059",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-22-000078",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-22-000079",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-22-026876",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000070",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-22-000123",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-22-000147",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-22-035087",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000108",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-22-000170",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-22-000166",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001564590-23-000733",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-23-000006",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-23-000017",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000002488-23-000047",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000950170-23-014423",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-23-000076",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-23-000064",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-23-000093",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-23-035122",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-23-000139",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-23-000077",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-23-000175",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-23-054855",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-23-000195",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-23-000227",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000002488-24-000012",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-24-000029",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-24-048288",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-24-000056",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-24-000069",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-24-000124",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-24-087843",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-24-000123",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-24-000081",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-24-000264",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000002488-24-000163",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000950170-24-118967",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-24-000123",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-24-000316",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-25-010491",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000008",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-25-000012",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-25-000023",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-25-061046",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000019617-25-000421",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "JPM"
+    },
+    {
+      "accession": "0000320193-25-000057",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-25-000047",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-25-000116",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-25-100235",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000073",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000019617-25-000615",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "JPM"
+    },
+    {
+      "accession": "0000002488-25-000108",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-25-000209",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001193125-25-256321",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000079",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001628280-25-048859",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "JPM"
+    },
+    {
+      "accession": "0000002488-25-000166",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-25-000230",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000002488-21-000009",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001193125-21-017683",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-21-000009",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-21-000007",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001193125-22-017041",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000006",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-22-000014",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-22-000008",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0001193125-23-014230",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000002488-23-000007",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000320193-23-000005",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-23-000014",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000002488-24-000009",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0000950170-24-008809",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-24-000005",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001045810-24-000028",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000950170-25-010484",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000007",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000002488-25-000009",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AMD"
+    },
+    {
+      "accession": "0001045810-25-000021",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "NVDA"
+    },
+    {
+      "accession": "0000019617-25-000332",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "JPM"
+    },
+    {
+      "accession": "0001140361-24-010155",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit index",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001140361-24-010155",
+      "reason": "no_verified_99_1_link",
+      "stage": "exhibit",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000320193-23-000104",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001193125-24-011295",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001193125-23-291720",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit index",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001193125-23-291720",
+      "reason": "no_verified_99_1_link",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001193125-23-271376",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit index",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001193125-23-271376",
+      "reason": "no_verified_99_1_link",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    }
+  ],
+  "filings_sha256": "428a81e2fbf1eacd35d010b71a4436b16b0c95052df03ada7b898a2715c679e7",
+  "forms": {
+    "10-K": 1,
+    "10-Q": 2,
+    "8-K": 7,
+    "8-K/A": 1
+  },
+  "inline_xbrl_fallback": {},
+  "market_sessions": "XNYS next session 16:15 ET",
+  "mode": "offline_cache",
+  "news_tickers": [],
+  "pit": {
+    "historical_proxy": 11
+  },
+  "rate_limit_stop": false,
+  "selected_primary": 115,
+  "source_files": {
+    "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json": {
+      "bytes": 3733700,
+      "retrieved_at": "2026-11-25T17:04:15.718033+00:00",
+      "sha256": "dcde3491321ccee802ee64ede0c7253ea4f7e4708709122b685ba2a1d7488be8"
+    },
+    "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json": {
+      "bytes": 3859564,
+      "retrieved_at": "2026-11-25T17:03:38.114953+00:00",
+      "sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad"
+    },
+    "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json": {
+      "bytes": 4938072,
+      "retrieved_at": "2026-11-25T17:03:51.550139+00:00",
+      "sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea"
+    },
+    "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json": {
+      "bytes": 4092966,
+      "retrieved_at": "2026-11-25T17:04:04.590125+00:00",
+      "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff"
+    },
+    "https://data.sec.gov/submissions/CIK0000002488.json": {
+      "bytes": 162032,
+      "retrieved_at": "2026-11-25T17:04:06.690257+00:00",
+      "sha256": "cc6d9d458727b9f0d2a4927bf0fe5ed577593cb7c2694a4c03551b91963df5e4"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-001.json": {
+      "bytes": 381584,
+      "retrieved_at": "2026-11-25T17:04:29.861412+00:00",
+      "sha256": "f476040427e5e73e46a48406daf8c4567233a392cb394a39388be65297aed11d"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-002.json": {
+      "bytes": 379907,
+      "retrieved_at": "2026-11-25T17:04:33.881812+00:00",
+      "sha256": "e2bf7c93585d5fbac2dc07839236793c3f0488b44af4a590c3aec368665d79e4"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-003.json": {
+      "bytes": 368283,
+      "retrieved_at": "2026-11-25T17:04:37.987617+00:00",
+      "sha256": "f37d0c60aad71c70ce3dabbd54900f60179e6ee39f80128e7f137446c1400afd"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-004.json": {
+      "bytes": 363920,
+      "retrieved_at": "2026-11-25T17:04:41.337660+00:00",
+      "sha256": "55c38742f503d8cff50ba2c335b057a9a04af4241698479b390af63491924b8f"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-005.json": {
+      "bytes": 373136,
+      "retrieved_at": "2026-11-25T17:04:46.471421+00:00",
+      "sha256": "b62c02c07216e211c4649039181425c6f8d84224fc9deecc4c447edb107494af"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-006.json": {
+      "bytes": 382589,
+      "retrieved_at": "2026-11-25T17:04:50.474333+00:00",
+      "sha256": "1910b1aac5a8dc345819a5dc1b13004cf2f4ebcec1d4364ac9001829c5ca0c8c"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617-submissions-007.json": {
+      "bytes": 363454,
+      "retrieved_at": "2026-11-25T17:04:54.430676+00:00",
+      "sha256": "a02210302a22ff4b7f2b6271f2ba5aba4b2c22d2524c42574de610e93794a12a"
+    },
+    "https://data.sec.gov/submissions/CIK0000019617.json": {
+      "bytes": 4658020,
+      "retrieved_at": "2026-11-25T17:04:25.298907+00:00",
+      "sha256": "b6b269cba9e9e1e4e501b590d81531ca91e1760374ce52a089fec8845f47a400"
+    },
+    "https://data.sec.gov/submissions/CIK0000320193.json": {
+      "bytes": 164356,
+      "retrieved_at": "2026-11-23T12:15:35.683263+00:00",
+      "sha256": "f001022596bb110c821112a8b12f794e0d5c545475b7d5f0ccfb42d9b431e57b"
+    },
+    "https://data.sec.gov/submissions/CIK0000789019-submissions-001.json": {
+      "bytes": 308181,
+      "retrieved_at": "2026-11-25T17:03:43.045015+00:00",
+      "sha256": "bd8d4e5c30f839955b7bd56f9353207e4ed94fa9132d30a4c17c7742d87bbbfd"
+    },
+    "https://data.sec.gov/submissions/CIK0000789019.json": {
+      "bytes": 186831,
+      "retrieved_at": "2026-11-23T12:15:45.182641+00:00",
+      "sha256": "0c7415804bdda6f5daea74122223596eecc02ee5fe23de8e83cf4e2630ff03e0"
+    },
+    "https://data.sec.gov/submissions/CIK0001045810-submissions-001.json": {
+      "bytes": 239604,
+      "retrieved_at": "2026-11-25T17:03:58.516122+00:00",
+      "sha256": "b93ba441edc3e41b1ed7489ff08582cdfda23a3bd0b4bbd3acbbd8d1ecd444e5"
+    },
+    "https://data.sec.gov/submissions/CIK0001045810.json": {
+      "bytes": 160578,
+      "retrieved_at": "2026-11-25T17:03:54.880034+00:00",
+      "sha256": "7c07b0a81346ce337884f26d353cd752ad7db6b380e980f73f7c60297a51ad63"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019323000104/aapl-20231102.htm": {
+      "bytes": 42826,
+      "retrieved_at": "2026-11-23T14:11:50.152648+00:00",
+      "sha256": "93fda3b3b3810fede758111f5bba8bf4d6f5b2b81b0622669a50d13fb7bfb5b5"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm": {
+      "bytes": 1559395,
+      "retrieved_at": "2026-11-23T14:11:55.725123+00:00",
+      "sha256": "4637b81f1c7a9fd9e00d492c42c7ec4ef6fb68c72a9a5e49755afdc22e7665b8"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019324000005/aapl-20240201.htm": {
+      "bytes": 41102,
+      "retrieved_at": "2026-11-23T14:11:58.450901+00:00",
+      "sha256": "939f84a9d25fd30663f2c5cadf5ddb85f78ad10b08d342a2a3b6c5250b421f59"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019324000006/aapl-20231230.htm": {
+      "bytes": 732644,
+      "retrieved_at": "2026-11-23T14:12:02.869730+00:00",
+      "sha256": "855990f6b3d8c4aff1cb142fc6caa8e6ac1219e1866cc2c45fa412e5b90334d4"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000114036124010155/ny20022580x1_8k.htm": {
+      "bytes": 89067,
+      "retrieved_at": "2026-11-23T14:12:06.056862+00:00",
+      "sha256": "3711905778a77b6a1ae669d0fc83e122242de89a670654ac0971ac5035c205f1"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000095017024008809/msft-20240130.htm": {
+      "bytes": 54517,
+      "retrieved_at": "2026-11-23T14:12:22.643015+00:00",
+      "sha256": "f7a8c9d9623cec09965beacb52cee42c04c1f2372170bcb47bec9b7c2ddd6691"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000095017024008814/msft-20231231.htm": {
+      "bytes": 5673771,
+      "retrieved_at": "2026-11-23T14:12:19.560305+00:00",
+      "sha256": "8994256cde52ddc4e82596f495f3ec221bdaabaa9c190ff376ed2e058450c966"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312523271376/d566386d8k.htm": {
+      "bytes": 61409,
+      "retrieved_at": "2026-11-23T14:12:09.144443+00:00",
+      "sha256": "30f94c30e80572af9843a2126541922e56b025b353e244c3ae2b54929729dc2e"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312523291720/d636199d8k.htm": {
+      "bytes": 105791,
+      "retrieved_at": "2026-11-23T14:12:12.338345+00:00",
+      "sha256": "d6a07dfb6516e3a4d236aad7177de000f4e3d08c2c632b572d877753ea2c4ba8"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312524011295/d708866d8k.htm": {
+      "bytes": 29422,
+      "retrieved_at": "2026-11-23T14:12:15.148700+00:00",
+      "sha256": "97010693b5a94da1b93861d999dbfd5eabec176205f57b2a95893bc6b49d242c"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312524062997/d808756d8ka.htm": {
+      "bytes": 33689,
+      "retrieved_at": "2026-11-23T14:12:29.546370+00:00",
+      "sha256": "47df053459a06c5e44ad693717c6ed3b48ce0dcbfdf3c6d1f7142b4c297ba753"
+    }
+  },
+  "ticker_mapping": {
+    "AAPL": {
+      "current_cik": null,
+      "historical_cik": "0000320193"
+    },
+    "AMD": {
+      "current_cik": null,
+      "historical_cik": "0000002488"
+    },
+    "AMZN": {
+      "current_cik": null,
+      "historical_cik": "0001018724"
+    },
+    "BA": {
+      "current_cik": null,
+      "historical_cik": "0000012927"
+    },
+    "BAC": {
+      "current_cik": null,
+      "historical_cik": "0000070858"
+    },
+    "CAT": {
+      "current_cik": null,
+      "historical_cik": "0000018230"
+    },
+    "CVX": {
+      "current_cik": null,
+      "historical_cik": "0000093410"
+    },
+    "GOOGL": {
+      "current_cik": null,
+      "historical_cik": "0001652044"
+    },
+    "GS": {
+      "current_cik": null,
+      "historical_cik": "0000886982"
+    },
+    "JNJ": {
+      "current_cik": null,
+      "historical_cik": "0000200406"
+    },
+    "JPM": {
+      "current_cik": null,
+      "historical_cik": "0000019617"
+    },
+    "KO": {
+      "current_cik": null,
+      "historical_cik": "0000021344"
+    },
+    "META": {
+      "current_cik": null,
+      "historical_cik": "0001326801"
+    },
+    "MSFT": {
+      "current_cik": null,
+      "historical_cik": "0000789019"
+    },
+    "NVDA": {
+      "current_cik": null,
+      "historical_cik": "0001045810"
+    },
+    "PFE": {
+      "current_cik": null,
+      "historical_cik": "0000078003"
+    },
+    "TSLA": {
+      "current_cik": null,
+      "historical_cik": "0001318605"
+    },
+    "UNH": {
+      "current_cik": null,
+      "historical_cik": "0000731766"
+    },
+    "WMT": {
+      "current_cik": null,
+      "historical_cik": "0000104169"
+    },
+    "XOM": {
+      "current_cik": null,
+      "historical_cik": "0000034088"
+    }
+  },
+  "ticker_rows": [
+    "AAPL",
+    "AMD",
+    "JPM",
+    "MSFT",
+    "NVDA"
+  ],
+  "version": "sec-accession-v2",
+  "warmup_documents": 0
+}

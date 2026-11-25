@@ -46,7 +46,11 @@ def issuer_news(path: Path):
         yield item
 
 
-def compile_corpus(root: Path, newsroom: Path, legacy_evidence: Path | None = None):
+def compile_corpus(root: Path, newsroom: Path, legacy_evidence: Path | None = None,
+                   *, version="data-expansion-v2-corpus-001"):
+    folder = root / "evidence"
+    if (folder / "source_manifest.json").exists():
+        raise FileExistsError("Research corpus already published. Compile in a new --root.")
     sec = root / "sec"
     sec_manifest = json.loads((sec / "source_manifest.json").read_text())
     if file_hash(sec / "evidence.jsonl") != sec_manifest["evidence_sha256"]:
@@ -60,12 +64,11 @@ def compile_corpus(root: Path, newsroom: Path, legacy_evidence: Path | None = No
     available = [item for item in [*sec_records, *issuer_records] if item.eligible_at is not None]
     visible = [item for item in available if item.eligible_at <= RESEARCH_THROUGH]
     store = EvidenceStore(visible)
-    folder = root / "evidence"
     folder.mkdir(parents=True, exist_ok=True)
     path = folder / "evidence.jsonl"
     write_rows(path, [item.model_dump(mode="json") for item in store.records])
     report = {
-        "version": "data-expansion-v2-corpus-001", "dataset_partition": PARTITION,
+        "version": version, "dataset_partition": PARTITION,
         "through": RESEARCH_THROUGH.isoformat(), "market_calendar_manifest_sha256": file_hash(root / "market/manifest.json"),
         "evidence_sha256": file_hash(path), "sec_manifest_sha256": file_hash(sec / "source_manifest.json"),
         "issuer_index_sha256": file_hash(newsroom), "count": len(store.records),
@@ -100,7 +103,7 @@ def _document(item, cache):
                     version_attestation_source=item.source_metadata.get("version_attestation_source")), raw
 
 
-def build_rag(root: Path, output: Path, models: Path) -> dict:
+def build_rag(root: Path, output: Path, models: Path, *, version="rag-expansion-v2-001") -> dict:
     started = perf_counter()
     if output.exists():
         raise FileExistsError("V2 RAG index already exists")
@@ -125,7 +128,7 @@ def build_rag(root: Path, output: Path, models: Path) -> dict:
             used.append({"version": doc.version_id, "ticker": doc.ticker, "sector": ISSUERS[doc.ticker][0],
                          "raw_sha256": doc.raw_hash, "chunks": len(chunks), "before_sampling": original_count})
     summary = {
-        "version": "rag-expansion-v2-001", "partition": PARTITION, "encoder": encoder.metadata,
+        "version": version, "partition": PARTITION, "encoder": encoder.metadata,
         "source_manifest_sha256": file_hash(root / "evidence/source_manifest.json"),
         "index_bytes": sum(path.stat().st_size for path in output.rglob("*") if path.is_file()),
         "elapsed_seconds": round(perf_counter() - started, 3),
@@ -147,8 +150,10 @@ if __name__ == "__main__":
     parser.add_argument("--news", type=Path, default=Path("tasks/data-expansion-v2/issuer-news.json"))
     parser.add_argument("--legacy-evidence", type=Path, default=Path("data/financial-evidence-dev-003"))
     parser.add_argument("--models", type=Path, default=Path("data/local-models"))
+    parser.add_argument("--version", help="Immutable version label for the new corpus or index")
     args = parser.parse_args()
-    report = (compile_corpus(args.root, args.news, args.legacy_evidence) if args.stage == "compile"
-              else build_rag(args.root, args.root / "rag", args.models))
+    parameters = {"version": args.version} if args.version else {}
+    report = (compile_corpus(args.root, args.news, args.legacy_evidence, **parameters) if args.stage == "compile"
+              else build_rag(args.root, args.root / "rag", args.models, **parameters))
     print({name: report[name] for name in ("count", "by_source", "by_pit") if name in report}
           or {name: report[name] for name in ("document_count", "chunk_count", "elapsed_seconds", "peak_rss_kib")})

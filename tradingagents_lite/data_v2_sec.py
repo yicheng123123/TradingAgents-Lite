@@ -1,7 +1,9 @@
 """Bounded SEC V2 acquisition and cache replay with accession provenance."""
 import argparse
 from collections import Counter, defaultdict
+from contextlib import contextmanager
 from datetime import UTC, date, datetime
+import fcntl
 from hashlib import sha256
 import json
 import os
@@ -9,6 +11,7 @@ from pathlib import Path
 import re
 from time import perf_counter
 from urllib.request import build_opener, HTTPRedirectHandler
+from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 
@@ -28,6 +31,28 @@ MAX_PRIMARY = 500
 MAX_DOCUMENTS = 600
 PROXY_BASIS = "next_session_after_max_filing_date_and_acceptance_et_date"
 ALLOWED_DOC = re.compile(r"[a-zA-Z0-9_.-]+\.html?", re.I)
+WARMUP_START = "2020-08-01"
+
+
+@contextmanager
+def collector_lock(path: Path = Path("data/.data-expansion-v2-sec.lock")):
+    """One collector per checkout, including collectors with a different output root."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as stream:
+        try:
+            fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise SourceError("sec_collector_already_running") from exc
+        yield
+
+
+def progress_event(stage, ticker, done, total, started, cache, receipts, errors):
+    elapsed = perf_counter() - started
+    return {"sec_progress": stage, "company": ticker, "completed": done, "total": total,
+            "remaining": total - done, "percent": round(100 * done / total, 1) if total else 100.0,
+            "eta_seconds": round(elapsed * (total - done) / done, 1) if done else None,
+            "downloaded": cache.downloads, "cache_hits": cache.cache_hits,
+            "documents_saved": len(receipts), "failures": len(errors), "network_stopped": cache.blocked}
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -36,7 +61,7 @@ class NoRedirect(HTTPRedirectHandler):
 
 
 class SecCache:
-    def __init__(self, root: Path, legacy: Path, offline: bool):
+    def __init__(self, root: Path, legacy: Path, offline: bool, reuse: tuple[Path, ...] = ()):
         agent = os.getenv("SEC_USER_AGENT", "").strip()
         if not offline and (("\r" in agent or "\n" in agent)
                             or not re.fullmatch(r".+\s+[^\s@]+@[^\s@]+\.[^\s@]+", agent)):
@@ -45,21 +70,30 @@ class SecCache:
         kwargs = {"sec_user_agent": agent or "TradingAgents-Lite offline cache replay"}
         self.current = CachedHTTP(root, offline=offline, opener=build_opener(NoRedirect()).open,
                                   sec_interval=.45, stop_on_throttle=True, **kwargs)
-        self.legacy = CachedHTTP(legacy, offline=True, **kwargs)
+        self.fallback = [CachedHTTP(path, offline=True, **kwargs)
+                         for path in dict.fromkeys((*reuse, legacy)) if path.resolve() != root.resolve()]
         self.blocked = False
         self.used = {}
+        self.downloads = self.cache_hits = 0
+
+    def has(self, url):
+        key = sha256(url.encode()).hexdigest()
+        return any((item.root / f"{key}.json").is_file() for item in (self.current, *self.fallback))
 
     def get(self, url, cap=30_000_000):
         key = sha256(url.encode()).hexdigest()
-        if (self.legacy.root / f"{key}.json").exists() and not (self.current.root / f"{key}.json").exists():
-            payload = self.legacy.get(url, cap)
-            if not (self.current.root / f"{key}.json").exists():
-                self.current.root.mkdir(parents=True, exist_ok=True)
-                atomic_write(self.current.root / f"{key}.body", payload.body)
-                write_json(self.current.root / f"{key}.json", {"url": url,
-                    "ingested_at": payload.ingested_at.isoformat(), "content_hash": payload.content_hash})
+        cached = (self.current.root / f"{key}.json").is_file()
+        source = None if cached else next((item for item in self.fallback
+                                           if (item.root / f"{key}.json").is_file()), None)
+        if source is not None:
+            payload = source.get(url, cap)
+            self.current.root.mkdir(parents=True, exist_ok=True)
+            atomic_write(self.current.root / f"{key}.body", payload.body)
+            write_json(self.current.root / f"{key}.json", {"url": url,
+                "ingested_at": payload.ingested_at.isoformat(), "content_hash": payload.content_hash})
+            cached = True
         else:
-            if self.blocked and not (self.current.root / f"{key}.json").exists():
+            if self.blocked and not cached:
                 raise SourceError("sec_network_stopped_after_access_limit")
             try:
                 payload = self.current.get(url, cap)
@@ -67,6 +101,8 @@ class SecCache:
                 if str(exc).startswith(("http_403", "http_429")):
                     self.blocked = True
                 raise
+        self.cache_hits += int(cached)
+        self.downloads += int(not cached)
         self.used[url] = {"bytes": len(payload.body), "sha256": payload.content_hash,
                           "retrieved_at": payload.ingested_at.isoformat()}
         return payload
@@ -125,32 +161,45 @@ def dated_filing(ticker, cik, row, sessions):
     }
 
 
-def choose_documents(filings):
+def choose_documents(filings, *, warmup=False):
     periodic = []
     earnings = {}
     for row in sorted(filings, key=lambda r: (r["filing_date"], r["accession"])):
         year = int(row["filing_date"][:4])
         if not FIRST_YEAR <= year <= LAST_YEAR:
+            if warmup and WARMUP_START <= row["filing_date"] < "2021-01-01" and row["form"] in PERIODIC:
+                periodic.append(row)
             continue
         if row["form"] in PERIODIC:
             periodic.append(row)
         elif row["form"] == "8-K" and "2.02" in row["items"].replace(" ", "").split(","):
             earnings.setdefault((row["ticker"], year), row)
+    periodic.sort(key=lambda row: (row["form"].endswith("/A"), row["filing_date"], row["accession"]))
     periodic = periodic[:MAX_PRIMARY]
     slots = (MAX_DOCUMENTS - len(periodic)) // 2
     return [*periodic, *list(earnings.values())[:slots]]
 
 
-def exhibit_reference(raw: bytes, filing: dict):
+def exhibit_reference(raw: bytes, filing: dict, *, index=False):
+    primary = urlsplit(filing["source_url"])
+    directory = primary.path.rsplit("/", 1)[0] + "/"
     soup = BeautifulSoup(raw, "html.parser")
     for row in soup.select("tr"):
         label = " ".join(row.stripped_strings)
-        if not re.match(r"^99\s*\.\s*1\b", label):
+        fields = {cell.get_text(" ", strip=True).upper() for cell in row.find_all("td")}
+        if (index and "EX-99.1" not in fields) or (not index and not re.match(r"^99\s*\.\s*1(?=\s|$)", label)):
             continue
         for link in row.find_all("a", href=True):
             href = link["href"].strip()
-            if ALLOWED_DOC.fullmatch(href) and href not in {".", ".."}:
-                return filing["source_url"].rsplit("/", 1)[0] + "/" + href
+            # SEC iX viewer links can wrap a document path in a doc parameter.
+            if href.startswith("/ix?doc="):
+                href = href.removeprefix("/ix?doc=")
+            target = urlsplit(urljoin(filing["source_url"], href))
+            name = target.path.removeprefix(directory)
+            if (target.scheme == "https" and target.netloc == "www.sec.gov"
+                    and target.path.startswith(directory) and ALLOWED_DOC.fullmatch(name)
+                    and not target.query and not target.fragment and target.path != primary.path):
+                return target.geturl()
     return None
 
 
@@ -185,17 +234,25 @@ def write_rows(path, rows):
                                for row in rows).encode())
 
 
-def build_sec(root: Path, legacy: Path, *, offline: bool):
+def build_sec(root: Path, legacy: Path, *, offline: bool, reuse: tuple[Path, ...] = (),
+              warmup=False, on_progress=None):
     clock = perf_counter()
     output = root / "sec"
+    if (output / "source_manifest.json").exists():
+        raise FileExistsError("SEC snapshot already published. Use a new --root with --reuse-cache.")
     fundamentals = output / "fundamentals"
     fundamentals.mkdir(parents=True, exist_ok=True)
-    cache = SecCache(output / "cache", legacy, offline)
+    cache = SecCache(output / "cache", legacy, offline, reuse)
     errors, receipts, evidence, cases, issuers = [], [], [], [], {}
     inline = defaultdict(list)
     inline_filings = defaultdict(dict)
     sessions = trading_sessions(date(2019, 1, 1), date(2026, 1, 16))
-    for ticker, (_, _, cik) in ISSUERS.items():
+    def emit(stage, ticker, done, total, started):
+        if on_progress is not None:
+            on_progress(progress_event(stage, ticker, done, total, started, cache, receipts, errors))
+
+    for i, (ticker, (_, _, cik)) in enumerate(ISSUERS.items()):
+        emit("issuer metadata", ticker, i, len(ISSUERS), clock)
         try:
             rows = periodic_rows(cache, ticker, cik, errors)
             classified = [dated_filing(ticker, cik, row, sessions) for row in rows.values()]
@@ -213,13 +270,17 @@ def build_sec(root: Path, legacy: Path, *, offline: bool):
                                "company_facts_sha256": raw.content_hash, "source_url": raw.url}
         except (ValueError, KeyError, OSError) as exc:
             errors.append({"ticker": ticker, "stage": "company_facts", "reason": str(exc) if isinstance(exc, SourceError) else type(exc).__name__})
-    selected = choose_documents(cases)
-    if offline:
-        cached = {row["accession"] for row in selected}
-        selected.extend(row for row in cases if row["accession"] not in cached
-                        and row["filing_date"] >= "2021-01-01"
-                        and (legacy / f'{sha256(row["source_url"].encode()).hexdigest()}.json').is_file())
-    for filing in selected:
+    emit("issuer metadata", None, len(ISSUERS), len(ISSUERS), clock)
+    selected = choose_documents(cases, warmup=warmup)
+    reserved = sum(filing["form"] == "8-K" for filing in selected)
+    seen = {row["accession"] for row in selected}
+    supplemental = [row for row in cases if row["accession"] not in seen
+                    and row["filing_date"] >= (WARMUP_START if warmup else "2021-01-01")
+                    and cache.has(row["source_url"])]
+    selected.extend(supplemental[:max(0, MAX_DOCUMENTS - len(selected) - reserved)])
+    documents_clock = perf_counter()
+    for i, filing in enumerate(selected):
+        emit("filing documents", filing["ticker"], i, len(selected), documents_clock)
         try:
             raw = cache.get(filing["source_url"])
             row, item = _record(filing, raw)
@@ -236,13 +297,20 @@ def build_sec(root: Path, legacy: Path, *, offline: bool):
             if facts:
                 inline[ticker].extend(facts)
                 inline_filings[ticker][row["accession"]] = row
-        if filing["form"] != "8-K":
+        if filing["form"] != "8-K" or len(receipts) >= MAX_DOCUMENTS:
             continue
         url = exhibit_reference(raw.body, filing)
         if url is None:
-            errors.append({"ticker": filing["ticker"], "accession": filing["accession"],
-                           "stage": "exhibit", "reason": "no_verified_inline_99_1_link"})
-            continue
+            try:
+                index = filing["source_url"].rsplit("/", 1)[0] + "/" + filing["accession"] + "-index.html"
+                url = exhibit_reference(cache.get(index).body, filing, index=True)
+            except (ValueError, KeyError, OSError) as exc:
+                errors.append({"ticker": ticker, "accession": filing["accession"], "stage": "exhibit index",
+                               "reason": str(exc) if isinstance(exc, SourceError) else type(exc).__name__})
+            if url is None:
+                errors.append({"ticker": ticker, "accession": filing["accession"],
+                               "stage": "exhibit", "reason": "no_verified_99_1_link"})
+                continue
         try:
             row, item = _record(filing, cache.get(url), exhibit=True)
             receipts.append(row)
@@ -251,6 +319,7 @@ def build_sec(root: Path, legacy: Path, *, offline: bool):
         except (ValueError, KeyError, OSError) as exc:
             errors.append({"ticker": filing["ticker"], "accession": filing["accession"], "stage": "exhibit",
                            "reason": str(exc) if isinstance(exc, SourceError) else type(exc).__name__})
+    emit("filing documents", None, len(selected), len(selected), documents_clock)
     inline_issuers = {}
     for ticker, facts in inline.items():
         path = fundamentals / f"{ticker}.json"
@@ -283,6 +352,8 @@ def build_sec(root: Path, legacy: Path, *, offline: bool):
         "evidence_sha256": file_hash(output / "evidence.jsonl"),
         "cache_bytes_used": sum(row["bytes"] for row in cache.used.values()),
         "elapsed_seconds": round(perf_counter() - clock, 3), "rate_limit_stop": cache.blocked,
+        "downloads": cache.downloads, "cache_hits": cache.cache_hits,
+        "warmup_documents": sum(row["filing_date"] < "2021-01-01" for row in receipts),
     }
     write_json(output / "source_manifest.json", summary)
     return summary
@@ -292,7 +363,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--legacy-cache", type=Path, default=Path("data/evidence-cache-001"))
+    parser.add_argument("--reuse-cache", action="append", type=Path, default=[])
+    parser.add_argument("--warmup", action="store_true", help="Acquire periodic filings from late 2020 as input context")
     parser.add_argument("--offline", action="store_true")
+    parser.add_argument("--progress", action="store_true")
     args = parser.parse_args()
-    summary = build_sec(args.root, args.legacy_cache, offline=args.offline)
+    with collector_lock():
+        summary = build_sec(args.root, args.legacy_cache, offline=args.offline, reuse=tuple(args.reuse_cache),
+                            warmup=args.warmup,
+                            on_progress=(lambda row: print(json.dumps(row), flush=True)) if args.progress else None)
     print({key: summary[key] for key in ("document_count", "forms", "pit", "news_tickers", "cache_bytes_used")})

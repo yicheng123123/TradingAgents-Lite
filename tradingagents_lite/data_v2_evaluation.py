@@ -41,9 +41,11 @@ def rule_directions(task, indicators, budget=Budget()):
     return directions
 
 
-def score_offline(tasks, market):
-    if any(not task.task_id.startswith("v2-offline-") for task in tasks):
-        raise ValueError("Evaluation accepts only the frozen Offline Extended partition")
+def score_offline(tasks, market, *, partition="offline"):
+    if partition not in {"offline", "development"} or any(
+        not task.task_id.startswith(f"v2-{partition}-") for task in tasks
+    ):
+        raise ValueError("Evaluation accepts only the specified frozen Offline Extended or Development partition")
     rows = []
     for task in tasks:
         row = {"task_id": task.task_id, "symbol": task.symbol, "decision_date": str(task.decision_date),
@@ -125,7 +127,22 @@ def quality_summary(rows):
     }
 
 
-def evaluate(root: Path, tasks: Path, output: Path, models: Path):
+def acceptance_gates(sec: dict, coverage: dict) -> dict:
+    targets = {
+        "sec_issuers": (len(sec["documents_by_ticker"]), 20),
+        "company_facts_issuers": (sum(entry["rows"] > 0 for entry in sec["company_facts"].values()), 20),
+        "development_rag_tasks": (coverage["development"]["rag_candidates"], 72),
+        "offline_rag_tasks": (coverage["offline"]["rag_candidates"], 180),
+    }
+    return {
+        **{key: {"actual": actual, "minimum": target, "passed": actual >= target}
+           for key, (actual, target) in targets.items()},
+        "pit_violations": {"actual": sum(row["pit_violations"] for row in coverage.values()), "maximum": 0,
+                           "passed": not any(row["pit_violations"] for row in coverage.values())},
+    }
+
+
+def evaluate(root: Path, tasks: Path, output: Path, models: Path, *, score_development=False):
     clock = perf_counter()
     if output.exists():
         raise FileExistsError(output)
@@ -170,6 +187,15 @@ def evaluate(root: Path, tasks: Path, output: Path, models: Path):
         "elapsed_seconds": round(perf_counter() - clock, 3),
         "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
     }
+    if score_development:
+        dev_rows = score_offline(development, market, partition="development")
+        write_rows(output / "development-cases.jsonl", dev_rows)
+        report["development_scores"] = {name: _score(dev_rows, name) for name in policies}
+        report["development_by_sector"] = {sector: {
+            name: _score([row for row in dev_rows if row["sector"] == sector], name) for name in policies
+        } for sector in sorted({row["sector"] for row in dev_rows})}
+        sec = json.loads((root / "sec/source_manifest.json").read_text())
+        report["acceptance"] = acceptance_gates(sec, report["coverage"])
     write_json(output / "summary.json", report)
     return report
 
@@ -180,6 +206,7 @@ if __name__ == "__main__":
     parser.add_argument("--tasks", type=Path, default=Path("tasks/data-expansion-v2"))
     parser.add_argument("--models", type=Path, default=Path("data/local-models"))
     parser.add_argument("--output", type=Path, default=Path("results/data-expansion-v2-001"))
+    parser.add_argument("--score-development", action="store_true", help="Score the 80 Development tasks separately")
     args = parser.parse_args()
-    summary = evaluate(args.root, args.tasks, args.output, args.models)
+    summary = evaluate(args.root, args.tasks, args.output, args.models, score_development=args.score_development)
     print({name: row["completed"] for name, row in summary["scores"].items()})
