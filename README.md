@@ -98,9 +98,15 @@ uv run --locked talite a3-benchmark --output data/a3-benchmark-new
 uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0.0.1 --server.headless true --browser.gatherUsageStats false
 ~~~
 
-打开输出的本机地址。默认使用 Offline。Research 运行冻结任务，Agent Trace 与 Evidence & Memory 查看同一运行，Benchmark 和 Token Dashboard 读取现有归档与 SQLite 账本。[界面教学](docs/learning/ui.md) · [Research 截图](docs/screenshots/research.png) · [Agent Trace 截图](docs/screenshots/agent-trace.png)
+打开输出的本机地址。Frontend V2 默认使用 Offline。Research 提供冻结行情、Agent 配置和决策报告。Agent Trace、Evidence 与 Memory 共享同一归档。Benchmark、Usage 和 Run History 分别提供实验、账本和历史运行的浏览入口。
 
-Token Dashboard 的项目硬上限显示为 **15.00 M（15,000,000 Tokens）**。若启动应用的 WSL 进程已设置 `TALITE_API_KEY`，可在 **BigModel Account** 点击 **Refresh BigModel account** 查询人民币余额和明确适用于 GLM-5.3 的资源包。成功结果在当前页面会话缓存 60 秒。控制台接口可能因账户权限或返回结构变化而不可用。账户查询独立于项目 SQLite 账本和模型执行。[账户查询说明](docs/learning/ui.md#bigmodel-account)
+![Frontend V2 Research](docs/screenshots/v2/research.png)
+
+![Frontend V2 Agent Trace](docs/screenshots/v2/agent-trace.png)
+
+[设计系统与七页截图](docs/ui-design-system.md) · [界面教学](docs/learning/ui.md)
+
+Usage 内 Token Dashboard 的项目硬上限显示为 **15.00M（15,000,000 Tokens）**。若启动应用的 WSL 进程已设置 `TALITE_API_KEY`，可在 **BigModel Account** 点击 **Refresh BigModel account** 查询人民币余额和明确适用于 GLM-5.3 的资源包。成功结果在当前页面会话缓存 60 秒。控制台接口可能因账户权限或返回结构变化而不可用。账户查询独立于项目 SQLite 账本和模型执行。[账户查询说明](docs/learning/ui.md#bigmodel-account)
 
 ### Data Expansion V2
 

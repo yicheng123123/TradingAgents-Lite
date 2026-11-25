@@ -55,7 +55,8 @@ def test_real_frozen_task_trace_and_no_rerun_execution(monkeypatch, tmp_path):
     row = load_run(identity)
     assert row["status"] == "ok" and row["role_calls"] == 2
     at.radio(key="page").set_value("Agent Trace").run()
-    assert len(at.dataframe[0].value) == len(row["agent_trace"])
+    assert not at.exception
+    assert len(next(widget for widget in at.selectbox if widget.label == "Inspect event").options) == len(row["agent_trace"])
     assert any(metric.label == "Measured model tokens" and metric.value == "0" for metric in at.metric)
     at.radio(key="page").set_value("Research").run()
     at.run()
@@ -63,7 +64,8 @@ def test_real_frozen_task_trace_and_no_rerun_execution(monkeypatch, tmp_path):
     refreshed = AppTest.from_file(str(ROOT / "streamlit_app.py"), default_timeout=35)
     refreshed.query_params["run"] = identity
     refreshed.run()
-    assert any(metric.label == "Task" and metric.value == row["task_id"] for metric in refreshed.metric)
+    assert not refreshed.exception
+    assert any(row["task_id"] in item.value for item in refreshed.markdown)
     assert len(list((tmp_path / "runs").iterdir())) == 1
 
 
@@ -86,9 +88,10 @@ def test_rag_memory_and_real_mcp_are_visible(monkeypatch, tmp_path):
     assert row["memory_trace"] is not None
     metadata = json.loads((tmp_path / "runs" / identity / "run/run.json").read_text())
     assert metadata["config"]["a3"]["transport"] == "mcp"
-    at.radio(key="page").set_value("Evidence & Memory").run()
-    assert len(at.dataframe) >= 2 and any(
-        key.startswith("chunk:") for key in at.dataframe[0].value["Evidence ID"])
+    at.radio(key="page").set_value("Evidence").run()
+    assert not at.exception and any("BM25" in item.value for item in at.markdown)
+    at.radio(key="page").set_value("Memory").run()
+    assert not at.exception and any("Context compaction" in item.value for item in at.markdown)
 
 
 def test_archive_exact_metrics_and_pending_status(monkeypatch, tmp_path):
@@ -97,7 +100,7 @@ def test_archive_exact_metrics_and_pending_status(monkeypatch, tmp_path):
     at.selectbox(key="archive").select("A1").run()
     assert any("Pending" in item.value for item in at.info)
     rows = at.dataframe[0].value
-    metric = rows.loc[(rows["Split"] == "test") & (rows["Mode"] == "R2"), "recall@10"].iloc[0]
+    metric = rows.loc[rows["Mode"] == "R2", "recall@10"].iloc[0]
     assert metric == archive_for("A1")["metrics"]["test"]["R2"]["page_proxy"]["recall@10"]
 
 
@@ -129,11 +132,10 @@ def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
         return snapshot(previous, refresh=refresh, transport=httpx.MockTransport(handler))
 
     monkeypatch.setattr(zhipu_account, "account_snapshot", use_mock)
-    at.radio(key="page").set_value("Token Dashboard").run()
+    at.radio(key="page").set_value("Usage").run()
     assert not at.exception and not at.error
-    assert any(metric.label == "Settled" and metric.value == "30" for metric in at.metric)
-    assert any(metric.label == "Project cap" and metric.value == "15.00 M" for metric in at.metric)
-    assert any(caption.value == "15,000,000 Tokens" for caption in at.caption)
+    assert any("Settled" in item.value and "30 Tokens" in item.value for item in at.markdown)
+    assert any("15.00M" in item.value and "15,000,000 Tokens" in item.value for item in at.markdown)
     assert calls == []
     at.button(key="refresh_bigmodel").click().run()
     assert any("TALITE_API_KEY is missing" in caption.value for caption in at.caption)
@@ -147,7 +149,7 @@ def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
     assert metrics["Available balance"] == "¥0.00"
     assert metrics["Total spend"] == "Unavailable"
     assert metrics["Remaining Tokens"] == "0"
-    assert metrics["Settled"] == "30" and metrics["Project cap"] == "15.00 M"
+    assert any("Settled" in item.value and "30 Tokens" in item.value for item in at.markdown)
     assert hashlib.sha256(path.read_bytes()).hexdigest() == before
 
 
@@ -172,7 +174,18 @@ def test_development_v2_only_offers_development_and_runs_real_mcp(monkeypatch, t
     assert len(options) == 80 and all("v2-development-" in option for option in options)
     if not (V2_DATA / "evidence/source_manifest.json").is_file():
         pytest.skip("Local V2 snapshot required to run the integrated research task")
-    at.selectbox(key="task").select(next(option for option in options if "v2-development-aapl" in option))
+    from tradingagents_lite.data import sha256
+
+    fundamentals = V2_DATA / "sec/fundamentals"
+    manifest_path = fundamentals / "manifest.json"
+    if not manifest_path.is_file():
+        pytest.skip("Local SEC fundamentals manifest required")
+    issuers = json.loads(manifest_path.read_text())["issuers"]
+    valid = [ticker for ticker, record in issuers.items() if (fundamentals / f"{ticker}.json").is_file()
+             and sha256(fundamentals / f"{ticker}.json") == record["sha256"]]
+    if not valid:
+        pytest.skip("Local SEC bundles differ from their frozen manifest")
+    at.selectbox(key="task").select(next(option for option in options if option.split(" · ")[0] in valid))
     at.selectbox(key="transport").select("MCP")
     at.checkbox(key="verifier").check()
     at.button(key="execute").click().run()

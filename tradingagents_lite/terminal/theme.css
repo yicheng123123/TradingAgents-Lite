@@ -1,0 +1,83 @@
+:root {
+  --bg: #0b101a;
+  --panel: #111925;
+  --elevated: #182233;
+  --border: #273244;
+  --ink: #e6edf7;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --positive: #34d399;
+  --negative: #f87171;
+  --warning: #fbbf24;
+  --radius: 8px;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+}
+.stApp {font-variant-numeric: tabular-nums; color: var(--ink);}
+[data-testid="stHeader"] {background: var(--bg);}
+[data-testid="stToolbar"] {visibility: hidden;}
+[data-testid="stSidebar"] {border-right: 1px solid var(--border); min-width: 216px; width: 216px; max-width: 216px;}
+[data-testid="stSidebarUserContent"] {padding: .8rem .9rem 1rem;}
+[data-testid="stMainBlockContainer"] {max-width: 1800px; padding: 3.3rem clamp(16px, 2vw, 34px) 3rem;}
+[data-testid="stVerticalBlock"] {gap: .7rem;}
+[data-testid="stHorizontalBlock"] {gap: .85rem;}
+[data-testid="stColumn"] {min-width: 0;}
+[data-testid="stVerticalBlockBorderWrapper"], [data-testid="stVerticalBlock"][style*="border"] {background: var(--panel);}
+[data-testid="stCodeBlock"] {font-size: .8rem;}
+[data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] p {color: var(--muted) !important; opacity: 1 !important;}
+[data-testid="stMarkdownContainer"] p, [data-testid="stMarkdownContainer"] li {font-size: .9rem; overflow-wrap: anywhere;}
+[data-testid="stMarkdownContainer"] h1 {font-size: 28px;}
+[data-testid="stMarkdownContainer"] h2 {font-size: 20px;}
+[data-testid="stMarkdownContainer"] h3 {font-size: 16px;}
+[data-testid="stMarkdownContainer"] code {overflow-wrap: anywhere;}
+[data-testid="stMetricValue"], [data-testid="stMetricValue"] > div {overflow: visible; text-overflow: clip; white-space: normal; overflow-wrap: anywhere; font-size: clamp(18px,1.6vw,26px); font-family: var(--mono);}
+[data-testid="stMetricLabel"], [data-testid="stMetricLabel"] * {white-space: normal;}
+[data-testid="stMetric"] {background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: .65rem .8rem;}
+.brand {display: flex; align-items: center; gap: .65rem; padding-bottom: 1.4rem;}
+.brand-mark {background: #113147; border: 1px solid #25506a; border-radius: 7px; width: 34px; height: 34px; display: grid; place-items: center; font: 700 14px var(--mono); color: var(--accent);}
+.brand-text strong {display: block; font-size: 12px; white-space: nowrap;}
+.brand-text small {color: var(--muted); font-size: 11px;}
+[data-testid="stSidebar"] [role="radiogroup"] {gap: 4px;}
+[data-testid="stSidebar"] [role="radiogroup"] label {display: flex; min-height: 39px; border: 1px solid transparent; border-radius: 6px; padding: .35rem .58rem; gap: .65rem;}
+[data-testid="stSidebar"] [role="radiogroup"] label:hover {background: var(--elevated);}
+[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {border-color: #25445b; background: #112b3e;}
+[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) p {color: var(--accent);}
+.topline {display: grid; grid-template-columns: 1.2fr 1fr .65fr 1fr 1.2fr; border: 1px solid var(--border); background: var(--panel); border-radius: var(--radius); margin-bottom: .15rem;}
+.topline > div {padding: .58rem .72rem; border-right: 1px solid var(--border); min-width: 0;}
+.topline > div:last-child {border: 0;}
+.eyebrow {color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .10em; text-transform: uppercase;}
+.topline strong {display: block; font: 12px var(--mono); margin-top: 4px; overflow-wrap: anywhere;}
+.pagehead {padding: .3rem 0 .35rem;}
+.pagehead h1 {margin: 0; padding: 0; font-size: 28px; line-height: 1.15;}
+.pagehead p {margin: .32rem 0 0; color: var(--muted); font-size: 13px;}
+.section {display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .35rem .65rem; margin: 0 0 .24rem;}
+.section h2 {margin: 0; padding: 0; font-size: 15px; font-weight: 680;}
+.badge {display: inline-block; color: var(--accent); background: #132c40; border: 1px solid #244559; border-radius: 5px; font: 11px var(--mono); padding: .2rem .42rem; overflow-wrap: anywhere;}
+.badge.good {color: var(--positive); background: #142c2b; border-color: #25483f;}
+.badge.bad {color: var(--negative); background: #301f29; border-color: #56313f;}
+.badge.warn {color: var(--warning); background: #30281c; border-color: #4c4329;}
+.statgrid {display: grid; grid-template-columns: repeat(auto-fit,minmax(min(135px,100%),1fr)); gap: 8px;}
+.stat {padding: .65rem .72rem; border: 1px solid var(--border); border-radius: 6px; background: var(--panel); min-width: 0;}
+.stat strong {display: block; font: 600 clamp(15px,1.5vw,24px) var(--mono); overflow-wrap: anywhere; margin-top: 5px;}
+.stat small {display: block; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; margin-top: 3px;}
+.kv {margin: 0;}
+.kv > div {display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: .43rem 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere;}
+.kv dt {color: var(--muted); font-size: 12px;}
+.kv dd {margin: 0; font: 12px/1.5 var(--mono); min-width: 0;}
+.flow {display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: .35rem 0;}
+.flow i {color: var(--muted); font-style: normal; font-size: 11px;}
+.timeline {border-left: 1px solid #35566e; display: grid; gap: .7rem; padding-left: 14px; margin-left: 5px;}
+.timeline > div {position: relative;}
+.timeline > div::before {content: ""; width: 7px; height: 7px; position: absolute; left: -18px; top: .42rem; border: 1px solid var(--bg); border-radius: 50%; background: var(--accent);}
+.timeline strong, .timeline small {display: block; overflow-wrap: anywhere;}
+.timeline strong {font-size: 13px;}
+.timeline small {font: 11px/1.45 var(--mono); color: var(--muted);}
+.document {max-width: 78ch; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.68; font-size: 14px; padding: .75rem 0;}
+.empty {border: 1px dashed #35516c; background: var(--panel); border-radius: var(--radius); padding: 1.1rem; color: var(--muted); font-size: 13px;}
+.empty strong {display: block; color: var(--ink); margin-bottom: .25rem;}
+@media (max-width: 1050px) {
+  .topline {grid-template-columns: repeat(auto-fit,minmax(120px,1fr));}
+}
+.st-key-market_chart {width: calc(100% - 48px);}
+[data-testid="stLayoutWrapper"]:has(> [data-testid="stVerticalBlockBorderWrapper"]) {border-radius: var(--radius);}
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {background: var(--panel);}
+[data-testid="stMetricValue"] p {font: inherit !important;}
