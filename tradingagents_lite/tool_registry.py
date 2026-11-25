@@ -1,9 +1,11 @@
 """Task-scoped finance tools shared by in-process calls and the MCP adapter."""
 from dataclasses import dataclass
+from typing import Literal
 
 from pydantic import Field, ValidationError
 
 from .evidence import SourceType
+from .fundamentals import METRICS, Period
 from .schema import Contract
 
 
@@ -25,6 +27,14 @@ class RagArgs(Contract):
     limit: int = Field(default=4, ge=1, le=10, strict=True)
 
 
+Metric = Literal[*METRICS]
+
+
+class FundamentalsArgs(Contract):
+    metrics: tuple[Metric, ...] = Field(default=("Revenue", "Net Income", "EPS"), min_length=1, max_length=4)
+    period: Period = "quarter"
+
+
 SPECS = {
     "market_indicators": (EmptyArgs, "Get past-only daily momentum, moving average and volatility."),
     "market_bars": (BarsArgs, "Get up to 20 daily bars known at the decision cutoff."),
@@ -32,6 +42,8 @@ SPECS = {
 FINANCIAL_SPEC = (FinancialArgs,
     "Retrieve dated financial evidence for this task only; returns exact citation IDs and PIT levels.")
 RAG_SPEC = (RagArgs, "Search task-bound filings and news for relevant passages. Cite returned chunk IDs.")
+FUNDAMENTALS_SPEC = (FundamentalsArgs,
+    "Read cutoff-bound SEC metrics for this task. Select quarter, fiscal YTD or annual. Cite supplied IDs.")
 
 
 @dataclass
@@ -39,12 +51,14 @@ class ToolRegistry:
     view: object
     financial: object = None
     rag: object = None
+    fundamentals: object = None
 
     @property
     def definitions(self):
         return {**SPECS,
                 **({"financial_evidence": FINANCIAL_SPEC} if self.financial is not None else {}),
-                **({"rag_search": RAG_SPEC} if self.rag is not None else {})}
+                **({"rag_search": RAG_SPEC} if self.rag is not None else {}),
+                **({"xbrl_fundamentals": FUNDAMENTALS_SPEC} if self.fundamentals is not None else {})}
 
     def execute(self, name: str, raw: str | dict) -> dict:
         spec = self.definitions.get(name)
@@ -64,6 +78,8 @@ class ToolRegistry:
                 return self.financial.search(args.source_type, args.limit)
             if name == "rag_search":
                 return self.rag.search(args.query, args.limit)
+            if name == "xbrl_fundamentals":
+                return self.fundamentals.query(args.metrics, args.period)
             if name == "market_bars":
                 return self.view.get_bars(args.limit)
             return self.view.indicators()

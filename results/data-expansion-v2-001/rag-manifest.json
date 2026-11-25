@@ -1,0 +1,584 @@
+{
+  "chunk_count": 362,
+  "document_count": 65,
+  "documents": [
+    {
+      "before_sampling": 168,
+      "chunks": 72,
+      "raw_sha256": "4637b81f1c7a9fd9e00d492c42c7ec4ef6fb68c72a9a5e49755afdc22e7665b8",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "b4d21c776d0d8235e067d6b3112129649380924ccbb630d0956302dd7474f147"
+    },
+    {
+      "before_sampling": 181,
+      "chunks": 72,
+      "raw_sha256": "8994256cde52ddc4e82596f495f3ec221bdaabaa9c190ff376ed2e058450c966",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "146e590a8e196888fbf2a300fc3cb9d49a38bd835c30861751e9b9f78feaedfb"
+    },
+    {
+      "before_sampling": 50,
+      "chunks": 50,
+      "raw_sha256": "855990f6b3d8c4aff1cb142fc6caa8e6ac1219e1866cc2c45fa412e5b90334d4",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "f34b4136970158e41b64f3d036363f6f61314fe27f438b945dd29107bd9dfbec"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "f7a8c9d9623cec09965beacb52cee42c04c1f2372170bcb47bec9b7c2ddd6691",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "1064b40f00df649c6f2215d6b6706ed730ae3887d48ae676756bdd24dcd5a424"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "939f84a9d25fd30663f2c5cadf5ddb85f78ad10b08d342a2a3b6c5250b421f59",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "50151516031fcd298fce0c844ff19faddee4f65f620d1208ce810b892f9dd069"
+    },
+    {
+      "before_sampling": 17,
+      "chunks": 17,
+      "raw_sha256": "3711905778a77b6a1ae669d0fc83e122242de89a670654ac0971ac5035c205f1",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d31eb2df0e2d0b9a8c016dc10525fc699d42d78efbeaeef40732225638daa5a2"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "93fda3b3b3810fede758111f5bba8bf4d6f5b2b81b0622669a50d13fb7bfb5b5",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "e03e687281d3d0142b6febbd42401d31b78fa607d075fb5e2cc2bc52150c4775"
+    },
+    {
+      "before_sampling": 16,
+      "chunks": 16,
+      "raw_sha256": "47df053459a06c5e44ad693717c6ed3b48ce0dcbfdf3c6d1f7142b4c297ba753",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "a0f226446e483b6668d75e2921b06428fd4425f385eda68cfc6085b5bca19bf7"
+    },
+    {
+      "before_sampling": 17,
+      "chunks": 17,
+      "raw_sha256": "97010693b5a94da1b93861d999dbfd5eabec176205f57b2a95893bc6b49d242c",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "efddd5527a0fc669e0e9969da207df457dce48676d464b02d2df27c950eba248"
+    },
+    {
+      "before_sampling": 28,
+      "chunks": 28,
+      "raw_sha256": "d6a07dfb6516e3a4d236aad7177de000f4e3d08c2c632b572d877753ea2c4ba8",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "21605b009bcb634a5d4e3ce7fb3d47003fa3d1d22f3d6d563599e287c465bb6f"
+    },
+    {
+      "before_sampling": 25,
+      "chunks": 25,
+      "raw_sha256": "30f94c30e80572af9843a2126541922e56b025b353e244c3ae2b54929729dc2e",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "1610b1d11e300628e86e36fcecec4ed6136b89ad496d7f563022aa7f0a76a8ff"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "a7239c5975128525e10791e9bded263247d63110126b278cf9886232fcc09c95",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "18f2a51f9eef827a89d66219f52c23a782772482ecc5574f4802748cfd2e591f"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2d5225aa27fc5ff220f2c21e868b68e3060e18af54faf70830e50b6d70f6f434",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "9e7788888408669455fee9bfdcd3ff919c899ac1131bf2d942175a19bc6bc1c6"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "920ad7b41491e0e04941384eb62541b4da5f83b712fff66c1b2a585e44c760dc",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "7e29e56de34ec27a030b666f66d500788ccfe50623a09e30e9469120f08dd07d"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "72c4ce09df931eaf0dbf83b0a8b6dd618e9cff8e99cbfcaa1232a0238003454f",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "8758582b6b13a2b4ff06443a9cece892733bbd895d2a13baa9014e2a24f6668a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0fe24f5d8b1b0161ce5e00c8659e5428354a3855f84c106b5423ed6a050f95a8",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "d0ef17e6f597ef855251eda5a05cf8fddcb0b75b5a9617d29dee9bb68646f534"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "801cac6ef5abb244bc97a67c4f690b4ada4286a6986fdab453a78e700a3006da",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "80a3ae360fdadc37bd9b1f4ccd5ac5062b53678a5e4dd0afa55c80c0c69f9783"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "093a8f3f9579af7ad84c57a9b0b0edbd5b049f20229e974bfbc4da4b1377e976",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "35887f16b8c4d122c38cc9ca5b64cb32916b9abbc17baa746bc5bd7ffb3ec5c7"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0e116a737b419bae61a8b94a9afb55e8f846f916639422783bd54e115d844380",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "506feb231e94349def9bae16972d638869e13ac4843d6c3f72071f5ef3665fbf"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "8e1108d7d09a32251e2aa9279ffbf0d5909eaf87115e6673df90fcd8a5d638c8",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "cf7d0af0d87320ecca4e351ee729be89ba26749a870cf9e823af67a7caaf2e32"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "d2cfe4b2e5cd7bc5ebe2b4d2705174bacd2e14a5e14beaf670ca42dda34eff7c",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "eb5894614245b32aba464f91ef6f474d1e3ecd82e5eb8ba122a448ce82546b4a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "1f5dc822e0eb29d36ee05c216d6422e69a860e1d6e88a7f203cc5c82824c0f7d",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "9b90c53f1d413d8dbeb7d39dfdc34d957937b5e09600730002614550971fe4bf"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "bc9d3c526fe9b307d83a57df1123fa8a2b77f75c18fb2e37e019f7f1e76c8418",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "b497fcba8a2a36917a82fc6edc337207d8f364b06588d25f4b94a6fdfaa9aedc"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2591ce36f805bde090a2cae3e2c5330e18c597eaa6b509331c3d8d0aeb57190e",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "369c6cf6c7f8a8a67a2604792013acc3a66936b7e4590d1a20d3bb3c454276c3"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "73071e8014ecd6d870241e1aad57e5b5a30a2b41bba568e65a6d0ded83c1ba2b",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "171383b5b386827cf4a7794a7924703ef1e76a3bb4998d85eda263b484902105"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "282ae6eb0be6bdf278e5416469c68fe7c9c9116ba773c5f7d6725ca169808fb8",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "07d784ba02bc87983a1d99f3dea88e874b7c39e2a1aa19ade12b630d9b640099"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "884b908e105757211897378644dff4eb99008dd8ff8959333f70c5973248715a",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "a641016accec54fa9d58ec33d95767db277d6c959749f6c62df552ac3d9ff93e"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0cab4e8bf4a3f4fe9a70c10da6680535c8b6c775a946e61dbeae4ea3d3a053c0",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "06d95246591d22961b4ab89b0755b3684d670b0e7327ec13a571af7b91891e52"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2625d2d6a9e0b54d4c8a3c5232825b08cd20ebf1536e1ff14623d8a188fc5565",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "3f7983b39486919bb9da7d0823a2cc7348bc63a3ce3e96247f8a7e2e9a57d0bf"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "d4250e0526806fd9cbe9a3166b8fdd7ba99fd631202c87cd5c9284ce905b688f",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "c269f55bbdd32daa0df6b103d8257ce99507247ca58126bcc19fb1af49d8fbfd"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "90b4ce64fc8a83d4dde99fa7d64076a6c70fc97ddea86ffda31a15a19505caef",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "97a8639f4ba07c630951a0497f22a865fa12f17d6d6faca28aed8390b214533a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "c4c378c505716376ffeb3ce91ea25c3344edba2828e7eae45b35a0621a5714d2",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1f9352f83e0a7c7cf1532984d5bf104701bd4ffce4dfad8ac6d06ef3f0c1ba79"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "32eb514593ec8898144a6745b14a71efe9a78e23cc04e20c717879a19e07a514",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d11b54de2201e96e50124de55999e1cf52879e0d8b431c2da1c4f00b14058f09"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "92569ce5a8f05be58478d64301b07483d4cb34739749820e84a61651dea0b140",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "f8205936971c0e8372cd6421519bf3ff09a35a9a3b568779cc821d6be24d9bc3"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "358bca6835872612523bb16fb3c18a5601f09c922e500c1d57f4cab8f71a4979",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "3b15cfba58a59c87e3b7209c24c4b82a422164038953257e2927808a4b28489a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "4378797de1baa6c00fc808e5d34cdb415c4cb44ca70d9cab0c6961de25a4c54b",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "8d2200268ca69ee203075865c65ec16d7c3162ec439670b1e8dd1e163433c575"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "a08c746860d0860e10c557262eb19420ce56a97789acb02a52ba7b137ac99a25",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5ad56215a97b9ae10e02955aaafa5465379446437a7ce1827670819d802956f2"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "6f8a6c254adf7a617fc402dd1bc80694f1102728476d90ec695e22dcbaa32a0f",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "52d17a9f4ccefe38e4a58c56a74dbe82e2e95e0ce62569b0cae99775367169ff"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "8196b36b4b11b8774aab1552dc879778dc02bd721bd2e3040ce687fa2316576c",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "a7ea7248625648da5f62114828cfa73d7bb13129787a163933eb6c6255158f54"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "81144858b8ede59aec5c58a3469d74b31d29e44a6a3464790b316025ebdc10ae",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1f3b4727b4077f86b20f74dd7b49d39f5bc5fab5b8d3210bb222abe0dc546feb"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "c1ea290fd2f093dc5bd21e27129cdf179b77eb876985e5d0b2e4966fd3ce7fe7",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "e02a0dcb091f6080c4f1c5b7506030444becde5f974f153e0fa6e8298d4c7453"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0226df3a6528c028ba9c5439dfd59de2fc503739e12076cc5577fcc1fdca08b4",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "a1b54532582f3ecbdfcad9b8d74e266bfa589eb84d795a02190ad00a0ca571e1"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "5093b9377a85beb60b9902c6d3422769c21b0a763de6e1623832ada98b007ccd",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "4fff1defee46f2afc4524dec65a5e31b588ad69931b0bb1f8013f75ac2ae9d26"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "9bda07fe39c705c4fb81313e59f354606e253f26680af2590dda8bc605876201",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "869fa63c5e327bd921af4e424623a526ebbc5b608170808a10dc094e3b5c207f"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "fb9fc0f7fe266f7e80d112387b55efa0681a155f53a0f5c08ff09237a507dbd8",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "b4c0724816115ac446ae041734845b0eaecada53adee6773193f4140509e5418"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "b449b977d1f34685be06a481c177485a95a00a46b73e9f39aced7fc35f3a2ea5",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "bc64ecdfa3beadf5c3471b8f0b8866af6b696ee3a78a8a5f30402f12d522cda8"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "8e19e593995ed29eea2a10fa4c2fd3cd51a8e8cea149537164cf92f0abf46f7a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "4c91cc7f3686779243ebbfa0298996aff7727b1cc0585d8d2af134d08f7ae3b5"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "accbb31ed8fe845ca3ad4750d0b46ee3e060e4d68d7cd734b83deb46c4450789",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5886e47634caaae88692b2f90086fd0db3de1e2d2831656696ba3753298fed26"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "b0477110e3dc8330ba50503573a1cf909fc64f7d0395162f55bc3f5799f77ecc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "07db7a0d1f07465a76a07a4be0690862d8dc6f904a0c14458cb984e7328c6356"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "20bab955b465280115f669a5f5dcb085234c43f04043acf5536efcb2c659c75b",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1422951ca807db5805fd1cc05754ed1592260cc9495ef3d7c6c98dc74f089cab"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2761b221531bfaceae31bb72249307940b17c306c86496bb94898fbf2773a2e1",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "43a2af7b266e9c1202da1ac0cd502ecee4efd0cb18ff4477b9827327247a3352"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "a6e786bfc9bdfd7ea0c08eaf733ed126d3530b2cab0fab85f4d602c12436a8d7",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "e5fe86424ed713fb96e6bf00de7bad6dbd5befbadc318df97e8b3bdfd6f47305"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "54abb8872bcbfe5289d0a3c5cd786ba68255e9d74d46f10881eb5170c4e33d92",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "c85180ae2ac788cf92277c2f85fba3ddce35058f8018ce85346c74fe8d8a4617"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "74495b0fabaef6c28e90a321d705065083cd38ee2975b5d34d5f69feca364cb8",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "cb2eaf852d2e4a488f13eafaf82cfcaa805dec16e472b14eda14201d987decce"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "888f0ede5c537af5c3418bff6553013e2e09fc616e10466f6d7c35debb6ab74a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "145e8887030cf63b057efa825e4cd34110bb7fd7089ee0784be6270275437dd2"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "84bbc0c01390c011d6326623944a1b5e17c41bc93d59a4db7c1e62e6c0c73ba9",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "04beb5dbb4e0dbe8a2ffae8cef2157df288e30ae37c54009962a56a902471089"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "4844d0fe98b93a0fe9e71cb3ad6d3291c50204551a0d225b99b1e4678c8edadc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "4396af404fc57dd048768018718d0bbce0bf7e112b532bdb14ff1d8b9078a15d"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "be2e14780f27a4e7846f4567169c9583dcfd9bdc4bd4e1f5a91e83612731c02f",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5c1406505165de0123a727fde504fff1f70ca8af7a0ec24b71ede290eebfc252"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0bdf55fe898850d3034aec2b3b7684f252a667031e7ee0c3b30810ad568e7643",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "23493f04a40c0d37a5d79fbf8f63e452ba4d718e5b03b86017e8a277208e08ea"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "e42038ce79b92979cb3b64f64a8d5f43f910ae6fa6469be1c6eaa720b788588a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "cfbefaf34d824e90e543a11de329c8891087d3f4a8ac5bf55854d182d86c4db5"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "5b8dff49a26898a420b6608b6dd094c947620e0f9547fae4a6740b3faa1a5013",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "c4b054e74d2a3d51362c47816fb56fe2c1d757952ba250b36663a6e87bf17bbb"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "1c8f0c1a00030c2afdbb37e86ae0f69841f4472b9e0ccda4e0ef2a0f898e28cc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "dacc9427213b6f99ed94b052021cd295f6afa7a5e48ed37d834c10acbce7c3bd"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0c96a6244fa82a3097a3d459833f697dbe794a81cfcd09fd6ac71ddc6d01ffe9",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "caa7116a34b8c157158ac9faed14fb85df9b652c3ef2719c8acaa5e3b8e86304"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "09f94702fc6a2a1afbf00bcc8dd2ea971681e54e32d7858db24bf0a6c4f5741e",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d3651492d8be86292bf8bef1ac318bc5ed73691daddb6c5f9e18558b307f4292"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "65c220221b48fd12bdf6fc2534e086dfddc94b8679d72d795fed1dfb88b78056",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "3bee6ad698b4c28ce4cca6a792ea1f363df8ae51173073384b919ddc22d11b19"
+    }
+  ],
+  "elapsed_seconds": 4.489,
+  "encoder": {
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "device": "CPUExecutionProvider",
+    "dimension": 384,
+    "max_model_tokens": 512,
+    "name": "Xenova/bge-small-en-v1.5",
+    "normalization": "CLS then L2",
+    "revision": "ea104dacec62c0de699686887e3f920caeb4f3e3",
+    "weight_hashes": {
+      "model_quantized.onnx": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    }
+  },
+  "failures": [],
+  "index_bytes": 2139137,
+  "max_chunks_per_document": 72,
+  "partition": "expansion-v2",
+  "peak_rss_kib": 298936,
+  "retrieval": [
+    "BM25",
+    "local dense cosine",
+    "RRF"
+  ],
+  "sectors": {
+    "Communication Services": 2,
+    "Consumer Discretionary": 2,
+    "Consumer Staples": 2,
+    "Energy": 2,
+    "Financials": 3,
+    "Healthcare": 3,
+    "Industrials": 2,
+    "Technology": 49
+  },
+  "source_manifest_sha256": "9108fa5190ee71bcf9c34ebe239e2b6a6a89c4cf42ff3acfd4032f4f12b1f05d",
+  "tickers": {
+    "AAPL": 40,
+    "AMD": 1,
+    "AMZN": 1,
+    "BA": 1,
+    "BAC": 1,
+    "CAT": 1,
+    "CVX": 1,
+    "GOOGL": 1,
+    "GS": 1,
+    "JNJ": 1,
+    "JPM": 1,
+    "KO": 1,
+    "META": 1,
+    "MSFT": 7,
+    "NVDA": 1,
+    "PFE": 1,
+    "TSLA": 1,
+    "UNH": 1,
+    "WMT": 1,
+    "XOM": 1
+  },
+  "version": "rag-expansion-v2-001"
+}

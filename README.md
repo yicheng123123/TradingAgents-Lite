@@ -102,6 +102,10 @@ uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0
 
 Token Dashboard 的项目硬上限显示为 **15.00 M（15,000,000 Tokens）**。若启动应用的 WSL 进程已设置 `TALITE_API_KEY`，可在 **BigModel Account** 点击 **Refresh BigModel account** 查询人民币余额和明确适用于 GLM-5.3 的资源包。成功结果在当前页面会话缓存 60 秒。控制台接口可能因账户权限或返回结构变化而不可用。账户查询独立于项目 SQLite 账本和模型执行。[账户查询说明](docs/learning/ui.md#bigmodel-account)
 
+### Data Expansion V2
+
+V2 冻结了 20 只股票及 380 道五交易日任务。Offline Extended 200 题已完成确定性基线，Development V2 80 题可在 Research 中选择，Final Holdout 100 题保持封存。实时 SEC 批量采集依赖本机配置的 `SEC_USER_AGENT`。本轮使用官方缓存和发行人资料，真实 GLM 消耗为 0。[数据与复现命令](docs/data-expansion-v2.md) · [金融数据教学](docs/learning/financial-data.md)
+
 ## 后续模块
 
 A1 与 A2 由通用实验入口单独开启。A3 可通过 `talite a3` 单独开启。B2 消融和 B3 Final Holdout 见[路线图](docs/roadmap.md)。B1 保持原有配对协议。

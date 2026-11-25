@@ -6,10 +6,9 @@ import sqlite3
 import streamlit as st
 
 from tradingagents_lite.agents import A3Config
-from tradingagents_lite.data import read_tasks
 from tradingagents_lite.experiment import upper_tokens
 from tradingagents_lite.research_ui import (
-    ARCHIVES, PAGES, ROOT, archive_for, load_run, new_run_id, start_run, token_dashboard,
+    ARCHIVES, PAGES, archive_for, load_run, new_run_id, research_tasks, start_run, token_dashboard, v2_coverage,
 )
 from tradingagents_lite.zhipu_account import CONSOLE_TZ, account_snapshot
 
@@ -33,7 +32,17 @@ def hero(title, detail):
 
 def research(row):
     hero("Research", "Frozen market replay and evidence review")
-    tasks = read_tasks(ROOT / "tasks/development.jsonl")
+    dataset = st.selectbox("Task set", ["Legacy", "Development V2"], key="task_set")
+    tasks = research_tasks(dataset)
+    if dataset == "Development V2":
+        coverage = v2_coverage()
+        if coverage:
+            count = coverage["tasks"]
+            xbrl = coverage["xbrl_fields"]["quarter"]["Revenue"]
+            st.caption(f"Development inputs · filings {coverage['sec_candidates']}/{count} · "
+                       f"news {coverage['news_candidates']}/{count} · RAG {coverage['rag_candidates']}/{count} · "
+                       f"XBRL quarterly revenue {xbrl}/{count}")
+        st.caption("Final Holdout is sealed. V2 research uses its own evidence and Memory.")
     lookup = {f"{t.symbol} · {t.decision_date} · {t.task_id}": t for t in tasks}
     top = st.columns([1.6, 1, 1])
     choice = top[0].selectbox("Frozen task", list(lookup), key="task")

@@ -68,6 +68,8 @@ def main():
     _add_frozen_paths(a3)
     a3.add_argument("--output", type=Path, required=True)
     a3.add_argument("--evidence", type=Path)
+    a3.add_argument("--fundamentals", type=Path, help="Opt in to a frozen SEC fundamentals directory")
+    a3.add_argument("--partition", choices=("development", "expansion-v2"), default="development")
     a3.add_argument("--rag-index", type=Path)
     a3.add_argument("--rag-mode", choices=("R1", "R2", "R3", "R4"), default="R3")
     a3.add_argument("--rag-dispatch", choices=("fixed", "agentic"), default="fixed")
@@ -175,10 +177,12 @@ def main():
         elif args.command == "a3":
             from .agents import A3Config
             from .experiment import execute_experiment
-            config = A3Config(args.debate, args.transport, args.verifier, args.repair, args.supplement)
+            config = A3Config(args.debate, args.transport, args.verifier, args.repair, args.supplement,
+                              partition=args.partition)
             result = execute_experiment(args.tasks, args.data, args.output, config,
                 backend=args.backend, evidence=args.evidence, rag_index=args.rag_index,
-                rag_mode=args.rag_mode, rag_dispatch=args.rag_dispatch, memory_mode=args.memory_mode)
+                rag_mode=args.rag_mode, rag_dispatch=args.rag_dispatch, memory_mode=args.memory_mode,
+                fundamentals=args.fundamentals)
         elif args.command == "a3-benchmark":
             from .a3_benchmark import benchmark
             result = benchmark(args.tasks, args.data, args.evidence, args.rag_index, args.output)

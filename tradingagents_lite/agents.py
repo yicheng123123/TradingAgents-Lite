@@ -9,7 +9,7 @@ from pydantic import Field
 from .provider import ModelCallError
 from .schema import Action, Contract, MarketReport
 from .token_budget import TokenBudget
-from .tool_registry import FINANCIAL_SPEC, RAG_SPEC
+from .tool_registry import FINANCIAL_SPEC, FUNDAMENTALS_SPEC, RAG_SPEC
 from .verifier import verify_citations, verify_proposal
 
 
@@ -61,6 +61,8 @@ class A3Runtime:
                 self.extra_definitions["financial_evidence"] = FINANCIAL_SPEC
             if transport.config.get("rag"):
                 self.extra_definitions["rag_search"] = RAG_SPEC
+            if transport.config.get("fundamentals"):
+                self.extra_definitions["xbrl_fundamentals"] = FUNDAMENTALS_SPEC
         self.events = []
         self.context_sizes = []
         self.steps = 0

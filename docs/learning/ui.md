@@ -20,6 +20,8 @@ uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0
 
 页面刷新仅依据 session state 或 URL 中的有效 run_id 加载已经生成的任务记录。模型调用属于执行按钮分支。研究数据写入 data/ui-runs 的新目录，正式 Benchmark 归档由只读适配读取。
 
+Research 的任务集选择支持 Legacy 和 Development V2，并按 V2 归档显示本地证据覆盖。V2 单题使用对应的行情、证据、基本面、RAG 和独立 Memory，Final Holdout 不在选项中。[V2 数据说明](../data-expansion-v2.md)
+
 ## BigModel Account
 
 在启动应用的 WSL 环境中设置现有的 `TALITE_API_KEY`，然后在 Token Dashboard 点击 **Refresh BigModel account**。打开页面、切换页面和普通重跑都只读取当前会话状态。余额与资源包各自缓存成功结果 60 秒。失败时显示 **Unavailable** 或带原同步时间的 **Stale cache**。更换密钥会丢弃旧会话数据。
@@ -32,8 +34,8 @@ uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0
 
 ## 代码导读
 
-- streamlit_app.py 的 research 第 34 行、agent_trace 第 106 行、evidence_memory 第 135 行、benchmark 第 174 行、bigmodel_account 第 228 行及 local_token_budget 第 268 行。
-- tradingagents_lite/research_ui.py 的archive_for 第 30 行、load_run 第 39 行、start_run 第 53 行、token_dashboard 第 74 行。
+- streamlit_app.py 的 research 第 33 行、agent_trace 第 115 行、evidence_memory 第 144 行、benchmark 第 183 行、bigmodel_account 第 237 行及 local_token_budget 第 277 行。
+- tradingagents_lite/research_ui.py 的 archive_for 第 48 行、load_run 第 57 行、start_run 第 71 行、token_dashboard 第 109 行。
 - tradingagents_lite/zhipu_account.py 的 `_balance` 第 86 行解析人民币金额，`_packages` 第 123 行筛选资源包，`_get` 第 158 行执行请求，`account_snapshot` 第 199 行处理点击和会话缓存。
 
 ## 本地验证

@@ -99,6 +99,9 @@ def _structured_event(stage: str, valid: bool, error_type: str | None = None) ->
 
 def _llm_tool_result(result: dict) -> dict:
     """Keep only model-useful fields in repeated conversation context."""
+    if result.get("source_type") == "sec_xbrl":
+        fields = ("metric", "value", "unit", "period", "period_end", "evidence_id", "eligible_at", "pit_level")
+        return {**result, "items": [{key: item[key] for key in fields} for item in result["items"]]}
     if "retrieval_trace" in result:
         return {key: result[key] for key in ("status", "items")}
     if "bars" in result:
@@ -137,13 +140,13 @@ def _tool_content(result: dict) -> str:
 
 
 def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bool = True,
-                   financial: EvidenceView | None = None, *, rag=None, memory=None, a3=None):
+                   financial: EvidenceView | None = None, *, rag=None, memory=None, a3=None, fundamentals=None):
     """Bind tools to a prefiltered single-task view, never to the outcome provider.
 
     The invariant analyst prompt is identical in B1-M and B1-E. B1-E differs only
     in the additional, cutoff-bound financial_evidence tool and its observed output.
     """
-    tools_bound = ToolRegistry(view, financial, rag)
+    tools_bound = ToolRegistry(view, financial, rag, fundamentals)
     registry = tools_bound.definitions
     if a3 is not None:
         registry.update(a3.extra_definitions)
@@ -162,6 +165,15 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
              f"Target horizon: {view.task.horizon_sessions} sessions."}]
         evidence, trace = {}, []
         context_ids = set()
+        if "xbrl_fundamentals" in registry:
+            result = execute("xbrl_fundamentals", "{}")
+            evidence.update({item["evidence_id"]: item for item in result.get("items", [])})
+            context_ids.update(evidence)
+            trace.append({"name": "xbrl_fundamentals", "dispatch": "prefetch",
+                          "status": "error" if "error" in result else "ok",
+                          "code": result.get("error"), "availability": result.get("status"),
+                          "evidence_ids": list(evidence)})
+            messages.append({"role": "user", "content": _tool_content(result)})
         if fixed_rag:
             result = execute("rag_search", json.dumps({"query": "Recent financial results, risks and company outlook"}))
             evidence.update({item["evidence_id"]: item for item in result.get("items", [])})

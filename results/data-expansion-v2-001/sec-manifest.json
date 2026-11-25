@@ -1,0 +1,616 @@
+{
+  "cache_bytes_used": 8774820,
+  "company_facts": {},
+  "distinct_document_hashes": 11,
+  "document_count": 11,
+  "documents_by_ticker": {
+    "AAPL": 5,
+    "MSFT": 6
+  },
+  "documents_sha256": "1bba393493104be621c972d3948b538f91cd3c76fb16c1ec0a8ce797ff0a26b6",
+  "elapsed_seconds": 2.876,
+  "evidence_sha256": "4218ad37259ed558fecdd86ac6177304f4e81c7cd1150bec4bd7fc1af07e24da",
+  "failures": [
+    {
+      "reason": "offline_cache_miss",
+      "stage": "company_facts",
+      "ticker": "AAPL"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "segment": "CIK0000789019-submissions-001.json",
+      "stage": "submissions_segment",
+      "ticker": "MSFT"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "company_facts",
+      "ticker": "MSFT"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "NVDA"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "AMD"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "JPM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "BAC"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "GS"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "JNJ"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "PFE"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "UNH"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "AMZN"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "TSLA"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "KO"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "WMT"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "XOM"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "CVX"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "CAT"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "BA"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "GOOGL"
+    },
+    {
+      "reason": "offline_cache_miss",
+      "stage": "submissions",
+      "ticker": "META"
+    },
+    {
+      "accession": "0001564590-21-002316",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-21-000010",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-21-020891",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-21-000056",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000320193-21-000065",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-21-039151",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001564590-21-051992",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-21-000105",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-22-002324",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000007",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-22-015675",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000059",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-22-026876",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000070",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-22-035087",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000108",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001564590-23-000733",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-23-000006",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-23-014423",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-23-000064",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-23-035122",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-23-000077",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-23-054855",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000950170-24-048288",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-24-000069",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-24-087843",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-24-000081",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-24-118967",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-24-000123",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-25-010491",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000008",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-25-061046",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000057",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-25-100235",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000073",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001193125-25-256321",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000079",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001193125-21-017683",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-21-000009",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001193125-22-017041",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-22-000006",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001193125-23-014230",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-23-000005",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-24-008809",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-24-000005",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000950170-25-010484",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0000320193-25-000007",
+      "reason": "offline_cache_miss",
+      "stage": "primary",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001140361-24-010155",
+      "reason": "no_verified_inline_99_1_link",
+      "stage": "exhibit",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0000320193-23-000104",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "AAPL"
+    },
+    {
+      "accession": "0001193125-24-011295",
+      "reason": "offline_cache_miss",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001193125-23-291720",
+      "reason": "no_verified_inline_99_1_link",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    },
+    {
+      "accession": "0001193125-23-271376",
+      "reason": "no_verified_inline_99_1_link",
+      "stage": "exhibit",
+      "ticker": "MSFT"
+    }
+  ],
+  "filings_sha256": "51c2ccfbfa66b8cc00e7dc8c7b743eb09385c5f0de02f61976191cc454d0b80f",
+  "forms": {
+    "10-K": 1,
+    "10-Q": 2,
+    "8-K": 7,
+    "8-K/A": 1
+  },
+  "inline_xbrl_fallback": {
+    "AAPL": {
+      "cik": "0000320193",
+      "rows": 81,
+      "sha256": "16c12b3590f260dd5aaa48cb6b6205db995600282f112ea543674fd855c42663",
+      "source_type": "cached SEC accession iXBRL"
+    },
+    "MSFT": {
+      "cik": "0000789019",
+      "rows": 68,
+      "sha256": "f9697be533ce9e57d064754b14ee3c9149cffa3c28e82d8bc6259a686c14c840",
+      "source_type": "cached SEC accession iXBRL"
+    }
+  },
+  "market_sessions": "XNYS next session 16:15 ET",
+  "mode": "offline_cache",
+  "news_tickers": [],
+  "pit": {
+    "historical_proxy": 11
+  },
+  "rate_limit_stop": false,
+  "selected_primary": 56,
+  "source_files": {
+    "https://data.sec.gov/submissions/CIK0000320193.json": {
+      "bytes": 164356,
+      "retrieved_at": "2026-11-23T12:15:35.683263+00:00",
+      "sha256": "f001022596bb110c821112a8b12f794e0d5c545475b7d5f0ccfb42d9b431e57b"
+    },
+    "https://data.sec.gov/submissions/CIK0000789019.json": {
+      "bytes": 186831,
+      "retrieved_at": "2026-11-23T12:15:45.182641+00:00",
+      "sha256": "0c7415804bdda6f5daea74122223596eecc02ee5fe23de8e83cf4e2630ff03e0"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019323000104/aapl-20231102.htm": {
+      "bytes": 42826,
+      "retrieved_at": "2026-11-23T14:11:50.152648+00:00",
+      "sha256": "93fda3b3b3810fede758111f5bba8bf4d6f5b2b81b0622669a50d13fb7bfb5b5"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm": {
+      "bytes": 1559395,
+      "retrieved_at": "2026-11-23T14:11:55.725123+00:00",
+      "sha256": "4637b81f1c7a9fd9e00d492c42c7ec4ef6fb68c72a9a5e49755afdc22e7665b8"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019324000005/aapl-20240201.htm": {
+      "bytes": 41102,
+      "retrieved_at": "2026-11-23T14:11:58.450901+00:00",
+      "sha256": "939f84a9d25fd30663f2c5cadf5ddb85f78ad10b08d342a2a3b6c5250b421f59"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000032019324000006/aapl-20231230.htm": {
+      "bytes": 732644,
+      "retrieved_at": "2026-11-23T14:12:02.869730+00:00",
+      "sha256": "855990f6b3d8c4aff1cb142fc6caa8e6ac1219e1866cc2c45fa412e5b90334d4"
+    },
+    "https://www.sec.gov/Archives/edgar/data/320193/000114036124010155/ny20022580x1_8k.htm": {
+      "bytes": 89067,
+      "retrieved_at": "2026-11-23T14:12:06.056862+00:00",
+      "sha256": "3711905778a77b6a1ae669d0fc83e122242de89a670654ac0971ac5035c205f1"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000095017024008809/msft-20240130.htm": {
+      "bytes": 54517,
+      "retrieved_at": "2026-11-23T14:12:22.643015+00:00",
+      "sha256": "f7a8c9d9623cec09965beacb52cee42c04c1f2372170bcb47bec9b7c2ddd6691"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000095017024008814/msft-20231231.htm": {
+      "bytes": 5673771,
+      "retrieved_at": "2026-11-23T14:12:19.560305+00:00",
+      "sha256": "8994256cde52ddc4e82596f495f3ec221bdaabaa9c190ff376ed2e058450c966"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312523271376/d566386d8k.htm": {
+      "bytes": 61409,
+      "retrieved_at": "2026-11-23T14:12:09.144443+00:00",
+      "sha256": "30f94c30e80572af9843a2126541922e56b025b353e244c3ae2b54929729dc2e"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312523291720/d636199d8k.htm": {
+      "bytes": 105791,
+      "retrieved_at": "2026-11-23T14:12:12.338345+00:00",
+      "sha256": "d6a07dfb6516e3a4d236aad7177de000f4e3d08c2c632b572d877753ea2c4ba8"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312524011295/d708866d8k.htm": {
+      "bytes": 29422,
+      "retrieved_at": "2026-11-23T14:12:15.148700+00:00",
+      "sha256": "97010693b5a94da1b93861d999dbfd5eabec176205f57b2a95893bc6b49d242c"
+    },
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312524062997/d808756d8ka.htm": {
+      "bytes": 33689,
+      "retrieved_at": "2026-11-23T14:12:29.546370+00:00",
+      "sha256": "47df053459a06c5e44ad693717c6ed3b48ce0dcbfdf3c6d1f7142b4c297ba753"
+    }
+  },
+  "ticker_mapping": {
+    "AAPL": {
+      "current_cik": null,
+      "historical_cik": "0000320193"
+    },
+    "AMD": {
+      "current_cik": null,
+      "historical_cik": "0000002488"
+    },
+    "AMZN": {
+      "current_cik": null,
+      "historical_cik": "0001018724"
+    },
+    "BA": {
+      "current_cik": null,
+      "historical_cik": "0000012927"
+    },
+    "BAC": {
+      "current_cik": null,
+      "historical_cik": "0000070858"
+    },
+    "CAT": {
+      "current_cik": null,
+      "historical_cik": "0000018230"
+    },
+    "CVX": {
+      "current_cik": null,
+      "historical_cik": "0000093410"
+    },
+    "GOOGL": {
+      "current_cik": null,
+      "historical_cik": "0001652044"
+    },
+    "GS": {
+      "current_cik": null,
+      "historical_cik": "0000886982"
+    },
+    "JNJ": {
+      "current_cik": null,
+      "historical_cik": "0000200406"
+    },
+    "JPM": {
+      "current_cik": null,
+      "historical_cik": "0000019617"
+    },
+    "KO": {
+      "current_cik": null,
+      "historical_cik": "0000021344"
+    },
+    "META": {
+      "current_cik": null,
+      "historical_cik": "0001326801"
+    },
+    "MSFT": {
+      "current_cik": null,
+      "historical_cik": "0000789019"
+    },
+    "NVDA": {
+      "current_cik": null,
+      "historical_cik": "0001045810"
+    },
+    "PFE": {
+      "current_cik": null,
+      "historical_cik": "0000078003"
+    },
+    "TSLA": {
+      "current_cik": null,
+      "historical_cik": "0001318605"
+    },
+    "UNH": {
+      "current_cik": null,
+      "historical_cik": "0000731766"
+    },
+    "WMT": {
+      "current_cik": null,
+      "historical_cik": "0000104169"
+    },
+    "XOM": {
+      "current_cik": null,
+      "historical_cik": "0000034088"
+    }
+  },
+  "ticker_rows": [
+    "AAPL",
+    "MSFT"
+  ],
+  "version": "sec-accession-v2"
+}

@@ -28,12 +28,14 @@ class Payload:
 
 class CachedHTTP:
     def __init__(self, root: Path, *, offline: bool = False, sec_user_agent: str,
-                 opener=urlopen, sleep=time.sleep):
+                 opener=urlopen, sleep=time.sleep, sec_interval=1.25, stop_on_throttle=False):
         self.root = root
         self.offline = offline
         self.sec_user_agent = sec_user_agent
         self.opener = opener
         self.sleep = sleep
+        self.sec_interval = sec_interval
+        self.stop_on_throttle = stop_on_throttle
 
     def get(self, url: str, cap: int = 12_000_000, *, store_body: bool = True) -> Payload:
         parts = urlsplit(url)
@@ -58,7 +60,7 @@ class CachedHTTP:
 
         # Single request stream with a full pause between SEC requests, including retries.
         for attempt in range(3):
-            self.sleep(1.25 if sec else .26)
+            self.sleep(self.sec_interval if sec else .26)
             delay = 2 ** attempt
             try:
                 with self.opener(Request(url, headers={"User-Agent": self.sec_user_agent if sec else
@@ -71,6 +73,8 @@ class CachedHTTP:
                     raise SourceError("Source payload empty or exceeds the configured bound")
                 break
             except HTTPError as exc:
+                if sec and self.stop_on_throttle and exc.code in {403, 429}:
+                    raise SourceError(f"http_{exc.code}") from exc
                 if exc.code not in {429, 500, 502, 503, 504} or attempt == 2:
                     raise SourceError(f"http_{exc.code}") from exc
                 retry = exc.headers.get("Retry-After", "")

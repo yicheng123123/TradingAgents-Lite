@@ -5,7 +5,7 @@ from pathlib import Path
 import sqlite3
 
 from .agents import A3Config, A3Runtime
-from .data import close_available
+from .data import close_available, sha256
 from .runner import run
 from .schema import Budget
 from .token_budget import TokenBudget
@@ -45,7 +45,8 @@ def execute_experiment(tasks: Path, market: Path, output: Path, config: A3Config
                        rag_index: Path | None = None, rag_mode: str = "R3",
                        rag_dispatch: str = "fixed", memory_mode: str = "M0",
                        models: Path = Path("data/local-models"),
-                       memory_seed: Path | None = None, run_id: str | None = None) -> dict:
+                       memory_seed: Path | None = None, run_id: str | None = None,
+                       fundamentals: Path | None = None) -> dict:
     from .data import read_tasks
 
     if backend not in {"offline", "llm"} or memory_mode not in {"M0", "M1", "M2", "M3"}:
@@ -55,8 +56,17 @@ def execute_experiment(tasks: Path, market: Path, output: Path, config: A3Config
     budget = Budget(max_tokens=A3_OUTPUT_TOKENS)
     run_id = run_id or str(output.resolve())
     selected = read_tasks(tasks)
+    if any(task.task_id.startswith("v2-holdout-") for task in selected):
+        raise ValueError("V2 holdout tasks are sealed")
     with ExitStack() as stack:
         rag_factory = memory = rag_options = encoder = ledger = None
+        fundamentals_factory = fundamentals_options = None
+        if fundamentals is not None:
+            from .fundamentals import FundamentalsView
+
+            fundamentals_options = {"root": str(fundamentals.resolve()), "partition": config.partition}
+            if config.transport == "local":
+                fundamentals_factory = lambda task: FundamentalsView.load(fundamentals, task, config.partition)
         if rag_index is not None:
             from .rag import RagConfig, RagView, Retriever
             from .vectors import LocalEmbedding, LocalReranker, VectorStore
@@ -91,12 +101,15 @@ def execute_experiment(tasks: Path, market: Path, output: Path, config: A3Config
                 from .mcp_finance import MCPTransport
 
                 transport = MCPTransport({"task": task.model_dump(mode="json"), "market": str(market.resolve()),
-                    "evidence": str(evidence.resolve()) if evidence else None, "rag": rag_options})
+                    "evidence": str(evidence.resolve()) if evidence else None, "rag": rag_options,
+                    "fundamentals": fundamentals_options})
             return A3Runtime(config, identity, task, transport=transport,
                              fixed_rag=bool(rag_index and rag_dispatch == "fixed"))
 
         description = {"backend": backend, "a3": asdict(config), "rag": rag_mode if rag_index else None,
                        "memory": memory_mode, "phase": "A3"}
+        if fundamentals is not None:
+            description["fundamentals_manifest_sha256"] = sha256(fundamentals / "manifest.json")
         if backend == "offline":
             factory = lambda: ResearchOffline(budget)
         else:
@@ -114,7 +127,8 @@ def execute_experiment(tasks: Path, market: Path, output: Path, config: A3Config
                                            phase="A3", max_prompt_bytes=A3_PROMPT_BYTES, max_retries=0)
         return run(tasks, market, output, factory, description, budget, 42, True,
                    evidence_path=evidence, run_label="A3", phase="A3", rag_factory=rag_factory, memory=memory,
-                   a3_factory=runtime, token_budget=ledger, experiment_id=run_id)
+                   a3_factory=runtime, token_budget=ledger, experiment_id=run_id,
+                   fundamentals_factory=fundamentals_factory)
 
 
 class ResearchOffline(MomentumBackend):

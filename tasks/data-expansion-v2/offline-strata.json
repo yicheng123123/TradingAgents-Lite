@@ -1,0 +1,1202 @@
+[
+  {
+    "daily_volatility_20": 0.023070537442057042,
+    "event_proximate": true,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-01"
+  },
+  {
+    "daily_volatility_20": 0.010857177467367935,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-02"
+  },
+  {
+    "daily_volatility_20": 0.013332460051190537,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-03"
+  },
+  {
+    "daily_volatility_20": 0.012732140701587777,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-04"
+  },
+  {
+    "daily_volatility_20": 0.02284738234215167,
+    "event_proximate": true,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-05"
+  },
+  {
+    "daily_volatility_20": 0.016233165041418543,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-06"
+  },
+  {
+    "daily_volatility_20": 0.018474468971282743,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-07"
+  },
+  {
+    "daily_volatility_20": 0.011898637111912047,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-08"
+  },
+  {
+    "daily_volatility_20": 0.009669187036654314,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-09"
+  },
+  {
+    "daily_volatility_20": 0.01092398957826746,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-aapl-10"
+  },
+  {
+    "daily_volatility_20": 0.02321550020712311,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-01"
+  },
+  {
+    "daily_volatility_20": 0.01300446314953916,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-02"
+  },
+  {
+    "daily_volatility_20": 0.020007548745057658,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-03"
+  },
+  {
+    "daily_volatility_20": 0.034272685877865264,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-04"
+  },
+  {
+    "daily_volatility_20": 0.04967097095009421,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-05"
+  },
+  {
+    "daily_volatility_20": 0.031145245777225352,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-06"
+  },
+  {
+    "daily_volatility_20": 0.02865885953501687,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-07"
+  },
+  {
+    "daily_volatility_20": 0.02654309277640662,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-08"
+  },
+  {
+    "daily_volatility_20": 0.02314678134224445,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-09"
+  },
+  {
+    "daily_volatility_20": 0.031996998947486595,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-amd-10"
+  },
+  {
+    "daily_volatility_20": 0.015816176063252155,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-01"
+  },
+  {
+    "daily_volatility_20": 0.009982362326320743,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-02"
+  },
+  {
+    "daily_volatility_20": 0.011077756492562462,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-03"
+  },
+  {
+    "daily_volatility_20": 0.013797758936080012,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-04"
+  },
+  {
+    "daily_volatility_20": 0.04145360302639128,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-05"
+  },
+  {
+    "daily_volatility_20": 0.030173784838619145,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-06"
+  },
+  {
+    "daily_volatility_20": 0.020990064177243133,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-07"
+  },
+  {
+    "daily_volatility_20": 0.018053976592579953,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-08"
+  },
+  {
+    "daily_volatility_20": 0.01615454540426951,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-09"
+  },
+  {
+    "daily_volatility_20": 0.026470102475448187,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-amzn-10"
+  },
+  {
+    "daily_volatility_20": 0.03216191153857225,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-01"
+  },
+  {
+    "daily_volatility_20": 0.01709485416077189,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-02"
+  },
+  {
+    "daily_volatility_20": 0.01963735848729485,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-03"
+  },
+  {
+    "daily_volatility_20": 0.021411174789086867,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-04"
+  },
+  {
+    "daily_volatility_20": 0.035775822762109034,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-05"
+  },
+  {
+    "daily_volatility_20": 0.020434064984099144,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-06"
+  },
+  {
+    "daily_volatility_20": 0.020460195865272916,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-07"
+  },
+  {
+    "daily_volatility_20": 0.021045846686122367,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-08"
+  },
+  {
+    "daily_volatility_20": 0.022451148683735208,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-09"
+  },
+  {
+    "daily_volatility_20": 0.0158767674679248,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-ba-10"
+  },
+  {
+    "daily_volatility_20": 0.017972719404088015,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-01"
+  },
+  {
+    "daily_volatility_20": 0.009424068261522806,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-02"
+  },
+  {
+    "daily_volatility_20": 0.017639155347376513,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-03"
+  },
+  {
+    "daily_volatility_20": 0.018240587988617014,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-04"
+  },
+  {
+    "daily_volatility_20": 0.02157673592141466,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-05"
+  },
+  {
+    "daily_volatility_20": 0.017447421487557367,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-06"
+  },
+  {
+    "daily_volatility_20": 0.017111885836708175,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-07"
+  },
+  {
+    "daily_volatility_20": 0.022247548805014665,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-08"
+  },
+  {
+    "daily_volatility_20": 0.016520235652274215,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-09"
+  },
+  {
+    "daily_volatility_20": 0.021070839065504523,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-bac-10"
+  },
+  {
+    "daily_volatility_20": 0.01808235792369795,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-01"
+  },
+  {
+    "daily_volatility_20": 0.010289379578100895,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-02"
+  },
+  {
+    "daily_volatility_20": 0.016802890406999355,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-03"
+  },
+  {
+    "daily_volatility_20": 0.01769910821708357,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-04"
+  },
+  {
+    "daily_volatility_20": 0.02349192065001672,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-05"
+  },
+  {
+    "daily_volatility_20": 0.01726754224720744,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-06"
+  },
+  {
+    "daily_volatility_20": 0.01215323662415115,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-07"
+  },
+  {
+    "daily_volatility_20": 0.0220640961396838,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-08"
+  },
+  {
+    "daily_volatility_20": 0.01103242205555788,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-09"
+  },
+  {
+    "daily_volatility_20": 0.022939338009818445,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-offline-cat-10"
+  },
+  {
+    "daily_volatility_20": 0.017440500407399077,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-01"
+  },
+  {
+    "daily_volatility_20": 0.016620300742610186,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-02"
+  },
+  {
+    "daily_volatility_20": 0.012932436376358106,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-03"
+  },
+  {
+    "daily_volatility_20": 0.009558370261413757,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-04"
+  },
+  {
+    "daily_volatility_20": 0.026319664829300513,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-05"
+  },
+  {
+    "daily_volatility_20": 0.015011904574300614,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-06"
+  },
+  {
+    "daily_volatility_20": 0.016601455682614064,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-07"
+  },
+  {
+    "daily_volatility_20": 0.017892141947672205,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-08"
+  },
+  {
+    "daily_volatility_20": 0.012061204456118031,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-09"
+  },
+  {
+    "daily_volatility_20": 0.02133889636690414,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-cvx-10"
+  },
+  {
+    "daily_volatility_20": 0.021045100302438665,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-01"
+  },
+  {
+    "daily_volatility_20": 0.010636419632829366,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-02"
+  },
+  {
+    "daily_volatility_20": 0.012397474267771024,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-03"
+  },
+  {
+    "daily_volatility_20": 0.015060948164004096,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-04"
+  },
+  {
+    "daily_volatility_20": 0.028223787524576393,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-05"
+  },
+  {
+    "daily_volatility_20": 0.025579939910197164,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-06"
+  },
+  {
+    "daily_volatility_20": 0.020449761229065694,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-07"
+  },
+  {
+    "daily_volatility_20": 0.02066242030545454,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-08"
+  },
+  {
+    "daily_volatility_20": 0.01806276061193361,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-09"
+  },
+  {
+    "daily_volatility_20": 0.02512314621443158,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-googl-10"
+  },
+  {
+    "daily_volatility_20": 0.016625146756488404,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-01"
+  },
+  {
+    "daily_volatility_20": 0.012864118023846636,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-02"
+  },
+  {
+    "daily_volatility_20": 0.012466092456799771,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-03"
+  },
+  {
+    "daily_volatility_20": 0.018232842004130976,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-04"
+  },
+  {
+    "daily_volatility_20": 0.019543486356212128,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-05"
+  },
+  {
+    "daily_volatility_20": 0.012632776860710111,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-06"
+  },
+  {
+    "daily_volatility_20": 0.013018610545602027,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-07"
+  },
+  {
+    "daily_volatility_20": 0.022242701643743555,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-08"
+  },
+  {
+    "daily_volatility_20": 0.014644790273817827,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-09"
+  },
+  {
+    "daily_volatility_20": 0.013252353666949863,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-gs-10"
+  },
+  {
+    "daily_volatility_20": 0.013521385959227692,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-01"
+  },
+  {
+    "daily_volatility_20": 0.007648623321422649,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-02"
+  },
+  {
+    "daily_volatility_20": 0.005953852771101408,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-03"
+  },
+  {
+    "daily_volatility_20": 0.009498163466066606,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-04"
+  },
+  {
+    "daily_volatility_20": 0.012693594709291893,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-05"
+  },
+  {
+    "daily_volatility_20": 0.00917554484427663,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-06"
+  },
+  {
+    "daily_volatility_20": 0.00769607066185393,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-07"
+  },
+  {
+    "daily_volatility_20": 0.00893535033516178,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-08"
+  },
+  {
+    "daily_volatility_20": 0.006917793592346494,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-09"
+  },
+  {
+    "daily_volatility_20": 0.010201623696896303,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-jnj-10"
+  },
+  {
+    "daily_volatility_20": 0.013632428037181328,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-01"
+  },
+  {
+    "daily_volatility_20": 0.01275319795683921,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-02"
+  },
+  {
+    "daily_volatility_20": 0.01540597446436294,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-03"
+  },
+  {
+    "daily_volatility_20": 0.02129312202696295,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-04"
+  },
+  {
+    "daily_volatility_20": 0.019684249755457506,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-05"
+  },
+  {
+    "daily_volatility_20": 0.013200959991645536,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-06"
+  },
+  {
+    "daily_volatility_20": 0.012792871030813835,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-07"
+  },
+  {
+    "daily_volatility_20": 0.024372745426568147,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-08"
+  },
+  {
+    "daily_volatility_20": 0.012376727832276611,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-09"
+  },
+  {
+    "daily_volatility_20": 0.01122280307977239,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-offline-jpm-10"
+  },
+  {
+    "daily_volatility_20": 0.010949661782522619,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-01"
+  },
+  {
+    "daily_volatility_20": 0.005777100084743174,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-02"
+  },
+  {
+    "daily_volatility_20": 0.00846392963096008,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-03"
+  },
+  {
+    "daily_volatility_20": 0.009901050335989304,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-04"
+  },
+  {
+    "daily_volatility_20": 0.008609137142611752,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-05"
+  },
+  {
+    "daily_volatility_20": 0.0088090635672844,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-06"
+  },
+  {
+    "daily_volatility_20": 0.008604113123323308,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-07"
+  },
+  {
+    "daily_volatility_20": 0.00838778811666601,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-08"
+  },
+  {
+    "daily_volatility_20": 0.008446817351340107,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-09"
+  },
+  {
+    "daily_volatility_20": 0.016288192716345292,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-ko-10"
+  },
+  {
+    "daily_volatility_20": 0.016044361911529643,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-01"
+  },
+  {
+    "daily_volatility_20": 0.013994805619696009,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-02"
+  },
+  {
+    "daily_volatility_20": 0.016227717123510902,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-03"
+  },
+  {
+    "daily_volatility_20": 0.018757508123929026,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-04"
+  },
+  {
+    "daily_volatility_20": 0.05674154922797807,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-05"
+  },
+  {
+    "daily_volatility_20": 0.026409005034174197,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-06"
+  },
+  {
+    "daily_volatility_20": 0.03275082842515361,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-07"
+  },
+  {
+    "daily_volatility_20": 0.027167587073509275,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-08"
+  },
+  {
+    "daily_volatility_20": 0.01796365999747657,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-09"
+  },
+  {
+    "daily_volatility_20": 0.022932911584804965,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-offline-meta-10"
+  },
+  {
+    "daily_volatility_20": 0.013163109390787747,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-01"
+  },
+  {
+    "daily_volatility_20": 0.014075313276529718,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-02"
+  },
+  {
+    "daily_volatility_20": 0.009849204721396406,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-03"
+  },
+  {
+    "daily_volatility_20": 0.016008805737669832,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-04"
+  },
+  {
+    "daily_volatility_20": 0.028075954644664038,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-05"
+  },
+  {
+    "daily_volatility_20": 0.020681932733119943,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-06"
+  },
+  {
+    "daily_volatility_20": 0.026256569428379752,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-07"
+  },
+  {
+    "daily_volatility_20": 0.01670186903420093,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-08"
+  },
+  {
+    "daily_volatility_20": 0.01469995373055139,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-09"
+  },
+  {
+    "daily_volatility_20": 0.015044719091459727,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-msft-10"
+  },
+  {
+    "daily_volatility_20": 0.025857040295457576,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-01"
+  },
+  {
+    "daily_volatility_20": 0.02529568976410509,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-02"
+  },
+  {
+    "daily_volatility_20": 0.01453484899852383,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-03"
+  },
+  {
+    "daily_volatility_20": 0.027361413634192366,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-04"
+  },
+  {
+    "daily_volatility_20": 0.04646238160921566,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-05"
+  },
+  {
+    "daily_volatility_20": 0.034976884938771415,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-06"
+  },
+  {
+    "daily_volatility_20": 0.034169973022154965,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-07"
+  },
+  {
+    "daily_volatility_20": 0.022377948581273892,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-08"
+  },
+  {
+    "daily_volatility_20": 0.022405409919088726,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-09"
+  },
+  {
+    "daily_volatility_20": 0.02649218778321272,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-offline-nvda-10"
+  },
+  {
+    "daily_volatility_20": 0.00722702557735741,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-01"
+  },
+  {
+    "daily_volatility_20": 0.009618936078674107,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-02"
+  },
+  {
+    "daily_volatility_20": 0.00800675960909745,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-03"
+  },
+  {
+    "daily_volatility_20": 0.01969295161442549,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-04"
+  },
+  {
+    "daily_volatility_20": 0.02054935413281862,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-05"
+  },
+  {
+    "daily_volatility_20": 0.014886886208274776,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-06"
+  },
+  {
+    "daily_volatility_20": 0.016722821373068176,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-07"
+  },
+  {
+    "daily_volatility_20": 0.009174142447862965,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-08"
+  },
+  {
+    "daily_volatility_20": 0.01285336397961541,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-09"
+  },
+  {
+    "daily_volatility_20": 0.017386575231260033,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-pfe-10"
+  },
+  {
+    "daily_volatility_20": 0.031621669363919816,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-01"
+  },
+  {
+    "daily_volatility_20": 0.025144051677602614,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-02"
+  },
+  {
+    "daily_volatility_20": 0.01539174947754599,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-03"
+  },
+  {
+    "daily_volatility_20": 0.04768300303907825,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-04"
+  },
+  {
+    "daily_volatility_20": 0.05143804541644362,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-05"
+  },
+  {
+    "daily_volatility_20": 0.03299265665938293,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-06"
+  },
+  {
+    "daily_volatility_20": 0.043419477699482824,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-07"
+  },
+  {
+    "daily_volatility_20": 0.03245456875749636,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-08"
+  },
+  {
+    "daily_volatility_20": 0.03272736524020006,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-09"
+  },
+  {
+    "daily_volatility_20": 0.0323881881243846,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-offline-tsla-10"
+  },
+  {
+    "daily_volatility_20": 0.012712797744299151,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-01"
+  },
+  {
+    "daily_volatility_20": 0.008749833268432029,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-02"
+  },
+  {
+    "daily_volatility_20": 0.012399272759242927,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-03"
+  },
+  {
+    "daily_volatility_20": 0.015562240037255287,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-04"
+  },
+  {
+    "daily_volatility_20": 0.016510468453623996,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-05"
+  },
+  {
+    "daily_volatility_20": 0.01005329260585796,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-06"
+  },
+  {
+    "daily_volatility_20": 0.018883197808812573,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-07"
+  },
+  {
+    "daily_volatility_20": 0.010924916323361426,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-08"
+  },
+  {
+    "daily_volatility_20": 0.02008920367543521,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-09"
+  },
+  {
+    "daily_volatility_20": 0.010620542389075232,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-offline-unh-10"
+  },
+  {
+    "daily_volatility_20": 0.018187461303900365,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-01"
+  },
+  {
+    "daily_volatility_20": 0.009605528679839933,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-02"
+  },
+  {
+    "daily_volatility_20": 0.007367296138878437,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-03"
+  },
+  {
+    "daily_volatility_20": 0.010907833504528367,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-04"
+  },
+  {
+    "daily_volatility_20": 0.013490664867096928,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-05"
+  },
+  {
+    "daily_volatility_20": 0.017451764048712314,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-06"
+  },
+  {
+    "daily_volatility_20": 0.01820373741893195,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-07"
+  },
+  {
+    "daily_volatility_20": 0.008224634169197453,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-08"
+  },
+  {
+    "daily_volatility_20": 0.009120379903308195,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-09"
+  },
+  {
+    "daily_volatility_20": 0.009653180902148357,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-offline-wmt-10"
+  },
+  {
+    "daily_volatility_20": 0.023433925912960844,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-01"
+  },
+  {
+    "daily_volatility_20": 0.01679207400670077,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-02"
+  },
+  {
+    "daily_volatility_20": 0.018710378269122988,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-03"
+  },
+  {
+    "daily_volatility_20": 0.01781776336571252,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-04"
+  },
+  {
+    "daily_volatility_20": 0.021622579724610957,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-05"
+  },
+  {
+    "daily_volatility_20": 0.022215430620051452,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-06"
+  },
+  {
+    "daily_volatility_20": 0.015830739310128916,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-07"
+  },
+  {
+    "daily_volatility_20": 0.023854168214571304,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-08"
+  },
+  {
+    "daily_volatility_20": 0.015756508528560545,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-09"
+  },
+  {
+    "daily_volatility_20": 0.01892938114324009,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-offline-xom-10"
+  }
+]

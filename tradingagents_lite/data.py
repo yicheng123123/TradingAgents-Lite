@@ -2,6 +2,7 @@
 from datetime import UTC, date, datetime, time, timedelta
 import hashlib
 import json
+import math
 from pathlib import Path
 import statistics
 from urllib.parse import urlencode
@@ -137,6 +138,7 @@ class HistoricalData:
     def __init__(self, directory: Path, manifest: dict | None = None):
         self.manifest = manifest if manifest is not None else json.loads((directory / "manifest.json").read_text())
         self.series = {}
+        self.split_events = {}
         for symbol, entry in self.manifest["assets"].items():
             if not symbol.isascii() or not symbol.isalnum():
                 raise DataError("Invalid snapshot symbol")
@@ -150,11 +152,30 @@ class HistoricalData:
                     or any(b.available_at < close_available(b.day) for b in bars)):
                 raise DataError(f"Invalid snapshot calendar or availability for {symbol}")
             self.series[symbol] = bars
+            if "actions_sha256" in entry:
+                actions = directory / f"{symbol}.actions.json"
+                if sha256(actions) != entry["actions_sha256"]:
+                    raise DataError(f"Corporate action hash mismatch for {symbol}")
+                self.split_events[symbol] = tuple(
+                    (date.fromisoformat(row["date"]), row["numerator"] / row["denominator"])
+                    for row in json.loads(actions.read_text())["splits"]
+                )
 
     def view(self, task: Task) -> MarketView:
-        return MarketView(task, self.series[task.symbol])
+        series = self.series[task.symbol]
+        splits = self.split_events.get(task.symbol, ())
+        # Yahoo quotes are on the retrieved share scale. A common factor lifts all
+        # known price bars back to the same share scale as the decision date.
+        factor = math.prod(ratio for day, ratio in splits if day > task.decision_date)
+        if factor != 1:
+            series = tuple(bar.model_copy(update={key: getattr(bar, key) * factor
+                for key in ("open", "high", "low", "close")})
+                for bar in series if bar.day <= task.decision_date)
+        return MarketView(task, series)
 
     def outcome(self, task: Task) -> Outcome:
+        if self.is_sealed(task):
+            raise DataError("V2 holdout settlement is sealed")
         future = [b for b in self.series[task.symbol] if b.day > task.decision_date]
         if len(future) < task.horizon_sessions:
             raise DataError("Incomplete outcome window")
@@ -169,3 +190,7 @@ class HistoricalData:
                        available_at=max(exit_bar.available_at, b.available_at),
                        asset_return=exit_bar.close / entry.open - 1,
                        benchmark_return=b.close / a.open - 1)
+
+    def is_sealed(self, task: Task) -> bool:
+        return (task.task_id.startswith("v2-holdout-")
+                or (self.manifest.get("version") == "yahoo-us-v2-001" and task.decision_date.year >= 2025))

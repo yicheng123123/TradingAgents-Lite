@@ -1,0 +1,162 @@
+[
+  {
+    "ticker": "AAPL",
+    "published_date": "2023-08-03",
+    "title": "Apple reports third quarter results",
+    "source_url": "https://www.apple.com/newsroom/2023/08/apple-reports-third-quarter-results/",
+    "observed_at": "2026-11-25T16:41:01.457657+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "MSFT",
+    "published_date": "2023-07-25",
+    "title": "Microsoft Cloud Strength Drives Fourth Quarter Results",
+    "source_url": "https://www.microsoft.com/en-us/investor/earnings/fy-2023-q4/press-release-webcast",
+    "observed_at": "2026-11-25T16:41:01.457674+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "NVDA",
+    "published_date": "2023-05-24",
+    "title": "NVIDIA Announces Financial Results for First Quarter Fiscal 2024",
+    "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2024",
+    "observed_at": "2026-11-25T16:41:01.457676+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "AMD",
+    "published_date": "2023-10-31",
+    "title": "AMD Reports Third Quarter 2023 Financial Results",
+    "source_url": "https://ir.amd.com/news-events/press-releases/detail/1163/amd-reports-third-quarter-2023-financial-results",
+    "observed_at": "2026-11-25T16:41:01.457678+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "JPM",
+    "published_date": "2023-07-14",
+    "title": "JPMorgan Chase Reports Second-Quarter 2023 Net Income",
+    "source_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2023/2nd-quarter/fc5019d6-4433-4a61-a340-a9cb89c4c7e1.pdf",
+    "observed_at": "2026-11-25T16:41:01.457682+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "BAC",
+    "published_date": "2023-07-18",
+    "title": "Bank of America Reports Second-Quarter 2023 Financial Results",
+    "source_url": "https://newsroom.bankofamerica.com/content/newsroom/press-releases/2023/07/bank-of-america-reports-second-quarter-2023-financial-results.html",
+    "observed_at": "2026-11-25T16:41:01.457685+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "GS",
+    "published_date": "2023-07-19",
+    "title": "Goldman Sachs Reports 2023 Second Quarter Earnings",
+    "source_url": "https://www.goldmansachs.com/pressroom/press-releases/2023/2023-07-19-q2-results",
+    "observed_at": "2026-11-25T16:41:01.457687+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "JNJ",
+    "published_date": "2023-04-18",
+    "title": "Johnson & Johnson Reports Q1 2023 Results",
+    "source_url": "https://www.jnj.com/media-center/press-releases/johnson-johnson-reports-q1-2023-results",
+    "observed_at": "2026-11-25T16:41:01.457688+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "PFE",
+    "published_date": "2023-08-01",
+    "title": "Pfizer Reports Second-Quarter 2023 Results",
+    "source_url": "https://www.pfizer.com/print/pdf/node/559521",
+    "observed_at": "2026-11-25T16:41:01.457689+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "UNH",
+    "published_date": "2023-07-14",
+    "title": "UnitedHealth Group Reports Second Quarter Results",
+    "source_url": "https://www.unitedhealthgroup.com/newsroom/2023/2023-07-14-unh-second-quarter-results.html",
+    "observed_at": "2026-11-25T16:41:01.457690+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "AMZN",
+    "published_date": "2023-08-03",
+    "title": "Amazon.com Announces Second Quarter Results",
+    "source_url": "https://ir.aboutamazon.com/news-release/news-release-details/2023/Amazon.com-Announces-Second-Quarter-Results/default.aspx",
+    "observed_at": "2026-11-25T16:41:01.457691+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "TSLA",
+    "published_date": "2023-07-02",
+    "title": "Tesla Vehicle Production & Deliveries and Date for Financial Results & Webcast for Second Quarter 2023",
+    "source_url": "https://ir.tesla.com/press-release/tesla-vehicle-production-deliveries-and-date-financial-results-webcast-second-quarter-2023",
+    "observed_at": "2026-11-25T16:41:01.457692+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "KO",
+    "published_date": "2023-07-26",
+    "title": "Coca-Cola Reports Second Quarter 2023 Results",
+    "source_url": "https://www.coca-colacompany.com/media-center/coca-cola-reports-second-quarter-2023-results",
+    "observed_at": "2026-11-25T16:41:01.457693+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "WMT",
+    "published_date": "2023-08-17",
+    "title": "Walmart Releases Q2 FY24 Earnings",
+    "source_url": "https://corporate.walmart.com/news/2023/08/17/walmart-releases-q2-and-fy24-earnings",
+    "observed_at": "2026-11-25T16:41:01.457694+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "XOM",
+    "published_date": "2023-07-28",
+    "title": "ExxonMobil announces second-quarter 2023 results",
+    "source_url": "https://corporate.exxonmobil.com/news/news-releases/2023/0728_exxonmobil-announces-second-quarter-2023-results",
+    "observed_at": "2026-11-25T16:41:01.457697+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "CVX",
+    "published_date": "2023-07-28",
+    "title": "Chevron Reports Second Quarter 2023 Results",
+    "source_url": "https://www.chevron.com/-/media/chevron/stories/documents/2Q23-earnings-press-release.pdf",
+    "observed_at": "2026-11-25T16:41:01.457698+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "CAT",
+    "published_date": "2023-08-01",
+    "title": "Caterpillar Reports Second-Quarter 2023 Results",
+    "source_url": "https://investors.caterpillar.com/news/news-details/2023/Caterpillar-Reports-Second-Quarter-2023-Results/default.aspx",
+    "observed_at": "2026-11-25T16:41:01.457699+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "BA",
+    "published_date": "2023-07-26",
+    "title": "Boeing Reports Second Quarter Results",
+    "source_url": "https://boeing.mediaroom.com/2023-07-26-Boeing-Reports-Second-Quarter-Results",
+    "observed_at": "2026-11-25T16:41:01.457700+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "GOOGL",
+    "published_date": "2023-07-25",
+    "title": "2023 Q2 Earnings Call",
+    "source_url": "https://abc.xyz/investor/events/event-details/2023/2023-Q2-Earnings-Call/",
+    "observed_at": "2026-11-25T16:41:01.457701+00:00",
+    "use_scope": "publisher title and link only"
+  },
+  {
+    "ticker": "META",
+    "published_date": "2023-07-26",
+    "title": "Meta Reports Second Quarter 2023 Results",
+    "source_url": "https://investor.atmeta.com/investor-news/press-release-details/2023/Meta-Reports-Second-Quarter-2023-Results/default.aspx",
+    "observed_at": "2026-11-25T16:41:01.457703+00:00",
+    "use_scope": "publisher title and link only"
+  }
+]

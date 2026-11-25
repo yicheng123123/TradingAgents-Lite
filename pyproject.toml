@@ -30,6 +30,7 @@ pdfium = ["pypdfium2>=4.30,<6"]
 [dependency-groups]
 dev = ["pytest>=8,<10"]
 ui = ["streamlit>=1.49,<2"]
+data-v2 = ["exchange-calendars>=4.11,<5"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["tradingagents_lite"]

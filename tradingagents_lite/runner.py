@@ -187,12 +187,14 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
         budget: Budget, seed: int, react: bool, evidence_path: Path | None = None,
         run_label: str | None = None, protocol_metadata: dict | None = None,
         token_budget=None, experiment_id: str | None = None, phase: str | None = None,
-        rag_factory=None, memory=None, a3_factory=None) -> dict:
+        rag_factory=None, memory=None, a3_factory=None, fundamentals_factory=None) -> dict:
     """Run fixed tasks without sharing outcomes or context across cells."""
     tasks = read_tasks(tasks_path)
     if memory is not None:
         tasks.sort(key=lambda task: (close_available(task.decision_date), task.task_id))
     market = HistoricalData(data_path)
+    if any(market.is_sealed(task) for task in tasks):
+        raise DataError("V2 holdout tasks are sealed for interactive and benchmark execution")
     financial = EvidenceStore.load(evidence_path) if evidence_path is not None else None
     experiment_id = experiment_id or str(out.resolve())
     phase = phase or model_config.get("phase", "B1")
@@ -244,6 +246,7 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                         state = build_workflow(view, backend, budget, react,
                              financial=financial.view(task) if financial is not None else None,
                              rag=rag_factory(task) if rag_factory is not None else None,
+                             fundamentals=fundamentals_factory(task) if fundamentals_factory is not None else None,
                              memory=memory, a3=runtime).invoke({}, {"recursion_limit": 40 if runtime else 30})
                     decision = Decision.model_validate(state["decision"])
                     model_error = any(e.get("stage") == "model" for e in state.get("errors", []))

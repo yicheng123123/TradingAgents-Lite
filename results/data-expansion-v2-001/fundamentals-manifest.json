@@ -1,0 +1,17 @@
+{
+  "issuers": {
+    "AAPL": {
+      "cik": "0000320193",
+      "rows": 81,
+      "sha256": "16c12b3590f260dd5aaa48cb6b6205db995600282f112ea543674fd855c42663",
+      "source_type": "cached SEC accession iXBRL"
+    },
+    "MSFT": {
+      "cik": "0000789019",
+      "rows": 68,
+      "sha256": "f9697be533ce9e57d064754b14ee3c9149cffa3c28e82d8bc6259a686c14c840",
+      "source_type": "cached SEC accession iXBRL"
+    }
+  },
+  "version": "sec-fundamentals-v2"
+}

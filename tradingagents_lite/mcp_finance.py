@@ -41,7 +41,13 @@ def bound_registry(config: dict, stack: ExitStack) -> ToolRegistry:
         store = stack.enter_context(VectorStore(Path(options["index"]), encoder, "chunks"))
         reranker = LocalReranker(models, allow_download=False) if cfg.mode == "R4" else None
         rag = RagView(Retriever(store, reranker), task, options["partition"], cfg, provenance=True)
-    return ToolRegistry(view, financial, rag)
+    fundamentals = None
+    if config.get("fundamentals"):
+        from .fundamentals import FundamentalsView
+
+        options = config["fundamentals"]
+        fundamentals = FundamentalsView.load(Path(options["root"]), task, options["partition"])
+    return ToolRegistry(view, financial, rag, fundamentals)
 
 
 def server_for(registry: ToolRegistry):

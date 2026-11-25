@@ -160,3 +160,23 @@ def test_execution_error_is_visible_without_echoing_private_path(monkeypatch, tm
     assert not at.exception
     assert any("Local input unavailable" in error.value for error in at.error)
     assert str(collision) not in " ".join(error.value for error in at.error)
+
+
+def test_development_v2_only_offers_development_and_runs_real_mcp(monkeypatch, tmp_path):
+    from tradingagents_lite.research_ui import V2_DATA
+
+    at = app(monkeypatch, tmp_path)
+    assert at.selectbox(key="task_set").options == ["Legacy", "Development V2"]
+    at.selectbox(key="task_set").select("Development V2").run()
+    options = at.selectbox(key="task").options
+    assert len(options) == 80 and all("v2-development-" in option for option in options)
+    if not (V2_DATA / "evidence/source_manifest.json").is_file():
+        pytest.skip("Local V2 snapshot required to run the integrated research task")
+    at.selectbox(key="task").select(next(option for option in options if "v2-development-aapl" in option))
+    at.selectbox(key="transport").select("MCP")
+    at.checkbox(key="verifier").check()
+    at.button(key="execute").click().run()
+    assert not at.error and not at.exception
+    run = load_run(at.session_state["run_id"])
+    assert run["status"] == "ok" and run["verification"]["passed"]
+    assert any(event["tool_name"] == "xbrl_fundamentals" for event in run["agent_trace"])

@@ -1,0 +1,482 @@
+[
+  {
+    "daily_volatility_20": 0.012401787787462072,
+    "event_proximate": true,
+    "sector": "Technology",
+    "task_id": "v2-development-aapl-01"
+  },
+  {
+    "daily_volatility_20": 0.016996299641814015,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-aapl-02"
+  },
+  {
+    "daily_volatility_20": 0.01709068033531154,
+    "event_proximate": true,
+    "sector": "Technology",
+    "task_id": "v2-development-aapl-03"
+  },
+  {
+    "daily_volatility_20": 0.011479024110512635,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-aapl-04"
+  },
+  {
+    "daily_volatility_20": 0.03426853556524885,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-amd-01"
+  },
+  {
+    "daily_volatility_20": 0.02740959676167579,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-amd-02"
+  },
+  {
+    "daily_volatility_20": 0.03441538307028487,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-amd-03"
+  },
+  {
+    "daily_volatility_20": 0.03131925223877007,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-amd-04"
+  },
+  {
+    "daily_volatility_20": 0.02366985232730923,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-amzn-01"
+  },
+  {
+    "daily_volatility_20": 0.016727511427894495,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-amzn-02"
+  },
+  {
+    "daily_volatility_20": 0.025261008257080154,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-amzn-03"
+  },
+  {
+    "daily_volatility_20": 0.024170767844629727,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-amzn-04"
+  },
+  {
+    "daily_volatility_20": 0.021328559911170924,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-ba-01"
+  },
+  {
+    "daily_volatility_20": 0.019390632830700423,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-ba-02"
+  },
+  {
+    "daily_volatility_20": 0.029292631056347208,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-ba-03"
+  },
+  {
+    "daily_volatility_20": 0.021309653372438935,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-ba-04"
+  },
+  {
+    "daily_volatility_20": 0.014949876396025137,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-bac-01"
+  },
+  {
+    "daily_volatility_20": 0.01506790400806275,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-bac-02"
+  },
+  {
+    "daily_volatility_20": 0.01788793182457702,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-bac-03"
+  },
+  {
+    "daily_volatility_20": 0.02202235195122944,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-bac-04"
+  },
+  {
+    "daily_volatility_20": 0.015452569101432926,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-cat-01"
+  },
+  {
+    "daily_volatility_20": 0.022802808974362928,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-cat-02"
+  },
+  {
+    "daily_volatility_20": 0.020070664092109485,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-cat-03"
+  },
+  {
+    "daily_volatility_20": 0.024362547824277003,
+    "event_proximate": false,
+    "sector": "Industrials",
+    "task_id": "v2-development-cat-04"
+  },
+  {
+    "daily_volatility_20": 0.01252514707448362,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-cvx-01"
+  },
+  {
+    "daily_volatility_20": 0.01088272758685299,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-cvx-02"
+  },
+  {
+    "daily_volatility_20": 0.016359639159165974,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-cvx-03"
+  },
+  {
+    "daily_volatility_20": 0.011757940247565924,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-cvx-04"
+  },
+  {
+    "daily_volatility_20": 0.019938264717363197,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-googl-01"
+  },
+  {
+    "daily_volatility_20": 0.02662711552681323,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-googl-02"
+  },
+  {
+    "daily_volatility_20": 0.02047121916568274,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-googl-03"
+  },
+  {
+    "daily_volatility_20": 0.020922927689146126,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-googl-04"
+  },
+  {
+    "daily_volatility_20": 0.012885789340981413,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-gs-01"
+  },
+  {
+    "daily_volatility_20": 0.010647550252241395,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-gs-02"
+  },
+  {
+    "daily_volatility_20": 0.0204562381157527,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-gs-03"
+  },
+  {
+    "daily_volatility_20": 0.032056037226635144,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-gs-04"
+  },
+  {
+    "daily_volatility_20": 0.007078497969299675,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-jnj-01"
+  },
+  {
+    "daily_volatility_20": 0.013412860878472418,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-jnj-02"
+  },
+  {
+    "daily_volatility_20": 0.011615908765723874,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-jnj-03"
+  },
+  {
+    "daily_volatility_20": 0.009101613545422483,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-jnj-04"
+  },
+  {
+    "daily_volatility_20": 0.008474047004951269,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-jpm-01"
+  },
+  {
+    "daily_volatility_20": 0.01434843307819916,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-jpm-02"
+  },
+  {
+    "daily_volatility_20": 0.015672370509365458,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-jpm-03"
+  },
+  {
+    "daily_volatility_20": 0.029145994527864243,
+    "event_proximate": false,
+    "sector": "Financials",
+    "task_id": "v2-development-jpm-04"
+  },
+  {
+    "daily_volatility_20": 0.008129425699013515,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-ko-01"
+  },
+  {
+    "daily_volatility_20": 0.005824649930641089,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-ko-02"
+  },
+  {
+    "daily_volatility_20": 0.009655752437690552,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-ko-03"
+  },
+  {
+    "daily_volatility_20": 0.008403852816593763,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-ko-04"
+  },
+  {
+    "daily_volatility_20": 0.047739731838376404,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-meta-01"
+  },
+  {
+    "daily_volatility_20": 0.030008528195078266,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-meta-02"
+  },
+  {
+    "daily_volatility_20": 0.021216783538783795,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-meta-03"
+  },
+  {
+    "daily_volatility_20": 0.01762929671060001,
+    "event_proximate": false,
+    "sector": "Communication Services",
+    "task_id": "v2-development-meta-04"
+  },
+  {
+    "daily_volatility_20": 0.014108757881458527,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-msft-01"
+  },
+  {
+    "daily_volatility_20": 0.011882728807789372,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-msft-02"
+  },
+  {
+    "daily_volatility_20": 0.015665418281014747,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-msft-03"
+  },
+  {
+    "daily_volatility_20": 0.016692260209239328,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-msft-04"
+  },
+  {
+    "daily_volatility_20": 0.020694383065432337,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-nvda-01"
+  },
+  {
+    "daily_volatility_20": 0.03189901918806038,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-nvda-02"
+  },
+  {
+    "daily_volatility_20": 0.05326578409892069,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-nvda-03"
+  },
+  {
+    "daily_volatility_20": 0.024688267629208574,
+    "event_proximate": false,
+    "sector": "Technology",
+    "task_id": "v2-development-nvda-04"
+  },
+  {
+    "daily_volatility_20": 0.014055851040977105,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-pfe-01"
+  },
+  {
+    "daily_volatility_20": 0.019256706546404215,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-pfe-02"
+  },
+  {
+    "daily_volatility_20": 0.013486021912966481,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-pfe-03"
+  },
+  {
+    "daily_volatility_20": 0.011217942648906578,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-pfe-04"
+  },
+  {
+    "daily_volatility_20": 0.032814939973040705,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-tsla-01"
+  },
+  {
+    "daily_volatility_20": 0.04526606800345664,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-tsla-02"
+  },
+  {
+    "daily_volatility_20": 0.04606725911843968,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-tsla-03"
+  },
+  {
+    "daily_volatility_20": 0.0567405693070838,
+    "event_proximate": false,
+    "sector": "Consumer Discretionary",
+    "task_id": "v2-development-tsla-04"
+  },
+  {
+    "daily_volatility_20": 0.017060648073131263,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-unh-01"
+  },
+  {
+    "daily_volatility_20": 0.017439940662082175,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-unh-02"
+  },
+  {
+    "daily_volatility_20": 0.013458342509079485,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-unh-03"
+  },
+  {
+    "daily_volatility_20": 0.01611826786159378,
+    "event_proximate": false,
+    "sector": "Healthcare",
+    "task_id": "v2-development-unh-04"
+  },
+  {
+    "daily_volatility_20": 0.01007953221873755,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-wmt-01"
+  },
+  {
+    "daily_volatility_20": 0.008776725893700436,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-wmt-02"
+  },
+  {
+    "daily_volatility_20": 0.01739989123810076,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-wmt-03"
+  },
+  {
+    "daily_volatility_20": 0.008166583630620419,
+    "event_proximate": false,
+    "sector": "Consumer Staples",
+    "task_id": "v2-development-wmt-04"
+  },
+  {
+    "daily_volatility_20": 0.013451101816868049,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-xom-01"
+  },
+  {
+    "daily_volatility_20": 0.012281807414542833,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-xom-02"
+  },
+  {
+    "daily_volatility_20": 0.013289048110958369,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-xom-03"
+  },
+  {
+    "daily_volatility_20": 0.010390537137951811,
+    "event_proximate": false,
+    "sector": "Energy",
+    "task_id": "v2-development-xom-04"
+  }
+]
