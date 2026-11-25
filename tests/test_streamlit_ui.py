@@ -2,6 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 
+import httpx
 import pytest
 
 pytest.importorskip("streamlit")
@@ -101,6 +102,8 @@ def test_archive_exact_metrics_and_pending_status(monkeypatch, tmp_path):
 
 
 def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
+    from tradingagents_lite import zhipu_account
+
     path = tmp_path / "ledger.sqlite"
     monkeypatch.setenv("TALITE_TOKEN_BUDGET_DB", str(path))
     assert token_dashboard()["remaining"] == 15_000_000 and not path.exists()
@@ -110,9 +113,41 @@ def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
     ledger.settle_usage(attempt, input_tokens=20, output_tokens=10, reasoning_tokens=4, cached_tokens=3)
     before = hashlib.sha256(path.read_bytes()).hexdigest()
     at = app(monkeypatch, tmp_path)
+    calls = []
+
+    def handler(request):
+        calls.append(request.url.path)
+        body = (
+            {"success": True, "data": {"availableBalance": 0, "giveAmount": "1.25"}}
+            if request.url.path == zhipu_account.BALANCE_PATH else {"code": 200, "rows": [], "total": 0}
+        )
+        return httpx.Response(200, json=body)
+
+    snapshot = zhipu_account.account_snapshot
+
+    def use_mock(previous, *, refresh):
+        return snapshot(previous, refresh=refresh, transport=httpx.MockTransport(handler))
+
+    monkeypatch.setattr(zhipu_account, "account_snapshot", use_mock)
     at.radio(key="page").set_value("Token Dashboard").run()
     assert not at.exception and not at.error
     assert any(metric.label == "Settled" and metric.value == "30" for metric in at.metric)
+    assert any(metric.label == "Project cap" and metric.value == "15.00 M" for metric in at.metric)
+    assert any(caption.value == "15,000,000 Tokens" for caption in at.caption)
+    assert calls == []
+    at.button(key="refresh_bigmodel").click().run()
+    assert any("TALITE_API_KEY is missing" in caption.value for caption in at.caption)
+    assert calls == []
+    monkeypatch.setenv("TALITE_API_KEY", "mock-account-key")
+    at.button(key="refresh_bigmodel").click().run()
+    at.run()
+    assert not at.exception and not at.error
+    assert calls == [zhipu_account.BALANCE_PATH, zhipu_account.PACKAGES_PATH]
+    metrics = {metric.label: metric.value for metric in at.metric}
+    assert metrics["Available balance"] == "¥0.00"
+    assert metrics["Total spend"] == "Unavailable"
+    assert metrics["Remaining Tokens"] == "0"
+    assert metrics["Settled"] == "30" and metrics["Project cap"] == "15.00 M"
     assert hashlib.sha256(path.read_bytes()).hexdigest() == before
 
 

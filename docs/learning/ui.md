@@ -16,14 +16,25 @@ uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0
 - Agent Trace 读取已归档的节点顺序、工具结果、Bull/Bear 论点、耗时、错误与重试摘要。
 - Evidence & Memory 从同一任务输出读取当前证据、各阶段检索排名、历史引用和分数。
 - Benchmark 为静态归档建立适配。A0/B0 是规则研究，A1/A2/A3 各自显示分母和来源。B1 真实评测状态为 Pending。
-- Token Dashboard 用 SQLite mode=ro 打开实际账本。未知或失败尝试保留保守记账。已知费用按历史标准价估计，发票字段保持不可用。没有账本时页面只展示配置额度。
+- Token Dashboard 的项目区用 SQLite mode=ro 打开实际账本。未知或失败尝试保留保守记账。已知费用按历史标准价估计，发票字段保持不可用。没有账本时显示配置额度。
 
 页面刷新仅依据 session state 或 URL 中的有效 run_id 加载已经生成的任务记录。模型调用属于执行按钮分支。研究数据写入 data/ui-runs 的新目录，正式 Benchmark 归档由只读适配读取。
 
+## BigModel Account
+
+在启动应用的 WSL 环境中设置现有的 `TALITE_API_KEY`，然后在 Token Dashboard 点击 **Refresh BigModel account**。打开页面、切换页面和普通重跑都只读取当前会话状态。余额与资源包各自缓存成功结果 60 秒。失败时显示 **Unavailable** 或带原同步时间的 **Stale cache**。更换密钥会丢弃旧会话数据。
+
+账户查询仅对 `open.bigmodel.cn` 发出两个只读 HTTPS GET，请求带 Bearer 凭据。客户端禁用重定向和环境代理。密钥与原始响应留在请求过程中，解析后的账户值只保存在当前 Streamlit 会话内。两个端点属于控制台，Bearer 权限和成功响应格式可能变化。[社区余额实现](https://github.com/hucuyuu/zhipu-balance/blob/main/scripts/check_balance.py)
+
+- 人民币区显示账户报告中的 `availableBalance`、`totalSpendAmount` 和 `giveAmount`。赠送金额按账户报告显示，赠金剩余余额需要单独的字段。合法数值 0 显示为 ¥0.00，缺失值显示 **Unavailable**。
+- 资源包区对照智谱控制台将 `tokenBalance` 显示为当前余额，将 `availableBalance` 显示为可用余额。只有按 Token 计量、处于生效状态、未到期且明确列出 `glm-5.3` 的资源包进入统计。到期取 `packageExpirationTime`，无时区的控制台时间按 UTC+08:00 解释。只读第一页，若返回的总行数表明还有其他行，或部分适用范围无法确认，汇总显示 **Unavailable**。[智谱控制台资源包页面](https://bigmodel.cn/finance-center/resource-package/package-mgmt)
+- 原始资源包总额度需要独立字段。当前可核实的接口字段只覆盖剩余和可用余额，原始总额度显示 **Unavailable**。Coding Plan 配额由控制台单独查询。项目 15,000,000 Tokens 硬上限及各阶段额度始终取自本地项目配置和账本。
+
 ## 代码导读
 
-- streamlit_app.py 的research 第 32 行、agent_trace 第 104 行、evidence_memory 第 133 行、benchmark 第 172 行、tokens 第 216 行。
+- streamlit_app.py 的 research 第 34 行、agent_trace 第 106 行、evidence_memory 第 135 行、benchmark 第 174 行、bigmodel_account 第 228 行及 local_token_budget 第 268 行。
 - tradingagents_lite/research_ui.py 的archive_for 第 30 行、load_run 第 39 行、start_run 第 53 行、token_dashboard 第 74 行。
+- tradingagents_lite/zhipu_account.py 的 `_balance` 第 86 行解析人民币金额，`_packages` 第 123 行筛选资源包，`_get` 第 158 行执行请求，`account_snapshot` 第 199 行处理点击和会话缓存。
 
 ## 本地验证
 
@@ -32,6 +43,8 @@ uv run --locked --group ui pytest -q
 ~~~
 
 AppTest 驱动真实应用代码，检查无 Key、离线冻结任务、STDIO、错误显示、归档指标一致性和只读账本。浏览器截图使用真实本地应用与实际生成的离线任务。
+
+账户测试使用内存 HTTP 模拟。AppTest 检查手动刷新、缺失密钥、已知零值、未知金额和项目上限显示，并比较刷新前后的 SQLite 文件哈希。
 
 ## 面试问题
 
@@ -45,6 +58,8 @@ AppTest 驱动真实应用代码，检查无 Key、离线冻结任务、STDIO、
 8. AppTest 与实际浏览器截图分别验证什么？
 9. 为什么 Trace 展示摘要和 ID，而非完整请求？
 10. 如何保证页面归档数字与机器读的 JSON 保持一致？
+11. 为什么资源包余额与可用余额分开显示？怎样证明一个资源包适用于当前模型？
+12. 为什么余额和资源包需要独立缓存？如何防止密钥变更后显示上一个账户的数据？
 
 ## 自行完成的练习
 

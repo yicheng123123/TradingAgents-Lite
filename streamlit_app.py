@@ -1,4 +1,5 @@
 """TradingAgents-Lite local research dashboard."""
+from datetime import UTC, datetime
 import os
 import sqlite3
 
@@ -10,6 +11,7 @@ from tradingagents_lite.experiment import upper_tokens
 from tradingagents_lite.research_ui import (
     ARCHIVES, PAGES, ROOT, archive_for, load_run, new_run_id, start_run, token_dashboard,
 )
+from tradingagents_lite.zhipu_account import CONSOLE_TZ, account_snapshot
 
 st.set_page_config(page_title="TradingAgents-Lite", layout="wide", initial_sidebar_state="expanded")
 st.markdown("""
@@ -213,8 +215,58 @@ def benchmark():
         st.json(data, expanded=False)
 
 
-def tokens():
-    hero("Token Dashboard", "Project ceiling, settlements and pending reservations")
+def account_status(section, now):
+    if section.synced_at is None:
+        status = "Unavailable"
+    else:
+        label = "Last sync" if section.is_fresh(now) else "Stale cache · last sync"
+        time = section.synced_at.astimezone(CONSOLE_TZ).isoformat(sep=" ", timespec="seconds")
+        status = f"{label} {time}"
+    return f"{status} · {section.issue}" if section.issue else status
+
+
+def bigmodel_account():
+    st.subheader("BigModel Account")
+    refresh = st.button("Refresh BigModel account", key="refresh_bigmodel")
+    snapshot = account_snapshot(st.session_state.get("bigmodel_account"), refresh=refresh)
+    st.session_state["bigmodel_account"] = snapshot
+    now = datetime.now(UTC)
+    if not refresh and snapshot.balance.synced_at is None and snapshot.balance.issue is None:
+        st.caption("Select Refresh BigModel account to query the console.")
+
+    st.markdown("**API account · CNY**")
+    balance = snapshot.balance.value
+    for column, label, amount in zip(st.columns(3), ("Available balance", "Total spend", "Amount granted"),
+                                     (balance.available_cny, balance.spend_cny, balance.granted_cny)
+                                     if balance is not None else (None, None, None), strict=True):
+        column.metric(label, f"¥{amount:,.2f}" if amount is not None else "Unavailable")
+    st.caption(account_status(snapshot.balance, now))
+
+    st.markdown("**GLM-5.3 resource packages · Tokens**")
+    packages = snapshot.packages.value
+    active = packages.active(now) if packages is not None else ()
+    for column, label, amounts in zip(st.columns(2), ("Remaining Tokens", "Available Tokens"),
+                                      ([row.remaining_tokens for row in active],
+                                       [row.available_tokens for row in active]), strict=True):
+        if packages is not None and packages.complete and all(amount is not None for amount in amounts):
+            column.metric(label, f"{sum(amount for amount in amounts if amount is not None):,}")
+        else:
+            column.metric(label, "Unavailable")
+    st.caption("Total package allocation: Unavailable. The console response does not confirm original allocation.")
+    if active:
+        st.dataframe([
+            {"Remaining Tokens": row.remaining_tokens, "Available Tokens": row.available_tokens,
+             "Expires (UTC+08:00)": row.expires_at.astimezone(CONSOLE_TZ).isoformat(sep=" ", timespec="seconds")}
+            for row in active
+        ], hide_index=True)
+    if packages is not None and not packages.complete:
+        st.caption("Some package rows or eligibility could not be verified. The table shows confirmed packages.")
+    st.caption(account_status(snapshot.packages, now))
+    st.caption("Coding Plan quota is separate. View it in the BigModel console.")
+
+
+def local_token_budget():
+    st.subheader("Project Token Budget")
     try:
         block = token_dashboard()
     except (OSError, sqlite3.Error):
@@ -223,8 +275,10 @@ def tokens():
     if not block["exists"]:
         st.caption("No local token ledger exists. No file was created.")
     cols = st.columns(4)
-    for col, title, key in zip(cols, ("Project cap", "Settled", "Pending / unknown", "Available"),
-                               ("limit", "settled", "pending", "remaining"), strict=True):
+    cols[0].metric("Project cap", f"{block['limit'] / 1_000_000:.2f} M")
+    cols[0].caption(f"{block['limit']:,} Tokens")
+    for col, title, key in zip(cols[1:], ("Settled", "Pending / unknown", "Available"),
+                               ("settled", "pending", "remaining"), strict=True):
         col.metric(title, f"{block[key]:,}")
     st.dataframe(block["phases"], hide_index=True)
     st.bar_chart({"phase": [row["phase"] for row in block["phases"]],
@@ -234,6 +288,13 @@ def tokens():
     a.metric("GLM-5.3 list-price estimate", f"¥{estimate:.4f}" if estimate is not None else "Unavailable")
     b.metric("Provider invoice", "Unavailable")
     st.caption("Cached tokens are included in input. Reasoning is a reported detail.")
+
+
+def tokens():
+    hero("Token Dashboard", "Local budget and BigModel account")
+    local_token_budget()
+    st.divider()
+    bigmodel_account()
 
 
 if st.session_state.pop("reset_paid", False):

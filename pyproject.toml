@@ -10,6 +10,7 @@ dependencies = [
     "langgraph>=1,<2",
     "pydantic>=2,<3",
     "openai>=2,<4",
+    "httpx>=0.28,<1",
     "mcp>=1.20,<2",
     "beautifulsoup4>=4.12,<5",
     "pypdf[crypto]>=5,<8",

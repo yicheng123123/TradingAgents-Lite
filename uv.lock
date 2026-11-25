@@ -1361,6 +1361,7 @@ source = { editable = "." }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "fonttools" },
+    { name = "httpx" },
     { name = "langgraph" },
     { name = "mcp" },
     { name = "numpy" },
@@ -1389,6 +1390,7 @@ ui = [
 requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.12,<5" },
     { name = "fonttools", specifier = ">=4.50,<5" },
+    { name = "httpx", specifier = ">=0.28,<1" },
     { name = "langgraph", specifier = ">=1,<2" },
     { name = "mcp", specifier = ">=1.20,<2" },
     { name = "numpy", specifier = ">=1.26,<3" },
