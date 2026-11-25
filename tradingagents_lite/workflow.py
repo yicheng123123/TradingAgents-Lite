@@ -165,7 +165,7 @@ def _tool_content(result: dict) -> str:
 
 
 def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bool = True,
-                   financial: EvidenceView | None = None, *, rag=None):
+                   financial: EvidenceView | None = None, *, rag=None, memory=None):
     """Bind tools to a prefiltered single-task view, never to the outcome provider.
 
     The invariant analyst prompt is identical in B1-M and B1-E. B1-E differs only
@@ -292,15 +292,31 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
     def trader(state: State) -> dict:
         if "report" not in state:
             return {}
+        memory_state = {}
         try:
             report = MarketReport.model_validate(state["report"])
             evidence = {i: state["evidence"][i] for i in report.evidence_ids}
-            proposal = Proposal.model_validate(backend.trader(report, evidence))
+            historical = []
+            if memory is not None:
+                query = f"{view.task.symbol} {report.view[:600]}"
+                try:
+                    observation = memory.before(view.task, query)
+                except Exception as exc:
+                    return {"memory_trace": {"error_type": type(exc).__name__},
+                            "errors": [*state["errors"], {"stage": "memory", "code": "recall_error"}]}
+                historical = observation["context"]
+                memory_state = {"memory_trace": {**observation, "passed_to_backend": bool(
+                    historical and hasattr(backend, "trader_with_memory"))}}
+            if historical and hasattr(backend, "trader_with_memory"):
+                raw = backend.trader_with_memory(report, evidence, historical)
+            else:
+                raw = backend.trader(report, evidence)
+            proposal = Proposal.model_validate(raw)
         except ModelCallError as exc:
-            return {"errors": [*state["errors"],
+            return {**memory_state, "errors": [*state["errors"],
                 {"stage": "model", "agent_stage": "trader", "code": exc.code, "attempts": exc.attempts}]}
         except Exception as exc:
-            return {"structured_output_trace": [*state.get("structured_output_trace", []),
+            return {**memory_state, "structured_output_trace": [*state.get("structured_output_trace", []),
                         _structured_event("proposal", False, type(exc).__name__)],
                     "errors": [*state["errors"], {"stage": "trader", "code": type(exc).__name__}]}
 
@@ -308,9 +324,9 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
         citation = _citation_event("proposal", proposal.evidence_ids, evidence)
         citation_trace = [*state.get("citation_trace", []), citation]
         if citation["invalid_ids"] or (proposal.action != Action.HOLD and not proposal.evidence_ids):
-            return {"structured_output_trace": output_trace, "citation_trace": citation_trace,
+            return {**memory_state, "structured_output_trace": output_trace, "citation_trace": citation_trace,
                     "errors": [*state["errors"], {"stage": "trader", "code": "invalid_citation"}]}
-        return {"proposal": proposal.model_dump(mode="json"),
+        return {**memory_state, "proposal": proposal.model_dump(mode="json"),
                 "structured_output_trace": output_trace, "citation_trace": citation_trace}
 
     def risk(state: State) -> dict:
@@ -327,7 +343,10 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
                 decision = Decision(**proposal.model_dump())
         return {"decision": decision.model_dump(mode="json")}
 
-    graph = StateGraph(State)
+    class WorkflowState(State, total=False):
+        memory_trace: dict
+
+    graph = StateGraph(WorkflowState if memory is not None else State)
     for name, fn in {"prepare": start, "analyst": analyst, "tools": tools, "trader": trader, "risk": risk}.items():
         graph.add_node(name, fn)
     graph.add_edge(START, "prepare")

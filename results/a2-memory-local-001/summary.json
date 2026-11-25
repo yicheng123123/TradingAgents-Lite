@@ -1,0 +1,104 @@
+{
+  "model": {
+    "name": "Xenova/bge-small-en-v1.5",
+    "revision": "ea104dacec62c0de699686887e3f920caeb4f3e3",
+    "weight_hashes": {
+      "model_quantized.onnx": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    },
+    "device": "CPUExecutionProvider",
+    "max_model_tokens": 512,
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "dimension": 384,
+    "normalization": "CLS then L2"
+  },
+  "tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae",
+  "market_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+  "development": {
+    "M0": {
+      "retrieved": 0,
+      "injected": 0,
+      "reused_tasks": 0,
+      "before_bytes": 40,
+      "context_bytes": 40,
+      "timing_violations": 0,
+      "tasks": 20,
+      "episodes": 0,
+      "relevance_queries": 14,
+      "mean_query_ms": 0.05282460003854794,
+      "recall@1": 0,
+      "recall@3": 0
+    },
+    "M1": {
+      "retrieved": 48,
+      "injected": 34,
+      "reused_tasks": 18,
+      "before_bytes": 29620,
+      "context_bytes": 20988,
+      "timing_violations": 0,
+      "historical_ids_expected": 34,
+      "historical_ids_preserved": 34,
+      "tasks": 20,
+      "episodes": 20,
+      "relevance_queries": 14,
+      "mean_query_ms": 1.723855050045131,
+      "recall@1": 0.26785714285714285,
+      "recall@3": 0.5654761904761905
+    },
+    "M2": {
+      "retrieved": 48,
+      "injected": 34,
+      "reused_tasks": 18,
+      "before_bytes": 29615,
+      "context_bytes": 20982,
+      "timing_violations": 0,
+      "historical_ids_expected": 34,
+      "historical_ids_preserved": 34,
+      "tasks": 20,
+      "episodes": 20,
+      "relevance_queries": 14,
+      "mean_query_ms": 6.251684100038801,
+      "recall@1": 0.10714285714285714,
+      "recall@3": 0.6309523809523809
+    },
+    "M3": {
+      "retrieved": 48,
+      "injected": 48,
+      "reused_tasks": 18,
+      "before_bytes": 29620,
+      "context_bytes": 18534,
+      "timing_violations": 0,
+      "historical_ids_expected": 48,
+      "historical_ids_preserved": 48,
+      "tasks": 20,
+      "episodes": 20,
+      "relevance_queries": 14,
+      "mean_query_ms": 8.288777449979534,
+      "recall@1": 0.26785714285714285,
+      "recall@3": 0.5654761904761905
+    }
+  },
+  "synthetic": {
+    "synthetic_queries": 1,
+    "recall@1": 1,
+    "recall@3": 1,
+    "future_visible": 0,
+    "negative_scope_checks": 3,
+    "negative_scope_visible": 0,
+    "idempotent_flags": [
+      true,
+      false,
+      true,
+      true
+    ],
+    "version_history_correct": true,
+    "reopened_records_found": 2,
+    "index_errors_detected": 1,
+    "index_errors_after_rebuild": 0,
+    "historical_ids_in_context": 4
+  },
+  "store_bytes": 406531,
+  "peak_rss_kib": 253944,
+  "elapsed_seconds": 7.640095179000127,
+  "glm_calls": 0
+}

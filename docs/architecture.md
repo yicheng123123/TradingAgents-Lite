@@ -29,6 +29,8 @@ NYSE 决策 cutoff 为纽约时间 16:15，DST 由 America/New_York 时区处理
 
 Outcome provider 只在 Agent graph 完成后由 runner 调用。入场为下一共同交易日开盘，出场为第 N 个共同交易日收盘；Alpha 是方向乘以股票价格收益减 SPY 价格收益。当前历史快照与证据是回溯数据或时间代理，不能认证严格 PIT，也不包含费用、股息与组合执行。
 
-## 未来架构
+## A1 检索与 A2 经验
 
-路线图保留完整文档解析、chunking、BM25 + Dense Hybrid Retrieval、Reranker、向量数据库 metadata/time filter、Evidence Grounding、长期 episodic memory、交易反馈与 Reflection、多 Agent Debate、ReAct 扩展及 MCP Server/Client。未来模块必须继续调用同一 PIT 约束层；不得通过向量索引、记忆或 MCP 旁路日期过滤。
+通用 runner 可向 Analyst 绑定任务级 RAG，也可在 Trader 前召回历史经验。A1 在候选阶段按当前任务分区、ticker、cutoff 和时点版本过滤。A2 用 SQLite 保存结算后的经验，Qdrant 搜索版本受同组、同分区和可用时点约束。旧经验作为 Trader 的独立输入，当前引用仍基于任务工具证据。模块分别见 [A1 RAG](learning/a1-rag.md) 和 [A2 Memory](learning/a2-memory.md)。
+
+未来 Multi-Agent、MCP 和 Verifier 扩展沿用相同的时点与引用约束。详见[路线图](roadmap.md)。

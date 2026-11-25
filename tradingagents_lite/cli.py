@@ -1,6 +1,7 @@
 """Download a bounded snapshot or evaluate frozen A0/A0.5/B1 protocols."""
 import argparse
 from contextlib import ExitStack
+from dataclasses import asdict
 from datetime import date
 import json
 from pathlib import Path
@@ -42,6 +43,10 @@ def main():
     evaluate.add_argument("--rag-mode", choices=("R1", "R2", "R3", "R4"), default="R3")
     evaluate.add_argument("--rag-dispatch", choices=("fixed", "agentic"), default="agentic")
     evaluate.add_argument("--model-cache", type=Path, default=Path("data/local-models"))
+    evaluate.add_argument("--memory-store", type=Path, help="Enable A2 with a persistent episode store")
+    evaluate.add_argument("--memory-mode", choices=("M0", "M1", "M2", "M3"), default="M3")
+    evaluate.add_argument("--memory-arm", help="Stable scope name. Defaults to the experiment output path.")
+    evaluate.add_argument("--memory-partition", default="development")
     evaluate.add_argument("--no-react", action="store_true", help="Prefetch the indicator evidence")
 
     baseline = sub.add_parser("b0", help="Run the frozen 20-task deterministic development baseline")
@@ -89,6 +94,16 @@ def main():
     bench.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     bench.add_argument("--modes", nargs="+", choices=("R1", "R2", "R3", "R4"), default=("R1", "R2", "R3", "R4"))
 
+    episodic = sub.add_parser("memory-benchmark", help="Replay Development and test memory locally")
+    _add_frozen_paths(episodic)
+    episodic.add_argument("--model-cache", type=Path, default=Path("data/local-models"))
+    episodic.add_argument("--output", type=Path, required=True)
+
+    repair = sub.add_parser("memory-index", help="Check or rebuild the Qdrant projection from SQLite")
+    repair.add_argument("--store", type=Path, required=True)
+    repair.add_argument("--model-cache", type=Path, default=Path("data/local-models"))
+    repair.add_argument("--rebuild", action="store_true")
+
     args = parser.parse_args()
     try:
         if args.command == "snapshot":
@@ -109,6 +124,16 @@ def main():
             from .rag_benchmark import benchmark
             result = benchmark(args.source, args.workspace, args.output, pdf_root=args.pdf_root,
                                device=args.device, modes=args.modes, pdf_engine=args.pdf_engine)
+        elif args.command == "memory-benchmark":
+            from .memory_benchmark import benchmark
+            result = benchmark(args.tasks, args.data, args.model_cache, args.output)
+        elif args.command == "memory-index":
+            from .memory import MemoryStore
+            from .vectors import LocalEmbedding
+            if not (args.store / "episodes.sqlite").is_file():
+                raise ValueError("Expected an existing memory SQLite store")
+            with MemoryStore(args.store, LocalEmbedding(args.model_cache)) as store:
+                result = store.rebuild() if args.rebuild else store.consistency()
         elif args.command == "b0":
             budget = Budget()
             factory = lambda: MomentumBackend(budget)
@@ -130,19 +155,31 @@ def main():
             budget = Budget(max_tool_rounds=args.max_tool_rounds, max_tokens=args.max_tokens)
             with ExitStack() as stack:
                 rag_factory = None
+                memory = None
+                encoder = None
+                if args.memory_store is not None:
+                    from .memory import MemoryConfig, MemoryReplay, MemoryStore
+                    from .vectors import LocalEmbedding
+                    if args.phase != "A2":
+                        raise ValueError("Memory requires --phase A2")
+                    encoder = LocalEmbedding(args.model_cache)
+                    scope = f"{args.memory_mode}:{args.memory_arm or args.output.resolve()}"
+                    store = stack.enter_context(MemoryStore(args.memory_store, encoder))
+                    memory = MemoryReplay(store, MemoryConfig(args.memory_mode, args.memory_partition, scope))
                 if args.rag_index is not None:
                     from .rag import RagConfig, RagView, Retriever
                     from .vectors import LocalEmbedding, LocalReranker, VectorStore
-                    if args.phase != "A1" or not (args.rag_index / "chunks-encoder.json").is_file():
-                        raise ValueError("RAG requires --phase A1 and an existing index")
+                    if args.phase not in {"A1", "A2"} or not (args.rag_index / "chunks-encoder.json").is_file():
+                        raise ValueError("RAG requires phase A1 or A2 and an existing index")
                     if args.no_react and args.rag_dispatch == "agentic":
                         raise ValueError("Agentic retrieval requires ReAct")
-                    encoder = LocalEmbedding(args.model_cache)
+                    encoder = encoder or LocalEmbedding(args.model_cache)
                     store = stack.enter_context(VectorStore(args.rag_index, encoder, "chunks"))
                     reranker = LocalReranker(args.model_cache) if args.rag_mode == "R4" else None
                     cfg = RagConfig(mode=args.rag_mode, dispatch=args.rag_dispatch)
                     retriever = Retriever(store, reranker)
-                    rag_factory = lambda task: RagView(retriever, task, "development", cfg)
+                    partition = memory.config.partition if memory else "development"
+                    rag_factory = lambda task: RagView(retriever, task, partition, cfg)
                 if args.backend == "offline":
                     factory = lambda: MomentumBackend(budget)
                     config = {"backend": "offline", "policy": "deterministic_momentum_5",
@@ -156,18 +193,20 @@ def main():
                     factory = lambda: ModelBackend(
                         client, model, budget, args.provider_seed,
                         token_budget=token_budget, phase=args.phase,
-                        **({"max_prompt_bytes": 16000} if args.rag_index else {}))
+                        **({"max_prompt_bytes": 20000} if memory else
+                           {"max_prompt_bytes": 16000} if args.rag_index else {}))
                     config = {"backend": "llm", "model": model, "api_host": api_host,
                               "temperature": 0, "provider_seed": args.provider_seed,
                               "phase": args.phase, "sdk_retries": 0, "application_retries": 1}
                 if rag_factory:
-                    from dataclasses import asdict
                     config["rag"] = asdict(cfg)
+                if memory is not None:
+                    config["memory"] = asdict(memory.config)
                 result = run(args.tasks, args.data, args.output, factory, config,
                              budget, args.seed, not args.no_react, evidence_path=args.evidence,
                              token_budget=token_budget if args.backend == "llm" else None,
                              experiment_id=str(args.output.resolve()),
-                             phase=args.phase, rag_factory=rag_factory)
+                             phase=args.phase, rag_factory=rag_factory, memory=memory)
         print(json.dumps(result, indent=2, ensure_ascii=False))
     except (OSError, ValueError) as exc:
         parser.exit(2, f"{type(exc).__name__}: {exc}\n")

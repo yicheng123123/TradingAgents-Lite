@@ -10,6 +10,8 @@
 - **A0.5**：20 个 Development 时点的历史证据层。SEC 财报为 20/20 历史代理可用；Apple Newsroom 标题为 10/20；Microsoft 新闻显式缺失；严格版本时点认证为 0/20。逐题证据见 [A0.5 覆盖报告](results/evidence-dev-a05-001/REPORT.md)。
 - **B0**：20 题确定性 Development 基线，独立保存于 results/b0-development-001。
 - **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。调用、对照和逐题轨迹已实现；当前真实 API smoke 需在 WSL 配置 API Key 后执行。没有 API Key 时不生成模型成绩。状态见 [B1 smoke 报告](results/b1-smoke-003/REPORT.md)。
+- **A1**：本地文档解析、Qdrant、BM25 / Dense / RRF / Cross Encoder，支持固定查询与 Analyst 自主查询。[A1 RAG](docs/learning/a1-rag.md)
+- **A2**：按结算事件推进的 SQLite / Qdrant 长期经验，提供 M0–M3 配置。[A2 Memory](docs/learning/a2-memory.md)
 
 B1 当前默认模型为 GLM-5.3，OpenAI Chat Completions Base URL 为 https://open.bigmodel.cn/api/paas/v4。智谱官方文档列出了此模型、兼容协议与 Function Calling；本机尚未通过账户认证或收到模型响应，因此账号权限和响应中的实际模型身份仍待两题 smoke 实测。参考[模型文档](https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3)与[工具调用文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
 
@@ -82,6 +84,6 @@ uv run --locked talite b1   --scope development   --budget-cap-cny 12   --output
 
 ## 后续模块
 
-完整 Agentic RAG、带 metadata / 时间过滤的向量数据库、BM25 + Dense Hybrid Retrieval、Reranker、Evidence Grounding、长期 Episodic Memory、交易结果反馈与 Reflection、Bull/Bear Debate、ReAct 扩展、MCP Server/Client、消融和独立 Holdout 均保留在 [路线图](docs/roadmap.md)。B1 不启用这些新模块，以隔离模型与证据访问条件。
+A1 与 A2 由通用实验入口单独开启。A3 的多 Agent、MCP 和 Verifier，以及 B2 消融与 B3 Final Holdout，见[路线图](docs/roadmap.md)。B1 保持原有配对协议。
 
 完整调用链、状态传递与练习见 [docs/learning/b1.md](docs/learning/b1.md)；协议和字段定义见 [docs/b1-protocol.md](docs/b1-protocol.md)。

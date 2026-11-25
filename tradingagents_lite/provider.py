@@ -281,11 +281,23 @@ class ModelBackend:
         return self._call(messages, tools)
 
     def trader(self, report: MarketReport, evidence: dict) -> Proposal:
+        return self._trader(report, evidence, None)
+
+    def trader_with_memory(self, report: MarketReport, evidence: dict, memory: list[dict]) -> Proposal:
+        return self._trader(report, evidence, memory)
+
+    def _trader(self, report: MarketReport, evidence: dict, memory: list[dict] | None) -> Proposal:
+        inputs = {"report": report.model_dump(), "evidence": _trader_context(evidence)}
+        if memory:
+            inputs["historical_experience"] = memory
+            inputs["experience_usage"] = (
+                "Use past experiences only as checks on reasoning. Historical IDs and outcomes "
+                "are not facts about this task and cannot be cited as current evidence."
+            )
         result = self._call(
             [{"role": "system", "content": TRADER_SYSTEM_PROMPT},
-             {"role": "user", "content": json.dumps({"report": report.model_dump(),
-                  "evidence": _trader_context(evidence)},
-                  ensure_ascii=False, sort_keys=True)}],
+             {"role": "user", "content": json.dumps(inputs, ensure_ascii=False, sort_keys=True,
+                                                    separators=(",", ":") if memory else None)}],
             [],
         )
         return Proposal.model_validate_json(result["content"])
