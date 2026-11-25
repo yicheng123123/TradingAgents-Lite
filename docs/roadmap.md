@@ -59,6 +59,10 @@
 
 [A3 评测归档](../results/a3-offline-001/REPORT.md)含真实 STDIO 与离线故障对照。真实模型实验仍待执行。
 
+## 本地 Research 界面
+
+Streamlit 提供冻结任务执行、轨迹、证据与记忆、基准和账本视图。交互式用户 Run 与正式实验独立归档。界面处于离线验收状态。
+
 ## B2：Benchmark 与消融
 
 - 固定 smoke 4 题与 Development 20 题，用于比较检索、记忆与工具配置。

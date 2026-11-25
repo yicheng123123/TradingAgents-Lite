@@ -11,8 +11,8 @@
 - **B0**：20 题确定性 Development 基线，独立保存于 results/b0-development-001。
 - **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。调用、对照和逐题轨迹已实现；当前真实 API smoke 需在 WSL 配置 API Key 后执行。没有 API Key 时不生成模型成绩。状态见 [B1 smoke 报告](results/b1-smoke-003/REPORT.md)。
 - **A1**：本地文档解析、Qdrant、BM25 / Dense / RRF / Cross Encoder，支持固定查询与 Analyst 自主查询。[A1 RAG](docs/learning/a1-rag.md)
-- **A3**：可选 Bull/Bear、MCP STDIO、确定性 Verifier 和有界恢复。[离线评测](results/a3-offline-001/REPORT.md) · [A3 教学](docs/learning/a3-agents.md)
 - **A2**：按结算事件推进的 SQLite / Qdrant 长期经验，提供 M0–M3 配置。[A2 Memory](docs/learning/a2-memory.md)
+- **A3**：可选 Bull/Bear、MCP STDIO、确定性 Verifier 和有界恢复。[离线评测](results/a3-offline-001/REPORT.md) · [A3 教学](docs/learning/a3-agents.md)
 
 B1 当前默认模型为 GLM-5.3，OpenAI Chat Completions Base URL 为 https://open.bigmodel.cn/api/paas/v4。智谱官方文档列出了此模型、兼容协议与 Function Calling；本机尚未通过账户认证或收到模型响应，因此账号权限和响应中的实际模型身份仍待两题 smoke 实测。参考[模型文档](https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3)与[工具调用文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
 
@@ -91,6 +91,14 @@ uv run --locked talite a3-benchmark --output data/a3-benchmark-new
 ~~~
 
 真实 GLM 实验仍待完整验收。
+
+## 本地研究界面
+
+~~~sh
+uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0.0.1 --server.headless true --browser.gatherUsageStats false
+~~~
+
+打开输出的本机地址。默认使用 Offline。Research 运行冻结任务，Agent Trace 与 Evidence & Memory 查看同一运行，Benchmark 和 Token Dashboard 读取现有归档与 SQLite 账本。[界面教学](docs/learning/ui.md) · [Research 截图](docs/screenshots/research.png) · [Agent Trace 截图](docs/screenshots/agent-trace.png)
 
 ## 后续模块
 
