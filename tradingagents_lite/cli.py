@@ -64,6 +64,27 @@ def main():
     b1.add_argument("--budget-cap-cny", type=float,
                     help="Required for the 20-task Development run; must cover the conservative cost ceiling")
 
+    a3 = sub.add_parser("a3", help="Run the optional multi-agent research graph")
+    _add_frozen_paths(a3)
+    a3.add_argument("--output", type=Path, required=True)
+    a3.add_argument("--evidence", type=Path)
+    a3.add_argument("--rag-index", type=Path)
+    a3.add_argument("--rag-mode", choices=("R1", "R2", "R3", "R4"), default="R3")
+    a3.add_argument("--rag-dispatch", choices=("fixed", "agentic"), default="fixed")
+    a3.add_argument("--memory-mode", choices=("M0", "M1", "M2", "M3"), default="M0")
+    a3.add_argument("--backend", choices=("offline", "llm"), default="offline")
+    a3.add_argument("--transport", choices=("local", "mcp"), default="local")
+    a3.add_argument("--debate", choices=("D0", "D1", "D2"), default="D0")
+    a3.add_argument("--verifier", action="store_true")
+    a3.add_argument("--repair", action="store_true")
+    a3.add_argument("--supplement", action="store_true")
+
+    a3_bench = sub.add_parser("a3-benchmark", help="Run scripted, deterministic and real MCP offline cases")
+    _add_frozen_paths(a3_bench)
+    a3_bench.add_argument("--output", type=Path, required=True)
+    a3_bench.add_argument("--evidence", type=Path, default=Path("data/financial-evidence-dev-003"))
+    a3_bench.add_argument("--rag-index", type=Path, default=Path("data/a1-development-001"))
+
     fetch = sub.add_parser("evidence-fetch")
     for flag in ("tasks", "data", "cache", "output"):
         fetch.add_argument(f"--{flag}", type=Path, required=True)
@@ -151,6 +172,16 @@ def main():
             if result["status"] != "completed":
                 raise SystemExit(2)
             return
+        elif args.command == "a3":
+            from .agents import A3Config
+            from .experiment import execute_experiment
+            config = A3Config(args.debate, args.transport, args.verifier, args.repair, args.supplement)
+            result = execute_experiment(args.tasks, args.data, args.output, config,
+                backend=args.backend, evidence=args.evidence, rag_index=args.rag_index,
+                rag_mode=args.rag_mode, rag_dispatch=args.rag_dispatch, memory_mode=args.memory_mode)
+        elif args.command == "a3-benchmark":
+            from .a3_benchmark import benchmark
+            result = benchmark(args.tasks, args.data, args.evidence, args.rag_index, args.output)
         else:
             budget = Budget(max_tool_rounds=args.max_tool_rounds, max_tokens=args.max_tokens)
             with ExitStack() as stack:

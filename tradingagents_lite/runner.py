@@ -1,5 +1,6 @@
 """Isolated decision and settlement, with append-only task trajectories and exports."""
 import csv
+from contextlib import nullcontext
 from datetime import UTC, datetime
 import importlib.metadata
 import json
@@ -186,7 +187,7 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
         budget: Budget, seed: int, react: bool, evidence_path: Path | None = None,
         run_label: str | None = None, protocol_metadata: dict | None = None,
         token_budget=None, experiment_id: str | None = None, phase: str | None = None,
-        rag_factory=None, memory=None) -> dict:
+        rag_factory=None, memory=None, a3_factory=None) -> dict:
     """Run fixed tasks without sharing outcomes or context across cells."""
     tasks = read_tasks(tasks_path)
     if memory is not None:
@@ -235,12 +236,15 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                         experiment_id=experiment_id, task_id=task.task_id, phase=phase)
                 row = task.model_dump(mode="json")
                 state, outcome = {}, None
+                runtime = None
                 try:
                     view = market.view(task)
-                    state = build_workflow(view, backend, budget, react,
-                         financial=financial.view(task) if financial is not None else None,
-                         rag=rag_factory(task) if rag_factory is not None else None, memory=memory).invoke(
-                        {}, {"recursion_limit": 30})
+                    runtime = a3_factory(task, experiment_id) if a3_factory is not None else None
+                    with runtime if runtime is not None else nullcontext():
+                        state = build_workflow(view, backend, budget, react,
+                             financial=financial.view(task) if financial is not None else None,
+                             rag=rag_factory(task) if rag_factory is not None else None,
+                             memory=memory, a3=runtime).invoke({}, {"recursion_limit": 40 if runtime else 30})
                     decision = Decision.model_validate(state["decision"])
                     model_error = any(e.get("stage") == "model" for e in state.get("errors", []))
                     status = "model_error" if model_error else "workflow_error" if state["errors"] else "ok"
@@ -274,6 +278,12 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                     row["memory_trace"] = state.get("memory_trace")
                     if status == "ok" and outcome is not None:
                         memory.enqueue(task, decision, outcome, state.get("evidence", {}))
+                if runtime is not None:
+                    row["agent_trace"] = runtime.events
+                    row["debate"] = state.get("debate", {})
+                    row["debate_trace"] = state.get("debate_trace", [])
+                    row["role_calls"] = runtime.role_calls
+                    row["verification"] = state.get("verification")
                 line = json.dumps(row, ensure_ascii=False)
                 with ledger:
                     ledger.execute("INSERT INTO outcomes VALUES (?,?)", (task.task_id, line))

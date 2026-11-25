@@ -79,7 +79,7 @@ class Retriever:
         supported = ["historical_proxy", "verified_known_at"]
         if cutoff.utcoffset() is None or not pit or not set(pit) <= set(supported):
             raise ValueError("Invalid cutoff or PIT policy")
-        key = (ticker, cutoff, partition, pit, lookback)
+        key = (self.store.revision, ticker, cutoff, partition, pit, lookback)
         if key in self._scopes:
             return self._scopes[key]
         base = [match("ticker", ticker), match("dataset_partition", partition),
@@ -137,9 +137,10 @@ def compact_json(value) -> str:
 
 
 class RagView:
-    def __init__(self, retriever: Retriever, task, partition: str, config: RagConfig):
+    def __init__(self, retriever: Retriever, task, partition: str, config: RagConfig, *, provenance=False):
         self.retriever, self.task, self.partition, self.config = retriever, task, partition, config
         self.remaining = config.context_bytes
+        self.provenance = provenance
 
     def search(self, query: str, limit: int | None = None) -> dict:
         cfg = self.config
@@ -151,6 +152,9 @@ class RagView:
             item = {"evidence_id": "chunk:" + row["chunk_id"], "source_type": row["source_type"],
                     "eligible_at": row["eligible_at"], "pit_level": row["pit_level"],
                     "document_id": row["document_id"], "page": row["page"], "excerpt": row["text"][:720]}
+            if self.provenance:
+                item.update({key: row[key] for key in (
+                    "source_url", "version_id", "raw_hash", "ticker", "dataset_partition")})
             proposal = [*payload["items"], item]
             if len(compact_json({**payload, "items": proposal}).encode()) > self.remaining:
                 break

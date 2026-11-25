@@ -48,7 +48,7 @@
 - 消融版本：M0 No Memory、M1 Recent、M2 Semantic、M3 Semantic + Evidence-aware Ranking + Context Compaction。
 - 评估 Memory Retrieval Quality、跨任务复用、Context Evidence Preservation、未来记忆泄漏、tokens 与延迟。Dev 经验不得污染 Holdout。
 
-## A3：多 Agent、ReAct 扩展、MCP 与 Verifier
+## A3：多 Agent、MCP 与 Verifier（离线已验证）
 
 - 完成 Market Analyst、Bull Researcher、Bear Researcher 单轮 Debate、Trader 和独立 Risk Manager。
 - 结构化 Agent State 明确每个节点可读写的信息、引用和失败状态。
@@ -56,6 +56,8 @@
 - MCP Server / Client 只适配已有金融工具注册表；本地函数调用与 MCP 必须走同一授权和执行实现，并测试输出/错误等价性。
 - 独立评估开启/关闭 ReAct 与 MCP 的工具成功率、恢复事件、延迟、tokens 和成本，不默认穷举全组合。
 - Verifier 优先采用确定性规则，核对证据、格式与时点约束。
+
+[A3 评测归档](../results/a3-offline-001/REPORT.md)含真实 STDIO 与离线故障对照。真实模型实验仍待执行。
 
 ## B2：Benchmark 与消融
 

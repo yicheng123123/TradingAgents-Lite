@@ -11,6 +11,7 @@
 - **B0**：20 题确定性 Development 基线，独立保存于 results/b0-development-001。
 - **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。调用、对照和逐题轨迹已实现；当前真实 API smoke 需在 WSL 配置 API Key 后执行。没有 API Key 时不生成模型成绩。状态见 [B1 smoke 报告](results/b1-smoke-003/REPORT.md)。
 - **A1**：本地文档解析、Qdrant、BM25 / Dense / RRF / Cross Encoder，支持固定查询与 Analyst 自主查询。[A1 RAG](docs/learning/a1-rag.md)
+- **A3**：可选 Bull/Bear、MCP STDIO、确定性 Verifier 和有界恢复。[离线评测](results/a3-offline-001/REPORT.md) · [A3 教学](docs/learning/a3-agents.md)
 - **A2**：按结算事件推进的 SQLite / Qdrant 长期经验，提供 M0–M3 配置。[A2 Memory](docs/learning/a2-memory.md)
 
 B1 当前默认模型为 GLM-5.3，OpenAI Chat Completions Base URL 为 https://open.bigmodel.cn/api/paas/v4。智谱官方文档列出了此模型、兼容协议与 Function Calling；本机尚未通过账户认证或收到模型响应，因此账号权限和响应中的实际模型身份仍待两题 smoke 实测。参考[模型文档](https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3)与[工具调用文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
@@ -82,8 +83,17 @@ uv run --locked talite b1   --scope development   --budget-cap-cny 12   --output
 
 行情是历史下载的 Yahoo Finance 回溯快照，存在供应商事后修订和复权限制。A0.5 证据多数为历史代理，不是经首次可见时间认证的 point-in-time 数据。模型预训练知识也无法按历史日期截断。该实验只能称为冻结数据上的历史研究基线，不能称为严格历史回测、可交易策略或真实收益。
 
+## A3 离线运行
+
+~~~sh
+uv run --locked talite a3 --debate D2 --transport mcp --verifier --repair --output data/a3-dev-new
+uv run --locked talite a3-benchmark --output data/a3-benchmark-new
+~~~
+
+真实 GLM 实验仍待完整验收。
+
 ## 后续模块
 
-A1 与 A2 由通用实验入口单独开启。A3 的多 Agent、MCP 和 Verifier，以及 B2 消融与 B3 Final Holdout，见[路线图](docs/roadmap.md)。B1 保持原有配对协议。
+A1 与 A2 由通用实验入口单独开启。A3 可通过 `talite a3` 单独开启。B2 消融和 B3 Final Holdout 见[路线图](docs/roadmap.md)。B1 保持原有配对协议。
 
 完整调用链、状态传递与练习见 [docs/learning/b1.md](docs/learning/b1.md)；协议和字段定义见 [docs/b1-protocol.md](docs/b1-protocol.md)。

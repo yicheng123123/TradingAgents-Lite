@@ -16,7 +16,7 @@ class Encoder(Protocol):
 
 
 class OnnxModel:
-    def __init__(self, root: Path, repository: str, revision: str, *, device: str, threads: int):
+    def __init__(self, root: Path, repository: str, revision: str, *, device: str, threads: int, allow_download: bool = True):
         from hashlib import file_digest
         from shutil import copyfileobj
         from tempfile import NamedTemporaryFile
@@ -31,6 +31,8 @@ class OnnxModel:
         hashes = {}
         for path in (model_file, tokenizer_file):
             if not path.is_file():
+                if not allow_download:
+                    raise FileNotFoundError("Local model files are required")
                 path.parent.mkdir(parents=True, exist_ok=True)
                 relative = path.relative_to(model_dir).as_posix()
                 url = f"https://huggingface.co/{repository}/resolve/{revision}/{relative}"
@@ -78,8 +80,9 @@ class LocalEmbedding:
     MODEL = "Xenova/bge-small-en-v1.5"
     REVISION = "ea104dacec62c0de699686887e3f920caeb4f3e3"
 
-    def __init__(self, root: Path, *, device: str = "cpu", threads: int = 4, batch: int = 32):
-        self.engine = OnnxModel(root, self.MODEL, self.REVISION, device=device, threads=threads)
+    def __init__(self, root: Path, *, device: str = "cpu", threads: int = 4, batch: int = 32,
+                 allow_download: bool = True):
+        self.engine = OnnxModel(root, self.MODEL, self.REVISION, device=device, threads=threads, allow_download=allow_download)
         self.metadata = {**self.engine.metadata, "base_model": "BAAI/bge-small-en-v1.5",
                          "dimension": 384, "normalization": "CLS then L2"}
         self.cache_identity = {k: v for k, v in self.metadata.items() if k != "device"}
@@ -122,8 +125,9 @@ class LocalReranker:
     MODEL = "Xenova/ms-marco-MiniLM-L-6-v2"
     REVISION = "a09144355adeed5f58c8ed011d209bf8ee5a1fec"
 
-    def __init__(self, root: Path):
-        self.engine = OnnxModel(root, self.MODEL, self.REVISION, device="cpu", threads=4)
+    def __init__(self, root: Path, *, allow_download: bool = True):
+        self.engine = OnnxModel(root, self.MODEL, self.REVISION, device="cpu", threads=4,
+                                allow_download=allow_download)
         self.metadata = self.engine.metadata
 
     def score(self, query: str, texts: list[str]) -> list[float]:
@@ -146,6 +150,7 @@ class VectorStore:
     def __init__(self, path: Path, encoder: Encoder | None, name: str):
         self.encoder = encoder
         self.name = name
+        self.revision = 0
         self.client = QdrantClient(path=str(path))
         identity = {k: v for k, v in encoder.metadata.items() if k != "device"} if encoder else {}
         marker = path / f"{name}-encoder.json"
@@ -169,6 +174,8 @@ class VectorStore:
         self.client.close()
 
     def put(self, rows: list[dict], *, id_key: str, text_key: str) -> None:
+        if rows:
+            self.revision += 1
         for start in range(0, len(rows), 128):
             batch = rows[start:start + 128]
             vectors = (self.encoder.encode([row[text_key] for row in batch])
