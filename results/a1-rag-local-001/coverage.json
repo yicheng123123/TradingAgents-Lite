@@ -1,0 +1,10 @@
+{
+  "public_questions": 150,
+  "full_pypdf_evaluated": 148,
+  "pypdf_pilot_supplemented_count": 2,
+  "four_mode_union": {
+    "test": 99,
+    "calibration": 51
+  },
+  "questions_without_four_mode_metrics": []
+}

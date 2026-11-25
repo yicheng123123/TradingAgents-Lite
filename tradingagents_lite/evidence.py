@@ -70,25 +70,29 @@ def next_session_proxy(day: date, sessions: tuple[date, ...]) -> datetime | None
     return close_available(following) if following else None
 
 
+def retain_versions(records, *, key, verified):
+    """Retain single versions or only attested versions at a conflicting timestamp."""
+    groups = {}
+    for record in records:
+        groups.setdefault(key(record), []).append(record)
+    return [record for versions in groups.values() for record in versions
+            if len(versions) == 1 or verified(record)]
+
+
 class EvidenceView:
     """Only eligible versions and safe provenance fields enter the analyst graph."""
 
     def __init__(self, task: Task, records: tuple[Evidence, ...]):
         self.cutoff = close_available(task.decision_date)
-        visible = []
-        candidate_versions = {}
+        candidates = []
         for item in records:
             if item.ticker != task.symbol or item.eligible_at is None or item.pit_level == "unavailable":
                 continue
             if self.cutoff - timedelta(days=LOOKBACK[item.source_type]) <= item.eligible_at <= self.cutoff:
-                key = (item.source_type, item.document_id, item.eligible_at)
-                candidate_versions.setdefault(key, []).append(item)
-        for versions in candidate_versions.values():
-            if len(versions) == 1:
-                visible.extend(versions)
-                continue
-            attested = [v for v in versions if v.pit_level == "verified_known_at"]
-            visible.extend(attested)
+                candidates.append(item)
+        visible = retain_versions(candidates,
+            key=lambda item: (item.source_type, item.document_id, item.eligible_at),
+            verified=lambda item: item.pit_level == "verified_known_at")
         self._items = tuple(sorted(visible, key=lambda i: (i.eligible_at, i.evidence_id), reverse=True))
 
     def search(self, source_type: SourceType, limit: int = 3) -> dict:

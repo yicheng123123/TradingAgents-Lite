@@ -1,0 +1,253 @@
+{
+  "source": "https://github.com/patronus-ai/financebench",
+  "revision": "cc39aeb4afdf33909ee1412188bf89035950c2eb",
+  "license_basis": "CC BY-NC 4.0 per Patronus public dataset card; source PDFs used locally",
+  "license_url": "https://huggingface.co/datasets/PatronusAI/financebench",
+  "companies": [
+    "3M",
+    "Adobe"
+  ],
+  "public_questions": 150,
+  "split_counts": {
+    "test": 99,
+    "calibration": 51
+  },
+  "mapped_counts": {
+    "test": 8,
+    "calibration": 5
+  },
+  "exclusion_reasons_nonexclusive": {
+    "outside_pilot_company_scope": 137
+  },
+  "pdfs": {
+    "3M_2018_10K": {
+      "status": "indexed",
+      "sha256": "faf10c53fc6f1a8aa346ec3db79145e3ae6fbb3753c8064924e174d0a973934d",
+      "pages": 160,
+      "chunks": 530,
+      "source_url": "https://investors.3m.com/financials/sec-filings/content/0001558370-19-000470/0001558370-19-000470.pdf"
+    },
+    "3M_2022_10K": {
+      "status": "indexed",
+      "sha256": "d5cf549543a24b04228fd2af979ff2ca94cf64fb008a789340cb9117fbcfde5d",
+      "pages": 252,
+      "chunks": 857,
+      "source_url": "https://investors.3m.com/financials/sec-filings/content/0000066740-23-000014/0000066740-23-000014.pdf"
+    },
+    "3M_2023Q2_10Q": {
+      "status": "indexed",
+      "sha256": "3e66115793459f42185feeeab4e7f07dd27ab6dd465d0694ce415e861029cf93",
+      "pages": 92,
+      "chunks": 318,
+      "source_url": "https://investors.3m.com/financials/sec-filings/content/0000066740-23-000058/0000066740-23-000058.pdf"
+    },
+    "ADOBE_2015_10K": {
+      "status": "indexed",
+      "sha256": "f9ddba652f19e20752d98b1b4cedcebcb1a9a6d11dd23ab2e2f00f009a164c24",
+      "pages": 116,
+      "chunks": 379,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMTUtRklOQUwucGRm"
+    },
+    "ADOBE_2016_10K": {
+      "status": "indexed",
+      "sha256": "655153cdaed14d7093e98ff75595bf850a0d2299fa851ccf5b344ebc2d5038ae",
+      "pages": 112,
+      "chunks": 362,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMTYtRklOQUwucGRm"
+    },
+    "ADOBE_2017_10K": {
+      "status": "indexed",
+      "sha256": "ace32580369138998de84a0d0e24943766aa8374a17b823fdfae980b9c1458bd",
+      "pages": 107,
+      "chunks": 347,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMTctRklOQUwucGRm"
+    },
+    "ADOBE_2022_10K": {
+      "status": "indexed",
+      "sha256": "ce8c716abac26bfa38ae6b71d703112852c8591a4bb19f7c1177beb1dfc87ad2",
+      "pages": 99,
+      "chunks": 327,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMjItRklOQUwucGRm"
+    }
+  },
+  "questions_sha256": "a5a2aa673e573e55675fc3c0f9aa38c1cf59d2abc91edb077534f71f10a71877",
+  "documents_sha256": "1c69127783879de8cdadb159d2181f39bc3123b8e0ebf74031c3969d69189575",
+  "embedding": {
+    "name": "Xenova/bge-small-en-v1.5",
+    "revision": "ea104dacec62c0de699686887e3f920caeb4f3e3",
+    "weight_hashes": {
+      "model_quantized.onnx": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    },
+    "device": "CPUExecutionProvider",
+    "max_model_tokens": 512,
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "dimension": 384,
+    "normalization": "CLS then L2"
+  },
+  "reranker": {
+    "name": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+    "weight_hashes": {
+      "model_quantized.onnx": "e9d8ebf845c413e981c175bfe49a3bfa9b3dcce2a3ba54875ee5df5a58639fbe",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    },
+    "device": "CPUExecutionProvider",
+    "max_model_tokens": 512
+  },
+  "skipped_modes": [],
+  "metrics": {
+    "calibration": {
+      "R1": {
+        "n": 5,
+        "mean_latency_ms": 444.88355740013503,
+        "page_proxy": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "recall@10": 0.0,
+          "mrr@10": 0,
+          "ndcg@10": 0.0
+        },
+        "document": {
+          "recall@1": 0.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.4166666666666667,
+          "ndcg@10": 0.5646931637575532
+        }
+      },
+      "R2": {
+        "n": 5,
+        "mean_latency_ms": 192.52315440044185,
+        "page_proxy": {
+          "recall@1": 0.2,
+          "recall@5": 0.5,
+          "recall@10": 0.6,
+          "mrr@10": 0.4,
+          "ndcg@10": 0.442241792884654
+        },
+        "document": {
+          "recall@1": 0.2,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.5166666666666666,
+          "ndcg@10": 0.6385072130432616
+        }
+      },
+      "R3": {
+        "n": 5,
+        "mean_latency_ms": 442.29750639988197,
+        "page_proxy": {
+          "recall@1": 0.0,
+          "recall@5": 0.5,
+          "recall@10": 0.5,
+          "mrr@10": 0.16666666666666666,
+          "ndcg@10": 0.2389489361291968
+        },
+        "document": {
+          "recall@1": 0.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.4,
+          "ndcg@10": 0.5508284753722318
+        }
+      },
+      "R4": {
+        "n": 5,
+        "mean_latency_ms": 2453.879082199819,
+        "page_proxy": {
+          "recall@1": 0.0,
+          "recall@5": 0.5,
+          "recall@10": 0.6,
+          "mrr@10": 0.21666666666666667,
+          "ndcg@10": 0.3145124611232132
+        },
+        "document": {
+          "recall@1": 0.0,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.35,
+          "ndcg@10": 0.5123212623289701
+        }
+      }
+    },
+    "test": {
+      "R1": {
+        "n": 8,
+        "mean_latency_ms": 452.0232618750697,
+        "page_proxy": {
+          "recall@1": 0.125,
+          "recall@5": 0.125,
+          "recall@10": 0.125,
+          "mrr@10": 0.125,
+          "ndcg@10": 0.125
+        },
+        "document": {
+          "recall@1": 0.375,
+          "recall@5": 0.875,
+          "recall@10": 0.875,
+          "mrr@10": 0.6041666666666666,
+          "ndcg@10": 0.6740986575892965
+        }
+      },
+      "R2": {
+        "n": 8,
+        "mean_latency_ms": 193.04723425000248,
+        "page_proxy": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "recall@10": 0.0,
+          "mrr@10": 0,
+          "ndcg@10": 0.0
+        },
+        "document": {
+          "recall@1": 0.5,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.7291666666666666,
+          "ndcg@10": 0.7990986575892965
+        }
+      },
+      "R3": {
+        "n": 8,
+        "mean_latency_ms": 481.8015726250451,
+        "page_proxy": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "recall@10": 0.125,
+          "mrr@10": 0.020833333333333332,
+          "ndcg@10": 0.04452589838850277
+        },
+        "document": {
+          "recall@1": 0.375,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.6666666666666666,
+          "ndcg@10": 0.7529648767857288
+        }
+      },
+      "R4": {
+        "n": 8,
+        "mean_latency_ms": 2018.5894822499222,
+        "page_proxy": {
+          "recall@1": 0.0,
+          "recall@5": 0.0,
+          "recall@10": 0.125,
+          "mrr@10": 0.013888888888888888,
+          "ndcg@10": 0.03762874945799765
+        },
+        "document": {
+          "recall@1": 0.25,
+          "recall@5": 1.0,
+          "recall@10": 1.0,
+          "mrr@10": 0.5625,
+          "ndcg@10": 0.6740986575892965
+        }
+      }
+    }
+  },
+  "index_bytes": 20554753,
+  "peak_rss_kib": 1192344,
+  "elapsed_seconds": 371.1389270210002,
+  "glm_calls": 0
+}

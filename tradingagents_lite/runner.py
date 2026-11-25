@@ -185,7 +185,8 @@ def _git(*args: str) -> str:
 def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_config: dict,
         budget: Budget, seed: int, react: bool, evidence_path: Path | None = None,
         run_label: str | None = None, protocol_metadata: dict | None = None,
-        token_budget=None, experiment_id: str | None = None, phase: str | None = None) -> dict:
+        token_budget=None, experiment_id: str | None = None, phase: str | None = None,
+        rag_factory=None) -> dict:
     """Run fixed tasks without sharing outcomes or context across cells."""
     tasks = read_tasks(tasks_path)
     market = HistoricalData(data_path)
@@ -235,7 +236,8 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                 try:
                     view = market.view(task)
                     state = build_workflow(view, backend, budget, react,
-                        financial=financial.view(task) if financial is not None else None).invoke(
+                         financial=financial.view(task) if financial is not None else None,
+                         rag=rag_factory(task) if rag_factory is not None else None).invoke(
                         {}, {"recursion_limit": 30})
                     decision = Decision.model_validate(state["decision"])
                     model_error = any(e.get("stage") == "model" for e in state.get("errors", []))

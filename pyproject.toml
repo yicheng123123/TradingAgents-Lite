@@ -6,10 +6,24 @@ build-backend = "hatchling.build"
 name = "tradingagents-lite"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
-dependencies = ["langgraph>=1,<2", "pydantic>=2,<3", "openai>=2,<4"]
+dependencies = [
+    "langgraph>=1,<2",
+    "pydantic>=2,<3",
+    "openai>=2,<4",
+    "beautifulsoup4>=4.12,<5",
+    "pypdf[crypto]>=5,<8",
+    "fonttools>=4.50,<5",
+    "qdrant-client>=1.12,<2",
+    "numpy>=1.26,<3",
+    "onnxruntime>=1.20,<2",
+    "tokenizers>=0.21,<1",
+]
 
 [project.scripts]
 talite = "tradingagents_lite.cli:main"
+
+[project.optional-dependencies]
+pdfium = ["pypdfium2>=4.30,<6"]
 
 [dependency-groups]
 dev = ["pytest>=8,<10"]

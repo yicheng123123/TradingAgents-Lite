@@ -1,0 +1,659 @@
+{
+  "source": "https://github.com/patronus-ai/financebench",
+  "revision": "cc39aeb4afdf33909ee1412188bf89035950c2eb",
+  "license_basis": "CC BY-NC 4.0 per Patronus public dataset card; source PDFs used locally",
+  "license_url": "https://huggingface.co/datasets/PatronusAI/financebench",
+  "pdf_engine": "pdfium",
+  "companies": null,
+  "public_questions": 150,
+  "split_counts": {
+    "test": 99,
+    "calibration": 51
+  },
+  "mapped_counts": {
+    "test": 99,
+    "calibration": 51
+  },
+  "exclusion_reasons_nonexclusive": {},
+  "pdfs": {
+    "3M_2018_10K": {
+      "status": "indexed",
+      "sha256": "faf10c53fc6f1a8aa346ec3db79145e3ae6fbb3753c8064924e174d0a973934d",
+      "pages": 160,
+      "chunks": 528,
+      "source_url": "https://investors.3m.com/financials/sec-filings/content/0001558370-19-000470/0001558370-19-000470.pdf"
+    },
+    "3M_2022_10K": {
+      "status": "indexed",
+      "sha256": "d5cf549543a24b04228fd2af979ff2ca94cf64fb008a789340cb9117fbcfde5d",
+      "pages": 252,
+      "chunks": 843,
+      "source_url": "https://investors.3m.com/financials/sec-filings/content/0000066740-23-000014/0000066740-23-000014.pdf"
+    },
+    "3M_2023Q2_10Q": {
+      "status": "indexed",
+      "sha256": "3e66115793459f42185feeeab4e7f07dd27ab6dd465d0694ce415e861029cf93",
+      "pages": 92,
+      "chunks": 318,
+      "source_url": "https://investors.3m.com/financials/sec-filings/content/0000066740-23-000058/0000066740-23-000058.pdf"
+    },
+    "ACTIVISIONBLIZZARD_2019_10K": {
+      "status": "indexed",
+      "sha256": "017f1bbc1e37f2945a41fa2b5cf39d822e1e9d435a2c2b9c6b1cc76cd114a2df",
+      "pages": 198,
+      "chunks": 579,
+      "source_url": "https://investor.activision.com/static-files/32abe798-add2-4770-9c7d-4cd3a840ede2"
+    },
+    "ADOBE_2015_10K": {
+      "status": "indexed",
+      "sha256": "f9ddba652f19e20752d98b1b4cedcebcb1a9a6d11dd23ab2e2f00f009a164c24",
+      "pages": 116,
+      "chunks": 377,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMTUtRklOQUwucGRm"
+    },
+    "ADOBE_2016_10K": {
+      "status": "indexed",
+      "sha256": "655153cdaed14d7093e98ff75595bf850a0d2299fa851ccf5b344ebc2d5038ae",
+      "pages": 112,
+      "chunks": 362,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMTYtRklOQUwucGRm"
+    },
+    "ADOBE_2017_10K": {
+      "status": "indexed",
+      "sha256": "ace32580369138998de84a0d0e24943766aa8374a17b823fdfae980b9c1458bd",
+      "pages": 107,
+      "chunks": 347,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMTctRklOQUwucGRm"
+    },
+    "ADOBE_2022_10K": {
+      "status": "indexed",
+      "sha256": "ce8c716abac26bfa38ae6b71d703112852c8591a4bb19f7c1177beb1dfc87ad2",
+      "pages": 99,
+      "chunks": 326,
+      "source_url": "https://www.adobe.com/pdf-page.html?pdfTarget=aHR0cHM6Ly93d3cuYWRvYmUuY29tL2NvbnRlbnQvZGFtL2NjL2VuL2ludmVzdG9yLXJlbGF0aW9ucy9wZGZzL0FEQkUtMTBLLUZZMjItRklOQUwucGRm"
+    },
+    "AES_2022_10K": {
+      "status": "indexed",
+      "sha256": "9c5de2227534c4d6bf3d805f635bad5d82eddf8e4183a85a3d1311b48b50291d",
+      "pages": 257,
+      "chunks": 816,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000874761/3be55db1-bf7e-407a-8062-6a6b8d9dd2f5.pdf"
+    },
+    "AMAZON_2017_10K": {
+      "status": "indexed",
+      "sha256": "f8af08ff6c4147351ec3a6e5e2c74e104678ce68fb0d6d476b1e43f685c09a3f",
+      "pages": 85,
+      "chunks": 269,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001018724/02da2a86-7bb9-4bcb-95ae-4ce27ea5e3bc.pdf"
+    },
+    "AMAZON_2019_10K": {
+      "status": "indexed",
+      "sha256": "d7df8c6cf3e351a8d68c7473be4159723d545260a32dbc82a8dd11c254c5584a",
+      "pages": 83,
+      "chunks": 248,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001018724/4d39f579-19d8-4119-b087-ee618abf82d6.pdf"
+    },
+    "AMCOR_2020_10K": {
+      "status": "indexed",
+      "sha256": "da158d5c68835374bcc52205663aa7653af1c2a6b31b09ab775c6e02a40da026",
+      "pages": 195,
+      "chunks": 519,
+      "source_url": "https://portalvhds1fxb0jchzgjph.blob.core.windows.net/press-releases-attachments/1517907/Annual%20report%20%5BSection%2013%20and%2015(d)%2C%20not%20S-K%20Item%20405%5D.pdf"
+    },
+    "AMCOR_2022_8K_dated-2022-07-01": {
+      "status": "indexed",
+      "sha256": "1de32e72c265486469f3b1c7cbfbe064a27055e60f7b43a81439986dda9025ad",
+      "pages": 9,
+      "chunks": 24,
+      "source_url": "https://portalvhds1fxb0jchzgjph.blob.core.windows.net/press-releases-attachments/1517333/Current%20report.pdf"
+    },
+    "AMCOR_2023Q2_10Q": {
+      "status": "indexed",
+      "sha256": "71c39c3f338fc81a99e128e8e871e265818657670a7d29a62c454c905f94524c",
+      "pages": 57,
+      "chunks": 120,
+      "source_url": "https://portalvhds1fxb0jchzgjph.blob.core.windows.net/press-releases-attachments/1516809/Quarterly%20report%20%5BSections%2013%20or%2015(d)%5D.pdf"
+    },
+    "AMCOR_2023Q4_EARNINGS": {
+      "status": "indexed",
+      "sha256": "d155b7808e78167831648f476b7e3578e2d98645dee30862bbef4ff50fa24bf4",
+      "pages": 14,
+      "chunks": 39,
+      "source_url": "https://assets.ctfassets.net/f7tuyt85vtoa/lkZ2DcdUS4nrhXzLdqCIw/4de2a47a58532c829039cfa972c7ad78/Amcor_FY23_-_Press_Release_FINAL.pdf"
+    },
+    "AMCOR_2023_10K": {
+      "status": "indexed",
+      "sha256": "84d7a0291a12f4e68352750dccda3754c78eefdf06e0b5462046357a1ed53332",
+      "pages": 156,
+      "chunks": 458,
+      "source_url": "https://portalvhds1fxb0jchzgjph.blob.core.windows.net/press-releases-attachments/1556025/Annual%20report%20%5BSection%2013%20and%2015(d)%2C%20not%20S-K%20Item%20405%5D.pdf"
+    },
+    "AMD_2015_10K": {
+      "status": "indexed",
+      "sha256": "105fff1c4af84a3d974b0f3fa224122e782aedca60fa3609f2789c80549dd8f6",
+      "pages": 215,
+      "chunks": 708,
+      "source_url": "https://ir.amd.com/sec-filings/filter/annual-filings/content/0000002488-16-000111/0000002488-16-000111.pdf"
+    },
+    "AMD_2022_10K": {
+      "status": "indexed",
+      "sha256": "a3bd74088fae0ad4aa03d04998a1f4c64fd0b3c693841601b0ac49b46cf5c1f4",
+      "pages": 121,
+      "chunks": 384,
+      "source_url": "https://ir.amd.com/sec-filings/content/0000002488-23-000047/0000002488-23-000047.pdf"
+    },
+    "AMERICANEXPRESS_2022_10K": {
+      "status": "indexed",
+      "sha256": "d3bbc7ab23d6160e07eab50a359e4d68c40efff9fde3baa168e7c40e06f568e6",
+      "pages": 260,
+      "chunks": 768,
+      "source_url": "https://s26.q4cdn.com/747928648/files/doc_financials/2022/q4/AMEX-10K-4Q22.pdf"
+    },
+    "AMERICANWATERWORKS_2020_10K": {
+      "status": "indexed",
+      "sha256": "6b43f1ed70b67c06483d28f8054270d597bce8507f298af2b1b6d9356d728602",
+      "pages": 152,
+      "chunks": 547,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001410636/088387fd-7250-4370-80a7-dc5a30ea84ed.pdf"
+    },
+    "AMERICANWATERWORKS_2021_10K": {
+      "status": "indexed",
+      "sha256": "701528ae6d14a77229468a829ee18f01ed439d5be012d0a915d2683335051029",
+      "pages": 181,
+      "chunks": 603,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001410636/1228947b-ee48-4079-984b-7741727bbcea.pdf"
+    },
+    "AMERICANWATERWORKS_2022_10K": {
+      "status": "indexed",
+      "sha256": "aea336531f1f8b10ecee1dd61066aab29794504f1f4a1407c857bd1e20d7da40",
+      "pages": 306,
+      "chunks": 946,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001410636/ba508f4d-f3f5-4b6a-beba-e7bef231f5db.pdf"
+    },
+    "BESTBUY_2017_10K": {
+      "status": "indexed",
+      "sha256": "4570187fa697f252e08c8f99c409446fbcde05b08358851d34d4cb1c8bd1cec8",
+      "pages": 109,
+      "chunks": 325,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/47c2227c-aa33-4fe8-b14c-5f77bc63857e.pdf"
+    },
+    "BESTBUY_2019_10K": {
+      "status": "indexed",
+      "sha256": "d3228e9acd2ce498b97a9d2cb99c2330b9a04687b7947908646d205b3eadf30d",
+      "pages": 107,
+      "chunks": 329,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/17bef9d1-6ef1-4a53-beb8-9c12b07a4a0e.pdf"
+    },
+    "BESTBUY_2023_10K": {
+      "status": "indexed",
+      "sha256": "7ca465d31a08be29e8c08d756644d33d818c7254a1215720f265227005cda696",
+      "pages": 75,
+      "chunks": 261,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/a7d1c855-4d22-48e4-9d17-b5f5af923dbe.pdf"
+    },
+    "BESTBUY_2024Q2_10Q": {
+      "status": "indexed",
+      "sha256": "cf9efb922bdd28d726d7e1605c5fa1f263dda72e033989e3bc9ee3a3bb356c03",
+      "pages": 30,
+      "chunks": 91,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000764478/5e179976-086d-4c3c-af0c-85fda4b35b9d.pdf"
+    },
+    "BLOCK_2016_10K": {
+      "status": "indexed",
+      "sha256": "5ef866a19b1110dcdbd1b0bc3c513a04e3d05322384c754cf394ad63f9af8191",
+      "pages": 121,
+      "chunks": 351,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001512673/1862b88f-4e6b-4251-be45-4833fc0a0126.pdf"
+    },
+    "BLOCK_2020_10K": {
+      "status": "indexed",
+      "sha256": "c19a9fb25db3270e3a908c202855f4a54f000a06bf19a8b284331810228646fe",
+      "pages": 158,
+      "chunks": 494,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001512673/c7b05bfa-5bb8-43b7-9580-9de362ef1e83.pdf"
+    },
+    "BOEING_2018_10K": {
+      "status": "indexed",
+      "sha256": "6f1ace34b3b01778ad7d92d43ccd2f76513d5159ef48fbc07b510296cf2d07dc",
+      "pages": 136,
+      "chunks": 348,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000012927/fdc164e4-475f-416e-ac75-acd03df4d646.pdf"
+    },
+    "BOEING_2022_10K": {
+      "status": "indexed",
+      "sha256": "09285ff7ee737d3302977104aa05cc53c9dfb0161f3461a89b583dc38b9f2ab6",
+      "pages": 190,
+      "chunks": 477,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000012927/c93682a4-8b3c-4251-a2ed-97c4e474a214.pdf"
+    },
+    "COCACOLA_2017_10K": {
+      "status": "indexed",
+      "sha256": "b57c75cf20916904f31c6aa7644d6c110f019adf7c76782c7d0ede7b95c65ac1",
+      "pages": 197,
+      "chunks": 668,
+      "source_url": "https://investors.coca-colacompany.com/filings-reports/annual-filings-10-k/content/0000021344-18-000008/0000021344-18-000008.pdf"
+    },
+    "COCACOLA_2021_10K": {
+      "status": "indexed",
+      "sha256": "46a7059b9da795cd1ea9862d5b4f82a21e9b72e799351927a11f5cb4c528b592",
+      "pages": 183,
+      "chunks": 628,
+      "source_url": "https://investors.coca-colacompany.com/filings-reports/annual-filings-10-k/content/0000021344-22-000009/0000021344-22-000009.pdf"
+    },
+    "COCACOLA_2022_10K": {
+      "status": "indexed",
+      "sha256": "9f91bb914d94d014cfca96e1021c932d5476d8b8ac2a933767bac4c438fd7a71",
+      "pages": 183,
+      "chunks": 606,
+      "source_url": "https://investors.coca-colacompany.com/filings-reports/all-sec-filings/content/0000021344-23-000011/0000021344-23-000011.pdf"
+    },
+    "CORNING_2020_10K": {
+      "status": "indexed",
+      "sha256": "ef471ab9ff6067f117977df6df8b4b5007066286b733981475ac2ccf48d91e59",
+      "pages": 138,
+      "chunks": 387,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000024741/7cdeac7f-277e-4258-ad8e-4ba0f655f368.pdf"
+    },
+    "CORNING_2021_10K": {
+      "status": "indexed",
+      "sha256": "8023fac91ad417f996b692c506ee0e097effd091e698275288e4126cb8a2020e",
+      "pages": 125,
+      "chunks": 370,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000024741/f9519502-38b3-4e0b-94fa-b6a7138812a4.pdf"
+    },
+    "CORNING_2022_10K": {
+      "status": "indexed",
+      "sha256": "a63f102f045826b38ad21a606c33710f62932646fd7c0f1852ce411a4397a3ee",
+      "pages": 159,
+      "chunks": 443,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000024741/eb24002c-e050-45eb-806a-15264d59131c.pdf"
+    },
+    "COSTCO_2021_10K": {
+      "status": "indexed",
+      "sha256": "29e05b3862cf6ffa6cfda34ac82a9fa0fe76b67338c5924da3325c2ee3b08748",
+      "pages": 76,
+      "chunks": 202,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000909832/534964a5-44c9-47b3-b3c0-7620830fad6c.pdf"
+    },
+    "CVSHEALTH_2018_10K": {
+      "status": "indexed",
+      "sha256": "bdc800e3f52a3e1d7a79c0973af3e94122fa08a76e335ea8305df60a09e1a0dc",
+      "pages": 392,
+      "chunks": 1288,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000064803/317e65d9-41c0-4975-b3e1-30f7f2616049.pdf"
+    },
+    "CVSHEALTH_2022_10K": {
+      "status": "indexed",
+      "sha256": "183c196a41793cd50002ff6b88f8c6d32e4fcb1117ab490a732414e1208cda8f",
+      "pages": 213,
+      "chunks": 753,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000064803/e4b97418-e95e-4391-b2d9-8c604c4950ac.pdf"
+    },
+    "FOOTLOCKER_2022_8K_dated-2022-05-20": {
+      "status": "indexed",
+      "sha256": "865f22331a5943a85e53e38d1753addbeb6c42270853cddd0abc73ab23d150e9",
+      "pages": 4,
+      "chunks": 7,
+      "source_url": "https://investors.footlocker-inc.com/static-files/1ad2000b-8d76-4acd-8048-90b6fc17fee1"
+    },
+    "FOOTLOCKER_2022_8K_dated_2022-08-19": {
+      "status": "indexed",
+      "sha256": "70fd2d5bfc6955424196b372a5273ffbc74d2f0153f291e10e73edc37962a14e",
+      "pages": 31,
+      "chunks": 84,
+      "source_url": "https://investors.footlocker-inc.com/static-files/6120b3ac-d921-4d93-9e7a-c2685e4b74b0"
+    },
+    "GENERALMILLS_2019_10K": {
+      "status": "indexed",
+      "sha256": "e8120ce31b22136e15c14115cdfbf3ddc548e58f15b6febc350c422a4c12d9db",
+      "pages": 140,
+      "chunks": 399,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000040704/0fd13703-8eed-4b60-b46c-b2b3199887dc.pdf"
+    },
+    "GENERALMILLS_2020_10K": {
+      "status": "indexed",
+      "sha256": "626dd53f9b52e5895b7a7073e1c491008769970609c10e2f6cf8247ed85d6fae",
+      "pages": 127,
+      "chunks": 404,
+      "source_url": "https://s29.q4cdn.com/993087495/files/doc_downloads/2020/F20_10K_Final_07.01.2020.pdf"
+    },
+    "GENERALMILLS_2022_10K": {
+      "status": "indexed",
+      "sha256": "27f2cc507ffc056de3b679d124d51b80bd043ce7b8e867c59e2cdfe1d2ea5de3",
+      "pages": 127,
+      "chunks": 373,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000040704/e031af8c-f4fd-4350-9275-d3dbbec95c8c.pdf"
+    },
+    "JOHNSON_JOHNSON_2022Q4_EARNINGS": {
+      "status": "indexed",
+      "sha256": "7ae6bf6f9a998d19e23fd796b58b0f2015085c74712253b78fb90174c12436a7",
+      "pages": 24,
+      "chunks": 48,
+      "source_url": "https://johnsonandjohnson.gcs-web.com/static-files/ca8c3ac2-15ab-4f8d-9693-f604d50be358"
+    },
+    "JOHNSON_JOHNSON_2022_10K": {
+      "status": "indexed",
+      "sha256": "dba7d6cc97734abd6dcbc1a6a34f82b5d228e60d0a1a32425a90404fd4d3e290",
+      "pages": 151,
+      "chunks": 463,
+      "source_url": "https://johnsonandjohnson.gcs-web.com/static-files/9b012500-471a-4df9-93fc-6cee2b420678"
+    },
+    "JOHNSON_JOHNSON_2023Q2_EARNINGS": {
+      "status": "indexed",
+      "sha256": "db1f3419d309440e644dc3cdfbb74758e67734dd181e5dbabc7479d0ab92d026",
+      "pages": 24,
+      "chunks": 50,
+      "source_url": "https://johnsonandjohnson.gcs-web.com/static-files/6626623f-0619-46dc-b7b6-57568124c517"
+    },
+    "JOHNSON_JOHNSON_2023_8K_dated-2023-08-30": {
+      "status": "indexed",
+      "sha256": "0601a4b9f15e4400ced1b2ccb81c309cb66844fbac6b975a76dc490501bea95a",
+      "pages": 27,
+      "chunks": 54,
+      "source_url": "https://johnsonandjohnson.gcs-web.com/static-files/fa9ff302-f93d-450a-a73a-2ac9fb67d2ee"
+    },
+    "JPMORGAN_2021Q1_10Q": {
+      "status": "indexed",
+      "sha256": "62518c05b02265dc13ca257d9ec0be0aec4449dad53db0c77d93444e7e2cfe97",
+      "pages": 179,
+      "chunks": 537,
+      "source_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2021/1st-quarter/1q21-10-q.pdf"
+    },
+    "JPMORGAN_2022Q2_10Q": {
+      "status": "indexed",
+      "sha256": "7d715f552d4eeb6b2a1ea8ae02237b5767306907e761270ac23d74ac5b7e44b5",
+      "pages": 197,
+      "chunks": 580,
+      "source_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2022/2nd-quarter/corp-q2-2022.pdf"
+    },
+    "JPMORGAN_2022_10K": {
+      "status": "indexed",
+      "sha256": "c269899950f36edfa496e3c8447a51d86d0a206442a96dc24dcd9317d55b957c",
+      "pages": 382,
+      "chunks": 1359,
+      "source_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2022/4th-quarter/corp-10k-2022.pdf"
+    },
+    "JPMORGAN_2023Q2_10Q": {
+      "status": "indexed",
+      "sha256": "eef2d9c1fdb5dc82be48166487a9e451c8544aec932a01fb06309ea7cd7122f5",
+      "pages": 217,
+      "chunks": 659,
+      "source_url": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2023/2nd-quarter/CORP-Q2-2023.pdf"
+    },
+    "KRAFTHEINZ_2019_10K": {
+      "status": "indexed",
+      "sha256": "df1340e7b002e5f412d4c9073292d0f48a2988fd347d5a4f44d017b9680fbae2",
+      "pages": 152,
+      "chunks": 491,
+      "source_url": "https://ir.kraftheinzcompany.com/static-files/2d2e9a1f-a7bc-4c07-9e5e-77aa60be8f86"
+    },
+    "LOCKHEEDMARTIN_2020_10K": {
+      "status": "indexed",
+      "sha256": "1e68051a649270779fc5cb68806612a28d7d81288ed75dd37aa1858717bf55a0",
+      "pages": 132,
+      "chunks": 471,
+      "source_url": "https://investors.lockheedmartin.com/static-files/51bf9a09-5811-4f36-a5e4-fccaf8bfffea"
+    },
+    "LOCKHEEDMARTIN_2021_10K": {
+      "status": "indexed",
+      "sha256": "d2486265fedea887bcc621f0b2dbb9670e66fe05203e1378b8e650c9564732fb",
+      "pages": 136,
+      "chunks": 480,
+      "source_url": "https://investors.lockheedmartin.com/static-files/9ea385e3-f89c-471a-a720-4dcda1279cec"
+    },
+    "LOCKHEEDMARTIN_2022_10K": {
+      "status": "indexed",
+      "sha256": "9a2317300d0f1e2623ba291fe9ec38fc779c1d1ad989dcfe6f862b77435c6923",
+      "pages": 130,
+      "chunks": 458,
+      "source_url": "https://investors.lockheedmartin.com/static-files/3e78cba6-f0c4-48d0-b931-fc6137744c87"
+    },
+    "MGMRESORTS_2018_10K": {
+      "status": "indexed",
+      "sha256": "1b540737f91716aaa23b062499e6cab9c51d258e151f37eb8c65646bb588a0da",
+      "pages": 188,
+      "chunks": 608,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000789570/d1b055df-9e21-4013-a311-67c98e2eb16a.pdf"
+    },
+    "MGMRESORTS_2020_10K": {
+      "status": "indexed",
+      "sha256": "98a9a55baf838309d16a730fd63efbcd146be1911b61abb3658b1774f360b099",
+      "pages": 150,
+      "chunks": 518,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000789570/03692647-6ccc-4177-8ce9-13ac35692254.pdf"
+    },
+    "MGMRESORTS_2022Q4_EARNINGS": {
+      "status": "indexed",
+      "sha256": "fe9126b17c3656e50d53741b13cb5fb233d4adaf922e4d84072b1d5e564fbfbd",
+      "pages": 15,
+      "chunks": 43,
+      "source_url": "https://s22.q4cdn.com/513010314/files/doc_financials/2022/q4/r/MGM-Resorts-Exhibit-99.1.pdf"
+    },
+    "MGMRESORTS_2022_10K": {
+      "status": "indexed",
+      "sha256": "130b96c1309c97aaedcabee2fa5d5421e54491e618273bd33c3b1aeddad323ec",
+      "pages": 220,
+      "chunks": 651,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000789570/5e924681-e9c4-4bfb-95db-ef7c484303e7.pdf"
+    },
+    "MGMRESORTS_2023Q2_10Q": {
+      "status": "indexed",
+      "sha256": "09c02fd40073570ae0826d707674154a9cd55a895e94096a82fcf0a4447ea64d",
+      "pages": 62,
+      "chunks": 163,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000789570/e20e899f-c320-44ee-b5f9-c219e4585f49.pdf"
+    },
+    "MICROSOFT_2016_10K": {
+      "status": "indexed",
+      "sha256": "f3555bd5ea1802770cc8f2a7ca766392e16fe6504f18688db681d852029404dc",
+      "pages": 121,
+      "chunks": 362,
+      "source_url": "https://microsoft.gcs-web.com/static-files/a779c4f1-d788-4890-83fb-633d198efe7e"
+    },
+    "MICROSOFT_2023_10K": {
+      "status": "indexed",
+      "sha256": "e534af371c824aab19b8d01f8bc0e9d1e0a3fb418a33119c5224a53d20a0d37b",
+      "pages": 116,
+      "chunks": 315,
+      "source_url": "https://microsoft.gcs-web.com/static-files/e2931fdb-9823-4130-b2a8-f6b8db0b15a9"
+    },
+    "NETFLIX_2015_10K": {
+      "status": "indexed",
+      "sha256": "b22ca874ef08f383bd0b1071677d44f4a242af668f855f00dc9c6d4ac94148e2",
+      "pages": 72,
+      "chunks": 214,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001065280/7c37ae9c-ace5-4ad5-ab02-6b5e82c5ff8f.pdf"
+    },
+    "NETFLIX_2017_10K": {
+      "status": "indexed",
+      "sha256": "981a69bba010dd1709c74ccec9ca26c61635c02a4f22b76345d26021e88077d6",
+      "pages": 73,
+      "chunks": 215,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001065280/105c44c4-a362-4ed5-b606-78f512ff277c.pdf"
+    },
+    "NIKE_2018_10K": {
+      "status": "indexed",
+      "sha256": "31de66f1e37cabf1785e0ffa66955bf003bf2a9dcf3f4ebe93732d063b7b6ebe",
+      "pages": 97,
+      "chunks": 359,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000320187/3489b854-fa60-41a7-b8c3-8dc6b67534c0.pdf"
+    },
+    "NIKE_2019_10K": {
+      "status": "indexed",
+      "sha256": "7dbdf1bcbf37dd6d6e694ce95bcb23cd6943d08cc9cd1e5ee9832ed8f7eebdc6",
+      "pages": 104,
+      "chunks": 342,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000320187/76b92d86-75b3-4fa9-a754-e83395d63a46.pdf"
+    },
+    "NIKE_2021_10K": {
+      "status": "indexed",
+      "sha256": "73b54e5e0b1b0b33e51ac314f6d9a9db0bcc286269feb24a3445a5f1ff0f7789",
+      "pages": 109,
+      "chunks": 363,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000320187/702c5a98-3399-4049-aa9b-a159dd44826c.pdf"
+    },
+    "NIKE_2023_10K": {
+      "status": "indexed",
+      "sha256": "51f5a0fc6ede20de4f5cfdeae8791a57bdd65c95db2ceb263eb120696ff90172",
+      "pages": 106,
+      "chunks": 339,
+      "source_url": "https://s1.q4cdn.com/806093406/files/doc_downloads/2023/414759-1-_5_Nike-NPS-Combo_Form-10-K_WR.pdf"
+    },
+    "PAYPAL_2022_10K": {
+      "status": "indexed",
+      "sha256": "0c1dd6cd170261c6bd778de382a211a56a3bb1e009a429246370c97fa0defab3",
+      "pages": 134,
+      "chunks": 431,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0001633917/b562e712-8266-493c-8ae8-e28f93404d2f.pdf"
+    },
+    "PEPSICO_2021_10K": {
+      "status": "indexed",
+      "sha256": "f2c7cf1969c7f6dfc8c0596824e1d6b3cc70f662ee2dd06be84bb27af5635364",
+      "pages": 549,
+      "chunks": 1169,
+      "source_url": "https://pepsico.gcs-web.com/static-files/a5a1d988-8e28-4dc7-ac4e-e6a2abfd0310"
+    },
+    "PEPSICO_2022_10K": {
+      "status": "indexed",
+      "sha256": "7d8a9f3374e429c58f101319e2da8a0e601a89859e1e4f6854163dd5f8ce6b47",
+      "pages": 503,
+      "chunks": 1176,
+      "source_url": "https://pepsico.gcs-web.com/static-files/d051bdd6-c6d2-4814-826f-ece589b88d4c"
+    },
+    "PEPSICO_2023Q1_EARNINGS": {
+      "status": "indexed",
+      "sha256": "a705483ea6c548a2f67c421bc24ced391a6beb8487600b44b54e9ae2aca1f31c",
+      "pages": 16,
+      "chunks": 35,
+      "source_url": "https://investors.pepsico.com/docs/default-source/investors/q1-2023/q1-2023-earnings-release_wfvmt94lzqbm92aw.pdf?sfvrsn=5db72450_4"
+    },
+    "PEPSICO_2023_8K_dated-2023-05-05": {
+      "status": "indexed",
+      "sha256": "e8591d6f83d810a0f9edfc540a1a21aa6269a6de4c756b5eb808d5dbbea330ed",
+      "pages": 5,
+      "chunks": 7,
+      "source_url": "https://pepsico.gcs-web.com/static-files/718629be-2463-4b54-bba3-5e0e776e7d0c"
+    },
+    "PEPSICO_2023_8K_dated-2023-05-30": {
+      "status": "indexed",
+      "sha256": "8e8f99f270b065e105636f54b2684f4c4170b3fc80845ae2f393bf66f3291d2c",
+      "pages": 172,
+      "chunks": 520,
+      "source_url": "https://pepsico.gcs-web.com/static-files/bcd1012b-77b8-4ac0-8b28-5e0a7c686f4e"
+    },
+    "PFIZER_2021_10K": {
+      "status": "indexed",
+      "sha256": "ff3307d5f633c5dbe59a976f5ff5e086af04ba5a5135f2b6411c89538a22a665",
+      "pages": 143,
+      "chunks": 605,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000078003/fa35a206-5bac-4a7a-9571-1e194b4436b5.pdf"
+    },
+    "Pfizer_2023Q2_10Q": {
+      "status": "indexed",
+      "sha256": "bf6c059a1dd71bd56581c94bce650bd85b56de2f4d0a25b45f05804a8bd6684d",
+      "pages": 72,
+      "chunks": 242,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000078003/c7518e4a-3aaf-4987-ae85-27460d0f526c.pdf"
+    },
+    "ULTABEAUTY_2023Q4_EARNINGS": {
+      "status": "indexed",
+      "sha256": "c7df6210a627042e231c9579982648a43f3ff8b630b4020540330c2a85e0d781",
+      "pages": 9,
+      "chunks": 18,
+      "source_url": "https://d1io3yog0oux5.cloudfront.net/_237c8bef5f763d3c6c3a0d12f008caba/ulta/news/2023-03-09_Ulta_Beauty_Announces_Fourth_Quarter_Fiscal_2022_164.pdf"
+    },
+    "ULTABEAUTY_2023_10K": {
+      "status": "indexed",
+      "sha256": "cdf2ebcfbc2eb9ecf880126d38b186cac1f683dae5bcb50cad15176bfc449ff4",
+      "pages": 105,
+      "chunks": 295,
+      "source_url": "https://www.ulta.com/investor/sec-filings/annual-reports/content/0001558370-23-004581/0001558370-23-004581.pdf"
+    },
+    "VERIZON_2021_10K": {
+      "status": "indexed",
+      "sha256": "f7fcb508f920e3df9a07bc858a6d9f0d3cd1e976a46efe72375c9ffb983822ac",
+      "pages": 120,
+      "chunks": 427,
+      "source_url": "https://www.verizon.com/about/sites/default/files/2021-Annual-Report-on-Form-10-K.pdf"
+    },
+    "VERIZON_2022_10K": {
+      "status": "indexed",
+      "sha256": "403d7346e8a059472863d1789527f16e5127a61c2f6c4429012e6227f27576d7",
+      "pages": 124,
+      "chunks": 425,
+      "source_url": "https://www.verizon.com/about/sites/default/files/2022-Annual-Report-on-Form-10K.pdf"
+    },
+    "WALMART_2018_10K": {
+      "status": "indexed",
+      "sha256": "661512df698c895a4a5ab3d4ab879fd8ffc8f17a9038e27bcb208401982b6c15",
+      "pages": 304,
+      "chunks": 906,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000104169/a25e7acb-aa07-49f3-8c0c-0c69e5a8d372.pdf"
+    },
+    "WALMART_2019_10K": {
+      "status": "indexed",
+      "sha256": "f1d1b052c2b68c5d68e3575de7069dc47914f03abb02771d2629b10bf7d9e377",
+      "pages": 155,
+      "chunks": 411,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000104169/b23b2787-eb44-4e0b-82bd-fca01f140a3e.pdf"
+    },
+    "WALMART_2020_10K": {
+      "status": "indexed",
+      "sha256": "0f9e2ebc9432caef54fe932ec91ccc6fea3eac89f370073462ae002eabb71a34",
+      "pages": 170,
+      "chunks": 546,
+      "source_url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000104169/af5415d9-0e07-4ba1-a6cc-bb3058a7f4e8.pdf"
+    }
+  },
+  "questions_sha256": "a5a2aa673e573e55675fc3c0f9aa38c1cf59d2abc91edb077534f71f10a71877",
+  "documents_sha256": "1c69127783879de8cdadb159d2181f39bc3123b8e0ebf74031c3969d69189575",
+  "embedding": null,
+  "reranker": null,
+  "skipped_modes": [],
+  "metrics": {
+    "calibration": {
+      "R1": {
+        "n": 51,
+        "mean_latency_ms": 312.346153902064,
+        "page_proxy": {
+          "recall@1": 0.09803921568627451,
+          "recall@5": 0.16666666666666666,
+          "recall@10": 0.18627450980392157,
+          "mrr@10": 0.1250233426704015,
+          "ndcg@10": 0.1389865413119339
+        },
+        "document": {
+          "recall@1": 0.45098039215686275,
+          "recall@5": 0.9803921568627451,
+          "recall@10": 0.9803921568627451,
+          "mrr@10": 0.6944444444444444,
+          "ndcg@10": 0.7682392428053726
+        }
+      }
+    },
+    "test": {
+      "R1": {
+        "n": 99,
+        "mean_latency_ms": 382.7942228282715,
+        "page_proxy": {
+          "recall@1": 0.12121212121212122,
+          "recall@5": 0.23232323232323232,
+          "recall@10": 0.2828282828282828,
+          "mrr@10": 0.17007375340708675,
+          "ndcg@10": 0.1968053272602313
+        },
+        "document": {
+          "recall@1": 0.5353535353535354,
+          "recall@5": 0.9595959595959596,
+          "recall@10": 0.9595959595959596,
+          "mrr@10": 0.7163299663299664,
+          "ndcg@10": 0.7785150570079634
+        }
+      }
+    }
+  },
+  "index_bytes": 147542449,
+  "peak_rss_kib": 533912,
+  "elapsed_seconds": 516.7085715990002,
+  "glm_calls": 0
+}
