@@ -9,12 +9,15 @@ import subprocess
 from .data import read_tasks, sha256
 from .evidence import EvidenceStore
 from .provider import (
-    DEFAULT_BASE_URL, DEFAULT_MAX_PROMPT_BYTES, DEFAULT_MAX_RETRIES, DEFAULT_MODEL,
-    DEFAULT_REASONING_EFFORT, DEFAULT_TEMPERATURE, ModelBackend, client_from_env,
+    DEFAULT_BASE_URL, DEFAULT_MODEL, DEFAULT_REASONING_EFFORT, DEFAULT_TEMPERATURE,
+    ModelBackend, client_from_env,
 )
 from .prompts import prompt_hashes
 from .runner import clustered_bootstrap, run, summary
 from .schema import Budget
+from .token_budget import (
+    PROTOCOL_TOKEN_ALLOWANCE, SMOKE_TOKEN_LIMIT, TokenBudget,
+)
 from .workflow import MomentumBackend
 
 
@@ -24,9 +27,9 @@ EXPECTED_EVIDENCE_MANIFEST_SHA256 = "b46f9ef2ebc1c08022500282147940985eb9d3ceabe
 EXPECTED_EVIDENCE_SHA256 = "b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532"
 SMOKE_TASK_IDS = ("dev-01", "dev-02")
 MAX_TOOL_ROUNDS = 2
-MAX_TOKENS = 1200
-MAX_PROMPT_BYTES = DEFAULT_MAX_PROMPT_BYTES
-MAX_RETRIES = DEFAULT_MAX_RETRIES
+MAX_TOKENS = 512
+MAX_PROMPT_BYTES = 5_000
+MAX_RETRIES = 0
 TEMPERATURE = DEFAULT_TEMPERATURE
 REASONING_EFFORT = DEFAULT_REASONING_EFFORT
 PRICE_CNY_PER_MILLION = {"input": 8.0, "output": 28.0}
@@ -35,15 +38,17 @@ PRICE_AS_OF = "2026-11-24"
 
 
 def request_cost_ceiling(task_count: int) -> dict:
-    """Conservative standard-price bound from capped prompt bytes and output tokens."""
+    """Conservative token and standard-price ceiling for the frozen B1 protocol."""
     workflows = task_count * 2
     logical_calls_per_task = MAX_TOOL_ROUNDS + 2  # final analyst response and Trader call
     attempts = workflows * logical_calls_per_task * (MAX_RETRIES + 1)
-    protocol_token_allowance = 512
+    protocol_token_allowance = PROTOCOL_TOKEN_ALLOWANCE
     input_token_upper = attempts * (MAX_PROMPT_BYTES + protocol_token_allowance)
     output_token_upper = attempts * MAX_TOKENS
+    separate_reasoning_upper = attempts * MAX_TOKENS
+    max_conservative_tokens = input_token_upper + output_token_upper + separate_reasoning_upper
     cost = (input_token_upper * PRICE_CNY_PER_MILLION["input"] +
-            output_token_upper * PRICE_CNY_PER_MILLION["output"]) / 1_000_000
+            (output_token_upper + separate_reasoning_upper) * PRICE_CNY_PER_MILLION["output"]) / 1_000_000
     return {
         "tasks_per_condition": task_count,
         "conditions": 2,
@@ -54,11 +59,35 @@ def request_cost_ceiling(task_count: int) -> dict:
         "input_token_upper_bound": input_token_upper,
         "max_output_tokens_per_attempt": MAX_TOKENS,
         "output_token_upper_bound": output_token_upper,
+        "separate_reasoning_token_upper_bound": separate_reasoning_upper,
+        "max_conservative_tokens": max_conservative_tokens,
         "list_price_cost_ceiling_cny": round(cost, 6),
         "price_cny_per_million": PRICE_CNY_PER_MILLION,
         "price_as_of": PRICE_AS_OF,
         "price_source": PRICE_SOURCE,
         "note": "Conservative byte/token envelope; provider invoice and cached-token rates may differ.",
+    }
+
+
+def _completion_check(requested_tasks: int, m_stats: dict, e_stats: dict, paired_n: int) -> dict:
+    conditions = {}
+    for name, stats in (("B1-M", m_stats), ("B1-E", e_stats)):
+        conditions[name] = {
+            "requested_tasks": requested_tasks,
+            "processed_tasks": stats.get("tasks", 0),
+            "completed_tasks": stats.get("completed_tasks", 0),
+            "failed_tasks": stats.get("failed_tasks", 0),
+            "complete": (
+                stats.get("tasks", 0) == requested_tasks
+                and stats.get("completed_tasks", 0) == requested_tasks
+                and stats.get("failed_tasks", 0) == 0
+            ),
+        }
+    return {
+        "conditions": conditions,
+        "requested_pairs": requested_tasks,
+        "valid_pairs": paired_n,
+        "complete": all(item["complete"] for item in conditions.values()) and paired_n == requested_tasks,
     }
 
 
@@ -85,14 +114,17 @@ def _read_original_lines(path: Path) -> dict[str, str]:
 
 def _summary_rows(variant: str, scope: str, metrics: dict, status: str = "completed") -> list[dict]:
     columns = (
-        "tasks", "completed_tasks", "task_completion_rate", "structured_output_valid_rate",
+        "tasks", "requested_tasks", "completed_tasks", "failed_tasks", "task_completion_rate", "structured_output_valid_rate",
         "structured_output_valid_tasks", "directional_n", "non_hold_coverage",
         "directional_hit_rate", "hit_rate_wilson_95", "mean_alpha", "alpha_date_bootstrap_95",
         "tool_success_rate", "tool_failure_events", "tool_recovery_events", "tool_recovery_rate",
         "tool_recovered_tasks", "evidence_citation_valid_rate", "invalid_citation_rate",
         "valid_citation_references", "invalid_citation_references",
         "financial_citation_references", "eligible_financial_citation_task_rate",
-        "input_tokens", "output_tokens", "llm_calls", "llm_retries", "api_cost_cny_estimate",
+        "input_tokens", "output_tokens", "reasoning_tokens", "separate_reasoning_tokens",
+        "cached_tokens", "total_tokens_charged", "missing_usage_calls",
+        "reasoning_detail_missing_calls", "cached_detail_missing_calls",
+        "token_budget_denials", "llm_calls", "llm_retries", "api_cost_cny_estimate",
         "latency_mean_seconds",
     )
     output = []
@@ -125,7 +157,8 @@ def _paired(ms_rows: list[dict], evidence_rows: list[dict], seed: int) -> dict:
     paired = []
     for task_id in sorted(m.keys() & e.keys()):
         left, right = m[task_id], e[task_id]
-        if left.get("status") == right.get("status") == "ok" and left.get("alpha") is not None:
+        if (left.get("status") == right.get("status") == "ok"
+                and left.get("alpha") is not None and right.get("alpha") is not None):
             paired.append({
                 "task_id": task_id, "symbol": left["symbol"], "decision_date": left["decision_date"],
                 "alpha_b1_m": left["alpha"], "alpha_b1_e": right["alpha"],
@@ -178,8 +211,8 @@ def _report(manifest: dict, rows: list[dict], paired: dict | None, b0_full: dict
         "",
         "## Results",
         "",
-        "| Variant | Scope | Ticker | Completed / requested | Task completion | Structured valid | Non-Hold coverage | Hit rate (non-Hold) | Mean alpha | Tool success | Recovery events / rate | Citation valid / invalid | LLM calls | Input / output tokens | API cost (CNY) |",
-        "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Variant | Scope | Ticker | Completed / requested | Failed | Task completion | Structured valid | Non-Hold coverage | Hit rate (non-Hold) | Mean alpha | Tool success | Recovery events / rate | Citation valid / invalid | LLM calls | Input / output / reasoning / separate reasoning / cached / charged tokens | API cost (CNY) |",
+        "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in rows:
         completed = row.get("completed_tasks")
@@ -194,13 +227,14 @@ def _report(manifest: dict, rows: list[dict], paired: dict | None, b0_full: dict
         lines.append(
             f"| {row['variant']} | {row['scope']} | {row['ticker']} | "
             f"{completed if completed is not None else '-'} / {requested if requested is not None else '-'} | "
+            f"{row.get('failed_tasks') if row.get('failed_tasks') is not None else '-'} | "
             f"{row.get('task_completion_rate') if row.get('task_completion_rate') is not None else '-'} | "
             f"{row.get('structured_output_valid_rate') if row.get('structured_output_valid_rate') is not None else '-'} | "
             f"{row.get('non_hold_coverage') if row.get('non_hold_coverage') is not None else '-'} | "
             f"{rate if rate is not None else '-'} | {alpha if alpha is not None else '-'} | "
             f"{tool_success if tool_success is not None else '-'} | {recovery} | {citation} | "
             f"{row.get('llm_calls') if row.get('llm_calls') is not None else '-'} | "
-            f"{(str(row.get('input_tokens')) + ' / ' + str(row.get('output_tokens'))) if row.get('input_tokens') is not None else '-'} | "
+            f"{('/'.join(str(row.get(key)) for key in ('input_tokens', 'output_tokens', 'reasoning_tokens', 'separate_reasoning_tokens', 'cached_tokens', 'total_tokens_charged')) if any(row.get(key) is not None for key in ('input_tokens', 'total_tokens_charged')) else '-')} | "
             f"{row.get('api_cost_cny_estimate') if row.get('api_cost_cny_estimate') is not None else '-'} |"
         )
     lines.extend([
@@ -218,12 +252,12 @@ def _report(manifest: dict, rows: list[dict], paired: dict | None, b0_full: dict
         f"The conservative standard-list-price ceiling for this scope is "
         f"{manifest['cost_ceiling']['list_price_cost_ceiling_cny']} CNY. It assumes every request reaches "
         f"the {manifest['cost_ceiling']['max_prompt_bytes_per_attempt']}-byte prompt cap plus "
-        f"{manifest['cost_ceiling']['protocol_token_allowance_per_attempt']} protocol-token allowance, all bounded "
-        f"retries are charged, and each response uses the full {MAX_TOKENS}-token cap. This is a ceiling, not an observed bill.",
-        "The rough smoke expectation before API usage is approximately 0.2–0.5 CNY, assuming 12 model requests, "
-        "1–3k input tokens and 200–500 output tokens per request. This is an estimate only. GLM-5.3 standard "
-        "list prices were captured from the official pricing page; account discounts, cache treatment and billing "
-        "may differ.",
+        f"{manifest['cost_ceiling']['protocol_token_allowance_per_attempt']} protocol-token allowance, each request "
+        f"uses the full {MAX_TOKENS}-token output cap, and reasoning is conservatively allowed another "
+        f"{MAX_TOKENS} tokens. The worst-case token reservation is "
+        f"{manifest['cost_ceiling']['max_conservative_tokens']}; this is a ceiling, not observed usage.",
+        "No observed API spend is available until a real run completes. The ceiling uses the GLM-5.3 standard "
+        "list-price snapshot; account discounts, cache treatment and provider billing may differ.",
         "",
         "## Interpretation limits",
         "",
@@ -313,6 +347,10 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
     if model != DEFAULT_MODEL or base_url != DEFAULT_BASE_URL:
         raise ValueError("Frozen B1 protocol requires TALITE_MODEL=glm-5.3 and the official OpenAI-compatible GLM endpoint")
     code_worktree_dirty = bool(_git("status", "--porcelain"))
+    experiment_id = str(out.resolve())
+    token_budget = TokenBudget(experiment_limit=SMOKE_TOKEN_LIMIT if scope == "smoke" else None)
+    token_budget_preflight = token_budget.can_reserve(
+        cost_ceiling["max_conservative_tokens"], experiment_id=experiment_id, phase="B1")
     out.mkdir(parents=True, exist_ok=False)
     (out / "tasks.jsonl").write_bytes(selected_bytes)
 
@@ -337,10 +375,13 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
             "model_timeout_seconds": 25, "max_prompt_bytes": MAX_PROMPT_BYTES,
             "provider_generation_seed": None, "statistics_seed": seed,
             "reasoning_effort": REASONING_EFFORT, "thinking": "enabled",
+            "sdk_retries": 0, "reasoning_tokens_reserved_separately": MAX_TOKENS,
             "settlement": "next shared session open to horizon-th shared session close; alpha vs SPY; no costs",
             "holdout_accessed": False,
         },
         "cost_ceiling": cost_ceiling,
+        "token_budget_preflight": token_budget_preflight,
+        "token_budget": token_budget.snapshot(experiment_id=experiment_id, phase="B1"),
         "budget_cap_cny": budget_cap_cny,
         "b0_reference": str(b0_path),
     }
@@ -373,6 +414,30 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
                     "input_tokens": None, "output_tokens": None, "api_cost_cny_estimate": None})
         paired = None
         manifest["b1_m_and_b1_e"] = {"status": "not_run", "reason": "missing_api_key"}
+    elif not token_budget_preflight["fits"]:
+        blocked_reason = (
+            f"The conservative B1 reservation needs {cost_ceiling['max_conservative_tokens']} tokens, "
+            f"but only {token_budget_preflight['available']} remain across the project, B1 phase and smoke limits. "
+            "No model request was sent."
+        )
+        manifest.update(status="blocked_token_budget", blocker="insufficient_token_budget",
+                        finished_at=datetime.now(UTC).isoformat(),
+                        token_budget=token_budget.snapshot(experiment_id=experiment_id, phase="B1"))
+        requested_tickers = sorted({task.symbol for task in selected})
+        for variant in ("B1-M", "B1-E"):
+            for ticker in [*requested_tickers, "ALL"]:
+                summary_rows.append({"variant": variant, "scope": scope, "ticker": ticker,
+                    "status": "not_run_token_budget",
+                    "requested_tasks": (len(selected) if ticker == "ALL" else sum(task.symbol == ticker for task in selected)),
+                    "tasks": 0, "completed_tasks": 0, "failed_tasks": 0,
+                    "directional_n": 0, "llm_calls": 0, "input_tokens": 0,
+                    "output_tokens": 0, "reasoning_tokens": 0, "cached_tokens": 0,
+                    "separate_reasoning_tokens": 0,
+                    "total_tokens_charged": 0, "missing_usage_calls": 0,
+                    "reasoning_detail_missing_calls": 0, "cached_detail_missing_calls": 0,
+                    "api_cost_cny_estimate": None})
+        paired = None
+        manifest["b1_m_and_b1_e"] = {"status": "not_run", "reason": "insufficient_token_budget"}
     else:
         client, configured_model, api_host = client_from_env()
         if configured_model != DEFAULT_MODEL or api_host != "open.bigmodel.cn":
@@ -383,7 +448,8 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
             "backend": "llm", "model": configured_model, "api_host": api_host,
             "temperature": TEMPERATURE, "max_tokens": MAX_TOKENS,
             "thinking": "enabled", "reasoning_effort": REASONING_EFFORT,
-            "provider_seed": None, "sdk_retries": 0, "application_retries": MAX_RETRIES,
+            "provider_seed": None, "phase": "B1", "sdk_retries": 0,
+            "application_retries": MAX_RETRIES,
             "max_prompt_bytes": MAX_PROMPT_BYTES,
             "pricing_cny_per_million": PRICE_CNY_PER_MILLION,
             "pricing_source": PRICE_SOURCE, "pricing_as_of": PRICE_AS_OF,
@@ -393,38 +459,72 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
             "provider_generation_seed": None, "holdout_accessed": False}
         manifest.update(status="running", api_host=api_host, model_requested=configured_model)
         _write_json(manifest_path, manifest)
+        m_rows, e_rows = [], []
+        empty_stats = {"tasks": 0, "requested_tasks": len(selected), "completed_tasks": 0,
+                       "failed_tasks": 0, "run_status": "not_run", "budget_exhausted": False}
+        m_stats = e_stats = empty_stats
         try:
             for variant, financial_path in (("B1-M", None), ("B1-E", evidence_path)):
                 factory = lambda: ModelBackend(
                     client, configured_model, budget, None, max_retries=MAX_RETRIES,
                     max_prompt_bytes=MAX_PROMPT_BYTES, temperature=TEMPERATURE,
-                    reasoning_effort=REASONING_EFFORT,
+                    reasoning_effort=REASONING_EFFORT, token_budget=token_budget, phase="B1",
                 )
                 stats = run(out / "tasks.jsonl", data_path, out / variant, factory, model_config,
                     budget, seed, True, evidence_path=financial_path, run_label=variant,
-                    protocol_metadata=protocol_metadata)
+                    protocol_metadata=protocol_metadata, token_budget=token_budget,
+                    experiment_id=experiment_id, phase="B1")
                 rows_for_variant = _load_jsonl(out / variant / "tasks.jsonl")
-                summary_rows.extend(_summary_rows(variant, scope, stats))
+                group_status = (
+                    stats["run_status"] if stats["budget_exhausted"] else
+                    "completed" if stats["tasks"] == len(selected) and stats["failed_tasks"] == 0 else
+                    "incomplete"
+                )
+                summary_rows.extend(_summary_rows(variant, scope, stats, status=group_status))
                 if variant == "B1-M":
                     m_rows = rows_for_variant
                     m_stats = stats
                 else:
                     e_rows = rows_for_variant
                     e_stats = stats
+                if stats["budget_exhausted"]:
+                    break
             paired = _paired(m_rows, e_rows, seed)
             actual = sorted({call.get("actual_model") for rows in (m_rows, e_rows) for row in rows
                              for call in row.get("llm_calls", []) if call.get("actual_model")})
             mismatch = not actual or any(name != DEFAULT_MODEL for name in actual)
+            completion_check = _completion_check(len(selected), m_stats, e_stats, paired["paired_n"])
+            any_budget_exhausted = m_stats.get("budget_exhausted", False) or e_stats.get("budget_exhausted", False)
+            final_status = (
+                "budget_exhausted" if any_budget_exhausted else
+                "model_identity_unconfirmed" if mismatch else
+                "completed" if completion_check["complete"] else
+                "incomplete"
+            )
             manifest.update(
-                status="model_identity_unconfirmed" if mismatch else "completed",
+                status=final_status,
                 actual_models_observed=actual,
                 b1_m_summary=m_stats,
                 b1_e_summary=e_stats,
                 paired_comparison=paired,
+                completion_check=completion_check,
+                token_budget=token_budget.snapshot(experiment_id=experiment_id, phase="B1"),
                 finished_at=datetime.now(UTC).isoformat(),
             )
-            if mismatch:
+            if any_budget_exhausted:
+                blocked_reason = "The B1 token reservation limit was reached; the completed task records were archived."
+            elif mismatch and actual:
                 blocked_reason = "The API returned a model identity different from the frozen glm-5.3 request."
+            elif mismatch:
+                blocked_reason = "No actual model identity was observed, so the frozen glm-5.3 identity is unconfirmed."
+            elif not completion_check["complete"]:
+                blocked_reason = (
+                    "B1 is incomplete: both groups must process and successfully complete every requested task, "
+                    "with zero failed tasks and one valid paired result per task."
+                )
+            if blocked_reason:
+                manifest["blocker"] = final_status
+                manifest["blocker_reason"] = blocked_reason
             _write_json(out / "paired_summary.json", paired)
         finally:
             client.close()

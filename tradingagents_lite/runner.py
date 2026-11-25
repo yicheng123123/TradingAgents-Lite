@@ -53,8 +53,8 @@ def _cost(usage: dict, model_config: dict) -> float | None:
     price = model_config.get("pricing_cny_per_million")
     if not price or usage.get("missing_usage_calls", 0) or usage.get("failed_calls", 0) or usage.get("retries", 0):
         return None
-    return (usage["prompt_tokens"] * price["input"] +
-            usage["completion_tokens"] * price["output"]) / 1_000_000
+    billed_output = usage["completion_tokens"] + usage.get("separate_reasoning_tokens", 0)
+    return (usage["prompt_tokens"] * price["input"] + billed_output * price["output"]) / 1_000_000
 
 
 def _basic_summary(rows: list[dict], seed: int, model_config: dict) -> dict:
@@ -80,7 +80,9 @@ def _basic_summary(rows: list[dict], seed: int, model_config: dict) -> dict:
     total_usage = {
         key: sum(item.get(key, 0) or 0 for item in usage_rows)
         for key in ("calls", "logical_calls", "retries", "failed_calls", "prompt_tokens",
-                    "completion_tokens", "missing_usage_calls")
+                    "completion_tokens", "reasoning_tokens", "separate_reasoning_tokens", "cached_tokens",
+                    "total_tokens_charged", "missing_usage_calls", "reasoning_detail_missing_calls",
+                    "cached_detail_missing_calls", "budget_denials")
     }
     all_alpha = [r["alpha"] for r in scored]
     by_model = sorted({call.get("actual_model") for r in rows for call in r.get("llm_calls", [])
@@ -145,7 +147,13 @@ def _basic_summary(rows: list[dict], seed: int, model_config: dict) -> dict:
         "llm_failed_calls": total_usage["failed_calls"],
         "input_tokens": total_usage["prompt_tokens"],
         "output_tokens": total_usage["completion_tokens"],
+        "reasoning_tokens": total_usage["reasoning_tokens"],
+        "cached_tokens": total_usage["cached_tokens"],
+        "total_tokens_charged": total_usage["total_tokens_charged"],
         "missing_usage_calls": total_usage["missing_usage_calls"],
+        "reasoning_detail_missing_calls": total_usage["reasoning_detail_missing_calls"],
+        "cached_detail_missing_calls": total_usage["cached_detail_missing_calls"],
+        "token_budget_denials": total_usage["budget_denials"],
         "api_cost_cny_estimate": _cost(total_usage, model_config),
         "actual_models_observed": by_model,
         "latency_mean_seconds": statistics.fmean(task_latency) if task_latency else None,
@@ -176,11 +184,14 @@ def _git(*args: str) -> str:
 
 def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_config: dict,
         budget: Budget, seed: int, react: bool, evidence_path: Path | None = None,
-        run_label: str | None = None, protocol_metadata: dict | None = None) -> dict:
+        run_label: str | None = None, protocol_metadata: dict | None = None,
+        token_budget=None, experiment_id: str | None = None, phase: str | None = None) -> dict:
     """Run fixed tasks without sharing outcomes or context across cells."""
     tasks = read_tasks(tasks_path)
     market = HistoricalData(data_path)
     financial = EvidenceStore.load(evidence_path) if evidence_path is not None else None
+    experiment_id = experiment_id or str(out.resolve())
+    phase = phase or model_config.get("phase", "B1")
     provenance = {
         "started_at": datetime.now(UTC).isoformat(), "code_git_sha": _git("rev-parse", "HEAD"),
         "code_worktree_dirty": bool(_git("status", "--porcelain")),
@@ -193,6 +204,7 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
         "execution": "next shared session open to horizon-th shared session close, OHLC price return",
         "alpha": "position direction × (asset price return − SPY price return); no costs",
         "protocol_metadata": protocol_metadata or {},
+        "token_budget_phase": phase,
     }
     if financial is not None:
         evidence_manifest = evidence_path / "source_manifest.json"
@@ -204,6 +216,7 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
     run_path = out / "run.json"
     run_path.write_text(json.dumps(provenance, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     rows = []
+    budget_exhausted = False
     ledger = sqlite3.connect(out / "state.sqlite")
     try:
         ledger.execute("CREATE TABLE outcomes (task_id TEXT PRIMARY KEY, record TEXT NOT NULL)")
@@ -211,6 +224,12 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
             for task in tasks:
                 start = perf_counter()
                 backend = backend_factory()
+                backend_budget = getattr(backend, "token_budget", None)
+                if token_budget is None and backend_budget is not None:
+                    token_budget = backend_budget
+                if hasattr(backend, "set_budget_context"):
+                    backend.set_budget_context(
+                        experiment_id=experiment_id, task_id=task.task_id, phase=phase)
                 row = task.model_dump(mode="json")
                 state, outcome = {}, None
                 try:
@@ -253,11 +272,19 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                 stream.write(line + "\n")
                 stream.flush()
                 rows.append(row)
+                if any(call.get("error_code") == "token_budget_exhausted"
+                       for call in call_log):
+                    budget_exhausted = True
+                    break
     finally:
         ledger.close()
 
     shutil.copyfile(out / "tasks.jsonl", out / "trajectory.jsonl")
     result = summary(rows, seed, model_config)
+    result.update(requested_tasks=len(tasks), run_status="budget_exhausted" if budget_exhausted else "completed",
+                  budget_exhausted=budget_exhausted)
+    if token_budget is not None:
+        result["token_budget"] = token_budget.snapshot(experiment_id=experiment_id, phase=phase)
     with (out / "summary.csv").open("x", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(result))
         writer.writeheader()
@@ -276,7 +303,11 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
             f.write(f"| {key} | {json.dumps(value, ensure_ascii=False)} |\n")
     observed_models = sorted({call.get("actual_model") for row in rows for call in row["llm_calls"]
                               if call.get("actual_model")})
-    provenance.update(finished_at=datetime.now(UTC).isoformat(), status="completed",
+    provenance.update(finished_at=datetime.now(UTC).isoformat(),
+                      status="budget_exhausted" if budget_exhausted else "completed",
+                      requested_tasks=len(tasks), processed_tasks=len(rows),
                       actual_models_observed=observed_models)
+    if token_budget is not None:
+        provenance["token_budget"] = result["token_budget"]
     run_path.write_text(json.dumps(provenance, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return result

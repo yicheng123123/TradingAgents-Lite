@@ -10,7 +10,7 @@ A0.5 EvidenceView 在任务构造时绑定同一 ticker 与 cutoff。B1-M 不开
 
 B1-M 与 B1-E 共用同一个 Analyst 系统提示、Trader 系统提示、模型参数、任务、行情、Risk Manager 和结算方式。B1-E 只多一个受 cutoff 约束的 financial_evidence 函数工具。模型看到的具体 tool schema 和检索结果自然不同；共享核心 prompt 的 SHA 会写入 manifest，每次 API 请求还保存动态 messages/tools hash。
 
-当前固定预算为分析师最多两轮工具调用、每轮最多两个函数、模型输出最多 1,200 tokens、temperature 0、25 秒请求超时、每个逻辑模型调用最多一次暂时性错误重试。SDK 内部重试关闭，由应用代码统计实际尝试。模型 Key 从环境读取，不传入 LangGraph State，也不会写入日志。
+当前 B1 固定预算为分析师最多两轮工具调用、每轮最多两个函数、每次最多 512 output tokens、messages + tools 最多 5,000 bytes、temperature 0 和 25 秒请求超时。GLM-5.3 thinking 保持 enabled，reasoning_effort 固定为 low；供应商字段通过 SDK `extra_body` 发送。B1 应用重试数和 SDK 自动重试数均为 0。通用 `talite run --backend llm` 使用同一 SQLite 预算闸门并逐尝试记账。项目级预算和失败预留规则见[Token 预算说明](learning/token-budget.md)。模型 Key 从环境读取，不传入 LangGraph State，也不会写入日志。
 
 ## State 节点职责
 

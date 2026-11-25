@@ -8,14 +8,15 @@ import pytest
 from pydantic import ValidationError
 
 from test_stage1 import TASK, bars
-from tradingagents_lite.b1 import _write_summary_csv, request_cost_ceiling
+from tradingagents_lite.b1 import _completion_check, _write_summary_csv, request_cost_ceiling
 from tradingagents_lite.data import HistoricalData, MarketView, read_tasks
 from tradingagents_lite.evidence import Evidence, EvidenceStore
-from tradingagents_lite.provider import ModelBackend, ModelCallError
+from tradingagents_lite.provider import ModelBackend, ModelCallError, _trader_context, client_from_env
 from tradingagents_lite.prompts import prompt_hashes
 from tradingagents_lite.runner import run
 from tradingagents_lite.schema import Action, Budget, MarketReport, Proposal
-from tradingagents_lite.workflow import MomentumBackend, build_workflow, call_message
+from tradingagents_lite.token_budget import TokenBudget
+from tradingagents_lite.workflow import MomentumBackend, _llm_tool_result, build_workflow, call_message
 
 
 class FakeCompletions:
@@ -45,27 +46,74 @@ def test_core_prompt_hash_is_stable_and_contains_no_condition_specific_prompt():
     assert len(first["combined_core"]) == 64
 
 
-def test_model_backend_retries_timeout_once_and_counts_every_attempt():
+def test_tool_and_trader_prompt_context_keeps_evidence_but_drops_redundant_fields():
+    full = {
+        "status": "available", "source_type": "news", "reason": None,
+        "items": [{"evidence_id": "fin:exact-id", "source_type": "news",
+                   "published_at": "2024-02-12T12:00:00Z", "eligible_at": "2024-02-12T12:01:00Z",
+                   "pit_level": "historical_proxy", "content_hash": "a" * 64,
+                   "source_url": "https://example.test/article", "source_metadata": {"title": "Title"},
+                   "excerpt": "x" * 1000}],
+    }
+    prompt_result = _llm_tool_result(full)
+    prompt_evidence = _trader_context({"fin:exact-id": full["items"][0]})["fin:exact-id"]
+    assert prompt_result["items"][0]["evidence_id"] == "fin:exact-id"
+    assert len(prompt_result["items"][0]["excerpt"]) == 800
+    assert "content_hash" not in prompt_result["items"][0]
+    assert prompt_evidence["evidence_id"] == "fin:exact-id"
+    assert len(prompt_evidence["excerpt"]) == 800
+
+    bar_result = _llm_tool_result({"evidence_id": "AAPL:day:bars:1", "bars": [{
+        "day": "2024-02-13", "open": 1, "high": 2, "low": 0, "close": 1.5,
+        "volume": 10, "available_at": "2024-02-13T21:15:00Z",
+    }]})
+    assert bar_result["bars"][0]["day"] == "2024-02-13"
+    assert "available_at" not in bar_result["bars"][0]
+
+
+def test_client_has_sdk_automatic_retries_disabled(monkeypatch):
+    monkeypatch.setenv("TALITE_API_KEY", "offline-test-client-token")
+    monkeypatch.delenv("TALITE_MODEL", raising=False)
+    monkeypatch.delenv("TALITE_BASE_URL", raising=False)
+    client, _, _ = client_from_env()
+    try:
+        assert client.max_retries == 0
+    finally:
+        client.close()
+
+
+def test_model_backend_retries_timeout_once_and_counts_every_attempt(tmp_path):
     completions = FakeCompletions([TimeoutError("private transport detail"), fake_response()])
     client = SimpleNamespace(chat=SimpleNamespace(completions=completions))
-    backend = ModelBackend(client, "glm-5.3", Budget(max_tokens=128), None)
+    backend = ModelBackend(client, "glm-5.3", Budget(max_tokens=128), None,
+                           token_budget=TokenBudget(tmp_path / "budget.sqlite"))
     result = backend._call([{"role": "user", "content": "test"}], [])
     assert result["content"] == "{}"
     assert backend.usage == {
         "calls": 2, "logical_calls": 1, "retries": 1, "failed_calls": 0,
-        "prompt_tokens": 12, "completion_tokens": 5, "missing_usage_calls": 0,
+        "prompt_tokens": 12, "completion_tokens": 5, "reasoning_tokens": 0,
+        "separate_reasoning_tokens": 0, "cached_tokens": 0,
+        "total_tokens_charged": sum(row["charged_tokens"] for row in backend.token_budget.attempts()),
+        "missing_usage_calls": 0, "reasoning_detail_missing_calls": 1,
+        "cached_detail_missing_calls": 1,
+        "budget_denials": 0,
     }
     assert [call["status"] for call in backend.call_log] == ["retrying", "ok"]
     assert backend.call_log[0]["error_code"] == "timeout"
     assert "private transport detail" not in json.dumps(backend.call_log)
-    assert completions.requests[0]["thinking"] == {"type": "enabled"}
-    assert completions.requests[0]["reasoning_effort"] == "low"
+    assert backend.token_budget.attempts()[0]["status"] == "failed"
+    assert backend.token_budget.attempts()[0]["usage_missing"] == 1
+    assert completions.requests[0]["extra_body"] == {
+        "thinking": {"type": "enabled"}, "reasoning_effort": "low"}
+    assert "thinking" not in completions.requests[0]
+    assert "reasoning_effort" not in completions.requests[0]
 
 
-def test_model_backend_stops_at_retry_budget_and_redacts_timeout():
+def test_model_backend_stops_at_retry_budget_and_redacts_timeout(tmp_path):
     completions = FakeCompletions([TimeoutError("sensitive"), TimeoutError("sensitive again")])
     client = SimpleNamespace(chat=SimpleNamespace(completions=completions))
-    backend = ModelBackend(client, "glm-5.3", Budget(), None, max_retries=1)
+    backend = ModelBackend(client, "glm-5.3", Budget(), None, max_retries=1,
+                           token_budget=TokenBudget(tmp_path / "budget.sqlite"))
     with pytest.raises(ModelCallError) as error:
         backend._call([{"role": "user", "content": "test"}], [])
     assert (error.value.code, error.value.attempts) == ("timeout", 2)
@@ -76,21 +124,23 @@ def test_model_backend_stops_at_retry_budget_and_redacts_timeout():
     assert all("sensitive" not in json.dumps(row) for row in backend.call_log)
 
 
-def test_request_byte_cap_blocks_before_network_call():
+def test_request_byte_cap_blocks_before_network_call(tmp_path):
     completions = FakeCompletions([fake_response()])
     client = SimpleNamespace(chat=SimpleNamespace(completions=completions))
-    backend = ModelBackend(client, "glm-5.3", Budget(), None, max_prompt_bytes=10)
+    backend = ModelBackend(client, "glm-5.3", Budget(), None, max_prompt_bytes=10,
+                           token_budget=TokenBudget(tmp_path / "budget.sqlite"))
     with pytest.raises(ModelCallError, match="prompt_byte_limit"):
         backend._call([{"role": "user", "content": "larger than ten bytes"}], [])
     assert completions.requests == []
     assert backend.usage["calls"] == 0
 
 
-def test_invalid_structured_action_is_rejected():
+def test_invalid_structured_action_is_rejected(tmp_path):
     completions = FakeCompletions([fake_response(
         '{"action":"short","rationale":"invalid action","evidence_ids":[]}')])
     client = SimpleNamespace(chat=SimpleNamespace(completions=completions))
-    backend = ModelBackend(client, "glm-5.3", Budget(), None)
+    backend = ModelBackend(client, "glm-5.3", Budget(), None,
+                           token_budget=TokenBudget(tmp_path / "budget.sqlite"))
     report = MarketReport(view="observed market data", evidence_ids=["evidence-1"])
     with pytest.raises(ValidationError):
         backend.trader(report, {"evidence-1": {"close": 10}})
@@ -232,10 +282,53 @@ def test_model_timeout_becomes_failed_task_not_scored_hold(tmp_path):
 def test_cost_ceiling_covers_fixed_smoke_and_development_protocols():
     smoke = request_cost_ceiling(2)
     development = request_cost_ceiling(20)
-    assert smoke["list_price_cost_ceiling_cny"] == pytest.approx(9.59488)
-    assert development["list_price_cost_ceiling_cny"] == pytest.approx(95.9488)
-    assert smoke["max_http_attempts_including_retries"] == 32
-    assert development["max_http_attempts_including_retries"] == 320
+    assert smoke["max_http_attempts_including_retries"] == 16
+    assert development["max_http_attempts_including_retries"] == 160
+    assert smoke["max_conservative_tokens"] == 98_432
+    assert development["max_conservative_tokens"] == 984_320
+    assert smoke["max_conservative_tokens"] < 120_000
+    assert smoke["list_price_cost_ceiling_cny"] == pytest.approx(1.115136)
+    assert development["list_price_cost_ceiling_cny"] == pytest.approx(11.15136)
+
+
+def test_b1_top_level_completion_requires_all_tasks_failures_and_pairs():
+    complete = {"tasks": 2, "completed_tasks": 2, "failed_tasks": 0}
+    assert _completion_check(2, complete, complete, 2)["complete"] is True
+    assert _completion_check(2, {**complete, "tasks": 1}, complete, 1)["complete"] is False
+    assert _completion_check(2, {**complete, "failed_tasks": 1}, complete, 1)["complete"] is False
+    assert _completion_check(2, complete, complete, 1)["complete"] is False
+
+
+def test_runner_archives_and_stops_after_budget_exhaustion(tmp_path):
+    tasks_path = tmp_path / "two-tasks.jsonl"
+    tasks_path.write_text(
+        '{"task_id":"dev-01","symbol":"AAPL","decision_date":"2024-02-13","horizon_sessions":3}\n'
+        '{"task_id":"dev-02","symbol":"MSFT","decision_date":"2024-02-13","horizon_sessions":3}\n',
+        encoding="utf-8",
+    )
+    token_budget = TokenBudget(tmp_path / "budget.sqlite", global_limit=1,
+                               phase_limits={"B1": 1})
+    completions = FakeCompletions([])
+    client = SimpleNamespace(chat=SimpleNamespace(completions=completions))
+
+    def factory():
+        return ModelBackend(client, "glm-5.3", Budget(), None, max_retries=0,
+                            token_budget=token_budget)
+
+    result = run(
+        tasks_path, Path("data/yahoo-2024-v1"), tmp_path / "partial-run", factory,
+        {"backend": "llm", "model": "glm-5.3", "phase": "B1"}, Budget(), 42, True,
+        token_budget=token_budget, experiment_id="budget-stop", phase="B1",
+    )
+    saved = [json.loads(line) for line in (tmp_path / "partial-run/tasks.jsonl").read_text().splitlines()]
+    run_metadata = json.loads((tmp_path / "partial-run/run.json").read_text())
+    assert result["run_status"] == "budget_exhausted"
+    assert result["requested_tasks"] == 2
+    assert result["tasks"] == 1
+    assert len(saved) == 1
+    assert saved[0]["llm_calls"][0]["error_code"] == "token_budget_exhausted"
+    assert run_metadata["status"] == "budget_exhausted"
+    assert completions.requests == []
 
 
 def test_summary_csv_unions_columns_across_status_rows(tmp_path):

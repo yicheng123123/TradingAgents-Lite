@@ -36,6 +36,8 @@ def main():
     evaluate.add_argument("--provider-seed", type=int, help="Optional generation seed if supported by provider")
     evaluate.add_argument("--max-tool-rounds", type=int, default=2)
     evaluate.add_argument("--max-tokens", type=int, default=1200)
+    evaluate.add_argument("--phase", choices=("B1", "A1", "A2", "A3", "B2", "B3", "Reserve"), default="B1",
+                          help="Project token budget phase for real LLM requests")
     evaluate.add_argument("--no-react", action="store_true", help="Prefetch the indicator evidence")
 
     baseline = sub.add_parser("b0", help="Run the frozen 20-task deterministic development baseline")
@@ -102,14 +104,21 @@ def main():
                               "model": None, "api_calls": 0}
                 else:
                     from .provider import ModelBackend, client_from_env
+                    from .token_budget import TokenBudget
                     client, model, api_host = client_from_env()
                     stack.enter_context(client)
-                    factory = lambda: ModelBackend(client, model, budget, args.provider_seed)
+                    token_budget = TokenBudget()
+                    factory = lambda: ModelBackend(
+                        client, model, budget, args.provider_seed,
+                        token_budget=token_budget, phase=args.phase)
                     config = {"backend": "llm", "model": model, "api_host": api_host,
                               "temperature": 0, "provider_seed": args.provider_seed,
-                              "sdk_retries": 0, "application_retries": 1}
+                              "phase": args.phase, "sdk_retries": 0, "application_retries": 1}
                 result = run(args.tasks, args.data, args.output, factory, config,
-                             budget, args.seed, not args.no_react, evidence_path=args.evidence)
+                             budget, args.seed, not args.no_react, evidence_path=args.evidence,
+                             token_budget=token_budget if args.backend == "llm" else None,
+                             experiment_id=str(args.output.resolve()),
+                             phase=args.phase if args.backend == "llm" else "B1")
         print(json.dumps(result, indent=2, ensure_ascii=False))
     except (OSError, ValueError) as exc:
         parser.exit(2, f"{type(exc).__name__}: {exc}\n")

@@ -117,6 +117,38 @@ def _structured_event(stage: str, valid: bool, error_type: str | None = None) ->
     return event
 
 
+def _llm_tool_result(result: dict) -> dict:
+    """Keep only model-useful fields in repeated conversation context."""
+    if "bars" in result:
+        return {
+            "evidence_id": result.get("evidence_id"),
+            "bars": [
+                {key: bar[key] for key in ("day", "open", "high", "low", "close", "volume") if key in bar}
+                for bar in result["bars"]
+            ],
+        }
+    if "items" in result:
+        return {
+            "status": result.get("status"),
+            "source_type": result.get("source_type"),
+            "reason": result.get("reason"),
+            "items": [
+                {
+                    key: item[key]
+                    for key in ("evidence_id", "source_type", "published_at", "eligible_at", "pit_level")
+                    if key in item
+                }
+                | {
+                    "title": item.get("source_metadata", {}).get("title"),
+                    "publisher": item.get("source_metadata", {}).get("publisher"),
+                    "excerpt": (item.get("excerpt") or "")[:800],
+                }
+                for item in result["items"]
+            ],
+        }
+    return result
+
+
 def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bool = True,
                    financial: EvidenceView | None = None):
     """Bind tools to a prefiltered single-task view, never to the outcome provider.
@@ -220,7 +252,8 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
                 **({"availability": result["status"],
                     "evidence_ids": [item["evidence_id"] for item in result["items"]]}
                    if "items" in result else {})})
-            messages.append({"role": "tool", "tool_call_id": call["id"], "content": json.dumps(result)})
+            messages.append({"role": "tool", "tool_call_id": call["id"],
+                             "content": json.dumps(_llm_tool_result(result), ensure_ascii=False)})
         return {"messages": messages, "evidence": evidence, "tool_trace": trace, "pending": []}
 
     def trader(state: State) -> dict:

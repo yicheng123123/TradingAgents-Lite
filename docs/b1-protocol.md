@@ -24,25 +24,26 @@ B1-M / B1-E 共用 Market Analyst 和 Trader 系统提示。E 组不追加提示
 
 - 默认 GLM-5.3；默认 OpenAI Chat Completions Base URL 为 https://open.bigmodel.cn/api/paas/v4。
 - temperature=0；reasoning enabled；reasoning_effort=low。
-- 输出上限为每次请求 1,200 tokens。
+- 输出上限为每次请求 512 tokens。
 - Market Analyst 最多两轮工具调用，每轮最多两个工具；之后强制要求 final MarketReport。随后最多一次 Trader 请求。
-- 每次逻辑 API 调用最多重试一次，只重试 timeout / connection / rate-limit / HTTP 408 / 5xx；SDK 内重试关闭。
-- API 请求 timeout 25 秒。messages + tools 的 UTF-8 序列化上限为 32,768 bytes，超限时在发请求前失败。
+- B1 应用重试为 0；OpenAI SDK 自动重试为 0。
+- API 请求 timeout 25 秒。messages + tools 的 UTF-8 序列化上限为 5,000 bytes，超限时在发请求前失败。
 - 生成不设置供应商 seed；统计 seed 固定为 42。
+- 每次请求额外保守预留 128 协议 tokens、512 output tokens 和 512 reasoning tokens。
 - Function tool 本地执行为同步、限参数且本轮没有远程工具。若函数抛 TimeoutError，会记录 tool_timeout；该测试是异常路径模拟，不代表对任意未来远程工具提供通用中断保证。
 
 ## 成本预算
 
-智谱官方价目表在 2026-11-24 页面列出 GLM-5.3 输入 ¥8 / 百万 tokens、输出 ¥28 / 百万 tokens。代码按照 32 KiB prompt 上限、每次 512 个协议开销 tokens、1200 输出 tokens、全部逻辑调用均用满一次重试计算保守标准价封顶：
+智谱官方价目表在 2026-11-24 页面列出 GLM-5.3 输入 ¥8 / 百万 tokens、输出 ¥28 / 百万 tokens。代码按每次 5,000-byte prompt 上限、128 协议 tokens、512 output tokens 和 512 独立 reasoning reserve 计算最坏 token reservation。每个任务实例最多 4 个模型请求，B1 不重试：
 
 | Scope | 每组任务 | 成对逻辑调用上限 | HTTP 尝试上限 | 成本封顶 |
 |---|---:|---:|---:|---:|
-| Paired smoke | 2 | 16 | 32 | ¥9.594880 |
-| Full Development | 20 | 160 | 320 | ¥95.948800 |
+| Paired smoke | 2 | 16 | 16 | 98,432 tokens / ¥1.115136 |
+| Full Development | 20 | 160 | 160 | 984,320 tokens / ¥11.151360 |
 
-粗略预期 smoke 约 ¥0.2–0.5，采用每个任务组 3 个请求、每次 1–3k 输入与 200–500 输出 token 的假设；这是未测算的预测。实际 token usage 以接口返回值为准。若出现重试、调用失败或响应未返回 usage，API 成本标为 unknown，因为服务端可能已经计费。价目表、账户折扣、缓存和账单可能不同。
+两题 smoke 的保守上界 98,432 tokens 低于 120,000-token 实验硬上限；Full Development 的上界 984,320 低于 B1 阶段的 1,000,000-token 额度。项目总额度与其它阶段分配见[全局 Token 预算说明](learning/token-budget.md)。执行前会核对剩余余额，每次 HTTP 尝试再原子预留。失败、超时或 usage 缺失均不会按零 tokens 处理。实际模型用量以接口 usage 为准；reasoning 与 cached detail 不重复加到 provider 的 output / input 总量。账户折扣、缓存价格和最终账单可能不同。
 
-Full Development 必须以 --budget-cap-cny 显式提供不少于计算封顶的额度，未提供或低于封顶时 CLI 拒绝运行。扩大范围前先审阅 smoke 用量，并由运行者确认费用预算。
+Full Development 必须以 `--budget-cap-cny` 显式提供不少于 ¥11.151360 的估算额度，未提供或低于封顶时 CLI 拒绝运行。扩大范围前先审阅真实 smoke 用量，并由运行者确认费用预算。当前未收到真实模型响应，尚无 B1 真实 usage、成本或成绩。
 
 ## 结算与失败
 

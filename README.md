@@ -15,7 +15,7 @@ B1 当前默认模型为 GLM-5.3，OpenAI Chat Completions Base URL 为 https://
 
 ## B1 冻结协议
 
-B1 使用固定的 Development 20 题、A0.5 行情快照和证据快照。两个模型组共用核心提示、模型、temperature=0、每次调用最多 1,200 tokens、最多 2 轮分析师工具调用、每轮至多 2 个工具调用、25 秒超时、每次逻辑请求最多 1 次模型重试，以及同一风险门和结算代码。
+B1 使用固定的 Development 20 题、A0.5 行情快照和证据快照。两个模型组共用核心提示、模型、temperature=0、每次调用最多 512 tokens、messages + tools 最多 5,000 bytes、最多 2 轮分析师工具调用、每轮至多 2 个工具调用、25 秒超时和同一风险门与结算代码。B1 不自动重试，OpenAI SDK 自动重试也关闭。
 
 - B1-M：行情工具。
 - B1-E：相同行情工具，另开放按决策时点过滤的财务证据工具。
@@ -23,7 +23,8 @@ B1 使用固定的 Development 20 题、A0.5 行情快照和证据快照。两�
 - 模型生成不设置供应商 seed；seed 42 仅用于统计重采样。
 - 请求提示与工具定义的 SHA-256、模型调用次数、返回模型名、token 用量、延迟和失败状态都写入 run manifest 与逐题 trajectory JSONL。
 - 结算为决策后下一共同交易日开盘到第 N 个共同交易日收盘的价格收益，Alpha 减 SPY 同期价格收益；不含费用、股息、融券与组合执行。
-- smoke 的粗略预期成本约 ¥0.2–0.5；按 32 KiB 输入包上限、1,200 输出 token 和全部重试均计费估算的保守封顶为 ¥9.594880。20 题双组的保守上限为 ¥95.948800。全量 Development 命令要求调用者显式提供不低于计算上限的预算。
+- 项目 GLM 总预算为 15,000,000 tokens；B1 阶段预算为 1,000,000，smoke 单次实验硬上限为 120,000。按 5,000-byte prompt、512 output tokens、额外 512 reasoning reserve 及 128 协议 allowance 计算，smoke 保守上限为 98,432 tokens，Full Development 为 984,320 tokens。调用前逐请求预留；失败或 usage 缺失时按完整预留量计费。
+- 对应智谱标准价的静态上限为 smoke ¥1.115136、Full Development ¥11.151360。它们是边界估算，不是已发生费用；详细阶段预算、局限和实现见[全局 Token 预算教学](docs/learning/token-budget.md)。
 
 成本预估使用截至 2026-11-24 的智谱标准单价：GLM-5.3 输入 ¥8 / 百万 tokens，输出 ¥28 / 百万 tokens。账户折扣、缓存计费和平台最终账单可能不同。价格来源：[智谱 API 定价](https://docs.bigmodel.cn/cn/guide/start/pricing)。
 
@@ -55,7 +56,7 @@ uv run --locked talite b0   --tasks tasks/development.jsonl   --data data/yahoo-
 read -rsp "TALITE_API_KEY: " TALITE_API_KEY
 printf '\n'
 export TALITE_API_KEY
-uv run --locked talite b1   --scope smoke   --budget-cap-cny 9.59488   --output results/b1-smoke-004
+uv run --locked talite b1   --scope smoke   --output results/b1-smoke-004
 unset TALITE_API_KEY
 ~~~
 
@@ -68,7 +69,7 @@ unset TALITE_API_KEY
 先检查 B1 smoke 的模型身份、调用轨迹、费用和失败状态，再由项目维护者确认费用上限。全量运行需要显式传入不低于当前协议上限的预算，例如：
 
 ~~~sh
-uv run --locked talite b1   --scope development   --budget-cap-cny 96   --output results/b1-development-001
+uv run --locked talite b1   --scope development   --budget-cap-cny 12   --output results/b1-development-001
 ~~~
 
 若价格、模型预算或重试协议变化，应重新计算成本上限并新建实验配置，不覆盖旧归档。当前开发集不是 Holdout；本项目尚未访问最终 Holdout。

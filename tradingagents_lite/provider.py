@@ -9,6 +9,7 @@ from openai import APIConnectionError, APIStatusError, APITimeoutError, Internal
 
 from .prompts import TRADER_SYSTEM_PROMPT
 from .schema import Budget, MarketReport, Proposal
+from .token_budget import TokenBudget, TokenBudgetExceeded
 
 DEFAULT_MODEL = "glm-5.3"
 DEFAULT_BASE_URL = "https://open.bigmodel.cn/api/paas/v4"
@@ -20,10 +21,49 @@ DEFAULT_MAX_PROMPT_BYTES = 32_768
 
 class ModelCallError(RuntimeError):
     """A redacted, machine-readable model failure suitable for experiment artifacts."""
-    def __init__(self, code: str, attempts: int):
+    def __init__(self, code: str, attempts: int, *, budget_exhausted: bool = False):
         super().__init__(code)
         self.code = code
         self.attempts = attempts
+        self.budget_exhausted = budget_exhausted
+
+
+def _usage_detail(details, key: str) -> int | None:
+    if details is None:
+        return None
+    value = details.get(key) if isinstance(details, dict) else getattr(details, key, None)
+    return int(value) if value is not None else None
+
+
+def _trader_context(evidence: dict) -> dict:
+    """Drop repeated transport and availability metadata from the Trader prompt."""
+    compact = {}
+    for evidence_id, item in evidence.items():
+        if "bars" in item:
+            compact[evidence_id] = {
+                "evidence_id": evidence_id,
+                "bars": [
+                    {key: bar[key] for key in ("day", "open", "high", "low", "close", "volume") if key in bar}
+                    for bar in item["bars"]
+                ],
+            }
+        elif "excerpt" in item:
+            metadata = item.get("source_metadata", {})
+            compact[evidence_id] = {
+                key: item[key] for key in ("evidence_id", "source_type", "published_at", "eligible_at", "pit_level")
+                if key in item
+            }
+            compact[evidence_id].update({
+                "title": metadata.get("title"),
+                "publisher": metadata.get("publisher"),
+                "excerpt": (item.get("excerpt") or "")[:800],
+            })
+        else:
+            compact[evidence_id] = {
+                key: item[key] for key in ("evidence_id", "date", "close", "return_5", "sma_20",
+                                           "daily_volatility_20") if key in item
+            }
+    return compact
 
 
 def _canonical_hash(value) -> str:
@@ -59,13 +99,25 @@ class ModelBackend:
                  *, max_retries: int = DEFAULT_MAX_RETRIES,
                  max_prompt_bytes: int = DEFAULT_MAX_PROMPT_BYTES,
                  temperature: float = DEFAULT_TEMPERATURE,
-                 reasoning_effort: str = DEFAULT_REASONING_EFFORT):
+                 reasoning_effort: str = DEFAULT_REASONING_EFFORT,
+                 token_budget: TokenBudget | None = None, phase: str = "B1"):
         self.client, self.model, self.budget, self.provider_seed = client, model, budget, provider_seed
         self.max_retries, self.max_prompt_bytes = max_retries, max_prompt_bytes
         self.temperature, self.reasoning_effort = temperature, reasoning_effort
+        self.token_budget = token_budget or TokenBudget()
+        self.phase = phase
+        self.experiment_id = "unbound-experiment"
+        self.task_id = "unbound-task"
         self.usage = {"calls": 0, "logical_calls": 0, "retries": 0, "failed_calls": 0,
-                      "prompt_tokens": 0, "completion_tokens": 0, "missing_usage_calls": 0}
+                      "prompt_tokens": 0, "completion_tokens": 0, "reasoning_tokens": 0,
+                      "separate_reasoning_tokens": 0, "cached_tokens": 0,
+                      "total_tokens_charged": 0,
+                      "missing_usage_calls": 0, "reasoning_detail_missing_calls": 0,
+                      "cached_detail_missing_calls": 0, "budget_denials": 0}
         self.call_log: list[dict] = []
+
+    def set_budget_context(self, *, experiment_id: str, task_id: str, phase: str) -> None:
+        self.experiment_id, self.task_id, self.phase = experiment_id, task_id, phase
 
     def _call(self, messages: list[dict], tools: list[dict]) -> dict:
         options = {}
@@ -74,7 +126,10 @@ class ModelBackend:
         if self.provider_seed is not None:
             options["seed"] = self.provider_seed
         if self.model.lower().startswith("glm-5.3"):
-            options.update(thinking={"type": "enabled"}, reasoning_effort=self.reasoning_effort)
+            options["extra_body"] = {
+                "thinking": {"type": "enabled"},
+                "reasoning_effort": self.reasoning_effort,
+            }
         request = {"model": self.model, "messages": messages, "temperature": self.temperature,
                    "max_tokens": self.budget.max_tokens, **options}
         request_sha, prompt_sha, tools_sha = (_canonical_hash(request), _canonical_hash(messages),
@@ -92,6 +147,23 @@ class ModelBackend:
             raise ModelCallError("prompt_byte_limit", 0)
 
         for attempt in range(self.max_retries + 1):
+            attempt_number = attempt + 1
+            try:
+                reservation_id, reservation_tokens = self.token_budget.reserve(
+                    experiment_id=self.experiment_id, task_id=self.task_id, phase=self.phase,
+                    model=self.model, logical_call=logical_call, attempt_number=attempt_number,
+                    request_sha256=request_sha, request_bytes=byte_count,
+                    max_output_tokens=self.budget.max_tokens,
+                )
+            except TokenBudgetExceeded as exc:
+                self.usage["budget_denials"] += 1
+                self.usage["failed_calls"] += 1
+                self.call_log.append({"logical_call": logical_call, "attempt": attempt_number,
+                    "status": "blocked", "error_code": exc.code, "budget_reason": exc.reason,
+                    "required_tokens": exc.required, "available_tokens": exc.available,
+                    "request_bytes": byte_count, "request_sha256": request_sha,
+                    "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
+                raise ModelCallError(exc.code, attempt_number, budget_exhausted=True) from None
             started = perf_counter()
             self.usage["calls"] += 1
             try:
@@ -100,9 +172,14 @@ class ModelBackend:
                 elapsed = perf_counter() - started
                 code = _error_code(exc)
                 retry = _retryable(exc) and attempt < self.max_retries
+                charged_tokens = self.token_budget.settle_unknown(
+                    reservation_id, error_code=code, status="failed")
+                self.usage["total_tokens_charged"] += charged_tokens
                 self.call_log.append({"logical_call": logical_call, "attempt": attempt + 1,
                     "status": "retrying" if retry else "error", "error_code": code,
                     "http_status": exc.status_code if isinstance(exc, APIStatusError) else None,
+                    "usage_unknown": True, "reserved_tokens": reservation_tokens,
+                    "charged_tokens": charged_tokens,
                     "latency_seconds": elapsed, "request_bytes": byte_count,
                     "request_sha256": request_sha, "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
                 if retry:
@@ -113,13 +190,23 @@ class ModelBackend:
 
             elapsed = perf_counter() - started
             usage = result.usage
-            if usage is None:
-                self.usage["missing_usage_calls"] += 1
-                prompt_tokens = completion_tokens = None
+            raw_prompt_tokens = _usage_detail(usage, "prompt_tokens")
+            raw_completion_tokens = _usage_detail(usage, "completion_tokens")
+            usage_complete = raw_prompt_tokens is not None and raw_completion_tokens is not None
+            prompt_tokens = int(raw_prompt_tokens) if usage_complete else None
+            completion_tokens = int(raw_completion_tokens) if usage_complete else None
+            if usage is not None:
+                prompt_details = getattr(usage, "prompt_tokens_details", None)
+                completion_details = getattr(usage, "completion_tokens_details", None)
+                cached_tokens = _usage_detail(prompt_details, "cached_tokens")
+                reasoning_tokens = _usage_detail(completion_details, "reasoning_tokens")
             else:
-                prompt_tokens, completion_tokens = int(usage.prompt_tokens or 0), int(usage.completion_tokens or 0)
-                self.usage["prompt_tokens"] += prompt_tokens
-                self.usage["completion_tokens"] += completion_tokens
+                cached_tokens = reasoning_tokens = None
+            if usage_complete:
+                if reasoning_tokens is None:
+                    self.usage["reasoning_detail_missing_calls"] += 1
+                if cached_tokens is None:
+                    self.usage["cached_detail_missing_calls"] += 1
             try:
                 message = result.choices[0].message
                 content = message.content or ""
@@ -131,18 +218,60 @@ class ModelBackend:
                          for call in (message.tool_calls or [])]
             except Exception:
                 self.usage["failed_calls"] += 1
+                if not usage_complete:
+                    self.usage["missing_usage_calls"] += 1
+                    charged_tokens = self.token_budget.settle_unknown(
+                        reservation_id, error_code="invalid_response_shape", status="usage_missing",
+                        input_tokens=raw_prompt_tokens, output_tokens=raw_completion_tokens,
+                        reasoning_tokens=reasoning_tokens, cached_tokens=cached_tokens)
+                else:
+                    charged_tokens = self.token_budget.settle_usage(
+                        reservation_id, input_tokens=prompt_tokens, output_tokens=completion_tokens,
+                        reasoning_tokens=reasoning_tokens, cached_tokens=cached_tokens,
+                        status="failed", error_code="invalid_response_shape")
+                    self.usage["prompt_tokens"] += prompt_tokens
+                    self.usage["completion_tokens"] += completion_tokens
+                    self.usage["reasoning_tokens"] += reasoning_tokens or 0
+                    self.usage["separate_reasoning_tokens"] += max(
+                        0, (reasoning_tokens or 0) - completion_tokens)
+                    self.usage["cached_tokens"] += cached_tokens or 0
+                self.usage["total_tokens_charged"] += charged_tokens
                 self.call_log.append({"logical_call": logical_call, "attempt": attempt + 1,
                     "status": "error", "error_code": "invalid_response_shape",
                     "response_id": getattr(result, "id", None), "actual_model": getattr(result, "model", None),
+                    "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens,
+                    "reasoning_tokens": reasoning_tokens, "cached_tokens": cached_tokens,
+                    "charged_tokens": charged_tokens, "usage_missing": not usage_complete,
+                    "reserved_tokens": reservation_tokens,
                     "latency_seconds": elapsed, "request_bytes": byte_count,
                     "request_sha256": request_sha, "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
                 raise ModelCallError("invalid_response_shape", attempt + 1) from None
+            if not usage_complete:
+                self.usage["missing_usage_calls"] += 1
+                charged_tokens = self.token_budget.settle_unknown(
+                    reservation_id, error_code="usage_missing", status="usage_missing",
+                    input_tokens=raw_prompt_tokens, output_tokens=raw_completion_tokens,
+                    reasoning_tokens=reasoning_tokens, cached_tokens=cached_tokens)
+            else:
+                charged_tokens = self.token_budget.settle_usage(
+                    reservation_id, input_tokens=prompt_tokens, output_tokens=completion_tokens,
+                    reasoning_tokens=reasoning_tokens, cached_tokens=cached_tokens)
+                self.usage["prompt_tokens"] += prompt_tokens
+                self.usage["completion_tokens"] += completion_tokens
+                self.usage["reasoning_tokens"] += reasoning_tokens or 0
+                self.usage["separate_reasoning_tokens"] += max(
+                    0, (reasoning_tokens or 0) - completion_tokens)
+                self.usage["cached_tokens"] += cached_tokens or 0
+            self.usage["total_tokens_charged"] += charged_tokens
             if calls:
                 response["tool_calls"] = calls
             self.call_log.append({"logical_call": logical_call, "attempt": attempt + 1, "status": "ok",
                 "response_id": getattr(result, "id", None), "actual_model": getattr(result, "model", None),
                 "tool_names": [item["function"]["name"] for item in calls],
                 "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens,
+                "reasoning_tokens": reasoning_tokens, "cached_tokens": cached_tokens,
+                "charged_tokens": charged_tokens, "usage_missing": not usage_complete,
+                "reserved_tokens": reservation_tokens,
                 "latency_seconds": elapsed, "request_bytes": byte_count,
                 "request_sha256": request_sha, "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
             return response
@@ -154,8 +283,9 @@ class ModelBackend:
     def trader(self, report: MarketReport, evidence: dict) -> Proposal:
         result = self._call(
             [{"role": "system", "content": TRADER_SYSTEM_PROMPT},
-             {"role": "user", "content": json.dumps({"report": report.model_dump(), "evidence": evidence},
-                 ensure_ascii=False, sort_keys=True)}],
+             {"role": "user", "content": json.dumps({"report": report.model_dump(),
+                  "evidence": _trader_context(evidence)},
+                  ensure_ascii=False, sort_keys=True)}],
             [],
         )
         return Proposal.model_validate_json(result["content"])
