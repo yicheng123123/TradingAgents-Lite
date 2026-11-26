@@ -1,0 +1,41 @@
+{
+  "by_pit": {
+    "historical_proxy": 563
+  },
+  "by_source": {
+    "news": 129,
+    "sec_filing": 434
+  },
+  "count": 563,
+  "dataset_partition": "expansion-v2",
+  "evidence_sha256": "6b349139d610490a27526248eb95492bfca579ba333d744cf701bb9f6e923a65",
+  "issuer_index_sha256": "8d23990736252c4c8da05b537c9a18b9aa496554094d26703cc5b3d224913e51",
+  "issuer_news_tickers": [
+    "AAPL",
+    "AMD",
+    "AMZN",
+    "BA",
+    "BAC",
+    "CAT",
+    "CVX",
+    "GOOGL",
+    "GS",
+    "JNJ",
+    "JPM",
+    "KO",
+    "META",
+    "MSFT",
+    "NVDA",
+    "PFE",
+    "TSLA",
+    "UNH",
+    "WMT",
+    "XOM"
+  ],
+  "market_calendar_manifest_sha256": "325af46e5d9b930dd5889a63e9e2945ebaa929e04b9db17315bbe85357a1f25e",
+  "sec_manifest_sha256": "3e09e858cdf59045d78f5e24ff319df90e7ca44317d4ca4de183b73a8b0b34c5",
+  "sources_after_research_boundary": 85,
+  "through": "2024-12-31T21:15:00+00:00",
+  "unavailable_sources": 4,
+  "version": "data-expansion-v2-corpus-003"
+}

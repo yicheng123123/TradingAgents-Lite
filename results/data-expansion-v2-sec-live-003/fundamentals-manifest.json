@@ -1,0 +1,145 @@
+{
+  "issuers": {
+    "AAPL": {
+      "cik": "0000320193",
+      "company_facts_sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+      "rows": 757,
+      "sha256": "8623a67b445f087f7ec0f9edd5c49a0a15694f9c0e628052dd85442078129b9c",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "AMD": {
+      "cik": "0000002488",
+      "company_facts_sha256": "dcde3491321ccee802ee64ede0c7253ea4f7e4708709122b685ba2a1d7488be8",
+      "rows": 757,
+      "sha256": "dc99648e649d99b0283ed5735eeecd411d58b4a9f0e85ee5d2e2efb34d77e35b",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json"
+    },
+    "AMZN": {
+      "cik": "0001018724",
+      "company_facts_sha256": "acddb7c0a6973a1fd08372de3b292298a34eae7f42a7eedc4bdebd3ac659c8fd",
+      "rows": 813,
+      "sha256": "97bde4b73279dc6da85516694e74544f5552e656409190935fb757cc4c0be8e5",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json"
+    },
+    "BA": {
+      "cik": "0000012927",
+      "company_facts_sha256": "794d5fb4c83e163b258afbc6828a6d9ce6657f3dae28d5fce0c29623619a957d",
+      "rows": 897,
+      "sha256": "e9dadf558f017c1c02e843dcabdaa50bf838d779d813e116ccde6d15135c22c5",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000012927.json"
+    },
+    "BAC": {
+      "cik": "0000070858",
+      "company_facts_sha256": "6733152b7a74f3678a64e04531e3ceed90668fc979b15c7d7d3f5bc390264158",
+      "rows": 560,
+      "sha256": "6baeb080a9a89158c437ae97659c17a5930a3ace0d48847967dd518b60f163f7",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000070858.json"
+    },
+    "CAT": {
+      "cik": "0000018230",
+      "company_facts_sha256": "0fe50d57bf90ee91f2997ca309353b4b86c2adc192ba9c469623ea7c2f52cfb7",
+      "rows": 747,
+      "sha256": "70dbeea9fe2e2a1d918d0060298aaa893649fb41ac327b73a80e2b3df6a716aa",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000018230.json"
+    },
+    "CVX": {
+      "cik": "0000093410",
+      "company_facts_sha256": "43eaec6a9fa044700a81b6c2283acf92d0e29e710c1c33150429ef5e68e70336",
+      "rows": 736,
+      "sha256": "e5891a4d18af76098366594d73af06a058e2db8ea7a4de0ce4534bdeeef7b5dc",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000093410.json"
+    },
+    "GOOGL": {
+      "cik": "0001652044",
+      "company_facts_sha256": "e4b7685f57b8d6fc9be74c23dc891dfd81de5716d0551338914385fa11bf43a6",
+      "rows": 709,
+      "sha256": "709ed91fd4327f71dcd5cf1d54851299158b84c51c5423134b5aff2ab602b463",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json"
+    },
+    "GS": {
+      "cik": "0000886982",
+      "company_facts_sha256": "2c7bed1df1562d6c272cbe8cc09b599439ab5d026d50f810b1f53fa836f49113",
+      "rows": 662,
+      "sha256": "ec977eca758bcb842ab3eb2c1f31f4c4724e3b528464816c5631555bcd6349f5",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000886982.json"
+    },
+    "JNJ": {
+      "cik": "0000200406",
+      "company_facts_sha256": "9ce98e50414e9a6704eaf485e1868c2298c6ae36acc85a82c0a3737485303be7",
+      "rows": 698,
+      "sha256": "8f39863dbfc8d7933784ea34e12e07f33da400015934c28f28409e265a733415",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000200406.json"
+    },
+    "JPM": {
+      "cik": "0000019617",
+      "company_facts_sha256": "25831284a1bdcbf02bf92e45cc5685609bc3e9478d6d01b04a0c47995626c387",
+      "rows": 588,
+      "sha256": "0216091c52a38f22a89886895bfdc6859faec880fc3c427ec0e194457ffa9839",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json"
+    },
+    "KO": {
+      "cik": "0000021344",
+      "company_facts_sha256": "87a4173fcd3d662d18d19e0e885095aa5e3812b74c54d1ee55808ff1540a8081",
+      "rows": 724,
+      "sha256": "3450c1ff35ae85dc456f9593b30034222fb1e1b6848dabd11ba8914597277b3e",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json"
+    },
+    "META": {
+      "cik": "0001326801",
+      "company_facts_sha256": "f8e539cea9d363752df2f9bb33078c19ae897ff7f34d49fe4d9a732d032b94f7",
+      "rows": 693,
+      "sha256": "a9e63de1aa785b38d00690ca9d7b878f32e32a87aea7db046b39529293f6568f",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json"
+    },
+    "MSFT": {
+      "cik": "0000789019",
+      "company_facts_sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+      "rows": 829,
+      "sha256": "dace10736740e32b062b6f63eb698d6c9b0583df7ea50c8a8c53d50647461426",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    "NVDA": {
+      "cik": "0001045810",
+      "company_facts_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "rows": 707,
+      "sha256": "e33034b0609d736adb7118a250bd6067cf82b6b06cbf34f6de2c11eef245082c",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json"
+    },
+    "PFE": {
+      "cik": "0000078003",
+      "company_facts_sha256": "8f379293683cf844f7305fbf11e15716090a9cfe2a2af9cc0ef35bb4d77c6bce",
+      "rows": 696,
+      "sha256": "1faef4ce3cfa73e9900b1d5023bfbf54c0cad59868e03a0212868f6817ccce06",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000078003.json"
+    },
+    "TSLA": {
+      "cik": "0001318605",
+      "company_facts_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+      "rows": 872,
+      "sha256": "7041fe593202d975e1b1800de2e4e3ee762433b5e81fb7ab85e28b3705e1abe5",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json"
+    },
+    "UNH": {
+      "cik": "0000731766",
+      "company_facts_sha256": "d75b31039d2282ac4c9725f96571a0acab3742ca8a34c034f625adaabdebe63b",
+      "rows": 794,
+      "sha256": "9bdceae913b4f6600f48b125c61e86b39fd518c35baf513bf40f03cb3456021e",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000731766.json"
+    },
+    "WMT": {
+      "cik": "0000104169",
+      "company_facts_sha256": "49330f98609f70fcef4054edc90bc811398a58c4bf26dc0b218d607967a8dbe4",
+      "rows": 976,
+      "sha256": "99c577fc623b3a9b9c9276988b5a4892d1132ef0f1eebac5e754cd6c55e7d6ee",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json"
+    },
+    "XOM": {
+      "cik": "0000034088",
+      "company_facts_sha256": "9b95535419e5662e3deed01de803e83deead477a4c81316e1c45186368fdd8b8",
+      "rows": 749,
+      "sha256": "45d67a54505e6a219e3db5e336dd1bce2b87eabe7f9fcb7b1ad70afa00013a92",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000034088.json"
+    }
+  },
+  "version": "sec-fundamentals-v2"
+}

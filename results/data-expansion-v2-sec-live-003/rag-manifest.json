@@ -1,0 +1,4570 @@
+{
+  "chunk_count": 7236,
+  "document_count": 563,
+  "documents": [
+    {
+      "before_sampling": 658,
+      "chunks": 16,
+      "raw_sha256": "892db1824a0809bf13d2b4bffa0503f0e365505f941105cedba16a331a76f992",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "801d2d330e8be7647d2811b02b9a252c5f22f97f76adf3448ef083bc7ff2b25b"
+    },
+    {
+      "before_sampling": 79,
+      "chunks": 16,
+      "raw_sha256": "e620e5012164a4fc9a9ebe2e466e6c59595d10ce9b5c38656a89a9ad25dc3d04",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "c4147280d441490b78467e495178b1df341ffc008313d6dd29ceaa137aa6f5e8"
+    },
+    {
+      "before_sampling": 248,
+      "chunks": 16,
+      "raw_sha256": "5db94db7bea13cac11034edce4fea1013dbdf6cde6f564a8521419b65d47fbe8",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "397feaece42469ecec807f8834f16425db05d3a39a01a526848228f93af69f50"
+    },
+    {
+      "before_sampling": 71,
+      "chunks": 16,
+      "raw_sha256": "47caffc0ee2aa9e3b56bbb4530409087e87e41f5163f23ea3093d0cd055ee439",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "4b112940e2a40b87541518e5e53651366761d1ac2e26e7391d9d5b667f510ef2"
+    },
+    {
+      "before_sampling": 143,
+      "chunks": 16,
+      "raw_sha256": "76e13c4f56aaa8e81dfd6f4c4196f171f9771d2a0b0a4f8bec0ad15331a99052",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "334b47a31bfe976888d8fd4d160957f4355a49c0904be734edd214b5b7ee3591"
+    },
+    {
+      "before_sampling": 366,
+      "chunks": 16,
+      "raw_sha256": "c43edcf862c42791045e4ab1cafea05748e808ba21fc1d713202040e0133713c",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "d252dcdcb9e9b057484e61a29b1b053f4dd3904d4cb56fd819d29dc27aef8bdc"
+    },
+    {
+      "before_sampling": 688,
+      "chunks": 16,
+      "raw_sha256": "d5d74405c875533e964f2a7d137b83c6cf8bd852dc6b5dea0a527007e0224cef",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "91f32b352cd9f9dec6a646324f675f6104f0fa8fb61938963165449647a53d0e"
+    },
+    {
+      "before_sampling": 101,
+      "chunks": 16,
+      "raw_sha256": "748eb724bcfb28aaa6f5b21b9e587c69d38607d93e52fb439f71ebbb23d32bce",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "d8ec0184736197468baa3b462a85e221805f315269805d368b3513e884e3b371"
+    },
+    {
+      "before_sampling": 100,
+      "chunks": 16,
+      "raw_sha256": "2dc85b45c9b8d0bdf2de30b4ff1dbf5a4c18b62c95ef2a79ad89c7c21f428c4c",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "4631fcf87323eb67dc19ce56a807fe6086b83c8f87f68c18c1f715c0bfa724ce"
+    },
+    {
+      "before_sampling": 226,
+      "chunks": 16,
+      "raw_sha256": "b58604365ee30f46bfc6e9c7cfa5f9d1ee921c3e6bee8b25d2982d4b3451f838",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "04244bc8d22bc426ffadd3fa2a3008f751196336c8c1e72a4163eb36c2671506"
+    },
+    {
+      "before_sampling": 229,
+      "chunks": 16,
+      "raw_sha256": "9abe25b2690e8d37b4b7a2328d2566f8b22b1a30ac63a23583237297dd206a9a",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "df2716ea2628ae34485744251e8d963b92ea9bf76b2cfab99f40c2dddf5e59fb"
+    },
+    {
+      "before_sampling": 312,
+      "chunks": 16,
+      "raw_sha256": "4668ce11f54e58d569f37abea98dd6f0b89a8aa11add97f03ce254d6d43426ac",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "5f305022a7ddb9a9fbae7dcb5771dcaef0534b10b4df44d14a36c1929a6ac718"
+    },
+    {
+      "before_sampling": 226,
+      "chunks": 16,
+      "raw_sha256": "a2e9f726ffaf576fd0df0e06809a94c54cc21e51c0d51392f3f389a813abe4c9",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "44a0b29a241e0c1fad2ef284ae8cb31c1258136a3964af0c811a2b17918e658f"
+    },
+    {
+      "before_sampling": 167,
+      "chunks": 16,
+      "raw_sha256": "fa70b08fa0499838f1d8bd936d9e76b255a188b6818c13a6f469746bccf51cc0",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "cc65f22842d258fbf0a4a0be896bc4a4f176fcd8f6990260fd8a1884fe3f0ab6"
+    },
+    {
+      "before_sampling": 171,
+      "chunks": 16,
+      "raw_sha256": "801601c46857e07639ea5142d58d869e1bfcbb0d047c6c9013a7e4760faa95c7",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "3640bb2b944fa38b8976638ac1161e5a47150e0af6e8eb202fee3e701e5b1fb3"
+    },
+    {
+      "before_sampling": 487,
+      "chunks": 16,
+      "raw_sha256": "c82d21d57a66f29e6af30eb181dde2490c0fc5033caf81b70e144eb1ecc2eadc",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "e7d7568f3a4d747f69f0d4555509ccd29d41396a43a7e134ce6bc51f36447e87"
+    },
+    {
+      "before_sampling": 206,
+      "chunks": 16,
+      "raw_sha256": "1ceda79b0f7f7c365436eea435326d3a497e44b7bb179e15e302a3d718163107",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "0363801f13ae0ba8b27cd8531528fba5d2b6e6c5fb45c4ca8bc4de55edcf7e14"
+    },
+    {
+      "before_sampling": 135,
+      "chunks": 16,
+      "raw_sha256": "f544c566def381414f462407717ec8395bc682516db9f2b0e706af0ac405f675",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "4b27d00bb86cd4ca6b7a25f6e6c7e54e06e7ce00871fe73f62a8f01f523d3a26"
+    },
+    {
+      "before_sampling": 270,
+      "chunks": 16,
+      "raw_sha256": "f7296463701fb796f274f1144890d5166b422dfa08e426ece2119d93dea59cd3",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "36a7b2ff3c7fa1c106ba648b5af5e09590ae5b8eb01bbee9ca6137e62d59fc7a"
+    },
+    {
+      "before_sampling": 214,
+      "chunks": 16,
+      "raw_sha256": "28a2bbab17ea16df9cf35ef6a97a4d64bb64d326310f1a3f54e1407b0a46bc1c",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "3587dd1dd8e7ba76e62565ec0202de855290e08ef01e771beda8f577e35cbb7e"
+    },
+    {
+      "before_sampling": 673,
+      "chunks": 16,
+      "raw_sha256": "a68005b57fc6071a31752652e2fa7713f92b76eb3df608b435164a5205db00bc",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "b2bca89fc4e7d0cb639affa4ef85c27eba08320a999408626d8d2fa9f8ea7a94"
+    },
+    {
+      "before_sampling": 79,
+      "chunks": 16,
+      "raw_sha256": "568ddb567a77cc365a9af33289bec082f7832ae19d8718b52f8d7ad8c95060b0",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "f028cc98c1781b8ef25d0c47a1e0821f5c1af36d598a4ce787c62ea8d8d70d32"
+    },
+    {
+      "before_sampling": 686,
+      "chunks": 16,
+      "raw_sha256": "049336bc0119ccac3a523bc6d8634219312d9c0ea7619a6327773f470971034a",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "f838914c74313844b4360509714a756cc94baa09c958d39aa81726dcebd67b8e"
+    },
+    {
+      "before_sampling": 240,
+      "chunks": 16,
+      "raw_sha256": "9e42e477eaae5bdefc945cbcaa9efda15cf81b14529d1735cba47795873ddfab",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "8f46be88914b5c3d161c8f74051890ff860d34a79b863c3a63ad00cf8e9dba67"
+    },
+    {
+      "before_sampling": 75,
+      "chunks": 16,
+      "raw_sha256": "3a345bb738f1e467203bff98a9690819809fbcba47df858e03f4df8609c51223",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "619520377430437be66789208d0d327e7e1d463ff44b99d41ec1247aab2822dc"
+    },
+    {
+      "before_sampling": 360,
+      "chunks": 16,
+      "raw_sha256": "47a880e0e15f4c82747efaa2fb6972a0881a146b662a902473a586c8f6883c42",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "273eec56106855e00183c11da3fb1da519951593741bdf7fce21c362fd127c26"
+    },
+    {
+      "before_sampling": 138,
+      "chunks": 16,
+      "raw_sha256": "a3fbef424a2da856042867e2503cb83c1da700ddd17c701205ae293e88149f5a",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "69262bdc9f5c1034cfeefeb11758bc146a3f37c0ff04808a4545ff82d2eeccb6"
+    },
+    {
+      "before_sampling": 108,
+      "chunks": 16,
+      "raw_sha256": "f15b6f18eb63910a0629c362fe3d2969b31d9f15622bbe401fcec0c9419bba85",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "5cadaca71cb4a1d96f2d1b7546ac900abcec01a1d82132fa19d29d9d8568a3cf"
+    },
+    {
+      "before_sampling": 108,
+      "chunks": 16,
+      "raw_sha256": "076bf9b1d067d960cd206bc817749995d4013a5516b470ab57f12fad607cca36",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "45b8f358e26aee631a6e46e6f0ee03b185f668890dacddedfdf0acf1ccf87192"
+    },
+    {
+      "before_sampling": 246,
+      "chunks": 16,
+      "raw_sha256": "473d0807013e05802f5639c8e20ca0389e6d1d2bd9241cd4a4ae751f8e483e09",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "40b3f4e89ee4e9197081f7bf5993661870ce0ee95b68b51ac2732106ca478097"
+    },
+    {
+      "before_sampling": 88,
+      "chunks": 16,
+      "raw_sha256": "1d42fdd64b911c3952ac15d8568902f5a803e834888390844bcb747c1a0e14ba",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "71eb7ff117635a26673e87bdf4dc92ecb626ebb41a2f8c0e8ae44bbde6691781"
+    },
+    {
+      "before_sampling": 355,
+      "chunks": 16,
+      "raw_sha256": "5655b4fa9a66fa107a4a24915022d22fdd2c517520b5156646e33a40ce361581",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "538483e1794046d3a667b7a95cc39f75eac50de9952f564eb8bab83a36bf1797"
+    },
+    {
+      "before_sampling": 313,
+      "chunks": 16,
+      "raw_sha256": "803eb91ca801070256172164a9c6a54c168c847cc94ff170726a3f3c6c808a5d",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "7522cef5a418ec15da2d2647da4fefb023e5c5fb8229c19a0721417606872541"
+    },
+    {
+      "before_sampling": 396,
+      "chunks": 16,
+      "raw_sha256": "e46652d7916ff993c77a6ada269de1668786776394417dbd26d2b661507bbf8d",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "584f21a834f99ab2359094713e7ec88e621a183bd12e995f7f70ac8530079934"
+    },
+    {
+      "before_sampling": 213,
+      "chunks": 16,
+      "raw_sha256": "83a4270dd6b2270c92e7b98feb51b4465ee36bb10dbf8859801ed8e9457a1834",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "bf364f2ecfa431898ca8ebfd74e503faac669d1d0575b170f80e00a34e2703f2"
+    },
+    {
+      "before_sampling": 295,
+      "chunks": 16,
+      "raw_sha256": "047eb0cad431642ca3d018e2ea650029ac6f95e91dd9184763eaaa73f3abe70a",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "666d3793879ab6cc7f86c2415ab11b488a1a5048e3fb236f5221089b8a4daef1"
+    },
+    {
+      "before_sampling": 569,
+      "chunks": 16,
+      "raw_sha256": "b163b6255854f5b7468814d424ed2d1bc637c1509388453ffe1edb210c64c6ed",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "8493570e6e3e7320528f5981bbb204e74cd761e06bca0a85a9c6823fe9df8d3d"
+    },
+    {
+      "before_sampling": 420,
+      "chunks": 16,
+      "raw_sha256": "2d69f864f3414ea8d32eb7529d4bf3ee92fac6b883c2529c9214f00cd27b739d",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "57be8de401bfd077d6b94d4e03c957ea69026da80eb5fa35216feafc1999ce1e"
+    },
+    {
+      "before_sampling": 387,
+      "chunks": 16,
+      "raw_sha256": "2c9f9e85b303e64ce58310b19953a98765c198d2279e59c9cd8172a4c6483f5f",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "c7a5d054b25a70d2cd16d12a3e320d7a5a00134d963ba692644e53ad91f6dec9"
+    },
+    {
+      "before_sampling": 848,
+      "chunks": 16,
+      "raw_sha256": "630f0b807d0b993c00b30cef823dfa4a9779371a634a8fbfc19d9c2542c16a83",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "8e9d13e50329081d769037cfa489db6b70d6a61efa408cf3c889c0433f16021a"
+    },
+    {
+      "before_sampling": 1084,
+      "chunks": 16,
+      "raw_sha256": "a826666a5a2dae7e111396c4e291472e4d97ea178eb692175c0ccafc5e429a9a",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "6ad478fde1acd1c62948659cef66c56bd4b7c5aedee77e7a018521fbfcffb1ca"
+    },
+    {
+      "before_sampling": 337,
+      "chunks": 16,
+      "raw_sha256": "836f61a93596e21cecb3fe58bb32295448981772b8d7f8c62fe7a62eba5e373f",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "c2916fa1e4fed35a826b40a2ceaa5c045f1fdc8c5fa2ed0ce57573e37aacc64e"
+    },
+    {
+      "before_sampling": 833,
+      "chunks": 16,
+      "raw_sha256": "a459dae4c61e18b73b6866122464eb9999ed38b526ac4a14e43cd7280fd242a8",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "5819aa259a884ab9f3b810bf075e66203eb1fac3262471a8eaf323bd325bb000"
+    },
+    {
+      "before_sampling": 554,
+      "chunks": 16,
+      "raw_sha256": "a0be8098cd3b8ad622ac2723959a609f02c47e8f891cdc84e6c0d283e7c0b613",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "6ac567e91c890f7d50a42f2449e6e606e9694cf219842b24ead3ab08e6ba84f8"
+    },
+    {
+      "before_sampling": 542,
+      "chunks": 16,
+      "raw_sha256": "1a5c4d3ac5ef607ee1f98db2099bf14e23c47a817281e2b18a8938a077ce44e3",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "25cb71b8a2f585ed3bdf16d17517aacf1e6e97f6f472776b50477cd52c8a7e6b"
+    },
+    {
+      "before_sampling": 390,
+      "chunks": 16,
+      "raw_sha256": "ef1291a41398b322de97e710ffd981b4461719c99d3b88b520e7277fde4c5b33",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "4affe4b0cd0b0398ea3a026e50d5efb63f9962e0122565df8110e9241284c9b6"
+    },
+    {
+      "before_sampling": 255,
+      "chunks": 16,
+      "raw_sha256": "29170f4b2a06f4990ad19d428274ca8adbe75d7772e4d734348e250c41fece48",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "25a12f080c7faedcfdaa2e58d4e0de507f1aa18006097d669e2fe0c11d98a264"
+    },
+    {
+      "before_sampling": 264,
+      "chunks": 16,
+      "raw_sha256": "4aa95943e0e0a2cde445aefccbb80372b5e132bb897123022470c41af338b634",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "c27682fbad972d165795302402f6644066948885a634e1168b65bba310107326"
+    },
+    {
+      "before_sampling": 291,
+      "chunks": 16,
+      "raw_sha256": "57bed63e5599deac0de8af108e889d5802e60ea273026cdd6247830f90dceb94",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "d85418b904cdb757515172d64aea3929889c3f4d9e54950fa05b4165b300b55f"
+    },
+    {
+      "before_sampling": 175,
+      "chunks": 16,
+      "raw_sha256": "3650a911c4f06bf9612c7f434bd8ad9f5fbf73e594d7d7fd2518dbc022f72fe3",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "5130ab0bef38bb47adab3fa50962ebe0026586a9cae1263fb53258c46b63c0f5"
+    },
+    {
+      "before_sampling": 255,
+      "chunks": 16,
+      "raw_sha256": "08700047365bb0aa1cad1d462806117cd4ab314c1ee157375c765507bea34eff",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "7cad5cdf5a1ff06e98a3ebc495913caa73b5d0418bbcd9490e3361d5ed9c74ec"
+    },
+    {
+      "before_sampling": 154,
+      "chunks": 16,
+      "raw_sha256": "0cac752b09e721c60b4b820e0b3c7875869e33e4a38a360b4f78f65529d38c39",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "6c98f40be96c273ae299c663e00010f7e929734f324977699022d9816f1f7642"
+    },
+    {
+      "before_sampling": 144,
+      "chunks": 16,
+      "raw_sha256": "da8e37742d2e9927f95360c90cfd3b88d24bd01d0df6e98ab33c0ca41d57425a",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "37ed56de7ff4a5d5bc8ad5948663341718f355b7e7fb1c96fd503c8c65cc01d2"
+    },
+    {
+      "before_sampling": 207,
+      "chunks": 16,
+      "raw_sha256": "4cac2c830a86c5b9e22df094f5e8448e6386682e544ee6bf24502cfdc8ea7c53",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "a827a48f00829b0042b4deddf2aa199284d9e80de11b2184913c11942d4c530d"
+    },
+    {
+      "before_sampling": 117,
+      "chunks": 16,
+      "raw_sha256": "8a58d02546303b1fba6a5e7dd422783e1c3504b8bc66283201852b567f92851b",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "6e2757e99b5cccbc748f56521b9e5c27e3f01dad4e03c48a44e106980c026cd7"
+    },
+    {
+      "before_sampling": 393,
+      "chunks": 16,
+      "raw_sha256": "d926004b184bac235c6f063f51c466fae6b9e8ca2f295f9d1dfc6d3a9812ebcb",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "e3fd15c0c0d876b44ed87503015f07ec1599ea4f78f2f226112ab6065e4334dd"
+    },
+    {
+      "before_sampling": 96,
+      "chunks": 16,
+      "raw_sha256": "4f7f6f190ede7886aabd61e2ec7e21edf8e3d1ebd08d3bff097da213b681ecfa",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "a8c0b1a776108080badf62ad8b0c1a49c747b7e42a0b0b8027e93cf0e857b6bd"
+    },
+    {
+      "before_sampling": 253,
+      "chunks": 16,
+      "raw_sha256": "3547706dd58f83ed95a26bf0ff337ade648044fdde5613ef1e1ca76ee6e4bdf9",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "62471f56925bc4b72c8bd005f731da5eac98a26dd17572fb8302a58239b05c0a"
+    },
+    {
+      "before_sampling": 179,
+      "chunks": 16,
+      "raw_sha256": "486f20530bbf06d6783159b03b00c51e2ea65a3fd87d87e2724aae054ddeae98",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "6a200979c21672bb6fadb919de08b62268eb5c1af88ae747bca0c51ba7316d60"
+    },
+    {
+      "before_sampling": 124,
+      "chunks": 16,
+      "raw_sha256": "44253d76ee18d4ebea9157689c97fc989ff2c4dfef0c316df9553ee5b9d7f8e8",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "53e4d75675c8ad4e84712423578f36e8ec8439180ab7bd5c873033290a54780f"
+    },
+    {
+      "before_sampling": 524,
+      "chunks": 16,
+      "raw_sha256": "59878540ac5403cbe84d8f8c0c3a2940f563e0e572df3a43878258a611f69733",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "bff3cd39b060dc56afde7d31f3cf1061a453621eaecdef1b50eb5d648b6c9216"
+    },
+    {
+      "before_sampling": 634,
+      "chunks": 16,
+      "raw_sha256": "0a47a30019017f0fd9f2e172834ca607f57e29f5e583061cf13aac852aeeabe8",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "2d54111b2b821a40dfeb26331197050291dd90a6157eda7fb44c291252dcca20"
+    },
+    {
+      "before_sampling": 176,
+      "chunks": 16,
+      "raw_sha256": "3dabefea53995bfc2a140fe8bd59af2a89d5537eb9ce30520985a9f271219bf0",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "83a921db97b36acd751bc75a42cae93bc468995648724b448d4e67763ca2393c"
+    },
+    {
+      "before_sampling": 55,
+      "chunks": 16,
+      "raw_sha256": "4dd2852e3ca18b4dc4da0d5056ff1cca27d113b20dfef0b409b49f145cda4827",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "9784b9f5863e4a07d30298195fe16070338922afb08585ac0c46751ef502b512"
+    },
+    {
+      "before_sampling": 69,
+      "chunks": 16,
+      "raw_sha256": "7e55502dc01149580068762ec1ca97d46e6129795afd360b8a37d357bb766722",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "c2453e83eeccafea4215011142946dc6592f6840bf56e9add9379b7acf51c53a"
+    },
+    {
+      "before_sampling": 107,
+      "chunks": 16,
+      "raw_sha256": "dd9f993bb5b6dcd8e2495e19da1d1a181fbb4a0e8d618f746a30b035254666a7",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "3e4d7b8a66e3d1071f93f5f610bc585ca89d68dfacc2d53ff93cb9151999e763"
+    },
+    {
+      "before_sampling": 173,
+      "chunks": 16,
+      "raw_sha256": "79224a987718f7d5a9cd785e2d5f31a86bc95038b83511eadfd62fc26ddcbb61",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "b013b4f0ea67ce9de982f03181941139552440e8b14752c2d9a0820352d63c08"
+    },
+    {
+      "before_sampling": 86,
+      "chunks": 16,
+      "raw_sha256": "eb5b37906c6c1d6475475dcf7fd9ff9c3ced4ef6fdc2ba198a0e1143b587336b",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "3eb181cc141d1b8a4b28b3d0e716ab42b0b5c1424ee8e4ee6e6ca121c4a6c44d"
+    },
+    {
+      "before_sampling": 92,
+      "chunks": 16,
+      "raw_sha256": "33e362f338eed9a437835074b24210c9552eb84f71cf4835a5b6cb0f49c5eb73",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "738a25ddf921d18f0a8742d624f604583fbc51e4b1c94c8d62d2ac0f07fd63a0"
+    },
+    {
+      "before_sampling": 210,
+      "chunks": 16,
+      "raw_sha256": "dc8e082023f6b388db17faa4279d3a52aae920d657fccdbddd62415d587f60b3",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "e8d51c42cca15897cc2a735d018cd97b56741a711eee863a78f0287c515071f0"
+    },
+    {
+      "before_sampling": 226,
+      "chunks": 16,
+      "raw_sha256": "0ac07a1ba47adfe744910ee27c6b807149248b83e0d9ea5ce711ba4dff98ea06",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "a0a0ba2d2dcbf73700a92bef5be1712e9c1a32c8ed4d6c866f39ca1a4fe01d05"
+    },
+    {
+      "before_sampling": 157,
+      "chunks": 16,
+      "raw_sha256": "1f88cdb33a9a3ffe2b3e6549c990b6723149eec1748e59a90b976cacaba70d49",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "cded886c43dae5f1565c9b930446ea43fccd0b4e12334701db636987d77dd67d"
+    },
+    {
+      "before_sampling": 166,
+      "chunks": 16,
+      "raw_sha256": "4a3fd85b5ecaf65a3204633ef554580ea3856051f53bd1872573b31c02063125",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "500487bcbbd250386954cd6920f7e34d0d90323ad35f6ed0aaf0924d52d13ba9"
+    },
+    {
+      "before_sampling": 99,
+      "chunks": 16,
+      "raw_sha256": "2003054b591b8a1ef8f6ec15fcd45342c49875536c3aa299b21531adf0125c71",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1a3406dbcbc3443569937421243e72f05d5c70a16f459d365c89ea2f465dbe9e"
+    },
+    {
+      "before_sampling": 138,
+      "chunks": 16,
+      "raw_sha256": "c078498ac661aca26f782ceb17394a401b2bb9c49b1b314298aa3b7d35f168ff",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "e90d5c4e0103a3266686cf7715fcb3367e03fb10cc0fc4fe0e93fa8a8cabc36c"
+    },
+    {
+      "before_sampling": 220,
+      "chunks": 16,
+      "raw_sha256": "38195822d342e33529b3b3691f48cb419dc32bbed0dc0ef109ea21adc77264f9",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "a8f84d98d102eec77fd5cdb120b075ef33bdf01b81fd5b7bfb0c4d2962624feb"
+    },
+    {
+      "before_sampling": 262,
+      "chunks": 16,
+      "raw_sha256": "201706973e1e8d007b37ebabd5238e62094b5d109f38e34a68e03cd720476008",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "ea9b7083f38a3bccc5b8d752514b0ad08c938c9c4b8e0cec1b8c7c25c4477335"
+    },
+    {
+      "before_sampling": 398,
+      "chunks": 16,
+      "raw_sha256": "bb6daa9233bff4ca0f0b491a7be623664ca0031b96cfa3ef7a3de47094d77a9b",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "190a2be603ece9297affbf490a2b8b9e5be56189dc1ac9fdf15c3543df5cd132"
+    },
+    {
+      "before_sampling": 445,
+      "chunks": 16,
+      "raw_sha256": "71990a05dc09b3ae8225b5822b756321e107fcffde7a87f2073ccbae76b7743f",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "38e6913882b741388faa44af3d71b4a2e4f480178208dbd62d9c70297ee717da"
+    },
+    {
+      "before_sampling": 134,
+      "chunks": 16,
+      "raw_sha256": "cdcdd2920de942760b70c60f3ea91257604fb0839176fe70718527c83932b6b1",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "fe86dc2d55dd43de3203450c15574c438165ae01fe59c163eb58c32224e0aae5"
+    },
+    {
+      "before_sampling": 592,
+      "chunks": 16,
+      "raw_sha256": "bed6bad6c55b8e51259cbfa96d02eee7f537c5fbdaf788fd8e97fc49333d0ceb",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "4e63a330aed80126b75539e97a1ee5e3bc1f4a22a649fb9186856cbca40a5c2c"
+    },
+    {
+      "before_sampling": 73,
+      "chunks": 16,
+      "raw_sha256": "588743ad862b4037531594d0839a390ddcfefa061cb06d2c2227ef02801ab255",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "ce8819bdf86c27e9b51c39d3d78d1fe87f84b84b6a0304afb898f2c4e19babba"
+    },
+    {
+      "before_sampling": 217,
+      "chunks": 16,
+      "raw_sha256": "a8e019e78e3e42cb7460baefdb7c0bc740277c90266ecd287d51e905a53bb2ca",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "489c32e43c7017f9de03743f296decc45d9dde454ff75972e5711a30f8447bf0"
+    },
+    {
+      "before_sampling": 63,
+      "chunks": 16,
+      "raw_sha256": "8280d6350e97fbaee6fdcf0f236869f8ab44ab790dbf3db9412537207b403d5a",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "19cf71efd44f65c0c0c8ebf19f520e21a8aa8f5a55f8f6dbc17d260f2478c976"
+    },
+    {
+      "before_sampling": 701,
+      "chunks": 16,
+      "raw_sha256": "3a3dee426969a19797d200da4bd286fdabc28479deb9c02a073421eda7de1810",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "e8f0957d5830b85999e1a69f06260ccd921865c07c4259832996afb962af87f4"
+    },
+    {
+      "before_sampling": 118,
+      "chunks": 16,
+      "raw_sha256": "cc39b36e2bdbfc7cd6f885089a80d1099fa812232fd66e9714159ccf07cd33db",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "fd3be30426080450ed535bfd89accee789b3e74e5895e24035ebc3316228f041"
+    },
+    {
+      "before_sampling": 204,
+      "chunks": 16,
+      "raw_sha256": "0317ac1e7a2a10e4e9b41a69b21e33522a9d09e486a5c90b3e4fb61bb0a2701a",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "48651cc1fa569601f9a42ed834de2ca82c8c2d442db97a8ddfc90f51d2d364aa"
+    },
+    {
+      "before_sampling": 103,
+      "chunks": 16,
+      "raw_sha256": "3ac18c0b8d90d9e46ea4e876c8de623cdbad7a82297e69f7646d2ed36bed0e6b",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "9d5b80fe9424654e140873cb85980f6d18d4e3521c1a78a90d3768e235730048"
+    },
+    {
+      "before_sampling": 106,
+      "chunks": 16,
+      "raw_sha256": "8ea8a797422c29c52ead40cdf11d166416cbd4a7ef5a2237b85327d98c3d6fc7",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "bc8aa3d749e23ca1e67a1e8ecf085270e96b8699491d0786018c46c2e2898375"
+    },
+    {
+      "before_sampling": 224,
+      "chunks": 16,
+      "raw_sha256": "7ea4a73cb6a57d514429fd5e308356f5cd4ba73410e200d7d030a0982abf1d80",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "af3d19954f8095bf552bd065496e4dc5268023c0470d68e61b4854d70b608bbb"
+    },
+    {
+      "before_sampling": 271,
+      "chunks": 16,
+      "raw_sha256": "8401e3e850f9e2099abd96ef451703a3d0b82bf25084d929eb34900e35548a38",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "3445f743614aa740b52546cafc15626aa8dd3c84067a6c817753f68fb89aec4b"
+    },
+    {
+      "before_sampling": 230,
+      "chunks": 16,
+      "raw_sha256": "4eb6f32f6a080b817d69f62c64670812a154bdc4021a0e139bce3b5652f91c2f",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "8d745bb8df8102babd5d6015222deb0c20c420f323409b8b0e30bd8c9b896ddd"
+    },
+    {
+      "before_sampling": 156,
+      "chunks": 16,
+      "raw_sha256": "81ef984aa9369dabf4915f4e8fcde2722119578db730e5cc9fe5eeeec362d3e8",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "2b47f7ab6b34a42460afd2cc1b11cd5711da92a7179a8bfd25ad87d7a1afda41"
+    },
+    {
+      "before_sampling": 174,
+      "chunks": 16,
+      "raw_sha256": "ecccb6c43419e3919ce7a26e401862b8057a63470c299ba8e73a5b5615ff173c",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "c7740e21dd1cc0ec758ab292c11a72939d862e7124d155a4eaa66e1511dd76d8"
+    },
+    {
+      "before_sampling": 135,
+      "chunks": 16,
+      "raw_sha256": "f93cb2ce72b57887a32a0cca4e4a6d1f2cf7815166d7366665ef76d01665700b",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "711013c3a693ba49ce415f634e7dd96d8f71f9878ac32193c8deaf0bbfec371a"
+    },
+    {
+      "before_sampling": 221,
+      "chunks": 16,
+      "raw_sha256": "4e46157933a4375c309606b4925c20280e4e82bdc2ee20e8004a282824ec66fb",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "0934cbc4fe1140b82cc8f3f6c6580ad42612fd0039014c25f15863085f569c39"
+    },
+    {
+      "before_sampling": 447,
+      "chunks": 16,
+      "raw_sha256": "824bc5ace4c1bd56c8c3903f827ca70ebd5bb6873a25cddfa4680b5c0f4bb5d2",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "155ebc006a88d14093b7959e1c57df319be68b91206a316abadbeb43c2201b7c"
+    },
+    {
+      "before_sampling": 227,
+      "chunks": 16,
+      "raw_sha256": "d397d170298a51385214983408bfd5f14fea2ad9f78b5258e70b225ebe9854fe",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "0b7cacfcdcf6d09941476a0ce2a2e11588080ae22ef4eabdfdb4c84a49b2a3f9"
+    },
+    {
+      "before_sampling": 186,
+      "chunks": 16,
+      "raw_sha256": "b48aaf0de5c9bd19e098977d55fbbcda9e9094ace3dc3ae1763858ea7b6641f7",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "be6f20340679d3923e37ddb7c38ca8d8db801dd864b02656e547c292fb5549b4"
+    },
+    {
+      "before_sampling": 132,
+      "chunks": 16,
+      "raw_sha256": "01697a580debfc457fc74215faca257fc62eacbce9e10f0c5f37d03dfc279781",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "bb93559ba313d409c7383ee7b84a2f81afe545aa30cc0cc7c3a3ac0b9753a9ca"
+    },
+    {
+      "before_sampling": 987,
+      "chunks": 16,
+      "raw_sha256": "5378a14c1678f920e2d0f0d201e2f6886adc55d6148aa284b5a201bb698f3c29",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "fcc5212db638714489b962a1768af57d4ff9f71f2cec1cd3c9982f92ba28a46c"
+    },
+    {
+      "before_sampling": 598,
+      "chunks": 16,
+      "raw_sha256": "07efccf487d661b18b0f91d6e3b0f4befa586ab65d6fa55aba818f7a19dca5e7",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "828c281a1cecc0296605e4a1ec237ae850e799b11feee3ef1220105c1c5259fd"
+    },
+    {
+      "before_sampling": 220,
+      "chunks": 16,
+      "raw_sha256": "914b7282574f99b92819c793d81d50ac20b0b14781140bbdcaa23bbbbb50bc0e",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "3d743f60128f0e31b7744df3a8f7fb16b53819537b3fb13a88625ff53b16a525"
+    },
+    {
+      "before_sampling": 66,
+      "chunks": 16,
+      "raw_sha256": "95bc27bdfcf97d531968b6370d35eb2188570faf03861c3655866c5791b3e0d9",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "6c7b223b60c58dc7cbcb07f2717f91bc1180e54662496c02bfeb798bc373ec04"
+    },
+    {
+      "before_sampling": 72,
+      "chunks": 16,
+      "raw_sha256": "948c3819f2a50d7c5de847738e82359f95bbce4bd4b2fba8350a7020a26aa97e",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "228001bedb07877d65f38d7e7b16e938309964d63ec520eeab276ea16950cf0e"
+    },
+    {
+      "before_sampling": 121,
+      "chunks": 16,
+      "raw_sha256": "e05c3705fefcc361e39b3c3b17e27f94ce6ce99ba45fa43447e56910283608c7",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "8f175b4e88dda98e430982e5e28801ffced85edd5116361a3cc9d75d87c8cb54"
+    },
+    {
+      "before_sampling": 219,
+      "chunks": 16,
+      "raw_sha256": "8d59944bced4aea3f9d915315569baf43457830a6257eb0299dadef4e24ff6e7",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "65e819b60fd37eaf9adfab0f1af597a42fc28cb7ad2ae49a0f36c8d2634231a2"
+    },
+    {
+      "before_sampling": 119,
+      "chunks": 16,
+      "raw_sha256": "e738d68846d6b22829ef87bfcb9a9515c5c4cfe11718753b4535617f8eca8139",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "f72c7d9663c5c9f4b1bf6276ed531d1475d2d3a428fe4b9f3d9aec73ae8a3bad"
+    },
+    {
+      "before_sampling": 119,
+      "chunks": 16,
+      "raw_sha256": "9d5118f62dd586de19d6929c5a482277d1499d919aa5ae6fca16dace85989600",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "186a9b0343f4c3a6652b2c90b6337f203d81c480c4c370e3c239f736f6486856"
+    },
+    {
+      "before_sampling": 248,
+      "chunks": 16,
+      "raw_sha256": "59c79c2125776f80d04ee7b949d6f2d5a6ede57ca23f12377a05cfa753c80b56",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "31bebb031a5181323abfec7615acfde6258738454d7fcae9bc7d80acc5b0fc3f"
+    },
+    {
+      "before_sampling": 52,
+      "chunks": 16,
+      "raw_sha256": "bf3fe2f85796429923c43a295f21e91a712fcf0b8f81a6f048484eb1af0a2de2",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "375deaceff8a3d078a699006fe14854d1e3ab190ae2501da548dbf0217e20f92"
+    },
+    {
+      "before_sampling": 373,
+      "chunks": 16,
+      "raw_sha256": "650ea3c5ca47d72612d7260b9ecfd6c2c88bd9196a10e7d15cb2b8b3045d4314",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "3c86042d093dc46c229b0cbb65469be94f383caeefc28afa4af115789b76080d"
+    },
+    {
+      "before_sampling": 281,
+      "chunks": 16,
+      "raw_sha256": "a2447801951a56a0a036d868292299e69793866ddab05cc4b45643eaaece2b9a",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "faf17104aca30f890b5774baf43171faecd2997393b59f8ac37d4abaa88576ce"
+    },
+    {
+      "before_sampling": 295,
+      "chunks": 16,
+      "raw_sha256": "bb9dc989a1e27545b423abdac13a1944cea0a6bef976670c343fe965e0f9b1c2",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "91b8cea52a51db8b6b6debfc5a8f053fbda85384bfc7ab2606cd566abc96f666"
+    },
+    {
+      "before_sampling": 357,
+      "chunks": 16,
+      "raw_sha256": "30cba11527cb47ffc91a7309b7da1be2a90866f8bdec9cd0bb3e20b92013d241",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "e80381e216501a2eed32f9f23e23bb0cbdf8d0fb998913a42dd73a2f090c37b3"
+    },
+    {
+      "before_sampling": 212,
+      "chunks": 16,
+      "raw_sha256": "7cd1d9de12947fcbf5cfc65a5906b871fa0f5a3b81569afa46cbbbdf016f09ac",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "b79d37c867dabaa269878294601daea4a156c9072988f0a2e9725bc9e0ef0b9d"
+    },
+    {
+      "before_sampling": 385,
+      "chunks": 16,
+      "raw_sha256": "4956290ddccc91e1cea2fa0915dbb65e5d36c91825473efb7fc53400d1ae2013",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "627a3f25bc6b5b3f64e034a61297a7e47ba0409cca15d0ee3c3857da69db0dfb"
+    },
+    {
+      "before_sampling": 265,
+      "chunks": 16,
+      "raw_sha256": "8c51e72b95c28465c3344abf39263afd33ba1e6e995f8d001d5fbf7c3746bef5",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "832b3317427e571531462a9fc136bdad2d2c1c57eb083e161fc35403ed57628c"
+    },
+    {
+      "before_sampling": 403,
+      "chunks": 16,
+      "raw_sha256": "7f0745773727bbb43d15a04a3b0f6032273a9659af10a23946ec9aab11ff2328",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "100284d928cdd0ae0d15624b5729ae4a4d8a4378cb6e7ac29d5d72c5be10c14b"
+    },
+    {
+      "before_sampling": 391,
+      "chunks": 16,
+      "raw_sha256": "a6c3432958edc93d997f8d7c44bcbee9180e7496b367248ac3296c4fa3436303",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "9441d7815d5ba656d5d151e3e2de26fb299a14abedce7c78f3249e5f1ab82238"
+    },
+    {
+      "before_sampling": 998,
+      "chunks": 16,
+      "raw_sha256": "70530c0b60cb0a11859eb22aeceb4f0e7bdb1b6dd46e7b21e71478a03ad1671a",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "6db7e831a60266730282140678018ea847412893ce93f3924fcbb31ead70d142"
+    },
+    {
+      "before_sampling": 526,
+      "chunks": 16,
+      "raw_sha256": "dba8d47761427c34c908613af1930a7228836a9c5d796cf260555a5be97057e3",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "16fd8627ed4007b98bcdfe3a381fccb0e4d59590358f62cbe57799012a6a927f"
+    },
+    {
+      "before_sampling": 805,
+      "chunks": 16,
+      "raw_sha256": "86eb611c5b542e4d4b9a78ae955d5a9249fcc42608ba0c20a28b64028bf992a1",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "902c55590ef963aa9c55e16c0b8c4f40014ac755ca9606710536c62763e3ad4e"
+    },
+    {
+      "before_sampling": 331,
+      "chunks": 16,
+      "raw_sha256": "b61c06abd12be822ed00fb280ad2ef38b0d6190d5f5a28b268ebd4ce5c7c8902",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "460037afae66030f7ae1b633c45bc0f983595f93d0f6402d40e1f822de1ce8ac"
+    },
+    {
+      "before_sampling": 540,
+      "chunks": 16,
+      "raw_sha256": "f5715fb68c5090725f5e0290902c8ea8f6536ab5ddfed44e1f466ddcb74b53f1",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "0526e49ebe188822a7702ef8cd0cd4a93efaf7904081d866b1ba3a4ad1498d5c"
+    },
+    {
+      "before_sampling": 382,
+      "chunks": 16,
+      "raw_sha256": "5334bd44901dc35d95222d79421aaf104694669215303307e199e00423de0899",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "0bd2fa3ec7959290d49965a03821f257fa60e6051e33b8ec4d8ac94f890de648"
+    },
+    {
+      "before_sampling": 1123,
+      "chunks": 16,
+      "raw_sha256": "7395cd2b48242d451933c3b41fb976367cb7c1d5cfa71af04ff6847b15dfbf33",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "bd58681b0f90c76a4769735d97a4613825690837ceda151b3af871eee0623a5b"
+    },
+    {
+      "before_sampling": 293,
+      "chunks": 16,
+      "raw_sha256": "fff2c84bf725599605abc9d7e35a7778bc8b5804b6afadedeceb5459868ef468",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "dd9655adcfecca8d579544a1e5a9641080ec84f9369774cf1643eadabd27505d"
+    },
+    {
+      "before_sampling": 256,
+      "chunks": 16,
+      "raw_sha256": "0fd3833690009af1d4f4d33de12943bea09e9754f9ae19827dc5e95181ca2b60",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "9c89dbd47fa001b618dd0f7c276d17278f786d67d50b4596132400b75051789e"
+    },
+    {
+      "before_sampling": 198,
+      "chunks": 16,
+      "raw_sha256": "f1e393d77a84e7848402982b77fbbe4c52f8f97ed043e598db769e518bb6e5a9",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "8ee697913ac8c325c8e9ec98cbf3e3f81db9661ff458e87049d49dcb59599ca8"
+    },
+    {
+      "before_sampling": 254,
+      "chunks": 16,
+      "raw_sha256": "c131ddd85bf8862044e4e90e36bc9265c339ce4b01c22373ae005bab1f616cb5",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "73eb3627259605a073b61cc5ed8cbddf54dea3c6b94daafc6bfe04dbf35c8980"
+    },
+    {
+      "before_sampling": 130,
+      "chunks": 16,
+      "raw_sha256": "bd5447ff31aad9915d7e13818c2f764800e8967a831e10173d08908b14fc48a6",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "98bbe2f48e9e3c7bb849bf642d8997f168a6e51d5a8d6382a187502c0e362b96"
+    },
+    {
+      "before_sampling": 108,
+      "chunks": 16,
+      "raw_sha256": "cc5dd8927da6323c0353c70ad29092bc17345d80e29069801b18a169113fc26e",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "34e4c9564ce664cc3e11c874122d044b6e4a15abd07d0ae997d3c84060fc4602"
+    },
+    {
+      "before_sampling": 158,
+      "chunks": 16,
+      "raw_sha256": "5728cdf2335881824f2b9a4b2169b69d61658338d52c9a9cbb036759c728debf",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "688478dbd16d6521b71909e11a3952ad4a40622cf7d178da09e9eecfc42cb8d1"
+    },
+    {
+      "before_sampling": 268,
+      "chunks": 16,
+      "raw_sha256": "6a354e8bacb37da4d072c06caaf89124c561c219a152028018d774f956939cb6",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "4ac286fd5518dbc95178b3ae17f3aeed2891eb50e1ab8b0668dc79298f29d52e"
+    },
+    {
+      "before_sampling": 384,
+      "chunks": 16,
+      "raw_sha256": "0065b2e6d28f55fc2bd2f77686a1e06b58ec5a13b01d457b430d51e8c6616c85",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "9a8ca0c0b19f6ab64969388a140fb40b7f2a6e55403d22a192643c1e3fa7dc2e"
+    },
+    {
+      "before_sampling": 185,
+      "chunks": 16,
+      "raw_sha256": "6aa0656dece82569e6d4b0772f4a18f7be2ddfe180467e44b1b0047671466a48",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "b48583688a47de97e5f2e1d3c271e5fd10a4a8c53d57f5bfef8ef050d104e7c6"
+    },
+    {
+      "before_sampling": 58,
+      "chunks": 16,
+      "raw_sha256": "09d9a013881bf61c37fef4d1485d406b94f3ddc5a9eb48cb96f8cb093e271662",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5a18061581c85d16330669df4a33c4b6b1ae9a864ec225d6d47846a02753d4d0"
+    },
+    {
+      "before_sampling": 133,
+      "chunks": 16,
+      "raw_sha256": "86684a36306cd9e4849a744fb500867c3fd1f15a677ec7f185337860f9a83e98",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "cb8dcb6f5d80dd9a0d9286d2cf47889cce9fc8bf3b80f96ef4bfe3b02d17b039"
+    },
+    {
+      "before_sampling": 985,
+      "chunks": 16,
+      "raw_sha256": "1073f7a87ed5d66eddd3d503b5faee8ce5db28c562718b946287e05358226fa8",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "27b9d788d7286fb3b377ffeca88728dc74f98783f66e365e8ad3145258240179"
+    },
+    {
+      "before_sampling": 506,
+      "chunks": 16,
+      "raw_sha256": "987e8b36a49bdc57c4bd51ec94bcacda84c8cece32095bd5682304bad6564327",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "99972cce15fc94f48d30d432ecd631b6baec3ad8f3186e88c9aacdacdfbdbaec"
+    },
+    {
+      "before_sampling": 186,
+      "chunks": 16,
+      "raw_sha256": "f81e13fa2e2ed5847c44cd617f295a14a11f324b2a2d4d482991274592bd4fe0",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "6232b362b1aac27da66e7f47001283e2a6f62ab5ebfa642a2933c661d92961c2"
+    },
+    {
+      "before_sampling": 166,
+      "chunks": 16,
+      "raw_sha256": "5c2bfe7500950992a87fd01b3fba38a5744dba3b2ec04d879fbed21594673f20",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "4a6dcc0255af57b053eac8c4690ec246c1b46f04a042df01b28e49ace36d0c76"
+    },
+    {
+      "before_sampling": 51,
+      "chunks": 16,
+      "raw_sha256": "89f50988600aa04272d4f71973b247842b25ff3c52e9f8664c7cd56a9c0b8408",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "4e6ac0fb9c42425f26b63dcb078c48d988ef9b053eb82f3e721d8ce644876464"
+    },
+    {
+      "before_sampling": 101,
+      "chunks": 16,
+      "raw_sha256": "0929735106a09f88410f95fd1e6b50e571d8f6814654bbe1d6b71e573b706076",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "7ad0381a8149b42e06bfad8b85a28b6139446f6283a498b3b47ddda586123925"
+    },
+    {
+      "before_sampling": 60,
+      "chunks": 16,
+      "raw_sha256": "973cec506b60146369244ef12227440b8fe56c1bb7dc603f56f5b8cd48ebfde6",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "7faeee9402290081bf53b1a32ffcf0a848a1e7654af2df1eeb28cfcb35980d94"
+    },
+    {
+      "before_sampling": 189,
+      "chunks": 16,
+      "raw_sha256": "2849ced26f870d404c68520acd1692e87447bdba88bd67795a6a0cc3cf707b28",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "9f828c0906118cfaef5c82126500c900b48031f26bb1db643a1f063f34afc482"
+    },
+    {
+      "before_sampling": 100,
+      "chunks": 16,
+      "raw_sha256": "1e2bf1564db1b544ffed7fac30db4ef3069be8e9daf64b61d903a1952387525f",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "7cd10151646d92d3bf2f03cd29bdd0b6371257c1e4c710ded4f1afde9b197d8c"
+    },
+    {
+      "before_sampling": 92,
+      "chunks": 16,
+      "raw_sha256": "af35218111e22b670ae22abf81567bb30d970567257afe58ee3d62ddd61ab479",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "92cb7ec3fd498fbce6766d96bb9ce2acb6f1a5921f007a0b2a937033c48cf61a"
+    },
+    {
+      "before_sampling": 213,
+      "chunks": 16,
+      "raw_sha256": "6b105fbc03e094dd9cab9d93eed882793c68145f7d8b299b13bd05bb13d7e642",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "f966940061def77beffebace4caf3d59138e325b11d6aa960cc8ee355c198cfc"
+    },
+    {
+      "before_sampling": 144,
+      "chunks": 16,
+      "raw_sha256": "237c4be7fd6aa63c26b03c5283f936984e3d367f988664ea7913789464b5348d",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "3dba9b7d9943f6bc3e4967ebf62cc80ac8668de48da1d61389dbc58301796222"
+    },
+    {
+      "before_sampling": 193,
+      "chunks": 16,
+      "raw_sha256": "2e8f8a259899ede3dd6a52129b9c35a88f675b4f50b237f2b274c7688db567cf",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "b4e0331257b7cd0a1c26b27c1f230a9045582c320ae2909db5feaceef80baa4d"
+    },
+    {
+      "before_sampling": 124,
+      "chunks": 16,
+      "raw_sha256": "adcb011ddb5b1e308782dd04646f6741afc317e478f7f7e90ac40964d29302a6",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "811a2fb87d0c93bd959ff3c42d4cb783dfac790624b5d821cbd97da3c9e8669e"
+    },
+    {
+      "before_sampling": 279,
+      "chunks": 16,
+      "raw_sha256": "dc9e53bb0010bed6b67d865fd04f24477050c7504b90dc9c8f04dda09d1f94a2",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "18aedfef6cc15950377aa8209b215692843dd7ec5833b530cefe2bd1115052a3"
+    },
+    {
+      "before_sampling": 397,
+      "chunks": 16,
+      "raw_sha256": "8209aa35029aee374d6fbf6fe37d60213aca6c795b57d42aad9fe158c7bbb23d",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "ffe8c87c406b284b0199f18c3318620369747fe3eae96c80c0fb2450d37c1323"
+    },
+    {
+      "before_sampling": 442,
+      "chunks": 16,
+      "raw_sha256": "b7f990b8bb43635143b5cbc322da95877a37bf5260c91002a49d12e1bd3aa32c",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "5812cc35f3d7a25a43c5927cd9517add47789de8201b815e2a5a9fdc9045d350"
+    },
+    {
+      "before_sampling": 229,
+      "chunks": 16,
+      "raw_sha256": "066d13dcad2f3034422253611c08b418885eda4a2b733e90a04c5304d0409405",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "3dde2283a6fa66aeb9a4dc65c03c9f7b4adb41a37d77234d372fd273058bd987"
+    },
+    {
+      "before_sampling": 57,
+      "chunks": 16,
+      "raw_sha256": "8c128ab787ebd635c9f95353c04a3b5ab7ac52a51533074ae161dcb9458e9cbf",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "567c8eaa27b5d18ac3805907d676b1fb649fe883e32fadd1f91774e2825d47f2"
+    },
+    {
+      "before_sampling": 144,
+      "chunks": 16,
+      "raw_sha256": "206a2fb0691fb35f0d6172dc3dcb5a1ac21aedbf6452870e870c7c28b78e3c78",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "a3f1a1a39c9932a055da375a598564bdcd319500137a1a5db950373b33d5278e"
+    },
+    {
+      "before_sampling": 200,
+      "chunks": 16,
+      "raw_sha256": "4ab3f80fefe9317618b34c371a9e89d160bcf2acd0629e4c3f037cc6538a16ac",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "326d26b737f33ada5fd8be8752180a4a89182ce818b8b38aad179792f64682fa"
+    },
+    {
+      "before_sampling": 203,
+      "chunks": 16,
+      "raw_sha256": "e87fb1981f81cbb6e9f14f97bb598258617fd978f5eab966ba449236e10b666a",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "6c1b5aee6b1b437802466b71e0f213473bc1bb5f6513754b1cf89e870e80c188"
+    },
+    {
+      "before_sampling": 575,
+      "chunks": 16,
+      "raw_sha256": "fd1e8cc925ef9cdaeb2fb38ea78b2fb536d87bec68509d36458f67d09c828fb0",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "900cd4c66a7f21182df5dc8554a395989925a96cf1f5671085bcfd7d14efae24"
+    },
+    {
+      "before_sampling": 65,
+      "chunks": 16,
+      "raw_sha256": "5438bcdfc6a71dcd29adcd4204b75bb88b9cb9a87f4f3c26a46fad857c34db09",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "551f783b59dd536c6a7025714c77edd130f173ce1fbd77b9fccadc5f3411b130"
+    },
+    {
+      "before_sampling": 74,
+      "chunks": 16,
+      "raw_sha256": "f19d55282c6910b202fc05a60c7be61afb5682573bc2dde864733aa215891410",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "01c89df7a14df31d6324b871f556dd8cd56c383714e946787e5807c71fbf6506"
+    },
+    {
+      "before_sampling": 119,
+      "chunks": 16,
+      "raw_sha256": "23f046788d8d684dfcefc232b393c1aa177d086324de61004dc488d142ac6818",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "8b889866a9dfa7c29af15d965c332f2dd5a0f2eea69a5bd94a8fe7b1724e9099"
+    },
+    {
+      "before_sampling": 1069,
+      "chunks": 16,
+      "raw_sha256": "eae7df845aba1e9cfd92e294d461c3fe48b5fa8d951ee0b1842c010672ed6e6a",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "33b52f79584ef9976ef69ae3af1ed55ea9819d4a8627c8879dceda2a14f94b1e"
+    },
+    {
+      "before_sampling": 219,
+      "chunks": 16,
+      "raw_sha256": "7410359e019d69846c77725be444b0388494f83d66196681eeda7ee6957f7a5c",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "993733fd4c0018602c3ba0ff631e57325a41aa90461c599cddad07f959fe5fe1"
+    },
+    {
+      "before_sampling": 134,
+      "chunks": 16,
+      "raw_sha256": "d12094e0e78328ea957458b032ad029251f40bcc01d16e9d638f20ec9da4ca80",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "98289b5b5c9da3692ac4e657204523acd9c9e9d378363f811439d83a73fa11d0"
+    },
+    {
+      "before_sampling": 107,
+      "chunks": 16,
+      "raw_sha256": "ee8c1bff048c1b2882f9044aacd3464914212c0c17db650d67db65e8cad55723",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "6650c53f55cfb73dc515bee4f371f10db8c6e04ef2f4166c085335723c9db876"
+    },
+    {
+      "before_sampling": 220,
+      "chunks": 16,
+      "raw_sha256": "ed37be6c5f9d2839cfa62812764c1a613f07caef71a487e0c0e5d6fca375473a",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "1e0ff1b5de5cc8f49eb750383c91b100643a5cb8f0adaacf290bfac48126fc01"
+    },
+    {
+      "before_sampling": 224,
+      "chunks": 16,
+      "raw_sha256": "69d8880c6a767b0922e6dd9783b7431a9e39e685533f17b19f61f5033174aa6b",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "ddecad1837e9595b5c99dcb7ca562c4b5ee49295d177736aa5ba43070597cb6b"
+    },
+    {
+      "before_sampling": 151,
+      "chunks": 16,
+      "raw_sha256": "5471114d1f684cafcf3eee27a298a0e96c0b950abcb1ca925e2637d2ef9d6c44",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "72debec1ce44a43d58b39fe91513e9c2c4f8fc642d01ec76f35c6c92959c0147"
+    },
+    {
+      "before_sampling": 196,
+      "chunks": 16,
+      "raw_sha256": "6db4956a92dee5856ee611afa12169612b1ba54caa60b9a308c2d071b4cda438",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "de664a09cad6ebff460f88c000ade9a477cafee92701470a1d9df1ad1833bd45"
+    },
+    {
+      "before_sampling": 132,
+      "chunks": 16,
+      "raw_sha256": "45e7b91ccea62149b6fb9cfe0a578621040760fc7110ec6199bcc13501073a9b",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "11c2bf274070eb592bb7e36e4e2315645dc94b430999e60a3f2d3d164e884c13"
+    },
+    {
+      "before_sampling": 234,
+      "chunks": 16,
+      "raw_sha256": "fa8fa7822f0ce36107f2c9dd972c12b48253655492d6d7750cc58e5c420eb8de",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "0f19cffb8f6124d1f5095ad5dead9af2c082229bcded360d60b1cb8c200b272f"
+    },
+    {
+      "before_sampling": 292,
+      "chunks": 16,
+      "raw_sha256": "4fd7f90e5908dcc85220f86eb7c6f647965ba715d853b351c81ee11c812bd8ec",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "95695ae6741b8101129490c57643b1e930ba6058bf736662db071387a0866e7c"
+    },
+    {
+      "before_sampling": 446,
+      "chunks": 16,
+      "raw_sha256": "6e3ed7ceee697fd93b8453bae645dcd7922a68a5213eebd808ced498a4ef6ea0",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "eda85a3b420b931e217fb3ca2a3fc319b6f28df99ab1db8967a3da0ab7a6eafc"
+    },
+    {
+      "before_sampling": 180,
+      "chunks": 16,
+      "raw_sha256": "0d680d0b8ac5b26274f57b1e96b9e497b061fc2a70d00433b1e803b45dc36ee2",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "891c9c9f54d16a2618588ce0969e2c8d8845bafd1d708dd91c2fa09112513f4c"
+    },
+    {
+      "before_sampling": 145,
+      "chunks": 16,
+      "raw_sha256": "caf03e7631df896ba11b8211a5e0561f68dd8d1ea40fe8c93ce49d9bf37f83e6",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "923d9fe1b32587fdab62fcbaf4362c879a184e780eb3e636226f310be46ff963"
+    },
+    {
+      "before_sampling": 201,
+      "chunks": 16,
+      "raw_sha256": "8568ead4611ba9fc4c8e123314905a34505f7f3a88e66e94bf6f3be0a7d375a4",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "2c018da4fde8839b0eb7e1df59623751b513cef81070563aa72f947e80ad701d"
+    },
+    {
+      "before_sampling": 215,
+      "chunks": 16,
+      "raw_sha256": "cae3e0463a26d51f76ea7e308d161ea11220a22fec591279d2fd4bc9bbbf14ee",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "8805dbba36ffc8ca02c5d612bab10fe0cd2d544b573cfedf95e36051e7c1df3c"
+    },
+    {
+      "before_sampling": 73,
+      "chunks": 16,
+      "raw_sha256": "fd5a0c66c2e879377f29db9e18b22521e8e0f8ccba0e28609751b4713357a01d",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "e66124020f2a3e2e0ce9b5259bf034e45a0d59c798cc09ca83c5fbeb2f6ce75a"
+    },
+    {
+      "before_sampling": 73,
+      "chunks": 16,
+      "raw_sha256": "3c3894859531ac54c6d79a2df5cb73f4e0d335d2449f1836a70cbee906265ef4",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "db2ce77d1d3cb0a4f6c5de6f4f6e7658b6c07098332ea10d99addd7838c00737"
+    },
+    {
+      "before_sampling": 585,
+      "chunks": 16,
+      "raw_sha256": "8a21b62be7d98e2c13571c86f7a720a69d10b7861838dddea22235c36b795ea6",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "17732dc0aa0360ff457cda57ffbf0e925f561a8c65d80679c632423e67b1e2c0"
+    },
+    {
+      "before_sampling": 121,
+      "chunks": 16,
+      "raw_sha256": "91ad83e8ac0f4eadc7196a72cbac4f00e2ce9fea160cb6e1ef29a205589860db",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "2f9f455c80afae39a47ae702da57673c05f5c089851d1868dc97f3c254917c40"
+    },
+    {
+      "before_sampling": 706,
+      "chunks": 16,
+      "raw_sha256": "2273a16a323d2c1cd76dd85b155c29ec66a1b61b3cf7240bceaab37a446b9679",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "b6152302866a7b3ffd366c118325a2c3085065136c8c3a17d1b6e42a28c4a759"
+    },
+    {
+      "before_sampling": 225,
+      "chunks": 16,
+      "raw_sha256": "c375e93129b477a9a3f5d62e31e7feaec36099fcd4feb330385f8a572c7bb265",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "ff73013a4c3b042b1a3c94436d6fd2a10a1a0ad15ccab27f3a468d541debf8ce"
+    },
+    {
+      "before_sampling": 119,
+      "chunks": 16,
+      "raw_sha256": "f635b8d103271af64c9a0dbd849bcb37f44fb786f12d07d001fe531fd616da1d",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "472d875ed9a3e0e9dddf03f5fdbd61df062cf3f3499b3c9ebe00afa1f4642c03"
+    },
+    {
+      "before_sampling": 116,
+      "chunks": 16,
+      "raw_sha256": "a367bbab7fee46c00f3cd2042b57b8da8727f4c8cbd040d33489e090ce94ee21",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "0ef37ea726b7ff1b6fc6dbd87984cb5149cf8c33c4c4e6c0670bae61dd51b091"
+    },
+    {
+      "before_sampling": 247,
+      "chunks": 16,
+      "raw_sha256": "084e72d46a692a2d013bbebd63ce33598e4f55b799401a97b375dff846b9ec3a",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "7b62200a82889ab1e06efbd819aee0b3370c1201550981ce99e5ca3c844c22b8"
+    },
+    {
+      "before_sampling": 337,
+      "chunks": 16,
+      "raw_sha256": "0613bc5dba326d7d045be7e883adafff6aff4c47df6f09caaec91d71710fdfd7",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "cdadb535a454545544fcd140b56d5712a0acbef4a19c70c1f78def3232385c85"
+    },
+    {
+      "before_sampling": 348,
+      "chunks": 16,
+      "raw_sha256": "4609215f590934022398820cb1006fdd80389a6caaa718d77be9a00bb9fc1375",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "0157e78474eda47f2bd3dea57dfef18288ba8556aae0396100821bbcdcbd3471"
+    },
+    {
+      "before_sampling": 390,
+      "chunks": 16,
+      "raw_sha256": "e8835692cef9b12e9d999764b5504a91ef63fc04cceddebc7677bc5993527bfc",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "0d719b76c294d15d5aaf449f98f5b24230ce055bc91294289755a2986c272b13"
+    },
+    {
+      "before_sampling": 52,
+      "chunks": 16,
+      "raw_sha256": "708b5cc1f076b4cfc3e8edeacc12062c1f4c7fcce05860fd01467dc490aefb69",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "cb4c19b8096f4c90f16064020d9d5152c29d37f626583e15a892adad754b81ee"
+    },
+    {
+      "before_sampling": 224,
+      "chunks": 16,
+      "raw_sha256": "1e45dc6d8b4c992a9d17cee6b34b37167be7a5dc7af607baab0b337ba7a051ff",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "146ef31925d1a00e72bc12cbf32b9813af2461687cfef92cc0fa6bf501afd3c0"
+    },
+    {
+      "before_sampling": 271,
+      "chunks": 16,
+      "raw_sha256": "8f93f3451bd94bbb162fb6d893168d5797a495fcc893778ed3019a503b360bb1",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "607e8c5f5679f1f646887b99809394d1e6377b246b993e5c161e7583518c7812"
+    },
+    {
+      "before_sampling": 388,
+      "chunks": 16,
+      "raw_sha256": "5304bd90f08bb9835dd26be5fab6cddfb2e27430bf9c153ceafbb7f415bb81d4",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "ae311c302f285060dc5fcadd69ec9139adbb43ea9664f44cea7d0338533581cf"
+    },
+    {
+      "before_sampling": 396,
+      "chunks": 16,
+      "raw_sha256": "9679759aba95844e9ecbc06242896b4f8ce0fddf22ec422bbf8b9d66b8c50fad",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "badc319ee0fff462eedf94bf854446afe84ec8cce4c26a09c048df8026e7b66c"
+    },
+    {
+      "before_sampling": 993,
+      "chunks": 16,
+      "raw_sha256": "e98d2348230b797f1de2a9cefa01f50376cd419a2ee97b0bf4ecccdc4dba1548",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "de14cb6f3bdb43b4199616c8cf09d095ef9b5241c4de8e3f7af3479ce1395efd"
+    },
+    {
+      "before_sampling": 520,
+      "chunks": 16,
+      "raw_sha256": "c5c3bd5511c430fe92f12bc386d00328380692079f762c4ebf6b6260f158452a",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "e1ce59427a87290d9b38f54ff0bc11fe300e0b26fa6f28fd2f9e25048ccc6d7b"
+    },
+    {
+      "before_sampling": 347,
+      "chunks": 16,
+      "raw_sha256": "9df85e197d24c0cfcfcb63089e6e1b506ad1a8bc23d13e1b9e5da7f0a94747b2",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "e1646bc43a957d6b286708e527d73837f2d13c7df1e89906db01aed1abb4efba"
+    },
+    {
+      "before_sampling": 791,
+      "chunks": 16,
+      "raw_sha256": "b76efed8c3a29870d3a395afbbfb5550bb4c9bd229dbeb8f744c4789f629233f",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "1fcb4fa88eeeb77e40ac46dbd4af44518066e595cd6c7bb77e5f795bbc18d100"
+    },
+    {
+      "before_sampling": 532,
+      "chunks": 16,
+      "raw_sha256": "18015bbf2bf34991a0ee0c3c748b8b11d021771a7d3b1f78cb9261011577b824",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "9ea71e4da01c25519068898ae025a0c345d4c007dcb0cdf9b2b5bfad55db6557"
+    },
+    {
+      "before_sampling": 392,
+      "chunks": 16,
+      "raw_sha256": "d21cd32ef79544fcf909b638dcb12b4c864054559fd751ed520ea3cb7fe12c81",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "789406e3ce511465693d1939a57360cbb76c7bdcd2da954e93a32849458753e8"
+    },
+    {
+      "before_sampling": 249,
+      "chunks": 16,
+      "raw_sha256": "f69095863e58bb318bc4a43b452f0f411547b072e3f8e06e3019ff39c415a205",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "0c3558ac8277232285be53ec5094eb75292d7aec012b8463625ca71967312c29"
+    },
+    {
+      "before_sampling": 948,
+      "chunks": 16,
+      "raw_sha256": "45649306a5ba17d6d0916b16519ae0530ac0e3dade45e31ef5d509a246354f0f",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "8f615cd7a11e59816a38f3748efd9d8b05b837292fd8e6ae9461f2972a798a5f"
+    },
+    {
+      "before_sampling": 267,
+      "chunks": 16,
+      "raw_sha256": "603b700afc371c9eaa8f9f0bb2d9d866b79b241fb79977bc32df7a134365b724",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "4c159b5525a565d6e12933059bfef35179c9cf45c6098d9b449650eb4d3c1c23"
+    },
+    {
+      "before_sampling": 330,
+      "chunks": 16,
+      "raw_sha256": "3c5ebc279c06a65133cd7afa817c5b2df8a4f9d33c68fb4c85e8c98537f201c0",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "bafec37d52a6e6049b8ca5e2e3a4e3c5df539fffc5a6900712f634f9ba3f258e"
+    },
+    {
+      "before_sampling": 299,
+      "chunks": 16,
+      "raw_sha256": "67b7947868036dcd213f45035a00e0bdb6835362cec7c87bbb457d3396540e18",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "b67e6f92181ce85b9ea56df2087b83cd2711f70115e103c979dafb1efcd95b16"
+    },
+    {
+      "before_sampling": 90,
+      "chunks": 16,
+      "raw_sha256": "20340c5abebb5fb61659d19c72942dd4174e2ed027b97489d3077f8fcbce6c9b",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "1294516d3e138ec827fcc84d7cdfb1fc4b7e45f3543988caf34e24c870f215ce"
+    },
+    {
+      "before_sampling": 183,
+      "chunks": 16,
+      "raw_sha256": "44967c12c9ad4eda76f25266c80cd51e10cca17282be88c343b03fc44a561593",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "96e1c3e44d51f37bb1a0a3fd2cc9062bd8232426d499672dd58ac1edb82695e7"
+    },
+    {
+      "before_sampling": 114,
+      "chunks": 16,
+      "raw_sha256": "7f959593a51ec5825d6051290e39c5448e7815fc0aebcb5f7a03c654d249a117",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "1b9ff570e4bb105d9e57d84706cb9ab2242979d131e1d3f0baf054be55f6f088"
+    },
+    {
+      "before_sampling": 156,
+      "chunks": 16,
+      "raw_sha256": "f9a9263a872dfad7e2e95c71f9f434c6a29da91b75bd390508f865c516776478",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "f82e21521cf23c5c128e554364dfb9164ba0768b8f379ba2fb998ea09e5b9684"
+    },
+    {
+      "before_sampling": 113,
+      "chunks": 16,
+      "raw_sha256": "8cc7ebb09314af32255c3a2a0a4f027fbdbe8f8c399b876e628ec6a76d66c6dc",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "c4687da92bc1c05acdc9457ac8cac92e1f85c3e0f29ec4fc12e6bccfc8487789"
+    },
+    {
+      "before_sampling": 288,
+      "chunks": 16,
+      "raw_sha256": "8083c01953cc5c15ef0be1813da7ca56c600dabd580f71b7cec58db37950a9f8",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "284a1bb5580f068d557179830800ed170b82f10ac70a16501afe68ffa27a863b"
+    },
+    {
+      "before_sampling": 175,
+      "chunks": 16,
+      "raw_sha256": "ec1596a5f4d00ba7d3cd6741d3afe6100e769a50cb80919f444b08687d661cc0",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "a5ab3941a8f4088f2be367a3696c558398d1ff986f77c3e3e01a0a287fc602e0"
+    },
+    {
+      "before_sampling": 137,
+      "chunks": 16,
+      "raw_sha256": "397eb1b6e5a53496a109e652926092ce64cd57f4b0a9276fd9474747c70cc9cd",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "548c6ec36f63d51bc7cfce5d3f7f8af5b6b8900fda7082d376bb404ce94391af"
+    },
+    {
+      "before_sampling": 397,
+      "chunks": 16,
+      "raw_sha256": "004f703fd627e60255e38bd406f3c885c49bf7e1fc96d7f4a6422d2c8c6f6f3e",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "b94982df1ed3d8df1cbbe80f33f81f4ccb34240424007a692ef69062d9bb63e2"
+    },
+    {
+      "before_sampling": 54,
+      "chunks": 16,
+      "raw_sha256": "79a3ae26da8999b698624ce47eb3aecbcfb83dcb95eda4cd12dd0f2c63976f69",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "c91dc2bc546d0f82aa0466464be26f5903cabee5976bf67ff45e395eba124c3b"
+    },
+    {
+      "before_sampling": 159,
+      "chunks": 16,
+      "raw_sha256": "c90a06d9a0a7ec4dacfc24f0ce1fa59fe12825541e9f1f9297a09f5591d4ce01",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "bf46276ad200bfb8c11cad75dac013d6d89ec7d1a6e060e2066655e6154bfd18"
+    },
+    {
+      "before_sampling": 166,
+      "chunks": 16,
+      "raw_sha256": "21b7b8f5f2285d68d6eca7c4312228bd9f6ebb7c4cc3394244a8113de236980f",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "1e0f833511a2b70ba65f23d6db6df0bbe3444f2852578e76fe9c0eb591433627"
+    },
+    {
+      "before_sampling": 517,
+      "chunks": 16,
+      "raw_sha256": "61c60b4bac8f9478622e13541ffe73636025d6a61023483737aa6718eae23b4c",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "5319fd8066416b22e9582cd3c568e1692d29b02ef3a19fc476bf1971945bfbd9"
+    },
+    {
+      "before_sampling": 61,
+      "chunks": 16,
+      "raw_sha256": "6dc90c69b55165bfbc2a2f03de01bea2871b4a95a1fdf1143fddd0208d190efa",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "40f6f1aa63272eb12c171537693187c45ff714a1444afdbe322f610cecb1b904"
+    },
+    {
+      "before_sampling": 101,
+      "chunks": 16,
+      "raw_sha256": "dd0b195386e7b7abc6c461ec1e0f2c169ae1921f7e0b681421e509b26185ac5f",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "ccdb8f9e1b5c47f87d00fb59e7bca8da2069252ac3290d9b75b08112a5fe9ba6"
+    },
+    {
+      "before_sampling": 653,
+      "chunks": 16,
+      "raw_sha256": "ec6b1f999baf502115a6b2261facb4c67521a18b652227f99115e39b74c2ba82",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "2400fa9175241c4bf5288daee932355d9583487aa186b7f961fd0cbc55202a32"
+    },
+    {
+      "before_sampling": 56,
+      "chunks": 16,
+      "raw_sha256": "7bccbdc09124729b2c5a49bd456a004362ea008888c11906db5c193c56e1a299",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "649814116eee803e55ddcc751c3d58c2757284b088196c9d7411fa02fb8ae781"
+    },
+    {
+      "before_sampling": 186,
+      "chunks": 16,
+      "raw_sha256": "4845dd79d7a18729a7b34bf1514930e6945d38b9d4ab91bab3b57ffae82b6746",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "1941c5836600b7b55a221e6fa257eb7a2ebb68eb6cc02942291de3a9c235a3cb"
+    },
+    {
+      "before_sampling": 117,
+      "chunks": 16,
+      "raw_sha256": "d17f21015978b378c01ef73600e2214d9ceda41d02405467a4fd145fd6d31c04",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "fc0c2a5510e2c9b9b8ed973c292f0c4f0ebb5c430dbfcea0a3dafd82d13eab31"
+    },
+    {
+      "before_sampling": 104,
+      "chunks": 16,
+      "raw_sha256": "22f891c2448ffe9f9367aebedb7106375c7f69ae3308ded441cb8c81ecbd075c",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "7b023738932915a45b357289136cac29246b6f364296b0396e4166d0fa93f938"
+    },
+    {
+      "before_sampling": 102,
+      "chunks": 16,
+      "raw_sha256": "bee02742021187b02fd184ba3c91d5f3e5c333aeb1c961c70fa9911e12c9631b",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "471ea4209b99009051b8c6115b8f5f27784bbc17626ef167968df701e228fa5a"
+    },
+    {
+      "before_sampling": 131,
+      "chunks": 16,
+      "raw_sha256": "d91558e82a6066638695781c3cc52efae3d2a03a19aed95b91412f6a4e3743c5",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "34125c006a6918cdbf62742fafabbda2db2b7d40db12a559e529a4e6c5f7df31"
+    },
+    {
+      "before_sampling": 134,
+      "chunks": 16,
+      "raw_sha256": "bb5ceffec8cf33dc7e611a0007959c042da175da406bd0be8c4b0c473d350349",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "7b417ac1117b89a4aaad06be8ba5a3f711c36bd4c4f7b33cb8aa2a6df2bf9160"
+    },
+    {
+      "before_sampling": 191,
+      "chunks": 16,
+      "raw_sha256": "b51b4288f70e6ef78935a2e7018369713368f009cec46693a0aef2af16705c51",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "30ef530149a1c7bbe18f793d771c0fa2455c990a59974965bbbeb4f819e98ec4"
+    },
+    {
+      "before_sampling": 283,
+      "chunks": 16,
+      "raw_sha256": "03d32305ec9b4d39434643294a8ec74c94605f7466aee9eeec6c3ecf36856f2c",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "bfae61bfa9357c0d55feea0969eb5832a18c6f08346f149e43cc5bba5e4f55a7"
+    },
+    {
+      "before_sampling": 301,
+      "chunks": 16,
+      "raw_sha256": "4c7a676976283d5af0235ef8a8173aae51883bb68ee44c4fe755a4dd446c0ada",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "33fa3a4d020a64c27de9b7bb722494e99ff19b99158cb147ddc4fbef83c4a6e4"
+    },
+    {
+      "before_sampling": 463,
+      "chunks": 16,
+      "raw_sha256": "1a301f528deb66064ed2d00ae0ef955e755a7abf8c5887283df558d13d13d34a",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "774d4c671066a07ef3155a0ab7ea083910b5d46317109ce311b13b04b6b46e97"
+    },
+    {
+      "before_sampling": 213,
+      "chunks": 16,
+      "raw_sha256": "d967371ed722f1ef2e42296d097bc6bb399060c89f93a01c8d7c5b2b8c51f6db",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "261b4dc62db3e5da947254417d70453a279e3da9a7a26e509ec74dd306d36201"
+    },
+    {
+      "before_sampling": 69,
+      "chunks": 16,
+      "raw_sha256": "826cae4198c4e877683f656a5638c2f63fd0858f95e28fcbe3f30aaf20b324ad",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "07f4c6adf5a44d36e4acedcfbdbc902a9ee4394f59504987ab96b6f0e19c26e2"
+    },
+    {
+      "before_sampling": 165,
+      "chunks": 16,
+      "raw_sha256": "17ea12009205415cd39bd9a87fbad25700b5ac266983747f8145f2cda02db699",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "0f1217b147d26f0098740a0c9cf3b78e59cfdb6162b3368271a039c1a3fe1ba3"
+    },
+    {
+      "before_sampling": 206,
+      "chunks": 16,
+      "raw_sha256": "e431ec1d206be8ddf5c1e3a8f5bec0e8b2d5973b0a343944428800772cda651c",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "1a79e2d4445596e020892fb430b08504939b1c80e6dd14f364429e40fcdbd3c0"
+    },
+    {
+      "before_sampling": 72,
+      "chunks": 16,
+      "raw_sha256": "5afc65b502a8b350adf9d68e01eb443ee79b16c46a0cb153968535283477d752",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "62005538bbc3a71710d7e2a0d80eafab948d7a66dac730d00ca10c26d922e482"
+    },
+    {
+      "before_sampling": 656,
+      "chunks": 16,
+      "raw_sha256": "f1699855b85cbfc83d52cb19cba128be136f37f4683dc200089adcd479931544",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "5ad4e09e29dfb08753f95987bd8b3f9fae25f44a007d2526bb5c3338b938a8ae"
+    },
+    {
+      "before_sampling": 116,
+      "chunks": 16,
+      "raw_sha256": "4dc84ebc78d436374ed77d3497d62291cfe99b990d030ab20adbc2f521b29e79",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "f0f4ac29a631b143269ed71e18186315f1c7f965820649d9556e3bf475563aa8"
+    },
+    {
+      "before_sampling": 712,
+      "chunks": 16,
+      "raw_sha256": "37eeea971bdecf4e7beddc4ba68eb135f9bfbbf82fb216be36ae1410e8f6173e",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "a07ce0f7ba630548dfe29eac83e956b23d018bf47672ddd748c6d0f1cbb24ee2"
+    },
+    {
+      "before_sampling": 56,
+      "chunks": 16,
+      "raw_sha256": "a0735ab18637107f5bc299fa986f78419ff722e0da1e6e6830a262f31428a555",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "487f61930eac452b337acf94689d8a9e263bb52155cda211ed4a8e20ae5441bb"
+    },
+    {
+      "before_sampling": 145,
+      "chunks": 16,
+      "raw_sha256": "4e7113bed8217d5c922557a279cdced4999f87fea2359422ad59e91bd43c5d88",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "0e429ac307feef92c2b641f128a9b28763ace99c8daa1092597e8b7d51125380"
+    },
+    {
+      "before_sampling": 229,
+      "chunks": 16,
+      "raw_sha256": "e53a3e9ca389f2df7ad57d2251d8bd528c8c5ea6024d66b92041da9a375b3bb2",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "fab48ce1607782f847b725ff1f4a0a7f90c895d489abe60d3f0bf27d803f0904"
+    },
+    {
+      "before_sampling": 127,
+      "chunks": 16,
+      "raw_sha256": "e284ec38f16875f7d50b8a5fa5a5e76b8358ca712ceb1f596af55964646bc0c2",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "c2c53c46f2cacab4b946ddf587fb171ad087e3e2d1f33f9313046d27789bfcf2"
+    },
+    {
+      "before_sampling": 117,
+      "chunks": 16,
+      "raw_sha256": "519a3de204814f9c383cbb1f30bccb182bf5dabd8f02132e7061eb2101cb34a8",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "7499cd4105e9f6c04106879fbd54648a293d44ebcba43fccd9b6008d122d13d3"
+    },
+    {
+      "before_sampling": 107,
+      "chunks": 16,
+      "raw_sha256": "add289acea0a3f44767c216d0a7076c73454a0933dcdc0d404a041d853085a82",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "5e4e7ca2c2356daea7bf7edefa0d9b22b27d31617ea623d9c1b49351c87163f1"
+    },
+    {
+      "before_sampling": 191,
+      "chunks": 16,
+      "raw_sha256": "5faf233e44be807bf5a6cf50f71ac186d24befab75656224182295ac307b3aa2",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "d9a73ab78d04b51e144ebd2d815cf27935c8426f842aac158982c99ee19209f8"
+    },
+    {
+      "before_sampling": 155,
+      "chunks": 16,
+      "raw_sha256": "53bf1fd2fb39eeea8e4a8dc6d4b6ed39fd22626254756474658f5860768512b6",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "a2f13849e13d42c81d123107cfb0d18b4f0f8ac3f2fe0cc2ff12f8bed8a847bf"
+    },
+    {
+      "before_sampling": 136,
+      "chunks": 16,
+      "raw_sha256": "c0378e39eab2d6485e8aeef21c38bd02dfe449a99a23c298d9924e42fd5294df",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "30205f634d984bf2cda0eab4a1d1fe018abd17c00651e91e56653e6bb2525c15"
+    },
+    {
+      "before_sampling": 136,
+      "chunks": 16,
+      "raw_sha256": "778e9ee353a604e12fdf02c0f0bb4bd4728b1bc00ceaace1b288766f98e30671",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "fa981176faf4513361097ae55cbf1178cae73d89d0252634a152cfed11a43f2e"
+    },
+    {
+      "before_sampling": 308,
+      "chunks": 16,
+      "raw_sha256": "a1941577df8a1fe583b63fdbd3cd02b3ece9bc7d5705a782a290fcbbe0f4648c",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "5d9725fc2217b8cc29cb397ea26aa5bb472c67f517e4af51e98d7ab86d8d8684"
+    },
+    {
+      "before_sampling": 202,
+      "chunks": 16,
+      "raw_sha256": "711766267dc61a9a1da1bcf9f79db159928ba91ea461760792607121f21f3ff1",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "f8196c970bb688ae00dd38741d32cb57486a3757407a5bf1b7824b6d8a75034a"
+    },
+    {
+      "before_sampling": 146,
+      "chunks": 16,
+      "raw_sha256": "1c92530c1b27c88000cc621d696d8eab1dbdc6fe8ab8fa9dfbc8c639e3b07267",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "731d6b834fd598fc2397979f5e7df85fc2fb34e26254ee03cda3be081f341c6c"
+    },
+    {
+      "before_sampling": 79,
+      "chunks": 16,
+      "raw_sha256": "b5028218a88a67f06ca567b1d5f4f0ea566d68c38da72bd56d4f987115b89ae6",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "50bfa2b9764bc13efd75a38a208f7b6a72e63943e3b086b1d4b4f75726dc531c"
+    },
+    {
+      "before_sampling": 459,
+      "chunks": 16,
+      "raw_sha256": "d24aa10806eadff1e24ff2464a8b86ab04f45af6f887060a2188f51672bf34c5",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "efc65bb9cf47d0ef48312f1a0c9166d470fc0d2c12491ec776bfe55723b54a97"
+    },
+    {
+      "before_sampling": 170,
+      "chunks": 16,
+      "raw_sha256": "f94fe5ca07d5aa2056b4c95373cb0d424160239893f909d52bd0e28c7f4b9e15",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "18250e6ac98dd520dcce5ebcda91953534c4ebf086ee9ea7e52f4cced1c8f213"
+    },
+    {
+      "before_sampling": 210,
+      "chunks": 16,
+      "raw_sha256": "c87702c0dee7b1f9e94928257c1346bb9a7fd71ec6ae17d01d166b0e11fa34f0",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "f1fb098d971197cf5aab37db440756cad9ca0923bcfde3535d05a8026e36af69"
+    },
+    {
+      "before_sampling": 670,
+      "chunks": 16,
+      "raw_sha256": "e4dba33fb383e1936571f600e097726c034951bfede1f4f3695c33e5b191af28",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "0b17521d79311a7d4baf05f048d0cff09ff798587795111442373ccf509ce480"
+    },
+    {
+      "before_sampling": 119,
+      "chunks": 16,
+      "raw_sha256": "0f54c2fb7c39ab9351066ccedc90ed01a776a986f7b372ebc62e4a88b2704541",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "d9e4dde62b283ab1ada0e6cb57c3c5251672d2c9886be3075d12ecf8102364c3"
+    },
+    {
+      "before_sampling": 168,
+      "chunks": 16,
+      "raw_sha256": "4637b81f1c7a9fd9e00d492c42c7ec4ef6fb68c72a9a5e49755afdc22e7665b8",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "b4d21c776d0d8235e067d6b3112129649380924ccbb630d0956302dd7474f147"
+    },
+    {
+      "before_sampling": 719,
+      "chunks": 16,
+      "raw_sha256": "a7c4f90e994514d809ab4666ce4410b3086bef352530d4668bfa31ebba550e64",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "924269934c27d1a31db8d80702dc8f1ff47055a5807eb33d1f97cb023c5eea7b"
+    },
+    {
+      "before_sampling": 72,
+      "chunks": 16,
+      "raw_sha256": "2f22ffc35c074c69bf8967d4ddda44a25a069d3b0d3a6b15d685baff26513b42",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "b8a43c4ea8a12e95b6be63f9e0a5141e90def4f2b61a0ebddd8611bc582223d6"
+    },
+    {
+      "before_sampling": 235,
+      "chunks": 16,
+      "raw_sha256": "d597b468957fb1c6d95272a47b0eb746f9dee3f918d812f35e0bca6dbb7426a2",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "5d760b1ab5bfde27605e0fad9264fa48fa8b53b691fe3ab859c780e1f4216126"
+    },
+    {
+      "before_sampling": 134,
+      "chunks": 16,
+      "raw_sha256": "b6b4e61138ee5c4f34cd804059ee3b825a1e4e50a4e4f85b34a47f1b54995e6f",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "306a9fd3bf872c0102b82e46fda98b726b651d5b28d9c47246ce7231105da22e"
+    },
+    {
+      "before_sampling": 122,
+      "chunks": 16,
+      "raw_sha256": "f7763ca0c056b14da7fac9c93a30f77edded5aff19a6e328316d30e80f3be123",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "bbb531d34bb44cae806bb51b4a2734be89be6bc077ed7e1eb44e5f6f945ece50"
+    },
+    {
+      "before_sampling": 334,
+      "chunks": 16,
+      "raw_sha256": "09108f751148a009b26ec51285c6a309e835303a98002565b44a241eb0762bd5",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "18fe477cd5648e11754fb2ed858ca6eb7d624f6bf419d4b9ba375d9a3a96fdcf"
+    },
+    {
+      "before_sampling": 181,
+      "chunks": 16,
+      "raw_sha256": "8994256cde52ddc4e82596f495f3ec221bdaabaa9c190ff376ed2e058450c966",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "146e590a8e196888fbf2a300fc3cb9d49a38bd835c30861751e9b9f78feaedfb"
+    },
+    {
+      "before_sampling": 329,
+      "chunks": 16,
+      "raw_sha256": "2edd799eb07322486b7b80579b9cd1f7ae45275407ea34f8033029102dc65d05",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "a492410134a25ee60edce1900e92cf374dc4287dc50748f674981e85af68b10b"
+    },
+    {
+      "before_sampling": 329,
+      "chunks": 16,
+      "raw_sha256": "dd19a167b7b5574ae5c682143d2d750dee3132b4edea4acec7c30bd23a536074",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "baf762339260c0e95dfb5d48a31d01ccacfb2258657675088d626e69ecd9a6f7"
+    },
+    {
+      "before_sampling": 288,
+      "chunks": 16,
+      "raw_sha256": "5f76e7816a1169eed749e5429b40202c7d5b8816f74787b908b33d3d5dfc0e57",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "33fb7ed6f6b6574de0c2a38414e35d3748b60d4e77ef30c795b8210ff639a9eb"
+    },
+    {
+      "before_sampling": 50,
+      "chunks": 16,
+      "raw_sha256": "855990f6b3d8c4aff1cb142fc6caa8e6ac1219e1866cc2c45fa412e5b90334d4",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "f34b4136970158e41b64f3d036363f6f61314fe27f438b945dd29107bd9dfbec"
+    },
+    {
+      "before_sampling": 237,
+      "chunks": 16,
+      "raw_sha256": "ade02f79be71e5f8a13b2bd0a6d141e4766c591cf7325341817ea36829449ba2",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "67b50ebc7c5e8d2b31378b0cc7eb77ab8c79adf0cec15253d30da9f07f718441"
+    },
+    {
+      "before_sampling": 412,
+      "chunks": 16,
+      "raw_sha256": "f6345e34345e21ae3c79f0714e604824aae306db774cbf3d6f510e49bd18a544",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "03b88b3be0dba5069a827965ee15a0f1207b792ee6075465b21bec51b9db3740"
+    },
+    {
+      "before_sampling": 385,
+      "chunks": 16,
+      "raw_sha256": "2bb28305b29eb5aaa323c2b109392e2c4e99bf19f59af33e30ac33f02363e990",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "8ff0fb0d5d7fa5ac673b932adb8d0812837a80a635dc340c3e0138344291728b"
+    },
+    {
+      "before_sampling": 1063,
+      "chunks": 16,
+      "raw_sha256": "7391d61e434a3ec00a66c065117ce211539f5caa29696a421f9112d00c850cb9",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "e49979c0e1262aa804dd319ec67f8c90a60b61ff8c92dbbe62939149199dd2d2"
+    },
+    {
+      "before_sampling": 367,
+      "chunks": 16,
+      "raw_sha256": "fdab2ecbbe76875a920673f2eaac14bb53822f110650593554d8ace531fd11d9",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "3df7dbcbb708597ed7714cf79c07252c5c51d5a35710e5d445e77f9633d38574"
+    },
+    {
+      "before_sampling": 514,
+      "chunks": 16,
+      "raw_sha256": "8645b1ee1c05f6bd51a519a450c1fe8fba87c08caa1209cb6339b4777b63ff8c",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "0363d013daf831ce6ff946c6051656d60060fa15007ac73199875f46833348f5"
+    },
+    {
+      "before_sampling": 797,
+      "chunks": 16,
+      "raw_sha256": "da22845c067653de5719a781938bd866d0792f0e1b1e94ceb3c1bccdde4f9014",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "5164507a2036bb280bbae8a9bec9cf5e6d26a0ea54591909c6cdec601fa59f9c"
+    },
+    {
+      "before_sampling": 283,
+      "chunks": 16,
+      "raw_sha256": "080d2dedd838b7faf4565220e3562af72835053c2202b67642903ef4d1a82cf1",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "cd7b101b8bbfcb40ca1265f1886e7037e9a3c6dcd6b80346dbe763109406fb0f"
+    },
+    {
+      "before_sampling": 561,
+      "chunks": 16,
+      "raw_sha256": "ff0ddb0e9d535ccc9e6903eccac0c7374683a5c7600af6348692d29ee8e89c9c",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "83121f3391a5074311442946e094d726a3a504d93d06d513358fd6f050996a7d"
+    },
+    {
+      "before_sampling": 969,
+      "chunks": 16,
+      "raw_sha256": "6616c8923ca66cc2a978e77f6232597149418f4e716e981da73fafe0fd133a0f",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "3f2162dd04de615c057341caadffb7cf50e99884059b213c88c4ec3547a9e78b"
+    },
+    {
+      "before_sampling": 412,
+      "chunks": 16,
+      "raw_sha256": "13418b4a3ed14d21e9638ac5843fd55747f8828ac16165b4ab6cdbd3e0595246",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "3f4b38435f15e8964ca39eecb147f81dc4569fe38d927be80965191d2edf772d"
+    },
+    {
+      "before_sampling": 352,
+      "chunks": 16,
+      "raw_sha256": "5b7f2476ed0731140a335382aafd89929a585625d08ef64c4814ae877a64e52a",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "4c391101120b8a84cdc0027a22ea081377f1ed23891befbfdbb374868943ddee"
+    },
+    {
+      "before_sampling": 255,
+      "chunks": 16,
+      "raw_sha256": "ce5e8b5633f4a1a73f7818a58c2b9a6c3c69c0b09284da5c67250446edbd060b",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "d7bf9b2d83b8c06c0b2c021c0db61b328ffdc3b31e199c02cb99ebc639dbe9b9"
+    },
+    {
+      "before_sampling": 312,
+      "chunks": 16,
+      "raw_sha256": "4eec3d7613beec03bca7766e739182cd40ee384c7703633b00c7982aa6c59fc0",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "7a13e695d8b470c6cbd9154c7e764c74ff5b1f2948b0d220d778dbab24d36478"
+    },
+    {
+      "before_sampling": 112,
+      "chunks": 16,
+      "raw_sha256": "d0e7b171dbced0926b41af11b1ae73105ac5d7706b276fae217600913224fb8d",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "709e3e1fa2db9757845c66230153811c676d05986d1eb3f0801c19b1277a8afa"
+    },
+    {
+      "before_sampling": 89,
+      "chunks": 16,
+      "raw_sha256": "47ae8b6d6f78d64b059fb360e8e8af509db17524e6e4e3215f0504fed4852078",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "74d2017b564684c0910447f5f63754cb1e8fbf92bd37a3b0daed72d530bbffbf"
+    },
+    {
+      "before_sampling": 181,
+      "chunks": 16,
+      "raw_sha256": "c0f9a8bc96a1b267a6cbf5e6d84ba2fb70b49c18c985c6983a827822820721e4",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "858e790b1b61688af66f78c9a14e4bf712a5647766d9064021fda6bcf9c467e5"
+    },
+    {
+      "before_sampling": 288,
+      "chunks": 16,
+      "raw_sha256": "68aa6cc9fb4758249258bdd27213175c1b70f657309b6fc7672c5445a89f414f",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "4e2e7be85a5f48da9a55eb51dfb060b865cda74e679a229a616d3d04af5febdc"
+    },
+    {
+      "before_sampling": 116,
+      "chunks": 16,
+      "raw_sha256": "f972c9c6e2bbe5b4b848898435daef2790344f0ec1a4442496150b5c3c630f15",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "c0ed4c5a48f89d6164dd2c0633a92bcf9463b0ceee56987311654dbce08dddf3"
+    },
+    {
+      "before_sampling": 62,
+      "chunks": 16,
+      "raw_sha256": "0bbbc824311c547170500316d3248f6637f96903bf681790acdd94c572d996c4",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "578ebf4a9ebe9ffd8418061e156c7dcedf25ea13bcd25f5c31305f5297176d90"
+    },
+    {
+      "before_sampling": 391,
+      "chunks": 16,
+      "raw_sha256": "6afcd3fc67b0e0b39ae4d23d9dda2e9db5c0a489a326fa971eeb62ddeafdabdc",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "9435aaf3008612e9fe7458de5504611ba32de48d18f99faedd066ce6467879b3"
+    },
+    {
+      "before_sampling": 159,
+      "chunks": 16,
+      "raw_sha256": "bd821062c05db6cb342ea458389b40158612be2a5d16473f0354b83823be1bc5",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "32f88fe7c5b70e14fb083c3bb44b761557d797ea17e51b23e7ec6d4e0aa37da1"
+    },
+    {
+      "before_sampling": 174,
+      "chunks": 16,
+      "raw_sha256": "02248952a323f8328a015ae58665b90fda66d2d5a7e4a642f4975b2996a4c79e",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "c270f0279a45b72ccf7881587330a21e97a30ab544a1718845118edd199f02cc"
+    },
+    {
+      "before_sampling": 540,
+      "chunks": 16,
+      "raw_sha256": "0648bc6cfefafd236cb9604997d35a5b1e0acc56679ad8c22297f76f0cc3c702",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "0ca183fa70c12ff4f7d344823865db4a8f6bee37d4f98f0a48d1b16c5a6dcf48"
+    },
+    {
+      "before_sampling": 154,
+      "chunks": 16,
+      "raw_sha256": "d1aa5fcbe59e8e5a6a14aba00fc0d3908eff2e3f6f5cb9f8244c7452c9de0535",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "a2a511e681d90f6bec7c3efb591c3302d0dee6eb2ea3c1b4068fa97b54f4e063"
+    },
+    {
+      "before_sampling": 136,
+      "chunks": 16,
+      "raw_sha256": "defbd4b237912244f2f3738e6cd9be69f9bf98346bd2189446e64feedc78805d",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "a1335191b8349931916ef2abf8e453516d187b92495ebad1bacbe77ed213ee9c"
+    },
+    {
+      "before_sampling": 163,
+      "chunks": 16,
+      "raw_sha256": "81c7fbc3175a29320d1702016985f99099bd3056190cc6f0f5a15252043ab171",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "8890157655bd9753d86f40fa5c13f93c63d72851f2b56e44ecd592abb98a6ca5"
+    },
+    {
+      "before_sampling": 115,
+      "chunks": 16,
+      "raw_sha256": "40b5d4f5a65e5cce25b17db181099e36fd44ddefa1569891d3edb9ea6f612b98",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "d4501ccfe5c520074c32be28fbe132b72788a8714ebfa8d3d4ecef9c60e07979"
+    },
+    {
+      "before_sampling": 54,
+      "chunks": 16,
+      "raw_sha256": "e27da384ba22f918e79ee8667f0997f6c2b4fd5fd26cb83434ba9b197dc7a9c5",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d0dd57a92a15c11252e68594fd00bb86908bec522d2738b63238479b8faeb0b1"
+    },
+    {
+      "before_sampling": 655,
+      "chunks": 16,
+      "raw_sha256": "a80e5319be1a47534b40e9aa117fc1cf892fe4a767b95bea106124102b9a523f",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "96a9de6f24fbc4805b952307efe4c1797b6772bcdaad4e1cd08ab97a9d2993e5"
+    },
+    {
+      "before_sampling": 182,
+      "chunks": 16,
+      "raw_sha256": "957d8d540c9b4b82abd75d6058576688508cf02e1344147c67bcdf2b60051d5c",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "227a02e988a101ff347aa6ca8a195b688660360e36db22da7df327abf9ac1e0b"
+    },
+    {
+      "before_sampling": 65,
+      "chunks": 16,
+      "raw_sha256": "a8db4f1b273a7bcab5525d5bddde6a99882428500f151005281b5b3ae91b099f",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "5340978345992f1a049b516e1eb63c72c57e3d84a00efe9ab2ed828e8ca561a3"
+    },
+    {
+      "before_sampling": 117,
+      "chunks": 16,
+      "raw_sha256": "40ab953ec6200539961959b4c7c3902746a3562358ede3eee32d88afcb4061b5",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "9432ac23b9292cf7a67263dadd894492d10b13b56024b33804dca60f28896042"
+    },
+    {
+      "before_sampling": 103,
+      "chunks": 16,
+      "raw_sha256": "c33a32778bf1387d3a85a18eca4adbf3ba238e82604bebc6c74057ef0a109645",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "4a2d50991ad03e611df8e32f48b8111e5fcf570facc9d04965377bb95c1e2c21"
+    },
+    {
+      "before_sampling": 102,
+      "chunks": 16,
+      "raw_sha256": "28487e2c4c54434942dd43b602a774d486c7500e6ff399cc8611cf8ebab09dd5",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "39939b63be0343b79d6cb0747e5a5fc08347f1f51c6df7478aa61672db49e96c"
+    },
+    {
+      "before_sampling": 132,
+      "chunks": 16,
+      "raw_sha256": "3fa21d2a8e82dea4fb5f56682356cdf64478204353e97f55000351b8f995f64a",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "cdf5a1014075aac49d1e60b2b3c075828f55cd096e5e4ef45baecaee737c47eb"
+    },
+    {
+      "before_sampling": 195,
+      "chunks": 16,
+      "raw_sha256": "5106b4b674d80247d112a5f26fb91cb8346dfb354016480e92654b139f237632",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "7fae077badac50797c23cb2cce5b32621de888df7c8580382511862484752d96"
+    },
+    {
+      "before_sampling": 203,
+      "chunks": 16,
+      "raw_sha256": "8b4fdd28722813bdfc1bcface6d85323465a6fb15d3036cf709d9a409d25b526",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "3fea443adfdfd1ce475b800d52840edd191279bd6d0a416945b143c627e38bff"
+    },
+    {
+      "before_sampling": 450,
+      "chunks": 16,
+      "raw_sha256": "5689185fd3845e6eebed33a0c0f54fd45f62ee03206331b9507b6acbab0e2d81",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "043e4284771213a2974f0fec7770b11336b804674b2cb37653bdf8804405eee7"
+    },
+    {
+      "before_sampling": 295,
+      "chunks": 16,
+      "raw_sha256": "924aff75c041c1de8369b46ce96fa2300e70aebf07dd20a0d8c6b62e3b3ca21a",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "45872c12b28da1cac149114bb3434b5ed02723f0f1960dea7d4d74faa7ccd107"
+    },
+    {
+      "before_sampling": 165,
+      "chunks": 16,
+      "raw_sha256": "e4e48e6301b67603c87cacbcb551ce603df0aad46d7e41d337cd0b110bc9544c",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "52fe5858b313ac003e324a10f1766566fa26744d1ca3e1597875b769cf4a2e00"
+    },
+    {
+      "before_sampling": 143,
+      "chunks": 16,
+      "raw_sha256": "6d57f6de3c9c271dcf5a2b096bfc43f1f206a194c18cf9d08110362f9548d747",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "5c5691699423da4e3b6f6773d69306c84f631f5d25e202791cdbe3d08fb5bbba"
+    },
+    {
+      "before_sampling": 304,
+      "chunks": 16,
+      "raw_sha256": "001b90595d8397c523dd110de6cb23a1f3a08404cb423b9a24773be886ae015c",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "0d15fe8d8c9ecef3b85762b980dbebeae9211751655230693775b307c22cefc4"
+    },
+    {
+      "before_sampling": 610,
+      "chunks": 16,
+      "raw_sha256": "0b27f2ec5867833bd5255a1eedba84b7304ba3f1dc478a3d50303359ba7b53ee",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "45edb6d226ec40178d32cf32c291aa6402c210751119d2be3e514d0577840878"
+    },
+    {
+      "before_sampling": 54,
+      "chunks": 16,
+      "raw_sha256": "5d661f7edec828f55f60cc3ae5a363f397814a6a500b535dee1c8e4ca1a348da",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d214b6efbcf3033c5253504f9af627a3a0099aa51afc0ed1c487313ac6688926"
+    },
+    {
+      "before_sampling": 79,
+      "chunks": 16,
+      "raw_sha256": "2ad41d6b0e82b326f4ce377d9b4b34bb8671677059f61d1856b54a5b664fe42c",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "a7af31c3e3ff545d70dbd8c5d0b63dc728de8b13799a56616c6fb4405242b8f5"
+    },
+    {
+      "before_sampling": 215,
+      "chunks": 16,
+      "raw_sha256": "e43951cbd00efedeb36265d88635c01e02f3819c05697e66bb1355f2740bc47b",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "7d75701a3d19cda60ab207d031a93610cf6f074eb93f28acdf7756b334ae13bb"
+    },
+    {
+      "before_sampling": 214,
+      "chunks": 16,
+      "raw_sha256": "c5f213bcc25444e23fdb04844b3bcad1d9938388111c5dcb436cc7aeeeab0626",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "e3198a0d5b7c120857fa3a308b124477a389b8bf63f33601ba542151fd16ec6e"
+    },
+    {
+      "before_sampling": 127,
+      "chunks": 16,
+      "raw_sha256": "651da0108c8f66039fb5853c4bd22e494c62863a182f876e561d2ca94b911c19",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "71f926f07bfe86d7af7ac5a225c5ec01313ad7fde1fc553d4957e6f8caefef78"
+    },
+    {
+      "before_sampling": 79,
+      "chunks": 16,
+      "raw_sha256": "a4ac8445e30a50a0ff4cb34059d8aa2c99f06404d63839de09048dbcca473e57",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "b88c7d8c76815472d8a277972a9d7681c82605a2304052e7373ce28a1ef9b5cd"
+    },
+    {
+      "before_sampling": 128,
+      "chunks": 16,
+      "raw_sha256": "26744a3a610b23f0eefe9921625335ceed60b98011158781986ec7dad0ad3ab2",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "e016b61f38c7d86a0d2362ef8436e27cb0cfecf142445259c45a920e9f8f618a"
+    },
+    {
+      "before_sampling": 112,
+      "chunks": 16,
+      "raw_sha256": "721bb5cc7a93f117d0114ed3bed835eac0c47f1c00cb2240b0c2671170d4c8e8",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "633d0db3a817e7edf94c6814ad44cab6abb886877da5a984fa1de004a218c9a8"
+    },
+    {
+      "before_sampling": 160,
+      "chunks": 16,
+      "raw_sha256": "782d5eceaaf4ccdd2114260faea9667b0cbb749f0d98f0f0788c213ec4f74e0f",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "9ea94b93ccee8d9506d9b36b2f863b55083b9d88cfd476bda093007a14887dea"
+    },
+    {
+      "before_sampling": 201,
+      "chunks": 16,
+      "raw_sha256": "93b26d91b9c301cbb9e2ac841d1cc6fd40c1bc3e60bd5a340b1d186834fd2e5d",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "945922623282d49f0a399ad204a1b2599138182c958a8fac28f5818dea258d4c"
+    },
+    {
+      "before_sampling": 208,
+      "chunks": 16,
+      "raw_sha256": "e95a204dc33e721a6f7ae446b9e6904bb86d248d36b4487338af96ada2ed0f87",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "f00ae5636b3ae35dec7696bfdc8cde9cb52c5c7ade4e1a11a77f91a6bd61247d"
+    },
+    {
+      "before_sampling": 104,
+      "chunks": 16,
+      "raw_sha256": "dbcb81c5361e6d7898969dc187a4e69315a08409c0d6ebb09eaa4913b76de63d",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "b20d00f84f8088b1f801866e4f6b5f12464ae4723a3d2374ace796d58de8d063"
+    },
+    {
+      "before_sampling": 453,
+      "chunks": 16,
+      "raw_sha256": "e0132ad2a28ed17679a519a142bf8c9ed8d066e803993faa94baaefac994fbab",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "8f0df47426a4254db8ad5c8f421603f5bd78dfc42921f369d987cae38ae2ea72"
+    },
+    {
+      "before_sampling": 174,
+      "chunks": 16,
+      "raw_sha256": "a366445efc612ba7b6512c94f570f6bd5a84bff27a8da38716f91a6a3f2b8d39",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "0e01ed5f53f06968980a7148f11284d70512bdbe1149f3ba0ca95fed581ad87c"
+    },
+    {
+      "before_sampling": 609,
+      "chunks": 16,
+      "raw_sha256": "894a8ea4d0075de238826893dd585470a565b281988fa350321e01776603984c",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "b1cedcee1d0cd5853c2a7d4c6846bc4448bf153455482a25379dea4c0edfec16"
+    },
+    {
+      "before_sampling": 166,
+      "chunks": 16,
+      "raw_sha256": "fcb290dda6641f9210b8e06aa8cfe52c85bfbf2d34f1899713bb35214a3f2d36",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "8fccf1465c6db7f49b55b31c2d5d0807948d94b7b6cddb28a0270113c2819da3"
+    },
+    {
+      "before_sampling": 138,
+      "chunks": 16,
+      "raw_sha256": "47c8208fe6f17a346a295bc4d04bce0307d24866549320f85f822faaed784469",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "89eab7c8d4f5f5e5ca91e74e86d19df713732c51b128b9b298f3e2e680d6e411"
+    },
+    {
+      "before_sampling": 309,
+      "chunks": 16,
+      "raw_sha256": "e9d36127510aa18e6cca6dc90b4f4050332730491491268a7e1d555ac855c872",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "93dc685c9439cddcd71c3cd3f4e588a09219f9e888b879d577ca00e016a669e4"
+    },
+    {
+      "before_sampling": 170,
+      "chunks": 16,
+      "raw_sha256": "a3c4b13b313581642abbdee26e27141fb0fcca2ef915f069a3a3e32a68d8f671",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "297301cc7c8200634e922ba81b98e67745030fc4bffafa4268f46f125dab3427"
+    },
+    {
+      "before_sampling": 152,
+      "chunks": 16,
+      "raw_sha256": "74b2ac16eee82ef8e93be1e66b0837b367ba8aea80329dcfca82eb65b86a769b",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "e34b84e31b223c78a5aec5ea80a51a5156bd3ee36b5126231fb1b117c70a6b1a"
+    },
+    {
+      "before_sampling": 79,
+      "chunks": 16,
+      "raw_sha256": "4a06e056f4b12d59319edf8385ff0a26ea79c7305e50f16f074e5a08b9f754a2",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "3eb88824555ec96fe1a1cdffec3802956e4e47c7af71bf5f844a5b997e5cf998"
+    },
+    {
+      "before_sampling": 220,
+      "chunks": 16,
+      "raw_sha256": "08310069a13a8d51d8ea9a5b6717822dfde23f40226f0cb66ce96787fa4dbf5b",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "f54bbe13561f67af52186aeeac05088c4e158444e937bd70fbf0147de25c2c57"
+    },
+    {
+      "before_sampling": 81,
+      "chunks": 16,
+      "raw_sha256": "a1f5ec4a33c3e0086b4849581e8f9db7359da7697f65de13ee3fddcaf66404d5",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "b6b6b117638c5bf9c1457facd0f437a59d30699825d22b7b8eb8782ab3799f98"
+    },
+    {
+      "before_sampling": 725,
+      "chunks": 16,
+      "raw_sha256": "267b65f12295fac70c9b927e8160c1339e2be1cf4e49f08ca58a03eabf6d4585",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "1ce09a9b674c89660923837bc705f2837eac466ad5f6594f4422ed7cae977c46"
+    },
+    {
+      "before_sampling": 216,
+      "chunks": 16,
+      "raw_sha256": "19f81069a660aec69d0ad22469d62610ee7bcbaed63aa64f1883eebd23245a17",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "7ddcabe0dd00f2963ce6c1bca6cd357d6c5bfeb755ee5739f3801545236d8059"
+    },
+    {
+      "before_sampling": 134,
+      "chunks": 16,
+      "raw_sha256": "c223035d1968e00811f4832875909c069e34ceec70e29a43cce3bcec9164aea1",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "431947bf2a7f3dc63a30f69199f8cb7cb3e77c205bff2bcbc1ff9333a4971e64"
+    },
+    {
+      "before_sampling": 123,
+      "chunks": 16,
+      "raw_sha256": "85a36336bbd8e275a803e7d9ee4503d2076d3bd4320c3388df62e6c41fe4db3f",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "fa46725ab09cbeb6884ebb86984a35afec61f5f953975141c0d5e3c0968f9ff2"
+    },
+    {
+      "before_sampling": 117,
+      "chunks": 16,
+      "raw_sha256": "575b5b2bcec70daddc125a15874fc1024b27e4364ded9233cdc6c9c8560b0288",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "05ad1c9316970c442f5eaaccf2b163764a9eff15b9ec2c206f3c4bd1bf96f94b"
+    },
+    {
+      "before_sampling": 169,
+      "chunks": 16,
+      "raw_sha256": "54b1e401d8f08e2671ef495d6b850fdc1fc0266a992837c6e9c4ed06abd8b193",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "f20b2baf8750e47929c39228a13733b98a10def2e81237b520eefc0935420c0f"
+    },
+    {
+      "before_sampling": 159,
+      "chunks": 16,
+      "raw_sha256": "f63ed3b06ab1ebd07e75d6d1c0bf076a328017c8824651f0e98703181d02f250",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "fbfccf3c0546f2871363c3a9f1ad5bbfa8e570e11dd49954e231a34db85de694"
+    },
+    {
+      "before_sampling": 101,
+      "chunks": 16,
+      "raw_sha256": "9accd202352b834d44b942b89e19fa15cff31474aa6198e6b9e8096e50b64008",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "3f6aba103151302ebe1b120f878dfd714968cbf99876602c261c0576e5f60df1"
+    },
+    {
+      "before_sampling": 21,
+      "chunks": 16,
+      "raw_sha256": "8e5977b263d01bc5fdfd661d1e6bc8ace0d3de24680e3025b1464aa5863aa9aa",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "e23f6f7f4f074eb073d71528dfa5d107a8315007701f645a3528cf0ea8cfc0ab"
+    },
+    {
+      "before_sampling": 7,
+      "chunks": 7,
+      "raw_sha256": "b9ec847959f7444435e4c192532868f079eebd096a82392a5844b3beeb095b28",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "209ab63be835302f4d7286a714fac4d5b29a3c2b4b53f042de5c81bc5f3a6d13"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "997dee3743891c83a04621f354b110863eba1cd4d5875d8fdd8562902814eac6",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "1d92f5ae635bd19c7e1a23143d1362b816469cd58a41cd58cf248e2dd607be2a"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "5a95b465191e40ffb90cc77dc1db42e456e1a400cb56c1c9e74b4de65d954436",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "d60ce166e838b066462292a6ed0fd50a920682da14ca07c6cf78b033c4859f1a"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "6220c4f1176a9017129f725e680a8a1747ce90236ed9f717dd2abe00b9ed7645",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "981c9a0a8096048135bbb361e7721948efabbbf6aaa3365da8d1f81996746ed0"
+    },
+    {
+      "before_sampling": 22,
+      "chunks": 16,
+      "raw_sha256": "9796bbfd5e05faef25eb489c164db9a6445d49ccfce8238c59a25ded85f8a03b",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "8c195174a0af58fe8a2b72a92a807ffff750af4c8ca0a0e4a58b4ff79a5e1694"
+    },
+    {
+      "before_sampling": 8,
+      "chunks": 8,
+      "raw_sha256": "633f4c28ea8b1fcf37885a0184d8133d4487d5ac420766c805970e32f6c85252",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "cbcd738a47b0c7ece6b20a8ed568a8533653c859a1791837abe917deecf1b889"
+    },
+    {
+      "before_sampling": 48,
+      "chunks": 16,
+      "raw_sha256": "192a530b82e4509a82b0befe05818212a2d01bb2c392e7fbeaa46bd736618ee1",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "71c8ecdaaf3f7d41270efd0d89f5ad29a2c651cb4274d0cdf6927253f0b27f06"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "6e803f6d6848a8eccb5b4a1903b921a87a343f64c0f71b6d7e0c376ccf8aca85",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "9a72cf85b59b7f6a766975ff043818b903795d85613bb47931bb1e97feebecaf"
+    },
+    {
+      "before_sampling": 53,
+      "chunks": 16,
+      "raw_sha256": "fbb3780b321a84000cbf321c7c86a0d8374431b426a22994d6a011697dfeb4fd",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "deab2d5e2e237f2a437ec01d8d5b38a30fff526d06d3cdf7a4b63c8c999f46d8"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "033856813e1ec54d17ec4ea4c87b2700341674804e68cb1b06dd5552ee6973d1",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "a7f90faead2605590776616d1cc7f1ab717958d0d7420537bbf00d2bc1acbd92"
+    },
+    {
+      "before_sampling": 18,
+      "chunks": 16,
+      "raw_sha256": "598679df01b69d9fadf86dabf0cd39ac9a6b5a975594ed9dbf2bb452a1763084",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "88309353d853d89c8d07bc65b195e651fb84f1124a2a935a97659cba2990301f"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "b72da47cf6bd3e55c26c158d4a0eefe0b74a88034ed9417ca2e34ee69fd0d7a2",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "b5c4cc0485787a2c6f266e8cd6071c62671c5fd60a3e637f0ed46454304bbf13"
+    },
+    {
+      "before_sampling": 28,
+      "chunks": 16,
+      "raw_sha256": "afc8e24717d9cb008f1c57c154ee306b6e9f1df7f2dda209ab7cb1dc9bebc975",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "180c15cb33225970ef6c4511697129c23848a52e611e987bfba6637cb8dc78f7"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "8f91951ef901a4c9871b9f78872acbeabb6910d66e82b3eb2d8c0da2564d507c",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "1f990bb4427ac1118c7135129af241862856a9c13ee7e922e22a11a198847488"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "00e62d1e2e279c9fb3611450c7d382a1984846ed9d70f9c0e3e6c65bbc9b3430",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "9c6bb56eb7a8f49d82370396b4f720e1eceddf3a3515ba4f5eebf3451a1bb38a"
+    },
+    {
+      "before_sampling": 16,
+      "chunks": 16,
+      "raw_sha256": "9629905ed8b93320efc1a9bf319db0682ced9510e1cc36ac3cf31795c044071c",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "1dc2a8fa70fe6330beb1dbeaa14d8df33f01bf6ba8f47728eef0f18279fb4afc"
+    },
+    {
+      "before_sampling": 23,
+      "chunks": 16,
+      "raw_sha256": "35719ef31265508255309fead25ecb43f38ad2370872cd049dce304a9e7ddbff",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "f85c5a06e76fb7f44aba5ffd7b97506a2e0a41b94d33c2777ec7c644051c4699"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "35beac162b876e9e3729dd9d57b78bf1e7cf910d4117c397f5ac2b1bce222711",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d38a5ebbe4864c634b2ea1d262acd7f8f0fa8c9442b35ce34f3b760ffcb80f93"
+    },
+    {
+      "before_sampling": 10,
+      "chunks": 10,
+      "raw_sha256": "07454f9933ffb62c0187b8ee41803c220fd18eadf90e4c6121fc45b0ae6d494d",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "9ff064fa0fd89198fb1f1bc47bd37260cded75d97c656d731ce3a149c7fb7cd7"
+    },
+    {
+      "before_sampling": 15,
+      "chunks": 15,
+      "raw_sha256": "178d35d8ac50a921e2e81377c80c71fef7b32efbd0985142872187d7c91b997a",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "9107ec43154d13cc753e43679df1ba41ebbd1d74df3da3493d4adfa2ac088d67"
+    },
+    {
+      "before_sampling": 26,
+      "chunks": 16,
+      "raw_sha256": "2641414503b104977b154f51d29cbb1d6ec4933c6b52569d79255b70cbf6eae6",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "41b10125552514451d64411f772c4c7669caddab55061191618d285c541a14cb"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "124dd7bc107b18d09dcbfee1434ba04fa5cacbc7b4b7fc09bdc37e30d4d51ed6",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "27c8a188e91a840c74d29b47e576571a6aa7429e322891c06e5ad89704661a66"
+    },
+    {
+      "before_sampling": 16,
+      "chunks": 16,
+      "raw_sha256": "f2df4449cd599ba16d4397a648049c8cbddebba9981c045442ad84f30ce9c58b",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "b8a52c4b0ff61553161f32784d71a879e3a88000ea16b3e96255c950789ce11f"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "07c04187e5de51a03913cf9dd66a963f052187af8c64903b8c036fd38028361c",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "48ffe05b8c7b1b12ad2e89009bac54ada12b2eac30b5d3dff4be12902116b3f4"
+    },
+    {
+      "before_sampling": 48,
+      "chunks": 16,
+      "raw_sha256": "341731645b084803ab91231d27d687623d00a7f3ebe4ba777fdb709f42fdcd51",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "418ac2fd1a41538657ef0493277a61865995801d32c5775ed38f8f774cff85ea"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "7c6398d42d43b3565cd60c7a5b09a4f0e11760061a5ede159449ee645a1a6669",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "b53fb902a4953788435056c883da89e10d0d56b6d88f62cdf8ceff1a8ab86c50"
+    },
+    {
+      "before_sampling": 24,
+      "chunks": 16,
+      "raw_sha256": "adc8ceb7fe28fb14c18dfcf697be8137d3ce668eb9294ec0c871a3d08886ae0d",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "cf8bc5e9ba1fea6394d4f95314645cf0406323da878d1e3e2d913cac51ac3a8b"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "c8251591b5662e4a530fe180f9f6403ceb270576ca17d2423262a2878578f388",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "f91d50a2b659e9267f198df294a59f1d820b4a9a1027ef8141840220a85557ed"
+    },
+    {
+      "before_sampling": 34,
+      "chunks": 16,
+      "raw_sha256": "d6cfd98916e41f46b48c7df7cd6f4b7a11f90023f6cd0cc7d7ce0b681ff4f132",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "71dfd5594341e98735ad32dfc3781957a453313b97186e2104efd72e7c36ccb2"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "bd67fbb36f7498ccb19f99731180811331b738d279d75dfbac0f856904263ae2",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "fff56089dd4005e7abaf0636740c2c4dbd0ff8a684ea1e91a81fc73f29d7590c"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "c7463dbb2b9569acfa0001c91afbadc219c3981e5e14fa74fed71d8dcc13af0a",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "a4f0637c1ec4fa95214129f5a7b6e9678a3ad98a38302bfc880ce27efecf881f"
+    },
+    {
+      "before_sampling": 47,
+      "chunks": 16,
+      "raw_sha256": "3dedabbdfb2fc039ed7a852c4df90012c6548ec4b3cd011b9041a82dee92ddaf",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "08d35b5ad928bd35a5612cd04921920c06644a19a53e1298f1a4b95639a62c1c"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "4b65b5070b3f0a5b71b4a979739a15dd4efae122ab3d40329472cc11f92a899c",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "70db9829f4af6d9854e034cdc439783167f398f571c35afb4981d9a61161c659"
+    },
+    {
+      "before_sampling": 19,
+      "chunks": 16,
+      "raw_sha256": "afd65b41068bf0f3f884da4e7e4836456fcf87c18328f2485e61d84a3d11946d",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "dd14dfce1c676439abc03246b7a943ff4fd6c68226d5b28549bb052d3051fba3"
+    },
+    {
+      "before_sampling": 7,
+      "chunks": 7,
+      "raw_sha256": "6d5e37ef5bb06db2081c162e2a53de8713829314ccf11aead94b300465ae5030",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "b0d78a933ed8e66d38d442a572255574bfccb3817ca9c7af5a72b102be1bbfda"
+    },
+    {
+      "before_sampling": 76,
+      "chunks": 16,
+      "raw_sha256": "4fd18c37dbcc65e421c467dd59b3203ae245287489ce3128288fb33686679267",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "668337d14a04f499ad7fa43ed87cdd1e12c7ec5a0d7a30fb2c2d87231da29642"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "01dcfc035a237a7af6dc15816e8817a9de22855645437e203779f501428dcd94",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "269d0c495f79276b06ec39e6e0a3095254898f907c6aa66d397dcc51553df906"
+    },
+    {
+      "before_sampling": 37,
+      "chunks": 16,
+      "raw_sha256": "d333727fafdf6a735efdc1a8f74140654f49b41c15fd6409606a3f000a4a1578",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "3e33d1b94a15a25fc7e604b48781aa44d934a15b4dc384a6fa40fc0dbb7d19de"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "7266f830e1400b19aebc7d8bcdc6c667cb6eafe17560dc5a342c57b4705d94b3",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "180b478948b4393041e18459decd945ad99da88ecc863e0300da6beb01a352e6"
+    },
+    {
+      "before_sampling": 19,
+      "chunks": 16,
+      "raw_sha256": "58f6fdd2df686ffd709b817454dc4c8de6c52e2508628b0ae54e5c9585d9cd0f",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "a27e59c07c067489c5ca892391368d4beb32addfbb38fe840ad841715a88d124"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "c07bdc899fa8ea321ce1932b11bd122e0d4c1cedfe8da4967a6bb679c973c60a",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "65e66263d428e2dd89d15c62f16d85b8b23e86e1f1a39a1936276f3d17141b69"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "1c4130bc16bf9928bb96ba145b25f6e7ca7b951f3f02e619fa8d156766a3d907",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "044a11c80fc23d52d17da53a7a36297d19c5525f527e711ceaa5d0d936dd61f9"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "5f19709de47d3704309547621adb44e26e1835c51f951c2b46f3c11659f844b6",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "76713c41a517cc9444f014aec511c33cba757f976b914047f9e4150ce1eb0c36"
+    },
+    {
+      "before_sampling": 21,
+      "chunks": 16,
+      "raw_sha256": "7fc71fc56d3e39feb7e30144926793568d5c81ddbe82e8199fdca633c5621f74",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "26b25e63456919de40794faa4a4beb8fe96ba92d4999470aff00f88b650e5fd0"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "92860e36e942887363703dc65bc4d78e896bc7b93828b70d9016636a8daddb66",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "437a6056d89f8d3529fcbbba86e66099323aa345a6a22546417b078c404e63b6"
+    },
+    {
+      "before_sampling": 49,
+      "chunks": 16,
+      "raw_sha256": "6cd4f68f646f2201fc18738b9d6f6aac603d22e7135ab767b1dc32b086f268f2",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "4963dff28b0a6e3a31354b1285c179db75bbbf8d42e845390dc5d29bfc693d55"
+    },
+    {
+      "before_sampling": 7,
+      "chunks": 7,
+      "raw_sha256": "4d692d0504dda743aa7554089ce9538f9ea8d30d32bd6085b386b7fea6734b29",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "1c567d225c3e2909c412413204a06b9a74206caf52abf1944704982a589e69c7"
+    },
+    {
+      "before_sampling": 50,
+      "chunks": 16,
+      "raw_sha256": "c47b156f4185cd5714d7b1a69289c342d893abb6464a29736fbcfc13d37e0923",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "b204f3f31446faa8637357a6251f00fa93c37a6879d7ae220669b6172df4540c"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "789e7f530a9ccb4193a26721efdb3b2e641501e6650a80dbb9138d212cf5894e",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "006c6e316ff170a90553fc0140ee4c57b879e5f256b11766b45ed0a8abbe912c"
+    },
+    {
+      "before_sampling": 17,
+      "chunks": 16,
+      "raw_sha256": "472869cb0942bac03e7e8dcbec6d3092482355dd609b32314de426684d66882a",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "0b224e7e169017b264fb5a67541da3d7698e5454e241e887f3e3e5f3379bed77"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "59a15c141ecef93951eb915a145685f4120a458dc48c0450eeb8cce95b055d35",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "25f9c0c760a9af7ad0c7599bc341b69075ac3499134d0f12875f48e1500987b3"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "38fbb1f313bb821b9b1c942d96c4755e6daa35cc498b793acab51625d33698e1",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "195247cacc2706be2770548dac85511c7d38737331c6c6f1a3afcdc1e3398841"
+    },
+    {
+      "before_sampling": 15,
+      "chunks": 15,
+      "raw_sha256": "5981d2daeb3c40f5a5f0f66f48e23a2605b53bed0b0d9ebf70af17724ce1bb5f",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "e9f309abd54e6e3e18a4728353ffd13f93ee6574fa36cbd04320b7826063cfb5"
+    },
+    {
+      "before_sampling": 22,
+      "chunks": 16,
+      "raw_sha256": "4609db2a9679447078294dcf4265358ef9d606a691725f72f90d790103bc843a",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "c96332b2a7a53d300ad4dd4cd86fe2c35d27c30991b0d1d3ed2ebb3fcdb0674c"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "77cc20aa2ceca58c274a9bc2e3d4fdfb6d2be574ee967c5d2dbb3645761d0fa2",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "f735df1f782b5842e95400ba5b4fdf90f116be00a6658bfaf64f4b99d93a0160"
+    },
+    {
+      "before_sampling": 23,
+      "chunks": 16,
+      "raw_sha256": "6d7d1a679e35b00df79197d529d30d36c3c6b18ef26751c55ad1aca60c029a47",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "cede9519c072ea9af45c0c67b37ed185e3e102dc8804d22df9ccded1014ae42e"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "81578645c9388432b764074ad46aacb6ecc998255a0be60c381cc17ef74f90fc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "e3a3ed847d77b1a2d30b7193348953f44550bf3d30ad5dff8a222ba3397b7a3c"
+    },
+    {
+      "before_sampling": 10,
+      "chunks": 10,
+      "raw_sha256": "30c7ec6ff0342b91b4f20637bc82005d4fb53bfa06dad39354ddc60e716ed3af",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "fc414431563abeffb47cd9dfd508bfcfce7a4b641b408beaa42249d6d66b9196"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "3ea1a231b91c5275330614401afd6e37156ab82abe1f29a87696d7321c327c23",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "377a97a04d700c22494b35ed3450d3b2c979d76d2c42ed7367cd400a8f8392a4"
+    },
+    {
+      "before_sampling": 46,
+      "chunks": 16,
+      "raw_sha256": "c1fc9c197195d0f3a1c7c6ba8f18b54679dc0128d0362e6ffd1017b365cd54b5",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "363a5eacce5b9db605fd035abfe7e3fe3fab7a6da48b24dca0b2c7e9c95dcd9d"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "71069ce82c4a95eecb3faeaa71a7c1ee2e6d43b9c8d717277cf46851e50a7512",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "1b3d327a48ff265f27b345e6ca4ef8c80a81bb93390cd9a70cf08fd3a5b91a83"
+    },
+    {
+      "before_sampling": 27,
+      "chunks": 16,
+      "raw_sha256": "3867adc824829537c2c3600b076adac55e8a8200be16a02e6f0165f51ff6fbe9",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "75449c7048e785057fc30cabe9c1c661ad428e6c0fafe64170c80588525bc064"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "7f0ca656d2322dd919203addc7cf553ad5797b61823945232b30224803d7be5a",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "138c50d28c13cc547fd2c44443b24dffec6b18c6ea9fdaa88cb4e13c81e912de"
+    },
+    {
+      "before_sampling": 29,
+      "chunks": 16,
+      "raw_sha256": "f64c253196bb04637d4875a287bf205c586ff78debae66ffb6dafd49e7f65ce7",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "987bb37209ca5181f7035509100409ca4cf2856498ac3f01dd24225604e24ce6"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "f03dab63380e7bcf06604f92b64ab865c938c3ac5a6568695d3e0c451b427b68",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "806931c0e7173769c0b941a6fb6de61b5d2d745b2fa0cac6508c47e17d2fb89e"
+    },
+    {
+      "before_sampling": 28,
+      "chunks": 16,
+      "raw_sha256": "3815d9d0140e8bf511aaca762778a2102784369343e5dd3991a2d37c2570aad9",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "d0e23888057401c0e82b49762fde5457f6db3b7ea80789cd642574bb5f47afbb"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "633da35712414b37cae3bb06a4e22371af0ff9ec6983b97524f8f082de0f26b0",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "b7f130cea3a2fd93074f1d81c8101b461695fca2e510dacb60b9e663fe0c5725"
+    },
+    {
+      "before_sampling": 17,
+      "chunks": 16,
+      "raw_sha256": "8178c856a875fb1c6fc6fbf88fb804d1c63e159f406ab233ac643d8fc06a4af6",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "46c7ed592dfeb7cfa36cd512fb4a36fe9d5f1f0140a4daa0cf5e3677c383676e"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "d56e4f046fcbbc882352d5b513c640884a3d9df06ce5f6dd3cada0f89e56068d",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "3f6eb9bdfd0a7f6d037d32daf0728a372be3c20d54a883d72a7eee454096e7ca"
+    },
+    {
+      "before_sampling": 18,
+      "chunks": 16,
+      "raw_sha256": "390ea8ff9968cc7efc13bf293e48002d793c5b26f67ba4363ed1423b6b41cd97",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "3f186af4284cb635fddd0a23721800e03160d0e6add7d4aeaf85d10466a218df"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "c89d326f3a73f2187e46d0a3419fa40aeca9bd7d86c76b1d63ec4baed78c6658",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "f6c141277a1f8af7750abc31a9ef4aa582672f35301138c95e051d43c996c16d"
+    },
+    {
+      "before_sampling": 52,
+      "chunks": 16,
+      "raw_sha256": "b20d4e66007a1c0ad20954e92a7c960ef7309e7fb8894291df85aab2ce83ec63",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "e8f6ee6881d4798e8e025bb215679b1ac82ae7cd23c7092c5effcbf1d45c27d8"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "173544c2984e47f76e611f4f487a0a891955ce83df679f72905f64293e6fb9e4",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "52635cbde44221aa4b5e13c2930646d8a5ca3cbc8896aa2113df24d5efe309bc"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "bc11b23129dfd9e268a8120abffad5738ef38b7cf45a1776dc8b460f2fdfbfd2",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "00eb6c3035b5e66379499d18ac6beafc7c9d8b1c9d533dbb114e4a8d864ea733"
+    },
+    {
+      "before_sampling": 73,
+      "chunks": 16,
+      "raw_sha256": "381f2346d0e11bb34b33dbdec70ad9905f595837cbc08c994f5148174646f2ab",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "4fd7e459f88afd8c859c57b977f304b1c06938900c869be47e53d2c82d91c08b"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "819c380fe51ae57a1e9fff52dbcdb09bcbf63134e292c55a9221b36d971b0c0f",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "8a1b64070101f8e03650d1296de89436776ba1e3db6ba369dd66e9ec56d5ec03"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "6bc0db59365f4ed6e48ffcc59602a4b70b7dd02969811adb7ca39097eb4a01bd",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "85b859238933c0691a3293cdf848c65364a717cd8993e174214bb1b79a3c4dce"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "72f2b74b3c401af8c726086d9a40e75f849b1d5aab067f8f99cf4d16d6eb40ea",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "7feffee42bd11304004a7f0342ef684dd0462f4815adc4444295e800dbd1db61"
+    },
+    {
+      "before_sampling": 32,
+      "chunks": 16,
+      "raw_sha256": "202d34add496d0d23b5d0d4f8f4b2c1552ab6cdfbcc44b90ebf2aede66704f57",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "106740e803a9a5d4ecf9ce190a5c0ed7b5546ba2c10a5428d77e07f3f88095b8"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "e8de184ae69bb88027e40f847d074d82adb97e1a5d58f7a8a177fe5ead6cd7fe",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "50e3003f6313acd854aa0504ade48c69d40bd34fbd4d5178c3bb4063e5f5c802"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "45fa12e072b5d1f67dd1db0dbdb8bbd8846807bd3bc879825b5d33dfe36e6897",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "4812402a28e5ead0d47d8a6e6e9e427f2f7dadd37ea6f6a27b880fd8d5107ff2"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "aa13a6b4d4a9fc248964347c7b811c4d3f57130459c4e4fe6320f83ede509aaa",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "8fcf333f74f79b753f3ba8271540abd16457903c1f9de1cb8623e90fa741fe46"
+    },
+    {
+      "before_sampling": 23,
+      "chunks": 16,
+      "raw_sha256": "bf54e3bcb496d8a725d0083d38ef80d3e17bfde1b3e3223446511ab03f066c71",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "a033ffe8fc4940719ad8ec7114a1b995a8cbc9a1cfdeca51af5cb1d7b1f3c593"
+    },
+    {
+      "before_sampling": 7,
+      "chunks": 7,
+      "raw_sha256": "fe7a9a2f8f971cc59d3fef1cf3f834dbeefb1a3c1ee8e970e799566ac416dc48",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "6fe1e94b368475c4fa08490a112da186d49a972a0f8f150384151e15c6b0f205"
+    },
+    {
+      "before_sampling": 51,
+      "chunks": 16,
+      "raw_sha256": "a1ddf00bbc9eb961b808cae0b66d80251b326484d383aa4fa90b843e8c1d7e48",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "b8d401e67a2b969097ba70838c1e25ba3cbddc06a920abf090b508b6fb290d31"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "1c7322f44fad8309f765a89a7cd3bdde137bff60c1964b4d4a9766a734cb25c0",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "16c4e38e10bd10ad020e4ca578a1083a2a1453fb22f8e54646ac06a6853b6084"
+    },
+    {
+      "before_sampling": 16,
+      "chunks": 16,
+      "raw_sha256": "26bc579bb47b381c761767ab220afb6004274b66d5bb2dd97f9bbb225e0f6f96",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "8bb7d0429966b141c6fdd46d988dd01bb866fc5c56f842ece18b36e4c7d41df8"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "af6adeee3a4b17c5c24a9b3e2c502632e82258da79129a7337d0cf657cc7e525",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "160da3daba0d5deac9f384777499d47c0bc4301dad3c422361d00158bd05f47f"
+    },
+    {
+      "before_sampling": 48,
+      "chunks": 16,
+      "raw_sha256": "da280aab7272fac51efac7951776da75cffcbf4a974bf014df508b3b3c13ff8a",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "0f545873e18b06281d208d3fdc8b08b41084386b610afacde1a3a179a7f3664a"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "7d932e0bfb11ee3b1060c9974628368099c5d0efdbbcb9a38d0d145a4897ddfd",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "b285123c3a0189417725fc374273bff6c7ee50301d1e88c1209b3028ddde2481"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "a841fe852a76b3ebdf0d07d40f4a542e71a19f3ad53fc49cd61591ef8e78186a",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "abb647d597673f3c36515064aaa4e7d714351d763794b9d6a6373845c554bc63"
+    },
+    {
+      "before_sampling": 15,
+      "chunks": 15,
+      "raw_sha256": "062a6ee449a874b46d46dd154d54c4d63aead2fb7780989595a8b433d44ceb35",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "e32306696350c3cb38bdbb55ffd365183d8c84bd93b2bdc5bbce3b3443da6023"
+    },
+    {
+      "before_sampling": 24,
+      "chunks": 16,
+      "raw_sha256": "2890cc4c0750bc9887ef6c210697193109629ba5e9ca4d4065331c8dd9b3662f",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "19464ca4a28f2911fafd6a6dad26f29ce30edeb60393433bd83ef6a79dcdc729"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "4f8bd537701268ed3d3b643245870befb0146a2894319417a97ff59bb41ef030",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "b959d59d23a4aae7bbdb53ef974338ced283b28bda299ab94a6318e08dbc0da7"
+    },
+    {
+      "before_sampling": 22,
+      "chunks": 16,
+      "raw_sha256": "38726e1e648dad13a24fed57711b478afec16a8e0bb2d5feb8cf65c7d5c11b0c",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "b9a7b3a5cb9169fa5aa6e87d724ee0a81535733c23775f4840346edaee1f1b00"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "43b8e5bc31920921b6e37cb16355c8a59b67e473d1f8bf3081267d01b0ea36c4",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "5ddf5c1c8f770c4a78a43e1230afabbe88e7a51cbad811b86d0a0d8acab154a2"
+    },
+    {
+      "before_sampling": 29,
+      "chunks": 16,
+      "raw_sha256": "be48f3703a781a61df9ab72a67634025a9fe5f6fe2962c93668d4dd6bab15f12",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "efda9810d77459cc75d119b5de246e73ae4020a797520d4758f060b1a24fc9a5"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "38564d322bdde12cb05729576bde4908011c64571332e3a5952416e6d82b71cc",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "c71c3734141f3cf437f6545f7cc9b5d8e258945a0aec581ea9e10c6ae9f06629"
+    },
+    {
+      "before_sampling": 29,
+      "chunks": 16,
+      "raw_sha256": "e0aeb9a2423275676ca63add5c0865fe2faf1aa706f2f9642f39873a3e96873f",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "e8d5fb2d8ff78e31398014bf23806c8477ce641cad1fc066f51c7e973af2419d"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "61b17237720f46ff443c5e6e99784cdd5aea0e024ed2991358308eb84125ec31",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "9baa39f41a30fdc690c0c740cfc4be0eeca9168dc1e1a6be3a81cb0016da7e76"
+    },
+    {
+      "before_sampling": 49,
+      "chunks": 16,
+      "raw_sha256": "6301eb830d42f8263d177332abb5f681fd644c329763c92adff7d62b45049811",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "70715ec94facbbd6d50d115c7008239bfdbbb31143b59646014942631b1e4b05"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "6cd10a1c0007a9e50fbe629a830d24aa39a4b3abc06da378786f03abd8db72e5",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "01e6b72adc6b27e7e3578ba267891a5082375d481f76f4569d64b9249bff5f92"
+    },
+    {
+      "before_sampling": 42,
+      "chunks": 16,
+      "raw_sha256": "3d3bb25b6af3e05ee53ca5aadac55e49952116a9fbe6f0c0f4e291656b2367b6",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "4a7b0065ff29097f0e6b959b90fc720d5f1e0c6d1115b5bbabc0a63ddae9f4f8"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "90aabc37931de7a1b886cfd8ea1e4efbac10925cb5a77a72dc4b9309e8c63200",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "f9b878aac1da5504e6d9e8718e3208f7032c2cb2b2e13f6c0ab7b5caf40c7021"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "d2a51b1dbdb561903c3ff839741ec42f2b5e61a4a1848e4c9f0541a6ce38efd4",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "8d30687c082c37148678d74f4bbce0923d5f8680b29278be4415aeda050e0054"
+    },
+    {
+      "before_sampling": 19,
+      "chunks": 16,
+      "raw_sha256": "52a8eb3be7d61047ed30464a5a1d2f11760ea68fd33cf842f8a5d3b53a67d522",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "c29a62c0dcfd058471de5a3d4f4f5b30b4aae911f4f982682171ac52be3b8836"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "fd08db613dec80ceb2df8199af383fcef9bc9bb646916e900c5572770ea62cec",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "3d3585553b3420ab6c77e0e08d2125a748bded3411b728ea36a1c55319489fa2"
+    },
+    {
+      "before_sampling": 8,
+      "chunks": 8,
+      "raw_sha256": "1657077cffd0fa959ebed7fef0f93f10e983772bbe15a01986421fc1f4f1da7a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "51031e711ee73f87b06bbf8b201bf9124bb9d5e84df88ce0e9ee2f386981d520"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "12c0434524d68505433f26ff8a42bcd8ee851fe2811216f916d830395230cb04",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "96ba007cee51495eb4f1ac9a9dc8c84a2419a8f9dfe819e186bf59fcb9f54ebc"
+    },
+    {
+      "before_sampling": 40,
+      "chunks": 16,
+      "raw_sha256": "3b61f41fee0a6c116c3744b300a7cf6e5ce2c1d2cf97bb65613446817d33a35d",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "76b420ae287719b02ac2c9d843d446dacd25a4df3b1d3ea3320104261a4dfc5e"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "ef8fc64f94abd2ecc7d3788edf32aacf772654a1e5a08b94aa56e97cd32aa56b",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "2ce4e764f6913c6eb5dec1a6c495e0475dd42295cf85b0d7e3029f4a0ac5f678"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "2e37d72ecad54f2a151846a7310ad53c7889b1d8fb4167930dceabf4098908f8",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "9e8bca6ea85ffaf8f9dd1d9d6a294b533c9ebc814148088ecaf23965a5c30d38"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "629fb733c19a7c3b0129982b48a84dde44b4565b1da3a42a1dcb95ab1590930a",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "77b19f8ae68a5f9fc63a9acccc7a03fdfee461d2219407e078402dcca1fd9927"
+    },
+    {
+      "before_sampling": 74,
+      "chunks": 16,
+      "raw_sha256": "f0314e059ef8359219678e8a17c05a5d51f53d664c1d25667c1ac8fafa865b4f",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "5c3de2491b43f55fbc0c46ae320189abc620b9ab566a1962770854027556d97d"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "9d09e6f559282fb823205f2500027aea2de5003d58afa54a148159d419005f6e",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "2445ec03798785d0f84eaa257b223f089bee580bc7ecfd2fd93ea6eb0e0b280c"
+    },
+    {
+      "before_sampling": 32,
+      "chunks": 16,
+      "raw_sha256": "04bf509b8f5823a58fdeb8dff3302dccd8019caeb25b06ce31c8bebcdd3166da",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "a768e3ea6f827c3aad09417e8d339ad0c5c71d90e6278f8cc483eb6825229ece"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "458d566b6ca66e49b978355758827ef8363e8b297e77553ade2a74e08e1d6da3",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "3af16898f80e7e3dd5628e7e79a766b8dd038aa3349cd17f3766c91b756a5540"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "cc908502f8171061ada26224785a6af8c1e809818e26955d42b06ad31b3aa712",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "01c9c62e9449c4f41e0eb2c6cf9e6400fbd1e8cc7f5d84991ec2758b0915a717"
+    },
+    {
+      "before_sampling": 9,
+      "chunks": 9,
+      "raw_sha256": "6776c487c5726bc499a28353aa0b8970a3d1fa6d8e0cc799e7d79788503e506a",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "fd3228fea52c1827c220190438c3d6399012c626c6ef259afd514e38dc3803e0"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "c146fdea88e5fbc7f8ddc3a00419b5efaca5677646659a8b28973ff6250c17e0",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "f050dc1dc8eb23aae448c0d60345f2d15d9b152d350ce33395131c39df1e45fe"
+    },
+    {
+      "before_sampling": 2,
+      "chunks": 2,
+      "raw_sha256": "b6e1af0805be893a5d69773686dd0b2154cb088b719ac9da3cf4aafa258bb7b2",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "beb039da9410cc91b6d30a6874206d43f8eac5d13bb544110b02c3c6235c0936"
+    },
+    {
+      "before_sampling": 8,
+      "chunks": 8,
+      "raw_sha256": "e9724ee6bd62f63c0b234ec0db0b5cce7c408b6d010857781bc9e07b656a7710",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "3d583b3db4f5dd6197da5102ff8b00e388131264e9495ecd809d03d8b7cdc61a"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "ed2d9a40077e7ad8ab06d0d96ff2110fd3db5d0d5cb8fec37a58a902dcf14efc",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "a9a43ccf6df1d988d57c9afa53ba87f5f22cbd29613e53be76a04b19bb71539e"
+    },
+    {
+      "before_sampling": 25,
+      "chunks": 16,
+      "raw_sha256": "592ab1d3d28a985c9d339dcdce8bbb3c53a2901f703fa7f44e16730c2e8d6716",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "f2c6016364e5f9e6faa262e62f2da54e7dc6b081fe16f3fb0feda507a60dd1a7"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "8bc148a44e454510adb52d74f4d68b6872950f672a8935b41cbf136c385915ec",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "b62ef971753aff14d97cc8908c804898a54ad935a04fc4ed09bfe9385557eda7"
+    },
+    {
+      "before_sampling": 16,
+      "chunks": 16,
+      "raw_sha256": "c5bfb30e302a4d492a89e97884ec473033ac8b4c6d45cb99894d9607dae24701",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "0831a34a2c13af45254b61e3343e93db8d3b0dd03e235b5055e9c7bcc4b62c80"
+    },
+    {
+      "before_sampling": 11,
+      "chunks": 11,
+      "raw_sha256": "3ae85d2034d3e91a9df6974ece1af128fa4d32ce6dd7d8da76c6e26db0557be6",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "caa270c9af91584467843402b34ea41fecee19d2300d7f38576d4ef7f3b38298"
+    },
+    {
+      "before_sampling": 48,
+      "chunks": 16,
+      "raw_sha256": "0be8476a41ebe48192c57152aec502da22e7536c7e1d9382e50c74e7ee50820f",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "47cb04f5cbc0b91bb898a41d8bb83da702817532faca616cd86fa74ccf6f0c17"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "b4fa06200496a65ab7451522e878f8cbd8ca5b76f216ea05d5521070d073144d",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "5ff74ea3c92172b409c2b49157b860c3956c0b57c9c0b645c13afe18822cef6d"
+    },
+    {
+      "before_sampling": 12,
+      "chunks": 12,
+      "raw_sha256": "fa1d72152969cc2e13e3332101bfe063d7dcf01c065548911606ca126845d31b",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "b31921c14569e5bc58f8c353f609219ad3178c552f7306c770c815df652e25f1"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "3f74dedc3e1f977d912cb82460a3878dc911d03256248085cea46d5ed9846f57",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "af6e54acf021afca8f212f1471c23d22597672a0a8b3e161135f6025afbf9e94"
+    },
+    {
+      "before_sampling": 27,
+      "chunks": 16,
+      "raw_sha256": "4f237e6b31644ac1c917dafdc0df9773c0dad323e6bf35c1c4a7f35a617dae4f",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "ae41d14937f05599400aabe16bf3d409a3cc6149a4799ee064ab901a15d8d8d2"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "2bf3fc39230c35813eec71f9a810fdafaa5856a54fce1b25f157c8bbd7e45c3d",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "b236cde0f4cd9aca243a7ee774519b85bb42de36d17cdd83d5abc30040964245"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "f7a8c9d9623cec09965beacb52cee42c04c1f2372170bcb47bec9b7c2ddd6691",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "1064b40f00df649c6f2215d6b6706ed730ae3887d48ae676756bdd24dcd5a424"
+    },
+    {
+      "before_sampling": 16,
+      "chunks": 16,
+      "raw_sha256": "bb2f28e9a7f1fe95fea081d728cfe1d01536eeb1a9e9823282dbcbf1dc43b376",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "f4a74a2aa78516400b3644c89ec7f88372dec100814a6a9866b883791f7df123"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "d8c0b562c27e678e695c827c660da0f1413b30199375960184093817885135cc",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "b6e7ebf26cc2387a21ff0e0e8409a36647826455ef99b197f00a0976b7d74e4b"
+    },
+    {
+      "before_sampling": 20,
+      "chunks": 16,
+      "raw_sha256": "79f17dec4d4d4a71d269a457a2c77c815fe0060022dab979893234ada5026ce9",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "e4f6d0ffb829ba3e2fd064582341f6daa3da8d14a97a3095933fa51265f36085"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "e0cfcb8e39d5a1c0eacc2a93cc8ba87744d954b3c529bc861cfee062e58e0231",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "9cbf29c549ee859389666844703b60a954b687d5f628a2c2d394b798c4a40f8d"
+    },
+    {
+      "before_sampling": 21,
+      "chunks": 16,
+      "raw_sha256": "7ac1cfdc548053d23080e77ca0cbdb87b7c5601db5166c306685da68eb986fb6",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "da2bdb6037183ca15d76164a370de8ac2815125e00d9954fb1dcce31fe05fd91"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "939f84a9d25fd30663f2c5cadf5ddb85f78ad10b08d342a2a3b6c5250b421f59",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "50151516031fcd298fce0c844ff19faddee4f65f620d1208ce810b892f9dd069"
+    },
+    {
+      "before_sampling": 8,
+      "chunks": 8,
+      "raw_sha256": "e78235410dcb3ebcc028ad5dbafbc28caed535c579ba051999ba98cd5ed1a24c",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "20ebd6177c4a958910305eb90bedf99aab77f96f5454341a8fc5c28fb2748ef6"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "63f872b3685d146cfa6d2607e37f341739b0ec8038289a48e533153de2b1e064",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "c567c620d1325edf9100c0b655d9751af306474618e0d87dc2bec6643776be3d"
+    },
+    {
+      "before_sampling": 48,
+      "chunks": 16,
+      "raw_sha256": "e8978d2911e00d6e6d07000c743d740c4007d47f49ab1dbca79717511d96c67c",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "1439c0694f25e6d3373c181e6d8dd17d98c3c19448d2b37d78108447f5249303"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "23ac555dce92ea607d083c4dcb8168013580c73c1f0e6d3d3b134afda520a5db",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "d90df83f45834de5c06ff70e40d3fecec9a6df051637506425937b94cba46555"
+    },
+    {
+      "before_sampling": 19,
+      "chunks": 16,
+      "raw_sha256": "4cdb58fc6aaa1b746571dc66a797bc6609b367e3fc8f05431bf81b93c947740b",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "c84f069d254d38e277c242ce3cbe2d36e19e6920456e7e371de05b60c9b338ef"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "93e8ec9871af68412f703f2ab351420efd8fa7ede06edbe8009ec5c8b4c381c1",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "e7507dbe4ccebc6e65d17428802d1a74b3e5ef565234187813655d948b46b644"
+    },
+    {
+      "before_sampling": 47,
+      "chunks": 16,
+      "raw_sha256": "cd4dd6e28d5a402791a1621991e1f3ff0a0daa947dc348f42805d298cea69985",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "4f2039e5289f7be6e4de9dbd4361c78d0180b67be715e16cd9789f652817103f"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "76caf218f1ac475754550f670a79e346665a88c2ec1f1abefb6f9bf08c1e2a73",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "12c144e25b163cc32bc167bbd270953af3fd262b0ca972462193050149101d99"
+    },
+    {
+      "before_sampling": 48,
+      "chunks": 16,
+      "raw_sha256": "38f524ec1e22612dddfb0f1d054f194a613194344d8878b98be89d4988a01945",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "d758f1b92a8fab57a86d27ececac540a3f76dc57cdfc8044a75e210f12053696"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "0eebc41af6ad3189590d1b6fa44f4cbd36cdb4503a7aba138c5090291093b01f",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "ae284032739f289a74bedb7f1e1b902e264a209d733c8c136dc2630c16894830"
+    },
+    {
+      "before_sampling": 69,
+      "chunks": 16,
+      "raw_sha256": "75e0bd3c7d07d946a0c84cd97bd8a783c53428f08302d1ef935f2a3db65aa530",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "f31b6454a9afb8bf7aee57b98a5ea57f85158a4cbca9364ee8358e615fe412cf"
+    },
+    {
+      "before_sampling": 5,
+      "chunks": 5,
+      "raw_sha256": "72a0eaff409ff5f872fd0ce27a17672c7fdc6258f1ea1f7d4da9ba8bd37a54cc",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "8f09fb04cc934ead42848aed0251ee57336e6979e6b0bd4fac1160c65caf95d5"
+    },
+    {
+      "before_sampling": 37,
+      "chunks": 16,
+      "raw_sha256": "a2c7123d7436477e819b8e89a19b92058b55a38c18b4fea6527a83fbd8d05a14",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "0fd21a450c5176cda957e1f1deb3b338cad6992daecd94566f89292395852697"
+    },
+    {
+      "before_sampling": 4,
+      "chunks": 4,
+      "raw_sha256": "703d0ce96cefe8534031008434980f4609439d97a8176b37e3837a179647bd33",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "699628cea6379001e79b800c7f17d817d6b5c96319eb28a299d540cbb9d21239"
+    },
+    {
+      "before_sampling": 19,
+      "chunks": 16,
+      "raw_sha256": "4bc9ded8cfb65de1ae4c70c3886f64ec30ed4f546ce6a297d8fc14fb4729e9c3",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "e706b39eadf0cff93dcca5257b586dae2d9438b9424697273818639fc3db627b"
+    },
+    {
+      "before_sampling": 17,
+      "chunks": 16,
+      "raw_sha256": "3711905778a77b6a1ae669d0fc83e122242de89a670654ac0971ac5035c205f1",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d31eb2df0e2d0b9a8c016dc10525fc699d42d78efbeaeef40732225638daa5a2"
+    },
+    {
+      "before_sampling": 3,
+      "chunks": 3,
+      "raw_sha256": "b50cf8d5481aabb040002dfad9e6435e48fc54a303d0607f722bf1879071ad8b",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "ded4a040d2148d022975c24b573a5dd5f81d6aca905f8203c5ade8f7ab6ea8a1"
+    },
+    {
+      "before_sampling": 17,
+      "chunks": 16,
+      "raw_sha256": "126b886d75862b9521f0f48e3400d882e449e1bb39100011120b1529887d956e",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "682271da9d6d57f60bcec52d55ccdb69810467c483c7dcaf3d8958d2d16dc79d"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "a7239c5975128525e10791e9bded263247d63110126b278cf9886232fcc09c95",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "18f2a51f9eef827a89d66219f52c23a782772482ecc5574f4802748cfd2e591f"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2d5225aa27fc5ff220f2c21e868b68e3060e18af54faf70830e50b6d70f6f434",
+      "sector": "Technology",
+      "ticker": "MSFT",
+      "version": "9e7788888408669455fee9bfdcd3ff919c899ac1131bf2d942175a19bc6bc1c6"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "920ad7b41491e0e04941384eb62541b4da5f83b712fff66c1b2a585e44c760dc",
+      "sector": "Technology",
+      "ticker": "NVDA",
+      "version": "7e29e56de34ec27a030b666f66d500788ccfe50623a09e30e9469120f08dd07d"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "72c4ce09df931eaf0dbf83b0a8b6dd618e9cff8e99cbfcaa1232a0238003454f",
+      "sector": "Technology",
+      "ticker": "AMD",
+      "version": "8758582b6b13a2b4ff06443a9cece892733bbd895d2a13baa9014e2a24f6668a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0fe24f5d8b1b0161ce5e00c8659e5428354a3855f84c106b5423ed6a050f95a8",
+      "sector": "Financials",
+      "ticker": "JPM",
+      "version": "d0ef17e6f597ef855251eda5a05cf8fddcb0b75b5a9617d29dee9bb68646f534"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "801cac6ef5abb244bc97a67c4f690b4ada4286a6986fdab453a78e700a3006da",
+      "sector": "Financials",
+      "ticker": "BAC",
+      "version": "80a3ae360fdadc37bd9b1f4ccd5ac5062b53678a5e4dd0afa55c80c0c69f9783"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "093a8f3f9579af7ad84c57a9b0b0edbd5b049f20229e974bfbc4da4b1377e976",
+      "sector": "Financials",
+      "ticker": "GS",
+      "version": "35887f16b8c4d122c38cc9ca5b64cb32916b9abbc17baa746bc5bd7ffb3ec5c7"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0e116a737b419bae61a8b94a9afb55e8f846f916639422783bd54e115d844380",
+      "sector": "Healthcare",
+      "ticker": "JNJ",
+      "version": "506feb231e94349def9bae16972d638869e13ac4843d6c3f72071f5ef3665fbf"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "8e1108d7d09a32251e2aa9279ffbf0d5909eaf87115e6673df90fcd8a5d638c8",
+      "sector": "Healthcare",
+      "ticker": "PFE",
+      "version": "cf7d0af0d87320ecca4e351ee729be89ba26749a870cf9e823af67a7caaf2e32"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "d2cfe4b2e5cd7bc5ebe2b4d2705174bacd2e14a5e14beaf670ca42dda34eff7c",
+      "sector": "Healthcare",
+      "ticker": "UNH",
+      "version": "eb5894614245b32aba464f91ef6f474d1e3ecd82e5eb8ba122a448ce82546b4a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "1f5dc822e0eb29d36ee05c216d6422e69a860e1d6e88a7f203cc5c82824c0f7d",
+      "sector": "Consumer Discretionary",
+      "ticker": "AMZN",
+      "version": "9b90c53f1d413d8dbeb7d39dfdc34d957937b5e09600730002614550971fe4bf"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "bc9d3c526fe9b307d83a57df1123fa8a2b77f75c18fb2e37e019f7f1e76c8418",
+      "sector": "Consumer Discretionary",
+      "ticker": "TSLA",
+      "version": "b497fcba8a2a36917a82fc6edc337207d8f364b06588d25f4b94a6fdfaa9aedc"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2591ce36f805bde090a2cae3e2c5330e18c597eaa6b509331c3d8d0aeb57190e",
+      "sector": "Consumer Staples",
+      "ticker": "KO",
+      "version": "369c6cf6c7f8a8a67a2604792013acc3a66936b7e4590d1a20d3bb3c454276c3"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "73071e8014ecd6d870241e1aad57e5b5a30a2b41bba568e65a6d0ded83c1ba2b",
+      "sector": "Consumer Staples",
+      "ticker": "WMT",
+      "version": "171383b5b386827cf4a7794a7924703ef1e76a3bb4998d85eda263b484902105"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "282ae6eb0be6bdf278e5416469c68fe7c9c9116ba773c5f7d6725ca169808fb8",
+      "sector": "Energy",
+      "ticker": "XOM",
+      "version": "07d784ba02bc87983a1d99f3dea88e874b7c39e2a1aa19ade12b630d9b640099"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "884b908e105757211897378644dff4eb99008dd8ff8959333f70c5973248715a",
+      "sector": "Energy",
+      "ticker": "CVX",
+      "version": "a641016accec54fa9d58ec33d95767db277d6c959749f6c62df552ac3d9ff93e"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0cab4e8bf4a3f4fe9a70c10da6680535c8b6c775a946e61dbeae4ea3d3a053c0",
+      "sector": "Industrials",
+      "ticker": "CAT",
+      "version": "06d95246591d22961b4ab89b0755b3684d670b0e7327ec13a571af7b91891e52"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2625d2d6a9e0b54d4c8a3c5232825b08cd20ebf1536e1ff14623d8a188fc5565",
+      "sector": "Industrials",
+      "ticker": "BA",
+      "version": "3f7983b39486919bb9da7d0823a2cc7348bc63a3ce3e96247f8a7e2e9a57d0bf"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "d4250e0526806fd9cbe9a3166b8fdd7ba99fd631202c87cd5c9284ce905b688f",
+      "sector": "Communication Services",
+      "ticker": "GOOGL",
+      "version": "c269f55bbdd32daa0df6b103d8257ce99507247ca58126bcc19fb1af49d8fbfd"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "90b4ce64fc8a83d4dde99fa7d64076a6c70fc97ddea86ffda31a15a19505caef",
+      "sector": "Communication Services",
+      "ticker": "META",
+      "version": "97a8639f4ba07c630951a0497f22a865fa12f17d6d6faca28aed8390b214533a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "c4c378c505716376ffeb3ce91ea25c3344edba2828e7eae45b35a0621a5714d2",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1f9352f83e0a7c7cf1532984d5bf104701bd4ffce4dfad8ac6d06ef3f0c1ba79"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "32eb514593ec8898144a6745b14a71efe9a78e23cc04e20c717879a19e07a514",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d11b54de2201e96e50124de55999e1cf52879e0d8b431c2da1c4f00b14058f09"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "92569ce5a8f05be58478d64301b07483d4cb34739749820e84a61651dea0b140",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "f8205936971c0e8372cd6421519bf3ff09a35a9a3b568779cc821d6be24d9bc3"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "358bca6835872612523bb16fb3c18a5601f09c922e500c1d57f4cab8f71a4979",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "3b15cfba58a59c87e3b7209c24c4b82a422164038953257e2927808a4b28489a"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "4378797de1baa6c00fc808e5d34cdb415c4cb44ca70d9cab0c6961de25a4c54b",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "8d2200268ca69ee203075865c65ec16d7c3162ec439670b1e8dd1e163433c575"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "a08c746860d0860e10c557262eb19420ce56a97789acb02a52ba7b137ac99a25",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5ad56215a97b9ae10e02955aaafa5465379446437a7ce1827670819d802956f2"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "6f8a6c254adf7a617fc402dd1bc80694f1102728476d90ec695e22dcbaa32a0f",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "52d17a9f4ccefe38e4a58c56a74dbe82e2e95e0ce62569b0cae99775367169ff"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "8196b36b4b11b8774aab1552dc879778dc02bd721bd2e3040ce687fa2316576c",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "a7ea7248625648da5f62114828cfa73d7bb13129787a163933eb6c6255158f54"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "81144858b8ede59aec5c58a3469d74b31d29e44a6a3464790b316025ebdc10ae",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1f3b4727b4077f86b20f74dd7b49d39f5bc5fab5b8d3210bb222abe0dc546feb"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "c1ea290fd2f093dc5bd21e27129cdf179b77eb876985e5d0b2e4966fd3ce7fe7",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "e02a0dcb091f6080c4f1c5b7506030444becde5f974f153e0fa6e8298d4c7453"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0226df3a6528c028ba9c5439dfd59de2fc503739e12076cc5577fcc1fdca08b4",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "a1b54532582f3ecbdfcad9b8d74e266bfa589eb84d795a02190ad00a0ca571e1"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "5093b9377a85beb60b9902c6d3422769c21b0a763de6e1623832ada98b007ccd",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "4fff1defee46f2afc4524dec65a5e31b588ad69931b0bb1f8013f75ac2ae9d26"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "9bda07fe39c705c4fb81313e59f354606e253f26680af2590dda8bc605876201",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "869fa63c5e327bd921af4e424623a526ebbc5b608170808a10dc094e3b5c207f"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "fb9fc0f7fe266f7e80d112387b55efa0681a155f53a0f5c08ff09237a507dbd8",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "b4c0724816115ac446ae041734845b0eaecada53adee6773193f4140509e5418"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "b449b977d1f34685be06a481c177485a95a00a46b73e9f39aced7fc35f3a2ea5",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "bc64ecdfa3beadf5c3471b8f0b8866af6b696ee3a78a8a5f30402f12d522cda8"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "8e19e593995ed29eea2a10fa4c2fd3cd51a8e8cea149537164cf92f0abf46f7a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "4c91cc7f3686779243ebbfa0298996aff7727b1cc0585d8d2af134d08f7ae3b5"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "accbb31ed8fe845ca3ad4750d0b46ee3e060e4d68d7cd734b83deb46c4450789",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5886e47634caaae88692b2f90086fd0db3de1e2d2831656696ba3753298fed26"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "b0477110e3dc8330ba50503573a1cf909fc64f7d0395162f55bc3f5799f77ecc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "07db7a0d1f07465a76a07a4be0690862d8dc6f904a0c14458cb984e7328c6356"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "20bab955b465280115f669a5f5dcb085234c43f04043acf5536efcb2c659c75b",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "1422951ca807db5805fd1cc05754ed1592260cc9495ef3d7c6c98dc74f089cab"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "2761b221531bfaceae31bb72249307940b17c306c86496bb94898fbf2773a2e1",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "43a2af7b266e9c1202da1ac0cd502ecee4efd0cb18ff4477b9827327247a3352"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "a6e786bfc9bdfd7ea0c08eaf733ed126d3530b2cab0fab85f4d602c12436a8d7",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "e5fe86424ed713fb96e6bf00de7bad6dbd5befbadc318df97e8b3bdfd6f47305"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "54abb8872bcbfe5289d0a3c5cd786ba68255e9d74d46f10881eb5170c4e33d92",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "c85180ae2ac788cf92277c2f85fba3ddce35058f8018ce85346c74fe8d8a4617"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "74495b0fabaef6c28e90a321d705065083cd38ee2975b5d34d5f69feca364cb8",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "cb2eaf852d2e4a488f13eafaf82cfcaa805dec16e472b14eda14201d987decce"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "888f0ede5c537af5c3418bff6553013e2e09fc616e10466f6d7c35debb6ab74a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "145e8887030cf63b057efa825e4cd34110bb7fd7089ee0784be6270275437dd2"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "84bbc0c01390c011d6326623944a1b5e17c41bc93d59a4db7c1e62e6c0c73ba9",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "04beb5dbb4e0dbe8a2ffae8cef2157df288e30ae37c54009962a56a902471089"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "4844d0fe98b93a0fe9e71cb3ad6d3291c50204551a0d225b99b1e4678c8edadc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "4396af404fc57dd048768018718d0bbce0bf7e112b532bdb14ff1d8b9078a15d"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "be2e14780f27a4e7846f4567169c9583dcfd9bdc4bd4e1f5a91e83612731c02f",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "5c1406505165de0123a727fde504fff1f70ca8af7a0ec24b71ede290eebfc252"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0bdf55fe898850d3034aec2b3b7684f252a667031e7ee0c3b30810ad568e7643",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "23493f04a40c0d37a5d79fbf8f63e452ba4d718e5b03b86017e8a277208e08ea"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "e42038ce79b92979cb3b64f64a8d5f43f910ae6fa6469be1c6eaa720b788588a",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "cfbefaf34d824e90e543a11de329c8891087d3f4a8ac5bf55854d182d86c4db5"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "5b8dff49a26898a420b6608b6dd094c947620e0f9547fae4a6740b3faa1a5013",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "c4b054e74d2a3d51362c47816fb56fe2c1d757952ba250b36663a6e87bf17bbb"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "1c8f0c1a00030c2afdbb37e86ae0f69841f4472b9e0ccda4e0ef2a0f898e28cc",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "dacc9427213b6f99ed94b052021cd295f6afa7a5e48ed37d834c10acbce7c3bd"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "0c96a6244fa82a3097a3d459833f697dbe794a81cfcd09fd6ac71ddc6d01ffe9",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "caa7116a34b8c157158ac9faed14fb85df9b652c3ef2719c8acaa5e3b8e86304"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "09f94702fc6a2a1afbf00bcc8dd2ea971681e54e32d7858db24bf0a6c4f5741e",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "d3651492d8be86292bf8bef1ac318bc5ed73691daddb6c5f9e18558b307f4292"
+    },
+    {
+      "before_sampling": 1,
+      "chunks": 1,
+      "raw_sha256": "65c220221b48fd12bdf6fc2534e086dfddc94b8679d72d795fed1dfb88b78056",
+      "sector": "Technology",
+      "ticker": "AAPL",
+      "version": "3bee6ad698b4c28ce4cca6a792ea1f363df8ae51173073384b919ddc22d11b19"
+    }
+  ],
+  "elapsed_seconds": 821.141,
+  "encoder": {
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "device": "CPUExecutionProvider",
+    "dimension": 384,
+    "max_model_tokens": 512,
+    "name": "Xenova/bge-small-en-v1.5",
+    "normalization": "CLS then L2",
+    "revision": "ea104dacec62c0de699686887e3f920caeb4f3e3",
+    "weight_hashes": {
+      "model_quantized.onnx": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    }
+  },
+  "failures": [],
+  "index_bytes": 46388225,
+  "max_chunks_per_document": 16,
+  "partition": "expansion-v2",
+  "peak_rss_kib": 275628,
+  "peak_worker_rss_kib": 1200640,
+  "retrieval": [
+    "BM25",
+    "local dense cosine",
+    "RRF"
+  ],
+  "sectors": {
+    "Communication Services": 52,
+    "Consumer Discretionary": 53,
+    "Consumer Staples": 54,
+    "Energy": 54,
+    "Financials": 79,
+    "Healthcare": 78,
+    "Industrials": 53,
+    "Technology": 140
+  },
+  "source_manifest_sha256": "8cfbfc7990e740adf9bccbd81448b172f2e2b79b92cef05992b07f718641b6c0",
+  "tickers": {
+    "AAPL": 61,
+    "AMD": 26,
+    "AMZN": 25,
+    "BA": 26,
+    "BAC": 25,
+    "CAT": 27,
+    "CVX": 27,
+    "GOOGL": 26,
+    "GS": 27,
+    "JNJ": 26,
+    "JPM": 27,
+    "KO": 27,
+    "META": 26,
+    "MSFT": 26,
+    "NVDA": 27,
+    "PFE": 25,
+    "TSLA": 28,
+    "UNH": 27,
+    "WMT": 27,
+    "XOM": 27
+  },
+  "version": "rag-expansion-v2-003",
+  "workers": 4
+}

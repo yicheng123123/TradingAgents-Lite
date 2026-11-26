@@ -1,12 +1,14 @@
 import pytest
 
 from tradingagents_lite.data_v2_evaluation import acceptance_gates
-from tradingagents_lite.data_v2_corpus import compile_corpus
+from tradingagents_lite.data_v2_corpus import _prepare_chunks, compile_corpus
+from tradingagents_lite.documents import chunk_document, parse_document
 from tradingagents_lite.data_v2_market import write_json
 from tradingagents_lite.data_v2_sec import (
     SecCache, build_sec, choose_documents, collector_lock, exhibit_reference, progress_event,
 )
 from tradingagents_lite.evidence_http import SourceError
+from test_rag import document
 
 
 def test_checked_cache_reused_with_fresh_output_and_counted_without_network(tmp_path, monkeypatch):
@@ -51,6 +53,18 @@ def test_published_snapshots_are_immutable(tmp_path):
         build_sec(tmp_path, tmp_path / "old_cache", offline=True)
     with pytest.raises(FileExistsError, match="Research corpus already published"):
         compile_corpus(tmp_path, tmp_path / "news.json")
+
+
+def test_bounded_chunk_selection_spans_the_document(tmp_path, monkeypatch):
+    raw = ("<p>" + " ".join(f"word{i}" for i in range(4600)) + "</p>").encode()
+    doc = document(raw, ticker="AAPL")
+    monkeypatch.setattr("tradingagents_lite.data_v2_corpus._document", lambda *_: (doc, raw))
+    all_chunks = chunk_document(doc, parse_document(doc, raw), strategy="structure")
+    metadata, chunks, error = _prepare_chunks(None, cache=tmp_path, cap=16)
+    assert error is None and metadata["before_sampling"] == len(all_chunks)
+    assert metadata["chunks"] == len(chunks) == 16
+    assert chunks[0]["chunk_id"] == all_chunks[0]["chunk_id"]
+    assert chunks[-1]["chunk_id"] == all_chunks[-1]["chunk_id"]
 
 
 def test_earnings_exhibit_index_must_point_to_same_accession():
