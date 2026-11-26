@@ -290,7 +290,8 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                              memory=memory, a3=runtime,
                              max_tool_calls_per_round=model_config.get("max_tool_calls_per_round", 2),
                              compact_tool_results=model_config.get("compact_tool_results", False),
-                             flash_v2_prompt=model_config.get("protocol_version") == "b1-flash-v2"
+                             flash_v2_prompt=model_config.get("protocol_version") == "b1-flash-v2",
+                             flash_v3=model_config.get("protocol_version") == "b1-flash-v3",
                              ).invoke({}, {"recursion_limit": 40 if runtime else 30})
                     decision = Decision.model_validate(state["decision"])
                     model_error = any(e.get("stage") == "model" for e in state.get("errors", []))

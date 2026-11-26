@@ -85,6 +85,14 @@ def main():
                         help="Verified successful Flash Smoke archive required for Development")
     b1_v2.add_argument("--seed", type=int, default=42)
 
+    b1_v3 = sub.add_parser("b1-v3", help="Run or resume the frozen Flash V3 Smoke")
+    _add_frozen_paths(b1_v3)
+    b1_v3.add_argument("--evidence", type=Path, default=Path("data/financial-evidence-dev-003"))
+    b1_v3.add_argument("--b0-results", type=Path, default=Path("results/b0-development-001"))
+    b1_v3.add_argument("--output", type=Path, required=True)
+    b1_v3.add_argument("--resume", action="store_true", help="Continue pending instances in this V3 archive")
+    b1_v3.add_argument("--seed", type=int, default=42)
+
     a3 = sub.add_parser("a3", help="Run the optional multi-agent research graph")
     _add_frozen_paths(a3)
     a3.add_argument("--output", type=Path, required=True)
@@ -208,6 +216,17 @@ def main():
                                args.output, seed=args.seed, smoke_path=args.smoke)
             print(json.dumps(result, indent=2, ensure_ascii=False))
             if result["status"] != "completed":
+                raise SystemExit(2)
+            return
+        elif args.command == "b1-v3":
+            from .b1_v3 import run_b1_v3
+            result = run_b1_v3(args.tasks, args.data, args.evidence, args.b0_results, args.output,
+                               seed=args.seed, resume=args.resume)
+            print(json.dumps({key: result.get(key) for key in (
+                "status", "system_fault", "completed_instances", "failed_instances", "unattempted_instances",
+                "valid_pairs", "structured", "token_budget",
+            )}, indent=2, ensure_ascii=False))
+            if result["status"] != "completed" or result["valid_pairs"] != 2:
                 raise SystemExit(2)
             return
         elif args.command == "a3":

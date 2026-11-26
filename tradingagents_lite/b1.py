@@ -85,7 +85,8 @@ def _ledger_path() -> Path:
     return Path(os.getenv("TALITE_TOKEN_BUDGET_DB") or DEFAULT_LEDGER_PATH).expanduser()
 
 
-def _open_b1_budget(path: Path, scope: str, api_key_available: bool) -> TokenBudget | None:
+def _open_b1_budget(path: Path, scope: str, api_key_available: bool, *,
+                    smoke_limit: int = SMOKE_TOKEN_LIMIT) -> TokenBudget | None:
     if not api_key_available:
         return None
     if not path.is_file():
@@ -106,7 +107,7 @@ def _open_b1_budget(path: Path, scope: str, api_key_available: bool) -> TokenBud
         raise ValueError("The existing project token ledger is unreadable; refusing to initialize it") from exc
     if not required_columns.issubset(columns):
         raise ValueError("The existing project token ledger has no complete attempt schema; refusing to initialize it")
-    return TokenBudget(db_path=path, experiment_limit=SMOKE_TOKEN_LIMIT if scope == "smoke" else None)
+    return TokenBudget(db_path=path, experiment_limit=smoke_limit if scope == "smoke" else None)
 
 
 def _ledger_path_hash(path: Path) -> str:

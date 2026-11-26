@@ -7,9 +7,11 @@ from pydantic import ValidationError
 
 from .data import MarketView
 from .evidence import EvidenceView
-from .prompts import ANALYST_SYSTEM_PROMPT, ANALYST_SYSTEM_PROMPT_V2
+from .prompts import (ANALYST_SYSTEM_PROMPT, ANALYST_SYSTEM_PROMPT_V2, ANALYST_SYSTEM_PROMPT_V3,
+                      FINAL_JSON_V3, TRADER_SYSTEM_PROMPT_V3)
 from .provider import ModelCallError
 from .schema import Action, Budget, Decision, MarketReport, Proposal
+from .structured_output import StructuredOutput
 
 
 from .tool_registry import FINANCIAL_SPEC, RAG_SPEC, SPECS, ToolRegistry
@@ -71,6 +73,7 @@ class State(TypedDict, total=False):
     messages: list[dict]
     pending: list[dict]
     evidence: dict
+    context_ids: list[str]
     tool_trace: list[dict]
     rounds: int
     report: dict
@@ -189,7 +192,7 @@ def _valid_tool_calls(calls: list[dict], *, allowed: bool, maximum: int) -> bool
 def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bool = True,
                    financial: EvidenceView | None = None, *, rag=None, memory=None, a3=None, fundamentals=None,
                    max_tool_calls_per_round: int = 2, compact_tool_results: bool = False,
-                   flash_v2_prompt: bool = False):
+                   flash_v2_prompt: bool = False, flash_v3: bool = False):
     """Bind tools to a prefiltered single-task view, never to the outcome provider.
 
     The invariant analyst prompt is identical in B1-M and B1-E. B1-E differs only
@@ -197,6 +200,7 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
     """
     if not 1 <= max_tool_calls_per_round <= 4:
         raise ValueError("At most four tool calls per round are supported")
+    structured = StructuredOutput(backend) if flash_v3 else None
     tools_bound = ToolRegistry(view, financial, rag, fundamentals)
     registry = tools_bound.definitions
     if a3 is not None:
@@ -217,8 +221,9 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
         return _tool_content(result, compact=compact_tool_results)
 
     def start(_: State) -> dict:
-        messages = [{"role": "system", "content": ANALYST_SYSTEM_PROMPT_V2 if flash_v2_prompt
-                     else ANALYST_SYSTEM_PROMPT},
+        prompt = (ANALYST_SYSTEM_PROMPT_V3 if flash_v3 else
+                  ANALYST_SYSTEM_PROMPT_V2 if flash_v2_prompt else ANALYST_SYSTEM_PROMPT)
+        messages = [{"role": "system", "content": prompt},
             {"role": "user", "content": f"Analyze {view.task.symbol} after the {view.task.decision_date} session. "
              f"Target horizon: {view.task.horizon_sessions} sessions."}]
         evidence, trace = {}, []
@@ -250,9 +255,48 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
             messages.append({"role": "user", "content": tool_content(result)})
         return {"messages": messages, "evidence": evidence, "rounds": 0, "pending": [],
                 "errors": [], "tool_trace": trace, "structured_output_trace": [], "citation_trace": [],
-                **({"context_ids": sorted(context_ids)} if a3 is not None else {})}
+                **({"context_ids": sorted(context_ids)} if a3 is not None or flash_v3 else {})}
+
+    def structured_result(state, stage, messages, evidence, reply=None):
+        agent, key = ("analyst", "report") if stage == "market_report" else ("trader", "proposal")
+        try:
+            value, events, fault = structured.generate(stage, messages, evidence, reply)
+        except ModelCallError as exc:
+            value, events, fault = None, [], exc
+        result = {"structured_output_trace": [*state["structured_output_trace"], *events]}
+        if fault:
+            result["errors"] = [*state["errors"], {"stage": "model", "agent_stage": agent,
+                                                   "code": fault.code, "attempts": fault.attempts}]
+        elif value is None:
+            result["errors"] = [*state["errors"], {"stage": agent, "code": events[-1]["errors"][0]["type"]}]
+        else:
+            result[key] = value.model_dump(mode="json")
+            result["citation_trace"] = [*state["citation_trace"], _citation_event(stage, value.evidence_ids, evidence)]
+        return result
+
+    def analyst_v3(state: State) -> dict:
+        messages = state["messages"]
+        evidence = {key: state["evidence"][key] for key in state["context_ids"]}
+        final = [*messages, {"role": "user", "content": FINAL_JSON_V3}]
+        if react and state["rounds"] < budget.max_tool_rounds:
+            try:
+                reply = backend._call(messages, specs(registry), structured_stage="market_report")
+            except ModelCallError as exc:
+                return {"pending": [], "errors": [*state["errors"],
+                    {"stage": "model", "agent_stage": "analyst", "code": exc.code, "attempts": exc.attempts}]}
+            if reply.get("finish_reason") not in {None, "stop", "tool_calls"}:
+                return {"pending": [], **structured_result(state, "market_report", final, evidence, reply)}
+            calls = reply.get("tool_calls") or []
+            if calls:
+                if not _valid_tool_calls(calls, allowed=True, maximum=max_tool_calls_per_round):
+                    return {"pending": [], "errors": [*state["errors"], {"stage": "analyst", "code": "tool_budget"}]}
+                assistant = {key: reply[key] for key in ("role", "content", "tool_calls")}
+                return {"messages": [*messages, assistant], "pending": calls, "rounds": state["rounds"] + 1}
+        return {"pending": [], **structured_result(state, "market_report", final, evidence)}
 
     def analyst(state: State) -> dict:
+        if flash_v3:
+            return analyst_v3(state)
         allowed = react and state["rounds"] < budget.max_tool_rounds
         messages = state["messages"]
         if not allowed:
@@ -334,11 +378,21 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
             return {"evidence": evidence, "tool_trace": trace, "pending": [], "a3_stop": True,
                     "errors": [*state["errors"], {"stage": "tools", "code": a3.tool_fault}]}
         return {"messages": messages, "evidence": evidence, "tool_trace": trace, "pending": [],
-                **({"context_ids": sorted(context_ids)} if a3 is not None else {})}
+                **({"context_ids": sorted(context_ids)} if a3 is not None or flash_v3 else {})}
 
     def trader(state: State) -> dict:
         if "report" not in state:
             return {}
+        if flash_v3:
+            report = state["report"]
+            evidence = {key: state["evidence"][key] for key in report["evidence_ids"]}
+            compact = {key: (compact_result({"items": [item]})["items"][0]
+                             if "excerpt" in item else compact_result(item))
+                       for key, item in evidence.items()}
+            context = {"report": report, "evidence": compact}
+            messages = [{"role": "system", "content": TRADER_SYSTEM_PROMPT_V3},
+                        {"role": "user", "content": json.dumps(context, ensure_ascii=False, separators=(",", ":"))}]
+            return structured_result(state, "proposal", messages, evidence)
         memory_state = {}
         try:
             report = MarketReport.model_validate(state["report"])
@@ -422,7 +476,6 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
         return graph.compile()
 
     class A3State(WorkflowState, total=False):
-        context_ids: list[str]
         debate: dict
         debate_prior: dict
         debate_trace: list[dict]

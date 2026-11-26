@@ -123,10 +123,13 @@ class ModelBackend:
     def set_budget_context(self, *, experiment_id: str, task_id: str, phase: str) -> None:
         self.experiment_id, self.task_id, self.phase = experiment_id, task_id, phase
 
-    def _call(self, messages: list[dict], tools: list[dict]) -> dict:
+    def _call(self, messages: list[dict], tools: list[dict], *,
+              structured_stage: str | None = None, repair: bool = False) -> dict:
         options = {}
         if tools:
             options.update(tools=tools, tool_choice="auto")
+        elif structured_stage:
+            options["response_format"] = {"type": "json_object"}
         if self.provider_seed is not None:
             options["seed"] = self.provider_seed
         if self.model.lower().startswith("glm-5.3"):
@@ -284,6 +287,9 @@ class ModelBackend:
                 "error_code": response_error,
                 "response_id": getattr(result, "id", None), "actual_model": actual_model,
                 "finish_reason": finish_reason,
+                **({"structured_stage": structured_stage, "structured_repair": repair,
+                    "response_format": "json_object" if not tools else None,
+                    "response_bytes": len(content.encode("utf-8"))} if structured_stage else {}),
                 "tool_names": [item["function"]["name"] for item in calls],
                 "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens,
                 "reasoning_tokens": reasoning_tokens, "cached_tokens": cached_tokens,
@@ -291,7 +297,9 @@ class ModelBackend:
                 "reserved_tokens": reservation_tokens,
                 "latency_seconds": elapsed, "request_bytes": byte_count,
                 "request_sha256": request_sha, "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
-            if response_error:
+            if structured_stage and not identity_mismatch:
+                response["finish_reason"] = finish_reason
+            if response_error and not (structured_stage and output_truncated and not identity_mismatch):
                 raise ModelCallError(response_error, attempt + 1)
             return response
         raise ModelCallError("retry_budget_exhausted", self.max_retries + 1)
