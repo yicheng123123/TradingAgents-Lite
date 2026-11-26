@@ -19,13 +19,15 @@
 
 复用五日动量规则对同一 Development 任务结算。保存逐题轨迹、配置、数据 hash、Alpha、非 Hold 方向命中、覆盖率和置信区间。B0 与官方上游结果分开报告。
 
-## B1：真实 GLM Development Baseline（执行准备完成，真实调用待凭据）
+## B1：真实 GLM Development Baseline（续跑协议与离线校验完成，真实调用待凭据和既有账本）
 
-1. 先在 dev-01 / dev-02 上运行 B1-M 行情组与 B1-E 行情加 A0.5 证据组。
+1. 先在 dev-01 / dev-02 上运行 B1-M 行情组与 B1-E 行情加 A0.5 证据组；Smoke 成功轨迹可复用。
 2. 两组固定相同 GLM-5.3、temperature、token 上限、提示模板、工具轮数、重试、超时、风险门和结算；仅 B1-E 暴露时点过滤的金融证据工具。
 3. 对比模型响应身份、结构化输出、工具轨迹、证据引用、调用/重试、tokens、延迟和真实账单估算。
-4. 两题 smoke 是集成验证，不作为性能结论。确认预算上限后才运行 20 题 Development。
+4. 两题 smoke 是集成验证，不作为性能结论。成功后只运行剩余 18 题每组一次，并将其与 Smoke 合并成完整 20 题结果。
 5. B1 暂不启用向量 RAG、长期记忆、Bull/Bear Debate 或 MCP。现有有限本地 Function Calling 只用于读取截断行情及 A0.5 证据。
+
+6. 持久项目账本当前未找到，TALITE_API_KEY 在本次 WSL 会话中也不可见；代码会在账本不存在时 fail closed。恢复既有账本并安全设置密钥后，才可运行真实 GLM。
 
 旧编号映射：原 B2 RAG → A1，原 B3 Memory → A2，原 B4 多 Agent / MCP → A3，原 B5 评测 → B2 Benchmark / Ablation 与 B3 Final Holdout。
 

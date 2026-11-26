@@ -48,6 +48,18 @@ def clustered_bootstrap(rows: list[dict], seed: int) -> list[float] | None:
     return [samples[125], samples[4874]]
 
 
+def _percentile(values: list[float], percentile: float) -> float | None:
+    """Linear-interpolated percentile, deterministic for small task/call samples."""
+    if not values:
+        return None
+    ordered = sorted(values)
+    position = (len(ordered) - 1) * percentile
+    lower = int(position)
+    upper = min(lower + 1, len(ordered) - 1)
+    weight = position - lower
+    return ordered[lower] * (1 - weight) + ordered[upper] * weight
+
+
 def _cost(usage: dict, model_config: dict) -> float | None:
     if model_config.get("backend") == "offline":
         return 0.0
@@ -158,7 +170,31 @@ def _basic_summary(rows: list[dict], seed: int, model_config: dict) -> dict:
         "api_cost_cny_estimate": _cost(total_usage, model_config),
         "actual_models_observed": by_model,
         "latency_mean_seconds": statistics.fmean(task_latency) if task_latency else None,
+        "latency_p50_seconds": _percentile(task_latency, 0.50),
+        "latency_p95_seconds": _percentile(task_latency, 0.95),
         "llm_call_latency_mean_seconds": statistics.fmean(call_latency) if call_latency else None,
+        "llm_call_latency_p50_seconds": _percentile(call_latency, 0.50),
+        "llm_call_latency_p95_seconds": _percentile(call_latency, 0.95),
+        "input_tokens_per_task": (
+            total_usage["prompt_tokens"] / len(rows) if rows and usage_rows else None
+        ),
+        "output_tokens_per_task": (
+            total_usage["completion_tokens"] / len(rows) if rows and usage_rows else None
+        ),
+        "reasoning_tokens_per_task": (
+            total_usage["reasoning_tokens"] / len(rows) if rows and usage_rows else None
+        ),
+        "total_tokens_charged_per_task": (
+            total_usage["total_tokens_charged"] / len(rows) if rows and usage_rows else None
+        ),
+        "completed_tasks_per_100k_tokens": (
+            len(scored) * 100_000 / total_usage["total_tokens_charged"]
+            if total_usage["total_tokens_charged"] else None
+        ),
+        "directional_hits_per_100k_tokens": (
+            hits * 100_000 / total_usage["total_tokens_charged"]
+            if total_usage["total_tokens_charged"] else None
+        ),
         "token_usage": total_usage if usage_rows else None,
         "rag_recall_at_5": None,
         "rag_mrr": None,

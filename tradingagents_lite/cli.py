@@ -61,8 +61,19 @@ def main():
     b1.add_argument("--output", type=Path, required=True)
     b1.add_argument("--scope", choices=("smoke", "development"), default="smoke")
     b1.add_argument("--seed", type=int, default=42)
+    b1.add_argument("--resume-from", type=Path,
+                    help="Reuse a validated successful dev-01/dev-02 Smoke and run the remaining 18 tasks")
     b1.add_argument("--budget-cap-cny", type=float,
-                    help="Required for the 20-task Development run; must cover the conservative cost ceiling")
+                    help="Required for the 18-task continuation; must cover its conservative cost ceiling")
+
+    b1_merge = sub.add_parser("b1-merge", help="Validate and merge the B1 Smoke and 18-task continuation archives")
+    _add_frozen_paths(b1_merge)
+    b1_merge.add_argument("--evidence", type=Path, default=Path("data/financial-evidence-dev-003"))
+    b1_merge.add_argument("--b0-results", type=Path, default=Path("results/b0-development-001"))
+    b1_merge.add_argument("--smoke", type=Path, required=True)
+    b1_merge.add_argument("--continuation", type=Path, required=True)
+    b1_merge.add_argument("--output", type=Path, required=True)
+    b1_merge.add_argument("--seed", type=int, default=42)
 
     a3 = sub.add_parser("a3", help="Run the optional multi-agent research graph")
     _add_frozen_paths(a3)
@@ -169,7 +180,14 @@ def main():
         elif args.command == "b1":
             from .b1 import run_b1
             result = run_b1(args.scope, args.tasks, args.data, args.evidence, args.b0_results,
-                            args.output, args.seed, args.budget_cap_cny)
+                            args.output, args.seed, args.budget_cap_cny, args.resume_from)
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+            if result["status"] != "completed":
+                raise SystemExit(2)
+        elif args.command == "b1-merge":
+            from .b1 import merge_b1
+            result = merge_b1(args.smoke, args.continuation, args.tasks, args.data,
+                              args.evidence, args.b0_results, args.output, args.seed)
             print(json.dumps(result, indent=2, ensure_ascii=False))
             if result["status"] != "completed":
                 raise SystemExit(2)

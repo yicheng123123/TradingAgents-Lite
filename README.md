@@ -53,29 +53,41 @@ uv run --locked talite b0   --tasks tasks/development.jsonl   --data data/yahoo-
 
 ## 配置 GLM 并运行两题 B1 smoke
 
-模型名与 Base URL 有默认值。只需在 WSL 当前 shell 配置 Key；不要将 Key 写入仓库或聊天：
+模型名与 Base URL 有默认值。运行前还必须指向已有的项目 SQLite 账本；不要创建空账本替代它。只在 WSL 当前 shell 安全配置 Key，不要将 Key 写入仓库或聊天：
 
 ~~~sh
+# 先将此路径改为已存在且包含历史用量的项目账本。
+export TALITE_TOKEN_BUDGET_DB=/absolute/path/to/existing/token-budget.sqlite
 read -rsp "TALITE_API_KEY: " TALITE_API_KEY
 printf '\n'
 export TALITE_API_KEY
-uv run --locked talite b1   --scope smoke   --output results/b1-smoke-004
+uv run --locked talite b1 --scope smoke --output results/b1-smoke-004
 unset TALITE_API_KEY
 ~~~
 
-若成功，输出含 B1-M、B1-E 两组独立 run manifest、逐题 JSONL trajectory、汇总 CSV、逐题配对 Alpha 和报告。smoke 输出目录必须是新路径，程序不会覆盖已有结果。API Key 缺失时会记录明确的 blocked 状态，不会发出请求。
+若成功，输出含 B1-M、B1-E 两组独立 run manifest、逐题 JSONL trajectory、汇总 CSV、逐题配对 Alpha 和报告。smoke 输出目录必须是新路径，程序不会覆盖已有结果。API Key 缺失时会记录明确的 blocked 状态，不会发出请求；账本缺失时会失败关闭，不会创建一个空账本。
 
 两题 smoke 用于确认 GLM Function Calling、Pydantic 结构校验、证据引用、费用统计和结算链路。它不是性能结论。模型失败、无效引用与无法解析输出均留在失败分母，不会伪装成正常 Hold。
 
-## 扩大到 20 题
+## 复用 Smoke 完成 20 题
 
-先检查 B1 smoke 的模型身份、调用轨迹、费用和失败状态，再由项目维护者确认费用上限。全量运行需要显式传入不低于当前协议上限的预算，例如：
+Smoke 成功后，可复用 dev-01 / dev-02 的四条成功轨迹，仅执行另外 18 题。续跑前会核验原轨迹和 SQLite 账本记录；配置、模型身份或数据 hash 不一致时拒绝续跑。随后从两个只读来源生成完整 20 题归档，不会重算 Smoke Token，也不会改写来源归档。
 
 ~~~sh
-uv run --locked talite b1   --scope development   --budget-cap-cny 12   --output results/b1-development-001
+uv run --locked talite b1 --scope development \
+  --resume-from results/b1-smoke-004 \
+  --budget-cap-cny 10.036224 \
+  --output results/b1-development-remainder-001
+
+uv run --locked talite b1-merge \
+  --smoke results/b1-smoke-004 \
+  --continuation results/b1-development-remainder-001 \
+  --output results/b1-development-001
 ~~~
 
-若价格、模型预算或重试协议变化，应重新计算成本上限并新建实验配置，不覆盖旧归档。当前开发集不是 Holdout；本项目尚未访问最终 Holdout。
+剩余 18 题的保守请求上界是 885,888 tokens / ¥10.036224；与 Smoke 上界合计 984,320 tokens / ¥11.151360。Smoke 的独立硬上限仍是 120,000 tokens。实际执行还要求 `TALITE_API_KEY` 和已存在的项目账本；账本缺失时 B1 会停止，不会新建一个空账本并把历史累计当成零。密钥应在 Shell 中安全设置，不写进仓库。若价格、模型预算或重试协议变化，应冻结新协议并使用新目录。当前开发集不是 Holdout；本项目尚未访问最终 Holdout。
+
+续跑细节见[单独的 B1 Smoke 复用协议](docs/b1-resume-protocol.md)。
 
 ## 指标和边界
 

@@ -7,6 +7,7 @@
 - A0.5 evidence manifest：b46f9ef2ebc1c08022500282147940985eb9d3ceabe8cdaf78eec6efa190e4dc。
 - Evidence JSONL：b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532。
 - 不读取 Holdout，不改写 A0 / A0.5 归档。
+- Smoke 复用及 18 题续跑按[独立补充协议](b1-resume-protocol.md)执行；不改变本页冻结的模型、提示、工具或结算设置。
 
 程序在运行前校验以上 digest。smoke 固定 dev-01 / dev-02，分别为 AAPL 和 MSFT，决策日期相同。两组共用同一筛选任务文件，避免 task order 和 settlement 改变。
 
@@ -41,9 +42,9 @@ B1-M / B1-E 共用 Market Analyst 和 Trader 系统提示。E 组不追加提示
 | Paired smoke | 2 | 16 | 16 | 98,432 tokens / ¥1.115136 |
 | Full Development | 20 | 160 | 160 | 984,320 tokens / ¥11.151360 |
 
-两题 smoke 的保守上界 98,432 tokens 低于 120,000-token 实验硬上限；Full Development 的上界 984,320 低于 B1 阶段的 1,000,000-token 额度。项目总额度与其它阶段分配见[全局 Token 预算说明](learning/token-budget.md)。执行前会核对剩余余额，每次 HTTP 尝试再原子预留。失败、超时或 usage 缺失均不会按零 tokens 处理。实际模型用量以接口 usage 为准；reasoning 与 cached detail 不重复加到 provider 的 output / input 总量。账户折扣、缓存价格和最终账单可能不同。
+两题 smoke 的保守上界 98,432 tokens 低于 120,000-token 实验硬上限；其余 18 题上界 885,888 tokens。Smoke 与续跑合计 984,320，低于 B1 阶段的 1,000,000-token 额度。项目总额度与其它阶段分配见[全局 Token 预算说明](learning/token-budget.md)。执行前会核对现存账本的剩余额度，每次 HTTP 尝试再原子预留。失败、超时或 usage 缺失均不会按零 tokens 处理。实际模型用量以接口 usage 为准；reasoning 与 cached detail 不重复加到 provider 的 output / input 总量。账户折扣、缓存价格和最终账单可能不同。若持久账本不存在，B1 拒绝创建空账本并拒绝真实调用。
 
-Full Development 必须以 `--budget-cap-cny` 显式提供不少于 ¥11.151360 的估算额度，未提供或低于封顶时 CLI 拒绝运行。扩大范围前先审阅真实 smoke 用量，并由运行者确认费用预算。当前未收到真实模型响应，尚无 B1 真实 usage、成本或成绩。
+续跑必须以 `--budget-cap-cny` 显式提供不少于 ¥10.036224 的剩余 18 题估算额度，未提供或低于封顶时 CLI 拒绝运行。Smoke 全部成功后才能继续；B1 merge 会把两份轨迹重排成原 20 题并从轨迹重算统计，Smoke 的账本尝试只计一次。当前未收到真实模型响应，尚无 B1 真实 usage、成本或成绩。
 
 ## 结算与失败
 
