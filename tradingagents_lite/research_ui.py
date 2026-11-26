@@ -109,7 +109,7 @@ def new_run_id():
 def token_dashboard(path: Path | None = None):
     path = path or Path(os.getenv("TALITE_TOKEN_BUDGET_DB") or DEFAULT_LEDGER_PATH)
     records = []
-    glm_estimate = None
+    estimate_by_model = {}
     if path.is_file():
         con = sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)
         con.row_factory = sqlite3.Row
@@ -121,15 +121,27 @@ def token_dashboard(path: Path | None = None):
                        SUM(COALESCE(cached_tokens,0)) AS cached, SUM(COALESCE(reasoning_tokens,0)) AS reasoning
                 FROM token_attempts GROUP BY phase
             """)]
-            bill = con.execute("""
-                SELECT SUM(input_tokens), SUM(output_tokens), COUNT(*) FROM token_attempts
-                WHERE usage_known=1 AND model='glm-5.3'
-            """).fetchone()
-            if bill[2]:
-                from .b1 import PRICE_CNY_PER_MILLION
-
-                glm_estimate = (bill[0]*PRICE_CNY_PER_MILLION["input"] +
-                                bill[1]*PRICE_CNY_PER_MILLION["output"]) / 1_000_000
+            bills = con.execute("""
+                SELECT model, SUM(input_tokens) AS input, SUM(output_tokens) AS output,
+                       SUM(cached_tokens) AS cached,
+                       SUM(CASE WHEN reasoning_tokens > output_tokens
+                                THEN reasoning_tokens-output_tokens ELSE 0 END) AS separate_reasoning,
+                       COUNT(*) AS attempts
+                FROM token_attempts WHERE usage_known=1 GROUP BY model
+            """).fetchall()
+            rates = {
+                "glm-5.3": {"input": 8.0, "cached_input": 2.0, "output": 28.0},
+                "glm-5.3-flash": {"input": 0.8, "cached_input": 0.23, "output": 2.8},
+            }
+            for bill in bills:
+                price = rates.get(bill["model"])
+                if price and bill["attempts"]:
+                    prompt = bill["input"] or 0
+                    cached = min(bill["cached"] or 0, prompt)
+                    estimate_by_model[bill["model"]] = (
+                        (prompt-cached)*price["input"] + cached*price["cached_input"] +
+                        ((bill["output"] or 0) + (bill["separate_reasoning"] or 0))*price["output"]
+                    ) / 1_000_000
         finally:
             con.close()
     indexed = {row["phase"]: row for row in records}
@@ -143,4 +155,6 @@ def token_dashboard(path: Path | None = None):
              for key in ("settled", "pending", "input", "output", "cached", "reasoning")}
     return {"exists": path.is_file(), "limit": GLOBAL_TOKEN_LIMIT, **total,
             "remaining": max(0, GLOBAL_TOKEN_LIMIT-total["settled"]-total["pending"]),
-            "phases": phases, "list_price_estimate_cny": glm_estimate, "invoice_cny": None}
+            "phases": phases,
+            "list_price_estimates_cny": estimate_by_model,
+            "list_price_estimate_cny": estimate_by_model.get("glm-5.3"), "invoice_cny": None}

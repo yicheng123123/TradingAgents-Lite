@@ -16,7 +16,7 @@ BALANCE_PATH = "/api/biz/account/query-customer-account-report"
 PACKAGES_PATH = "/api/biz/tokenAccounts/list/my"
 CACHE_TTL = timedelta(seconds=60)
 CONSOLE_TZ = timezone(timedelta(hours=8))
-MODEL = "glm-5.3"
+MODEL = "glm-5.3-flash"
 STATUS_ISSUES = {401: "Authentication required", 403: "Access denied", 429: "Rate limited"}
 
 
@@ -136,15 +136,19 @@ def _packages(body: dict, now: datetime) -> ResourcePackages:
         category = f"{label} {purpose}"
         if any(marker in category for marker in ("coding", "glm code", "编程", "private_instance")):
             continue
-        status = row.get("displayStatus") or row.get("status")
+        status = str(row.get("status") or "").upper()
+        display_status = str(row.get("displayStatus") or "").upper()
         expires_at = _expiration(row.get("packageExpirationTime"))
-        if status in ("EXPIRED", "USED_UP") or (expires_at is not None and expires_at <= now):
+        if status in ("EXPIRED", "USED_UP") or display_status in ("EXPIRED", "USED_UP") or (
+                expires_at is not None and expires_at <= now):
             continue
         unit = row.get("consumeType")
         models = _models(row)
         if unit == "TIMES" or (models and MODEL not in models):
             continue
-        if not label or unit != "TOKENS" or MODEL not in models or status != "EFFECTIVE" or expires_at is None:
+        statuses = [value for value in (status, display_status) if value]
+        active_status = bool(statuses) and all(value in {"ACTIVE", "EFFECTIVE"} for value in statuses)
+        if not label or unit != "TOKENS" or MODEL not in models or not active_status or expires_at is None:
             complete = False
             continue
         remaining = _tokens(row.get("tokenBalance"))

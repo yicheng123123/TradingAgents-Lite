@@ -1,5 +1,8 @@
 # B1 实验协议
 
+> 本文描述已归档的 B1 V1 GLM-5.3 协议。新 Flash 实验使用独立的
+> [B1 Flash V2 协议](b1-v2-protocol.md)；本页、V1 轨迹与 V1 Token 账本均保留。
+
 ## 冻结输入
 
 - Development 集：20 个固定 ticker/date 单元，SHA-256 为 2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae。
@@ -44,7 +47,7 @@ B1-M / B1-E 共用 Market Analyst 和 Trader 系统提示。E 组不追加提示
 
 两题 smoke 的保守上界 98,432 tokens 低于 120,000-token 实验硬上限；其余 18 题上界 885,888 tokens。Smoke 与续跑合计 984,320，低于 B1 阶段的 1,000,000-token 额度。项目总额度与其它阶段分配见[全局 Token 预算说明](learning/token-budget.md)。执行前会核对现存账本的剩余额度，每次 HTTP 尝试再原子预留。失败、超时或 usage 缺失均不会按零 tokens 处理。实际模型用量以接口 usage 为准；reasoning 与 cached detail 不重复加到 provider 的 output / input 总量。账户折扣、缓存价格和最终账单可能不同。若持久账本不存在，B1 拒绝创建空账本并拒绝真实调用。
 
-续跑必须以 `--budget-cap-cny` 显式提供不少于 ¥10.036224 的剩余 18 题估算额度，未提供或低于封顶时 CLI 拒绝运行。Smoke 全部成功后才能继续；B1 merge 会把两份轨迹重排成原 20 题并从轨迹重算统计，Smoke 的账本尝试只计一次。当前未收到真实模型响应，尚无 B1 真实 usage、成本或成绩。
+V1 后续真实 GLM-5.3 Smoke 归档在 `results/b1-smoke-004`：1/4 实例完成、0 个有效配对，实际记录 5,057 tokens。失败原因为 5,326-byte 请求超出 V1 的 5,000-byte 限制，以及响应请求了每轮 3/4 个工具、超过当时的 2 个上限。该归档、协议参数和账本记录保留；它们不纳入 Flash V2 成绩。Flash V2 的独立协议和后续结果见 [b1-v2-protocol.md](b1-v2-protocol.md)。
 
 ## 结算与失败
 

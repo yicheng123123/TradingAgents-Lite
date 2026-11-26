@@ -5,13 +5,15 @@ import os
 from time import perf_counter
 from urllib.parse import urlsplit
 
+import httpx
 from openai import APIConnectionError, APIStatusError, APITimeoutError, InternalServerError, OpenAI, RateLimitError
 
 from .prompts import TRADER_SYSTEM_PROMPT
 from .schema import Budget, MarketReport, Proposal
 from .token_budget import TokenBudget, TokenBudgetExceeded
 
-DEFAULT_MODEL = "glm-5.3"
+DEFAULT_MODEL = "glm-5.3-flash"
+LEGACY_B1_MODEL = "glm-5.3"
 DEFAULT_BASE_URL = "https://open.bigmodel.cn/api/paas/v4"
 DEFAULT_TEMPERATURE = 0.0
 DEFAULT_REASONING_EFFORT = "low"
@@ -35,7 +37,7 @@ def _usage_detail(details, key: str) -> int | None:
     return int(value) if value is not None else None
 
 
-def _trader_context(evidence: dict) -> dict:
+def _trader_context(evidence: dict, *, excerpt_limit: int = 800) -> dict:
     """Drop repeated transport and availability metadata from the Trader prompt."""
     compact = {}
     for evidence_id, item in evidence.items():
@@ -56,7 +58,7 @@ def _trader_context(evidence: dict) -> dict:
             compact[evidence_id].update({
                 "title": metadata.get("title"),
                 "publisher": metadata.get("publisher"),
-                "excerpt": (item.get("excerpt") or "")[:800],
+                "excerpt": (item.get("excerpt") or "")[:excerpt_limit],
             })
         else:
             compact[evidence_id] = {
@@ -100,10 +102,12 @@ class ModelBackend:
                  max_prompt_bytes: int = DEFAULT_MAX_PROMPT_BYTES,
                  temperature: float = DEFAULT_TEMPERATURE,
                  reasoning_effort: str = DEFAULT_REASONING_EFFORT,
-                 token_budget: TokenBudget | None = None, phase: str = "B1"):
+                 token_budget: TokenBudget | None = None, phase: str = "B1",
+                 require_model_identity: bool = False, compact_context: bool = False):
         self.client, self.model, self.budget, self.provider_seed = client, model, budget, provider_seed
         self.max_retries, self.max_prompt_bytes = max_retries, max_prompt_bytes
         self.temperature, self.reasoning_effort = temperature, reasoning_effort
+        self.require_model_identity, self.compact_context = require_model_identity, compact_context
         self.token_budget = token_budget or TokenBudget()
         self.phase = phase
         self.experiment_id = "unbound-experiment"
@@ -209,6 +213,7 @@ class ModelBackend:
                     self.usage["cached_detail_missing_calls"] += 1
             try:
                 message = result.choices[0].message
+                finish_reason = getattr(result.choices[0], "finish_reason", None)
                 content = message.content or ""
                 if not isinstance(content, str):
                     content = json.dumps(content, ensure_ascii=False)
@@ -246,6 +251,11 @@ class ModelBackend:
                     "latency_seconds": elapsed, "request_bytes": byte_count,
                     "request_sha256": request_sha, "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
                 raise ModelCallError("invalid_response_shape", attempt + 1) from None
+            actual_model = getattr(result, "model", None)
+            identity_mismatch = self.require_model_identity and actual_model != self.model
+            output_truncated = self.require_model_identity and finish_reason == "length"
+            response_error = ("model_identity_mismatch" if identity_mismatch else
+                              "output_truncated" if output_truncated else None)
             if not usage_complete:
                 self.usage["missing_usage_calls"] += 1
                 charged_tokens = self.token_budget.settle_unknown(
@@ -255,7 +265,9 @@ class ModelBackend:
             else:
                 charged_tokens = self.token_budget.settle_usage(
                     reservation_id, input_tokens=prompt_tokens, output_tokens=completion_tokens,
-                    reasoning_tokens=reasoning_tokens, cached_tokens=cached_tokens)
+                    reasoning_tokens=reasoning_tokens, cached_tokens=cached_tokens,
+                    status="failed" if response_error else "succeeded",
+                    error_code=response_error)
                 self.usage["prompt_tokens"] += prompt_tokens
                 self.usage["completion_tokens"] += completion_tokens
                 self.usage["reasoning_tokens"] += reasoning_tokens or 0
@@ -265,8 +277,13 @@ class ModelBackend:
             self.usage["total_tokens_charged"] += charged_tokens
             if calls:
                 response["tool_calls"] = calls
-            self.call_log.append({"logical_call": logical_call, "attempt": attempt + 1, "status": "ok",
-                "response_id": getattr(result, "id", None), "actual_model": getattr(result, "model", None),
+            if response_error:
+                self.usage["failed_calls"] += 1
+            self.call_log.append({"logical_call": logical_call, "attempt": attempt + 1,
+                "status": "error" if response_error else "ok",
+                "error_code": response_error,
+                "response_id": getattr(result, "id", None), "actual_model": actual_model,
+                "finish_reason": finish_reason,
                 "tool_names": [item["function"]["name"] for item in calls],
                 "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens,
                 "reasoning_tokens": reasoning_tokens, "cached_tokens": cached_tokens,
@@ -274,6 +291,8 @@ class ModelBackend:
                 "reserved_tokens": reservation_tokens,
                 "latency_seconds": elapsed, "request_bytes": byte_count,
                 "request_sha256": request_sha, "prompt_sha256": prompt_sha, "tools_sha256": tools_sha})
+            if response_error:
+                raise ModelCallError(response_error, attempt + 1)
             return response
         raise ModelCallError("retry_budget_exhausted", self.max_retries + 1)
 
@@ -317,7 +336,8 @@ class ModelBackend:
         return self._trader(report, evidence, memory)
 
     def _trader(self, report: MarketReport, evidence: dict, memory: list[dict] | None) -> Proposal:
-        inputs = {"report": report.model_dump(), "evidence": _trader_context(evidence)}
+        inputs = {"report": report.model_dump(), "evidence": _trader_context(
+            evidence, excerpt_limit=320 if self.compact_context else 800)}
         if memory:
             inputs["historical_experience"] = memory
             inputs["experience_usage"] = (
@@ -333,13 +353,16 @@ class ModelBackend:
         return Proposal.model_validate_json(result["content"])
 
 
-def client_from_env() -> tuple[OpenAI, str, str]:
+def client_from_env(*, default_model: str = DEFAULT_MODEL, trust_env: bool = True,
+                    follow_redirects: bool = True) -> tuple[OpenAI, str, str]:
     key = os.getenv("TALITE_API_KEY", "")
-    model = os.getenv("TALITE_MODEL", DEFAULT_MODEL)
+    model = os.getenv("TALITE_MODEL", default_model)
     base = os.getenv("TALITE_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
     if not key:
         raise ValueError("LLM mode requires TALITE_API_KEY; TALITE_MODEL and TALITE_BASE_URL have GLM defaults")
     url = urlsplit(base)
     if url.scheme != "https" or not url.hostname or url.username or url.password or url.query or url.fragment:
         raise ValueError("Set a credential-free HTTPS API base URL")
-    return OpenAI(api_key=key, base_url=base, max_retries=0, timeout=25), model, url.hostname
+    http_client = httpx.Client(trust_env=trust_env, follow_redirects=follow_redirects)
+    return OpenAI(api_key=key, base_url=base, max_retries=0, timeout=25,
+                  http_client=http_client), model, url.hostname

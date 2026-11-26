@@ -6,7 +6,7 @@ import httpx
 import pytest
 
 from tradingagents_lite.zhipu_account import (
-    BALANCE_PATH, CACHE_TTL, PACKAGES_PATH, account_snapshot,
+    BALANCE_PATH, CACHE_TTL, MODEL, PACKAGES_PATH, account_snapshot,
 )
 
 
@@ -20,7 +20,7 @@ def package(**changes):
         "resourcePackageName": "Model inference package",
         "displayStatus": "EFFECTIVE",
         "consumeType": "TOKENS",
-        "suitableScene": "GLM-5.3, glm-4.7",
+        "suitableModel": MODEL,
         "packageExpirationTime": "2099-04-05 23:00:00",
         "tokenBalance": "2100",
         "availableBalance": 2000,
@@ -49,7 +49,7 @@ def test_console_response_uses_fixed_https_bearer_and_disjoint_units(monkeypatch
             package(),
             package(packageExpirationTime="2000-01-01T00:00:00+08:00"),
             package(displayStatus="EXPIRED"),
-            package(suitableScene="glm-5.3-trial"),
+            package(suitableModel="glm-5.3-trial"),
             package(resourcePackageName="GLM Coding Plan"),
             package(consumeType="TIMES"),
         ]
@@ -140,8 +140,8 @@ def test_business_error_or_schema_change(payload, issue):
 
 def test_partial_balances_and_uncertain_package_scope():
     packages = [
-        package(suitableScene="不适用于 GLM-5.3"),
-        package(suitableScene="所有按 tokens 计费的模型"),
+        package(suitableModel="不适用于 GLM-5.3-Flash"),
+        package(suitableModel="所有按 tokens 计费的模型"),
         package(packageExpirationTime="2099-04-05"),
         package(availableBalance=None),
     ]
@@ -156,3 +156,22 @@ def test_partial_balances_and_uncertain_package_scope():
     assert not result.packages.value.complete
     active, = result.packages.value.active(datetime.now(UTC))
     assert active.available_tokens is None
+
+
+def test_flash_scope_accepts_console_active_rows_and_excludes_other_models():
+    rows = [
+        package(status="EFFECTIVE", displayStatus="ACTIVE", tokenBalance=12345,
+                availableBalance=12000, suitableModel="glm-5.3-flash"),
+        package(suitableModel="glm-5.3-flashx", tokenBalance=3000000),
+        package(suitableModel="glm-5.3", tokenBalance=2000000),
+        package(suitableModel="all token models"),
+    ]
+    result = account_snapshot(refresh=True, transport=httpx.MockTransport(
+        lambda request: httpx.Response(200, json=(
+            {"success": True, "data": {"availableBalance": 0}}
+            if request.url.path == BALANCE_PATH else {"code": 200, "rows": rows, "total": len(rows)}
+        )),
+    ))
+    assert result.packages.value.complete is False
+    active, = result.packages.value.active(datetime.now(UTC))
+    assert (active.remaining_tokens, active.available_tokens) == (12345, 12000)

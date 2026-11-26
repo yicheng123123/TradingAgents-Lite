@@ -39,7 +39,7 @@ def bigmodel_account():
             column.metric(label, f"¥{amount:,.2f}" if amount is not None else "Unavailable")
         st.caption(account_status(snapshot.balance, now))
     with resources:
-        section("GLM-5.3 resource packages")
+        section("GLM-5.3-Flash resource packages")
         packages = snapshot.packages.value
         active = packages.active(now) if packages is not None else ()
         for column, label, field in zip(st.columns(2), ("Remaining Tokens", "Available Tokens"),
@@ -98,10 +98,13 @@ def local_budget(block):
 
 def details(block):
     section("Token and cost details")
-    estimate = block["list_price_estimate_cny"]
+    estimates = block.get("list_price_estimates_cny", {})
     stats(*[(label, compact(block[key]), f'{number(block[key])} Tokens') for label, key in
             (("Input", "input"), ("Output", "output"), ("Cached input", "cached"), ("Reasoning", "reasoning"))],
-          ("GLM-5.3 list-price estimate", f"¥{estimate:,.4f}" if estimate is not None else "Unavailable", None),
+          ("GLM-5.3-Flash list-price estimate",
+           f"¥{estimates['glm-5.3-flash']:,.4f}" if "glm-5.3-flash" in estimates else "Unavailable", None),
+          ("GLM-5.3 list-price estimate",
+           f"¥{estimates['glm-5.3']:,.4f}" if "glm-5.3" in estimates else "Unavailable", None),
           ("Provider invoice", "Unavailable", None))
     st.caption("Cached tokens are a subset of input. Reasoning is a provider-reported detail.")
     st.dataframe([{key.title(): row[key] for key in ("phase", "input", "output", "cached", "reasoning")}

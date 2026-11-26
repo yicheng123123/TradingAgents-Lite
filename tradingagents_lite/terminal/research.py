@@ -7,6 +7,7 @@ from .. import research_ui
 from ..agents import A3Config
 from ..data import DataError, close_available
 from ..experiment import upper_tokens
+from ..provider import DEFAULT_MODEL
 from . import archive
 from .charts import market_chart
 from .design import badge, empty, flow, heading, html, kv, ms, number, percent, section
@@ -56,11 +57,15 @@ def controls():
     st.caption(f"RAG {rag} · {memory} · {debate} · {transport}")
     allowed = True
     if backend == "LLM":
+        requested_model = os.getenv("TALITE_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
+        st.caption(f"Requested model: {requested_model} · default: {DEFAULT_MODEL}")
+        if requested_model != "glm-5.3-flash":
+            st.warning("The configured model is not GLM-5.3-Flash and may not use Flash-only resource packages.")
         st.metric("Estimated token ceiling", f"{upper_tokens(config):,}")
         keyed = bool(os.getenv("TALITE_API_KEY", "").strip())
         if not keyed:
             st.warning("TALITE_API_KEY is unavailable. Offline research is ready.")
-        approved = st.checkbox("Authorize one paid GLM run", key="approve_paid")
+        approved = st.checkbox("Authorize one real GLM run", key="approve_paid")
         allowed = keyed and approved
     if st.button("Run frozen task", type="primary", key="execute", disabled=not tasks or not allowed,
                  width="stretch"):

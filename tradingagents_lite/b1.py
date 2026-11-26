@@ -12,7 +12,7 @@ import subprocess
 from .data import read_tasks, sha256
 from .evidence import EvidenceStore
 from .provider import (
-    DEFAULT_BASE_URL, DEFAULT_MODEL, DEFAULT_REASONING_EFFORT, DEFAULT_TEMPERATURE,
+    DEFAULT_BASE_URL, LEGACY_B1_MODEL as DEFAULT_MODEL, DEFAULT_REASONING_EFFORT, DEFAULT_TEMPERATURE,
     ModelBackend, client_from_env,
 )
 from .prompts import prompt_hashes
@@ -44,6 +44,14 @@ SETTLEMENT_PROTOCOL = "next shared session open to horizon-th shared session clo
 RESUME_PROTOCOL_VERSION = "b1-smoke-reuse-v1"
 RESUME_PROTOCOL_DOCUMENT = Path(__file__).resolve().parents[1] / "docs" / "b1-resume-protocol.md"
 
+# Independently frozen Flash protocol; leave the legacy GLM-5.3 constants above unchanged.
+B1_V2_PROTOCOL_VERSION = "b1-flash-v2"
+B1_V2_MODEL = "glm-5.3-flash"
+B1_V2_MAX_TOOL_CALLS_PER_ROUND = 4
+B1_V2_MAX_PROMPT_BYTES = 8_000
+B1_V2_PRICE_CNY_PER_MILLION = {"input": 0.8, "cached_input": 0.23, "output": 2.8}
+B1_V2_PRICE_SOURCE = "https://docs.bigmodel.cn/cn/guide/start/pricing"
+B1_V2_PRICE_AS_OF = "2026-11-26"
 
 def _json_hash(value) -> str:
     encoded = json.dumps(value, ensure_ascii=False, sort_keys=True,
@@ -155,7 +163,8 @@ def _read_ledger_attempts(path: Path, experiment_id: str) -> list[dict]:
 
 
 def _verify_ledger_records(rows: list[dict], attempts: list[dict], *,
-                           manifest: dict, ledger_path: Path) -> dict:
+                           manifest: dict, ledger_path: Path,
+                           expected_model: str = DEFAULT_MODEL) -> dict:
     budget = manifest.get("token_budget") or {}
     experiment_id = budget.get("experiment_id")
     if not experiment_id:
@@ -197,7 +206,7 @@ def _verify_ledger_records(rows: list[dict], attempts: list[dict], *,
         if len(group_calls) != len(group_attempts):
             raise ValueError("B1 trajectory and token ledger request multiplicities do not match")
         for call, item in zip(group_calls, sorted(group_attempts, key=lambda record: record["id"])):
-            if item.get("model") != DEFAULT_MODEL:
+            if item.get("model") != expected_model:
                 raise ValueError("B1 request model differs from the token ledger")
             status = call.get("status")
             ledger_status = item.get("status")
@@ -1117,7 +1126,7 @@ def run_b1(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path,
         paired = None
         manifest["b1_m_and_b1_e"] = {"status": "not_run", "reason": "insufficient_token_budget"}
     else:
-        client, configured_model, api_host = client_from_env()
+        client, configured_model, api_host = client_from_env(default_model=DEFAULT_MODEL)
         if configured_model != DEFAULT_MODEL or api_host != "open.bigmodel.cn":
             client.close()
             raise ValueError("Resolved GLM endpoint/model differs from the frozen B1 protocol")

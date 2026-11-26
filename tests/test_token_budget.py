@@ -196,3 +196,98 @@ def test_success_without_usage_keeps_full_reservation(tmp_path):
     assert attempt["charged_tokens"] == attempt["reservation_tokens"]
     assert backend.usage["missing_usage_calls"] == 1
     assert backend.usage["total_tokens_charged"] == attempt["reservation_tokens"]
+
+
+def test_flash_v2_accepts_the_previous_5326_byte_prompt_under_new_cap(tmp_path):
+    captured = []
+
+    def handler(request):
+        body = json.loads(request.content)
+        captured.append(body)
+        return httpx.Response(200, json={
+            "id": "flash-prompt-limit-regression", "object": "chat.completion", "created": 1,
+            "model": "glm-5.3-flash",
+            "choices": [{"index": 0, "message": {"role": "assistant", "content": "{}"},
+                         "finish_reason": "stop"}],
+            "usage": {"prompt_tokens": 100, "completion_tokens": 2, "total_tokens": 102},
+        })
+
+    messages = [{"role": "user", "content": ""}]
+    tools = []
+    target = 5326
+    low, high = 0, target
+    while low <= high:
+        middle = (low + high) // 2
+        messages[0]["content"] = "x" * middle
+        size = len(json.dumps({"messages": messages, "tools": tools}, ensure_ascii=False,
+                              sort_keys=True, separators=(",", ":"), default=str).encode("utf-8"))
+        if size == target:
+            break
+        if size < target:
+            low = middle + 1
+        else:
+            high = middle - 1
+    else:
+        raise AssertionError("could not construct the exact archived request size")
+
+    client = OpenAI(api_key="offline-test-token-only", base_url="https://open.bigmodel.cn/api/paas/v4",
+                    http_client=httpx.Client(transport=httpx.MockTransport(handler)), max_retries=0)
+    backend = ModelBackend(client, "glm-5.3-flash", Budget(max_tokens=512), None,
+        max_retries=0, max_prompt_bytes=8000, require_model_identity=True,
+        token_budget=TokenBudget(tmp_path / "flash.sqlite"))
+    try:
+        assert backend._call(messages, tools)["content"] == "{}"
+    finally:
+        client.close()
+    assert len(captured) == 1 and backend.call_log[0]["request_bytes"] == 5326
+    assert captured[0]["model"] == "glm-5.3-flash"
+    assert captured[0]["max_tokens"] == 512
+    assert captured[0]["thinking"] == {"type": "enabled"}
+    assert captured[0]["reasoning_effort"] == "low"
+
+
+def test_flash_v2_rejects_a_different_actual_model_and_keeps_usage_charged(tmp_path):
+    from types import SimpleNamespace
+
+    response = SimpleNamespace(
+        id="wrong-model-response", model="glm-5.3",
+        choices=[SimpleNamespace(message=SimpleNamespace(content="{}", tool_calls=None))],
+        usage=SimpleNamespace(prompt_tokens=20, completion_tokens=5,
+            prompt_tokens_details=SimpleNamespace(cached_tokens=0),
+            completion_tokens_details=SimpleNamespace(reasoning_tokens=2)),
+    )
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=lambda **kwargs: response)))
+    ledger = TokenBudget(tmp_path / "wrong-model.sqlite")
+    backend = ModelBackend(client, "glm-5.3-flash", Budget(max_tokens=512), None, max_retries=0,
+        require_model_identity=True, token_budget=ledger)
+    with pytest.raises(ModelCallError, match="model_identity_mismatch"):
+        backend._call([{"role": "user", "content": "offline identity check"}], [])
+    attempt, = ledger.attempts()
+    assert attempt["model"] == "glm-5.3-flash"
+    assert attempt["status"] == "failed" and attempt["charged_tokens"] == 25
+    assert backend.call_log[0]["actual_model"] == "glm-5.3"
+    assert backend.call_log[0]["error_code"] == "model_identity_mismatch"
+
+
+def test_flash_v2_records_and_rejects_truncated_output_without_retry(tmp_path):
+    from types import SimpleNamespace
+
+    response = SimpleNamespace(
+        id="truncated-flash-response", model="glm-5.3-flash",
+        choices=[SimpleNamespace(message=SimpleNamespace(content="{", tool_calls=None),
+                                 finish_reason="length")],
+        usage=SimpleNamespace(prompt_tokens=20, completion_tokens=512,
+            prompt_tokens_details=SimpleNamespace(cached_tokens=0),
+            completion_tokens_details=SimpleNamespace(reasoning_tokens=400)),
+    )
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=lambda **kwargs: response)))
+    ledger = TokenBudget(tmp_path / "truncated.sqlite")
+    backend = ModelBackend(client, "glm-5.3-flash", Budget(max_tokens=512), None, max_retries=0,
+        require_model_identity=True, token_budget=ledger)
+    with pytest.raises(ModelCallError, match="output_truncated"):
+        backend._call([{"role": "user", "content": "offline truncation check"}], [])
+    assert backend.usage["calls"] == 1 and backend.usage["retries"] == 0
+    assert backend.call_log[0]["finish_reason"] == "length"
+    assert backend.call_log[0]["error_code"] == "output_truncated"
+    attempt, = ledger.attempts()
+    assert attempt["status"] == "failed" and attempt["charged_tokens"] == 532

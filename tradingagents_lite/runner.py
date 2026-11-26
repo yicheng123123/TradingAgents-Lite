@@ -66,8 +66,12 @@ def _cost(usage: dict, model_config: dict) -> float | None:
     price = model_config.get("pricing_cny_per_million")
     if not price or usage.get("missing_usage_calls", 0) or usage.get("failed_calls", 0) or usage.get("retries", 0):
         return None
+    prompt_tokens = usage["prompt_tokens"]
+    cached_tokens = min(usage.get("cached_tokens") or 0, prompt_tokens)
+    cached_rate = price.get("cached_input", price["input"])
     billed_output = usage["completion_tokens"] + usage.get("separate_reasoning_tokens", 0)
-    return (usage["prompt_tokens"] * price["input"] + billed_output * price["output"]) / 1_000_000
+    return ((prompt_tokens - cached_tokens) * price["input"] + cached_tokens * cached_rate +
+            billed_output * price["output"]) / 1_000_000
 
 
 def _basic_summary(rows: list[dict], seed: int, model_config: dict) -> dict:
@@ -283,7 +287,11 @@ def run(tasks_path: Path, data_path: Path, out: Path, backend_factory, model_con
                              financial=financial.view(task) if financial is not None else None,
                              rag=rag_factory(task) if rag_factory is not None else None,
                              fundamentals=fundamentals_factory(task) if fundamentals_factory is not None else None,
-                             memory=memory, a3=runtime).invoke({}, {"recursion_limit": 40 if runtime else 30})
+                             memory=memory, a3=runtime,
+                             max_tool_calls_per_round=model_config.get("max_tool_calls_per_round", 2),
+                             compact_tool_results=model_config.get("compact_tool_results", False),
+                             flash_v2_prompt=model_config.get("protocol_version") == "b1-flash-v2"
+                             ).invoke({}, {"recursion_limit": 40 if runtime else 30})
                     decision = Decision.model_validate(state["decision"])
                     model_error = any(e.get("stage") == "model" for e in state.get("errors", []))
                     status = "model_error" if model_error else "workflow_error" if state["errors"] else "ok"

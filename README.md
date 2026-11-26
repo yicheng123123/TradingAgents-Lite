@@ -9,14 +9,16 @@
 - **A0**：4 题确定性五日动量 smoke，结果保存在 results/smoke-a0-001。该归档保持不变。
 - **A0.5**：20 个 Development 时点的历史证据层。SEC 财报为 20/20 历史代理可用；Apple Newsroom 标题为 10/20；Microsoft 新闻显式缺失；严格版本时点认证为 0/20。逐题证据见 [A0.5 覆盖报告](results/evidence-dev-a05-001/REPORT.md)。
 - **B0**：20 题确定性 Development 基线，独立保存于 results/b0-development-001。
-- **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。调用、对照和逐题轨迹已实现；当前真实 API smoke 需在 WSL 配置 API Key 后执行。没有 API Key 时不生成模型成绩。状态见 [B1 smoke 报告](results/b1-smoke-003/REPORT.md)。
+- **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。原 GLM-5.3 Smoke 归档保留且结果为 1/4 实例、0 个有效配对；独立 Flash V2 协议见 [B1 Flash V2](docs/b1-v2-protocol.md)。没有成功的真实调用时不会生成模型成绩。
 - **A1**：本地文档解析、Qdrant、BM25 / Dense / RRF / Cross Encoder，支持固定查询与 Analyst 自主查询。[A1 RAG](docs/learning/a1-rag.md)
 - **A2**：按结算事件推进的 SQLite / Qdrant 长期经验，提供 M0–M3 配置。[A2 Memory](docs/learning/a2-memory.md)
 - **A3**：可选 Bull/Bear、MCP STDIO、确定性 Verifier 和有界恢复。[离线评测](results/a3-offline-001/REPORT.md) · [A3 教学](docs/learning/a3-agents.md)
 
-B1 当前默认模型为 GLM-5.3，OpenAI Chat Completions Base URL 为 https://open.bigmodel.cn/api/paas/v4。智谱官方文档列出了此模型、兼容协议与 Function Calling；本机尚未通过账户认证或收到模型响应，因此账号权限和响应中的实际模型身份仍待两题 smoke 实测。参考[模型文档](https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3)与[工具调用文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
+B1 V1 冻结协议默认 GLM-5.3；新协议单独使用准确模型 ID `glm-5.3-flash`，不回退到付费模型。两版结果不会混合。参考[Flash 官方模型文档](https://docs.bigmodel.cn/cn/guide/models/vlm/glm-5.3-flash)、[Thinking 文档](https://docs.bigmodel.cn/cn/guide/capabilities/thinking)与[Function Calling 文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
 
-## B1 冻结协议
+Flash V2 使用原始冻结的 20 道 Development 任务、A0.5 数据和 B0 结算。Smoke 固定 `dev-01`、`dev-02`，按任务配对运行 B1-M/B1-E；只有成功的 Flash Smoke 才能续跑其余 18 题。运行命令、预算策略、数据 hash 和模型身份检查见 [B1 Flash V2 协议](docs/b1-v2-protocol.md)。
+
+## B1 V1 冻结协议（归档）
 
 B1 使用固定的 Development 20 题、A0.5 行情快照和证据快照。两个模型组共用核心提示、模型、temperature=0、每次调用最多 512 tokens、messages + tools 最多 5,000 bytes、最多 2 轮分析师工具调用、每轮至多 2 个工具调用、25 秒超时和同一风险门与结算代码。B1 不自动重试，OpenAI SDK 自动重试也关闭。
 

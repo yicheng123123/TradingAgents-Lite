@@ -75,6 +75,16 @@ def main():
     b1_merge.add_argument("--output", type=Path, required=True)
     b1_merge.add_argument("--seed", type=int, default=42)
 
+    b1_v2 = sub.add_parser("b1-v2", help="Run the isolated paired GLM-5.3-Flash baseline protocol")
+    _add_frozen_paths(b1_v2)
+    b1_v2.add_argument("--evidence", type=Path, default=Path("data/financial-evidence-dev-003"))
+    b1_v2.add_argument("--b0-results", type=Path, default=Path("results/b0-development-001"))
+    b1_v2.add_argument("--output", type=Path, required=True)
+    b1_v2.add_argument("--scope", choices=("smoke", "development"), default="smoke")
+    b1_v2.add_argument("--smoke", type=Path,
+                        help="Verified successful Flash Smoke archive required for Development")
+    b1_v2.add_argument("--seed", type=int, default=42)
+
     a3 = sub.add_parser("a3", help="Run the optional multi-agent research graph")
     _add_frozen_paths(a3)
     a3.add_argument("--output", type=Path, required=True)
@@ -188,6 +198,14 @@ def main():
             from .b1 import merge_b1
             result = merge_b1(args.smoke, args.continuation, args.tasks, args.data,
                               args.evidence, args.b0_results, args.output, args.seed)
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+            if result["status"] != "completed":
+                raise SystemExit(2)
+            return
+        elif args.command == "b1-v2":
+            from .b1_v2 import run_b1_v2
+            result = run_b1_v2(args.scope, args.tasks, args.data, args.evidence, args.b0_results,
+                               args.output, seed=args.seed, smoke_path=args.smoke)
             print(json.dumps(result, indent=2, ensure_ascii=False))
             if result["status"] != "completed":
                 raise SystemExit(2)

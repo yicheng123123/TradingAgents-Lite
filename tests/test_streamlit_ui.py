@@ -114,6 +114,13 @@ def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
     attempt, _ = ledger.reserve(experiment_id="fixture", task_id="task", phase="A3", model="glm-5.3",
         logical_call=1, attempt_number=1, request_sha256="a"*64, request_bytes=150, max_output_tokens=64)
     ledger.settle_usage(attempt, input_tokens=20, output_tokens=10, reasoning_tokens=4, cached_tokens=3)
+    flash_attempt, _ = ledger.reserve(experiment_id="fixture-flash", task_id="task", phase="B1",
+        model="glm-5.3-flash", logical_call=1, attempt_number=1, request_sha256="b"*64,
+        request_bytes=150, max_output_tokens=64)
+    ledger.settle_usage(flash_attempt, input_tokens=20, output_tokens=10, reasoning_tokens=4, cached_tokens=4)
+    dashboard = token_dashboard(path)
+    assert dashboard["list_price_estimates_cny"]["glm-5.3-flash"] == pytest.approx(0.00004172)
+    assert dashboard["list_price_estimates_cny"]["glm-5.3"] == pytest.approx(0.000422)
     before = hashlib.sha256(path.read_bytes()).hexdigest()
     at = app(monkeypatch, tmp_path)
     calls = []
@@ -134,7 +141,7 @@ def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
     monkeypatch.setattr(zhipu_account, "account_snapshot", use_mock)
     at.radio(key="page").set_value("Usage").run()
     assert not at.exception and not at.error
-    assert any("Settled" in item.value and "30 Tokens" in item.value for item in at.markdown)
+    assert any("Settled" in item.value and "60 Tokens" in item.value for item in at.markdown)
     assert any("15.00M" in item.value and "15,000,000 Tokens" in item.value for item in at.markdown)
     assert calls == []
     at.button(key="refresh_bigmodel").click().run()
@@ -149,8 +156,16 @@ def test_token_dashboard_is_read_only(monkeypatch, tmp_path):
     assert metrics["Available balance"] == "¥0.00"
     assert metrics["Total spend"] == "Unavailable"
     assert metrics["Remaining Tokens"] == "0"
-    assert any("Settled" in item.value and "30 Tokens" in item.value for item in at.markdown)
+    assert any("Settled" in item.value and "60 Tokens" in item.value for item in at.markdown)
     assert hashlib.sha256(path.read_bytes()).hexdigest() == before
+
+
+def test_research_llm_configuration_displays_flash_default(monkeypatch, tmp_path):
+    monkeypatch.delenv("TALITE_MODEL", raising=False)
+    at = app(monkeypatch, tmp_path)
+    at.selectbox(key="backend").select("LLM").run()
+    assert not at.exception and not at.error
+    assert any("Requested model: glm-5.3-flash" in item.value for item in at.caption)
 
 
 def test_execution_error_is_visible_without_echoing_private_path(monkeypatch, tmp_path):

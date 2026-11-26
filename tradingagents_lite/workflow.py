@@ -7,7 +7,7 @@ from pydantic import ValidationError
 
 from .data import MarketView
 from .evidence import EvidenceView
-from .prompts import ANALYST_SYSTEM_PROMPT
+from .prompts import ANALYST_SYSTEM_PROMPT, ANALYST_SYSTEM_PROMPT_V2
 from .provider import ModelCallError
 from .schema import Action, Budget, Decision, MarketReport, Proposal
 
@@ -97,8 +97,40 @@ def _structured_event(stage: str, valid: bool, error_type: str | None = None) ->
     return event
 
 
-def _llm_tool_result(result: dict) -> dict:
+def _llm_tool_result(result: dict, *, compact: bool = False) -> dict:
     """Keep only model-useful fields in repeated conversation context."""
+    if compact:
+        if result.get("source_type") == "sec_xbrl":
+            fields = ("metric", "value", "unit", "period", "period_end", "evidence_id", "eligible_at", "pit_level")
+            return {"source_type": "sec_xbrl", "status": result.get("status"),
+                    "items": [{key: item[key] for key in fields if key in item}
+                              for item in result.get("items", [])[:4]]}
+        if "bars" in result:
+            bars = result.get("bars", [])
+            return {"evidence_id": result.get("evidence_id"),
+                    "bars": [{key: bar[key] for key in ("day", "open", "high", "low", "close", "volume")
+                              if key in bar} for bar in bars[-8:]]}
+        if "items" in result:
+            items = []
+            for item in result.get("items", [])[:4]:
+                picked = {key: item[key] for key in
+                          ("evidence_id", "source_type", "published_at", "eligible_at", "pit_level",
+                           "metric", "value", "unit", "period", "period_end") if key in item}
+                metadata = item.get("source_metadata", {})
+                if metadata.get("title"):
+                    picked["title"] = metadata["title"][:160]
+                if metadata.get("publisher"):
+                    picked["publisher"] = metadata["publisher"][:80]
+                excerpt = item.get("excerpt")
+                if excerpt:
+                    picked["excerpt"] = excerpt[:320]
+                items.append(picked)
+            return {key: result[key] for key in ("status", "source_type", "reason") if key in result} | {
+                "items": items}
+        return {key: result[key] for key in
+                ("status", "error", "reason", "evidence_id", "date", "close", "return_5", "sma_20",
+                 "daily_volatility_20", "value", "unit", "period", "eligible_at", "pit_level")
+                if key in result}
     if result.get("source_type") == "sec_xbrl":
         fields = ("metric", "value", "unit", "period", "period_end", "evidence_id", "eligible_at", "pit_level")
         return {**result, "items": [{key: item[key] for key in fields} for item in result["items"]]}
@@ -134,18 +166,37 @@ def _llm_tool_result(result: dict) -> dict:
     return result
 
 
-def _tool_content(result: dict) -> str:
-    compact = (",", ":") if "retrieval_trace" in result else None
-    return json.dumps(_llm_tool_result(result), ensure_ascii=False, separators=compact)
+def _tool_content(result: dict, *, compact: bool = False) -> str:
+    separators = (",", ":") if compact or "retrieval_trace" in result else None
+    return json.dumps(_llm_tool_result(result, compact=compact), ensure_ascii=False, separators=separators)
+
+
+def _valid_tool_calls(calls: list[dict], *, allowed: bool, maximum: int) -> bool:
+    if not allowed or not isinstance(calls, list) or not calls or len(calls) > maximum:
+        return False
+    identifiers = []
+    for call in calls:
+        if not isinstance(call, dict) or not isinstance(call.get("id"), str):
+            return False
+        function = call.get("function")
+        if (not isinstance(function, dict) or not isinstance(function.get("name"), str)
+                or not isinstance(function.get("arguments"), str)):
+            return False
+        identifiers.append(call["id"])
+    return len(set(identifiers)) == len(identifiers)
 
 
 def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bool = True,
-                   financial: EvidenceView | None = None, *, rag=None, memory=None, a3=None, fundamentals=None):
+                   financial: EvidenceView | None = None, *, rag=None, memory=None, a3=None, fundamentals=None,
+                   max_tool_calls_per_round: int = 2, compact_tool_results: bool = False,
+                   flash_v2_prompt: bool = False):
     """Bind tools to a prefiltered single-task view, never to the outcome provider.
 
     The invariant analyst prompt is identical in B1-M and B1-E. B1-E differs only
     in the additional, cutoff-bound financial_evidence tool and its observed output.
     """
+    if not 1 <= max_tool_calls_per_round <= 4:
+        raise ValueError("At most four tool calls per round are supported")
     tools_bound = ToolRegistry(view, financial, rag, fundamentals)
     registry = tools_bound.definitions
     if a3 is not None:
@@ -159,8 +210,15 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
             return a3.tool(name, raw, tools_bound.execute, call_id)
         return tools_bound.execute(name, raw)
 
+    def compact_result(result: dict) -> dict:
+        return _llm_tool_result(result, compact=compact_tool_results)
+
+    def tool_content(result: dict) -> str:
+        return _tool_content(result, compact=compact_tool_results)
+
     def start(_: State) -> dict:
-        messages = [{"role": "system", "content": ANALYST_SYSTEM_PROMPT},
+        messages = [{"role": "system", "content": ANALYST_SYSTEM_PROMPT_V2 if flash_v2_prompt
+                     else ANALYST_SYSTEM_PROMPT},
             {"role": "user", "content": f"Analyze {view.task.symbol} after the {view.task.decision_date} session. "
              f"Target horizon: {view.task.horizon_sessions} sessions."}]
         evidence, trace = {}, []
@@ -173,15 +231,15 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
                           "status": "error" if "error" in result else "ok",
                           "code": result.get("error"), "availability": result.get("status"),
                           "evidence_ids": list(evidence)})
-            messages.append({"role": "user", "content": _tool_content(result)})
+            messages.append({"role": "user", "content": tool_content(result)})
         if fixed_rag:
             result = execute("rag_search", json.dumps({"query": "Recent financial results, risks and company outlook"}))
             evidence.update({item["evidence_id"]: item for item in result.get("items", [])})
             trace.append({"name": "rag_search", "dispatch": "fixed",
                           "status": "error" if "error" in result else "ok",
                           "code": result.get("error"), "retrieval_trace": result.get("retrieval_trace")})
-            messages.append({"role": "user", "content": _tool_content(result)})
-            context_ids.update(item["evidence_id"] for item in _llm_tool_result(result).get("items", []))
+            messages.append({"role": "user", "content": tool_content(result)})
+            context_ids.update(item["evidence_id"] for item in compact_result(result).get("items", []))
         if not react:
             result = execute("market_indicators", "{}")
             if "error" not in result:
@@ -189,7 +247,7 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
                 context_ids.add(result["evidence_id"])
             trace.append({"name": "market_indicators", "status": "error" if "error" in result else "ok",
                           "dispatch": "prefetch", "code": result.get("error")})
-            messages.append({"role": "user", "content": json.dumps(result)})
+            messages.append({"role": "user", "content": tool_content(result)})
         return {"messages": messages, "evidence": evidence, "rounds": 0, "pending": [],
                 "errors": [], "tool_trace": trace, "structured_output_trace": [], "citation_trace": [],
                 **({"context_ids": sorted(context_ids)} if a3 is not None else {})}
@@ -218,9 +276,7 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
         try:
             calls = reply.get("tool_calls") or []
             if calls:
-                if (not allowed or len(calls) > 2 or len({c["id"] for c in calls}) != len(calls)
-                        or any(not isinstance(c["function"]["name"], str)
-                               or not isinstance(c["function"]["arguments"], str) for c in calls)):
+                if not _valid_tool_calls(calls, allowed=allowed, maximum=max_tool_calls_per_round):
                     return {"pending": [], "errors": [*state["errors"],
                         {"stage": "analyst", "code": "tool_budget"}]}
                 return {"messages": [*state["messages"], reply], "pending": calls,
@@ -268,12 +324,12 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
                 **({"availability": result["status"],
                     "evidence_ids": [item["evidence_id"] for item in result["items"]]}
                    if "items" in result else {})})
-            delivered = _llm_tool_result(result)
+            delivered = compact_result(result)
             context_ids.update(item["evidence_id"] for item in delivered.get("items", []))
             if delivered.get("evidence_id"):
                 context_ids.add(delivered["evidence_id"])
             messages.append({"role": "tool", "tool_call_id": call["id"],
-                             "content": _tool_content(result)})
+                             "content": tool_content(result)})
         if a3 is not None and a3.tool_fault and not a3.config.repair:
             return {"evidence": evidence, "tool_trace": trace, "pending": [], "a3_stop": True,
                     "errors": [*state["errors"], {"stage": "tools", "code": a3.tool_fault}]}
