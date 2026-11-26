@@ -254,15 +254,30 @@ def _write_paired_csv(path: Path, paired: dict) -> None:
 def _stats(rows: list[dict], seed: int, config: dict, requested: int) -> dict:
     metrics = summary(rows, seed, config)
     metrics["requested_tasks"] = requested
+    metrics["unattempted_tasks"] = max(0, requested - len(rows))
+    metrics["task_completion_rate"] = metrics["completed_tasks"] / requested if requested else None
     metrics["run_status"] = "completed" if len(rows) == requested and metrics["failed_tasks"] == 0 else "incomplete"
     metrics["budget_exhausted"] = any(call.get("error_code") == "token_budget_exhausted"
                                        for row in rows for call in row.get("llm_calls", []))
     return metrics
 
 
+def _summary_rows(variant: str, scope: str, metrics: dict, status: str = "completed") -> list[dict]:
+    rows = b1._summary_rows(variant, scope, metrics, status=status)
+    for row in rows:
+        if row.get("ticker") == "ALL":
+            row["unattempted_tasks"] = metrics.get("unattempted_tasks", 0)
+    return rows
+
+
 def _task_charge(tokens: TokenBudget, experiment_id: str, task_id: str) -> int:
     return sum(int(row["charged_tokens"] or 0) for row in tokens.attempts(experiment_id=experiment_id)
                if row["task_id"] == task_id)
+
+
+def _completed_instances(scope: str, cell_results: list[dict]) -> int:
+    reused = 4 if scope == "development" else 0
+    return reused + sum(item.get("status") == "ok" for item in cell_results)
 
 
 def _report(manifest: dict, b0: dict, m_stats: dict, e_stats: dict, paired: dict) -> str:
@@ -277,7 +292,9 @@ def _report(manifest: dict, b0: dict, m_stats: dict, e_stats: dict, paired: dict
         latency = "/".join(str(show(stats.get(key))) for key in (
             "latency_p50_seconds", "latency_p95_seconds",
             "llm_call_latency_p50_seconds", "llm_call_latency_p95_seconds"))
+        unattempted = stats.get("unattempted_tasks", max(0, requested - stats.get("tasks", 0)))
         return (f"| {label} | {requested} | {stats.get('completed_tasks')} | {stats.get('failed_tasks')} | "
+                f"{unattempted} | "
                 f"{show(stats.get('task_completion_rate'))} | "
                 f"{stats.get('structured_output_valid_count', 0)}/{stats.get('structured_output_count', 0)}; "
                 f"rate {show(stats.get('structured_output_valid_rate'))} | "
@@ -296,8 +313,8 @@ def _report(manifest: dict, b0: dict, m_stats: dict, e_stats: dict, paired: dict
                 f"{show(stats.get('api_cost_cny_estimate'))} |")
 
     table = [
-        "| Group | Requested | Complete | Failed | Completion | Structured valid | Tool calls successful | Non-Hold coverage | Direction hits / N | Mean alpha; date-cluster 95% CI | Evidence refs valid / total | LLM calls | Input / output / reasoning / charged tokens | Avg charged / task | Complete / hits per 100k tokens | Task P50/P95; call P50/P95 latency (s) | List-price estimate (CNY) |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Group | Requested | Complete | Failed | Unattempted | Completion | Structured valid | Tool calls successful | Non-Hold coverage | Direction hits / N | Mean alpha; date-cluster 95% CI | Evidence refs valid / total | LLM calls | Input / output / reasoning / charged tokens | Avg charged / attempted task | Complete / hits per 100k tokens | Task P50/P95; call P50/P95 latency (s) | List-price estimate (CNY) |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
         row("B0", b0), row("B1-M Flash", m_stats), row("B1-E Flash", e_stats),
     ]
     failures = {
@@ -370,11 +387,13 @@ def _archive_state(out: Path, manifest: dict, selected_ids: list[str], b0_rows: 
                 "token_budget_counted_once": True}
         b1._write_json(folder / "run.json", meta)
         stats = _stats(rows[variant], seed, config, len(selected_ids))
-        _write_csv(folder / "summary.csv", b1._summary_rows(
+        _write_csv(folder / "summary.csv", _summary_rows(
             variant, manifest["scope"], stats, status=meta["status"]))
     m_stats = _stats(rows["B1-M"], seed, config, len(selected_ids))
     e_stats = _stats(rows["B1-E"], seed, config, len(selected_ids))
     b0_stats = summary(b0_rows, seed, {"backend": "offline", "model": None})
+    b0_stats["requested_tasks"] = len(b0_rows)
+    b0_stats["unattempted_tasks"] = 0
     paired = b1._paired(rows["B1-M"], rows["B1-E"], seed)
     completion = b1._completion_check(len(selected_ids), m_stats, e_stats, paired["paired_n"])
     manifest.update(
@@ -383,11 +402,11 @@ def _archive_state(out: Path, manifest: dict, selected_ids: list[str], b0_rows: 
         trajectory_sha256={variant: sha256(out / variant / "trajectory.jsonl")
                            for variant in ("B1-M", "B1-E")},
     )
-    summary_rows = b1._summary_rows("B0", manifest["scope"], b0_stats)
-    summary_rows.extend(b1._summary_rows("B1-M Flash", manifest["scope"], m_stats,
-                                          status=manifest.get("status", "incomplete")))
-    summary_rows.extend(b1._summary_rows("B1-E Flash", manifest["scope"], e_stats,
-                                          status=manifest.get("status", "incomplete")))
+    summary_rows = _summary_rows("B0", manifest["scope"], b0_stats)
+    summary_rows.extend(_summary_rows("B1-M Flash", manifest["scope"], m_stats,
+                                      status=manifest.get("status", "incomplete")))
+    summary_rows.extend(_summary_rows("B1-E Flash", manifest["scope"], e_stats,
+                                      status=manifest.get("status", "incomplete")))
     _write_csv(out / "summary.csv", summary_rows)
     b1._write_json(out / "paired_summary.json", paired)
     _write_paired_csv(out / "paired.csv", paired)
@@ -622,7 +641,7 @@ def run_b1_v2(scope: str, tasks_path: Path, data_path: Path, evidence_path: Path
                         call.get("reserved_tokens") or 0 for call in calls),
                     "quality_issues": _cell_quality_issues(cell_rows[0]),
                 })
-                completed_instances = (0 if smoke else 4) + len(manifest.get("cell_results", []))
+                completed_instances = _completed_instances(scope, manifest.get("cell_results", []))
                 manifest["progress"] = {
                     "completed_instances": completed_instances,
                     "requested_instances": 4 if scope == "smoke" else 40,

@@ -6,7 +6,8 @@ import pytest
 from tradingagents_lite.b1 import (B1_V2_MODEL, EXPECTED_TASKS_SHA256, _json_hash,
                                    _b1_protocol, _ledger_path_hash, _selected_task_bytes)
 from tradingagents_lite.b1_v2 import (
-    _assert_flash_rows, _cell_quality_issues, _model_config, _report, _validated_smoke, run_b1_v2,
+    _assert_flash_rows, _cell_quality_issues, _completed_instances, _model_config, _report, _stats,
+    _validated_smoke, run_b1_v2,
 )
 from tradingagents_lite.data import sha256
 from tradingagents_lite.provider import DEFAULT_MODEL
@@ -21,6 +22,23 @@ def tool_calls(count):
 def test_general_model_default_is_flash_and_legacy_b1_stays_glm_53():
     assert DEFAULT_MODEL == B1_V2_MODEL
     assert _b1_protocol(42)["model_requested"] == "glm-5.3"
+
+
+def test_progress_counts_only_current_smoke_cells_and_reused_development_cells():
+    cells = [{"status": "ok"}, {"status": "workflow_error"}]
+    assert _completed_instances("smoke", cells) == 1
+    assert _completed_instances("development", cells + [{"status": "ok"}] * 4) == 9
+
+
+def test_partial_flash_summary_uses_requested_tasks_as_completion_denominator(monkeypatch):
+    monkeypatch.setattr("tradingagents_lite.b1_v2.summary", lambda rows, seed, config: {
+        "tasks": len(rows), "completed_tasks": 1, "failed_tasks": 0,
+        "task_completion_rate": 1.0, "failure_status_counts": {},
+    })
+    metrics = _stats([{"task_id": "dev-01"}], 42, {}, 2)
+    assert metrics["task_completion_rate"] == 0.5
+    assert metrics["unattempted_tasks"] == 1
+    assert metrics["run_status"] == "incomplete"
 
 
 @pytest.mark.parametrize("count", [3, 4])
