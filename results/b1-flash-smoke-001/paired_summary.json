@@ -1,0 +1,13 @@
+{
+  "paired_n": 0,
+  "mean_alpha_delta_e_minus_m": null,
+  "alpha_delta_date_bootstrap_95": null,
+  "date_clusters": 0,
+  "action_changed_n": 0,
+  "directional_transition_n": 0,
+  "wrong_to_right": 0,
+  "right_to_wrong": 0,
+  "by_ticker": {},
+  "tasks": [],
+  "interval_note": "No cluster interval is emitted with fewer than two paired decision dates."
+}

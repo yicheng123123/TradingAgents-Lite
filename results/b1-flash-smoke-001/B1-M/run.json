@@ -1,0 +1,62 @@
+{
+  "status": "incomplete",
+  "ablation": "B1-M",
+  "requested_tasks": 2,
+  "processed_tasks": 1,
+  "tasks_sha256": "16b24fbb7d5fae912993e3444af777d7b45f2e6e935f0d7f1b97dbf4714226e7",
+  "config": {
+    "backend": "llm",
+    "protocol_version": "b1-flash-v2",
+    "model": "glm-5.3-flash",
+    "api_host": "open.bigmodel.cn",
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "thinking": "enabled",
+    "reasoning_effort": "low",
+    "provider_seed": null,
+    "phase": "B1",
+    "sdk_retries": 0,
+    "application_retries": 0,
+    "max_prompt_bytes": 8000,
+    "max_tool_rounds": 2,
+    "max_tool_calls_per_round": 4,
+    "compact_tool_results": true,
+    "pricing_cny_per_million": {
+      "input": 0.8,
+      "cached_input": 0.23,
+      "output": 2.8
+    },
+    "pricing_source": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+    "pricing_as_of": "2026-11-26"
+  },
+  "actual_models_observed": [
+    "glm-5.3-flash"
+  ],
+  "protocol_version": "b1-flash-v2",
+  "source_experiment_ids": [
+    "/home/gaoyi/projects/tradingagents-lite/results/b1-flash-smoke-001"
+  ],
+  "snapshot_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+  "evidence_manifest_sha256": "b46f9ef2ebc1c08022500282147940985eb9d3ceabe8cdaf78eec6efa190e4dc",
+  "evidence_sha256": "b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532",
+  "prompt_hashes": {
+    "market_analyst_system": "f425b6938750c6cd85e2f6bdc6fa08003c389dfce014772156eba7a95754973a",
+    "trader_system": "e8f6b4e6a21bf93628e8552037cd3fdeaf33a06e3e774e8856fd3ee72818140e",
+    "combined_core": "71d004859d4f012fe9f9aa6e019c424d98b28880086a8bc9528f2e0de975bde4"
+  },
+  "tool_schema_hashes": {
+    "B1-M": "86b0bd46f7238ab22e9a1911a967114ef4164ee87f3e84b0e0433951639930c0",
+    "B1-E": "6d749ca480181ad521b492fcadadcd27338b97db0f3af0008f905fdf42e0a7d6"
+  },
+  "budget": {
+    "max_tool_rounds": 2,
+    "max_tokens": 512,
+    "momentum_threshold": 0.006,
+    "volatility_limit": 0.04
+  },
+  "react": true,
+  "settlement": "next shared session open to horizon-th shared session close; alpha vs SPY; no costs",
+  "execution": "next shared session open to horizon-th shared session close, OHLC price return",
+  "alpha": "position direction × (asset price return − SPY price return); no costs",
+  "token_budget_counted_once": true
+}

@@ -1,0 +1,90 @@
+{
+  "version": "b1-flash-v2",
+  "code_git_sha": "f7a2b929b50a88a421ae6292ca750bb6d63cf41d",
+  "tracked_worktree_clean": true,
+  "lock_sha256": "346627b81870859b0ee2421c015db25eae33a454786a2aaf462b71656ecaf920",
+  "protocol_document_sha256": "2e494c99175827ae6f31e755b845675accf49e78221e51417be6b3c65c69517b",
+  "dependencies": {
+    "langgraph": "1.2.24",
+    "pydantic": "2.14.4",
+    "openai": "3.57.0"
+  },
+  "model": "glm-5.3-flash",
+  "base_url": "https://open.bigmodel.cn/api/paas/v4",
+  "temperature": 0.0,
+  "max_tokens": 512,
+  "reasoning_effort": "low",
+  "thinking": "enabled",
+  "max_prompt_bytes": 8000,
+  "max_tool_rounds": 2,
+  "max_tool_calls_per_round": 4,
+  "sdk_retries": 0,
+  "application_retries": 0,
+  "provider_generation_seed": null,
+  "statistics_seed": 42,
+  "reasoning_tokens_reserved_separately": 512,
+  "task_file_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae",
+  "market_manifest_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+  "evidence_manifest_sha256": "b46f9ef2ebc1c08022500282147940985eb9d3ceabe8cdaf78eec6efa190e4dc",
+  "evidence_sha256": "b0ffce595575257231432650495d756681a9f4ac10f5deee972110c7a7b7a532",
+  "b0_run_metadata_sha256": "348ed56196a80742c388f15002e7439fdb86cca8d4a2b257f84ade176e55f73b",
+  "b0_trajectory_sha256": "ee7387bbf414a725afe8b85bfbd477f4c40d763a672c559c6359e77ed0ff5618",
+  "prompt_hashes": {
+    "market_analyst_system": "f425b6938750c6cd85e2f6bdc6fa08003c389dfce014772156eba7a95754973a",
+    "trader_system": "e8f6b4e6a21bf93628e8552037cd3fdeaf33a06e3e774e8856fd3ee72818140e",
+    "combined_core": "71d004859d4f012fe9f9aa6e019c424d98b28880086a8bc9528f2e0de975bde4"
+  },
+  "tool_schema_hashes": {
+    "B1-M": "86b0bd46f7238ab22e9a1911a967114ef4164ee87f3e84b0e0433951639930c0",
+    "B1-E": "6d749ca480181ad521b492fcadadcd27338b97db0f3af0008f905fdf42e0a7d6"
+  },
+  "settlement": "next shared session open to horizon-th shared session close; alpha vs SPY; no costs",
+  "holdout_accessed": false,
+  "rag": false,
+  "memory": false,
+  "debate": false,
+  "mcp": false,
+  "verifier_extension": false,
+  "automatic_fallback": false,
+  "max_calls_per_task": 4,
+  "pricing_cny_per_million": {
+    "input": 0.8,
+    "cached_input": 0.23,
+    "output": 2.8
+  },
+  "pricing_source": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+  "pricing_as_of": "2026-11-26",
+  "model_config": {
+    "backend": "llm",
+    "protocol_version": "b1-flash-v2",
+    "model": "glm-5.3-flash",
+    "api_host": "open.bigmodel.cn",
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "thinking": "enabled",
+    "reasoning_effort": "low",
+    "provider_seed": null,
+    "phase": "B1",
+    "sdk_retries": 0,
+    "application_retries": 0,
+    "max_prompt_bytes": 8000,
+    "max_tool_rounds": 2,
+    "max_tool_calls_per_round": 4,
+    "compact_tool_results": true,
+    "pricing_cny_per_million": {
+      "input": 0.8,
+      "cached_input": 0.23,
+      "output": 2.8
+    },
+    "pricing_source": "https://docs.bigmodel.cn/cn/guide/start/pricing",
+    "pricing_as_of": "2026-11-26"
+  },
+  "budget": {
+    "max_tool_rounds": 2,
+    "max_tokens": 512,
+    "momentum_threshold": 0.006,
+    "volatility_limit": 0.04
+  },
+  "react": true,
+  "compact_tool_results": true
+}
