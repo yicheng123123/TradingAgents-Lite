@@ -14,6 +14,8 @@
 - **A2**：按结算事件推进的 SQLite / Qdrant 长期经验，提供 M0–M3 配置。[A2 Memory](docs/learning/a2-memory.md)
 - **A3**：可选 Bull/Bear、MCP STDIO、确定性 Verifier 和有界恢复。[离线评测](results/a3-offline-001/REPORT.md) · [A3 教学](docs/learning/a3-agents.md)
 
+**最终 Benchmark 准备**：已审计现有数据与账本，并为 FinanceBench 加入四组预测、独立评分和校准 Mock 入口。真实 FinanceBench、私有反事实及 V3 决策消融的执行条件与预算见 [最终 Benchmark 协议](docs/final-benchmark-protocol.md)。
+
 B1 V1 冻结协议默认 GLM-5.3；新协议单独使用准确模型 ID `glm-5.3-flash`，不回退到付费模型。两版结果不会混合。参考[Flash 官方模型文档](https://docs.bigmodel.cn/cn/guide/models/vlm/glm-5.3-flash)、[Thinking 文档](https://docs.bigmodel.cn/cn/guide/capabilities/thinking)与[Function Calling 文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
 
 Flash V2 使用原始冻结的 20 道 Development 任务、A0.5 数据和 B0 结算。Smoke 固定 `dev-01`、`dev-02`，按任务配对运行 B1-M/B1-E；只有成功的 Flash Smoke 才能续跑其余 18 题。运行命令、预算策略、数据 hash 和模型身份检查见 [B1 Flash V2 协议](docs/b1-v2-protocol.md)。

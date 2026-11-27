@@ -189,6 +189,21 @@ def _valid_tool_calls(calls: list[dict], *, allowed: bool, maximum: int) -> bool
     return len(set(identifiers)) == len(identifiers)
 
 
+def analyst_tool_turn(messages, reply, rounds, *, allowed, maximum):
+    """Advance the bounded Analyst loop without copying provider-only metadata."""
+    calls = reply.get("tool_calls") or []
+    if not calls:
+        return None
+    if not _valid_tool_calls(calls, allowed=allowed, maximum=maximum):
+        raise ValueError("tool_budget")
+    assistant = {"role": "assistant", "content": reply.get("content") or "", "tool_calls": calls}
+    return {"messages": [*messages, assistant], "pending": calls, "rounds": rounds + 1}
+
+
+def tool_message(call_id, content):
+    return {"role": "tool", "tool_call_id": call_id, "content": content}
+
+
 def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bool = True,
                    financial: EvidenceView | None = None, *, rag=None, memory=None, a3=None, fundamentals=None,
                    max_tool_calls_per_round: int = 2, compact_tool_results: bool = False,
@@ -286,12 +301,13 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
                     {"stage": "model", "agent_stage": "analyst", "code": exc.code, "attempts": exc.attempts}]}
             if reply.get("finish_reason") not in {None, "stop", "tool_calls"}:
                 return {"pending": [], **structured_result(state, "market_report", final, evidence, reply)}
-            calls = reply.get("tool_calls") or []
-            if calls:
-                if not _valid_tool_calls(calls, allowed=True, maximum=max_tool_calls_per_round):
-                    return {"pending": [], "errors": [*state["errors"], {"stage": "analyst", "code": "tool_budget"}]}
-                assistant = {key: reply[key] for key in ("role", "content", "tool_calls")}
-                return {"messages": [*messages, assistant], "pending": calls, "rounds": state["rounds"] + 1}
+            try:
+                turn = analyst_tool_turn(messages, reply, state["rounds"], allowed=True,
+                                         maximum=max_tool_calls_per_round)
+            except ValueError:
+                return {"pending": [], "errors": [*state["errors"], {"stage": "analyst", "code": "tool_budget"}]}
+            if turn:
+                return turn
         return {"pending": [], **structured_result(state, "market_report", final, evidence)}
 
     def analyst(state: State) -> dict:
@@ -372,8 +388,7 @@ def build_workflow(view: MarketView, backend: Backend, budget: Budget, react: bo
             context_ids.update(item["evidence_id"] for item in delivered.get("items", []))
             if delivered.get("evidence_id"):
                 context_ids.add(delivered["evidence_id"])
-            messages.append({"role": "tool", "tool_call_id": call["id"],
-                             "content": tool_content(result)})
+            messages.append(tool_message(call["id"], tool_content(result)))
         if a3 is not None and a3.tool_fault and not a3.config.repair:
             return {"evidence": evidence, "tool_trace": trace, "pending": [], "a3_stop": True,
                     "errors": [*state["errors"], {"stage": "tools", "code": a3.tool_fault}]}
