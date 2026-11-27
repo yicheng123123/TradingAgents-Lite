@@ -2,10 +2,12 @@ import json
 import platform
 from pathlib import Path
 import shutil
+from types import SimpleNamespace
 
 import pytest
 
 from tradingagents_lite.counterfactual_dev import generate_development
+from tradingagents_lite import counterfactual_runner
 from tradingagents_lite.counterfactual_runner import _hash, _sealed, _verify_sealed, run
 from tradingagents_lite.counterfactual_score import _correct, parse_answer, score_run
 from tradingagents_lite.data import sha256 as file_sha
@@ -163,3 +165,99 @@ def test_actual_isolated_mock_runner_and_resume(tmp_path):
     resumed = run(DEV, output, backend="mock", resume=True, limit=1)
     assert resumed["status"] == "complete"
     assert (output / "predictions.jsonl").read_bytes() == before
+
+
+def test_llm_provider_initializer_returns_token_budget_object_without_http(monkeypatch):
+    class FakeBudget:
+        pass
+
+    class FakeClient:
+        def close(self):
+            pass
+
+    budget, opened_budget, client = FakeBudget(), object(), FakeClient()
+    captured = {}
+
+    def make_backend(*args, **kwargs):
+        captured["args"], captured["kwargs"] = args, kwargs
+        return SimpleNamespace(client=client, call_log=[], set_budget_context=lambda **values: None)
+
+    monkeypatch.setenv("TALITE_MODEL", "glm-5.3-flash")
+    monkeypatch.delenv("TALITE_BASE_URL", raising=False)
+    monkeypatch.setenv("TALITE_API_KEY", "offline-test-placeholder")
+    monkeypatch.setattr(counterfactual_runner.b1, "_open_b1_budget",
+                        lambda path, scope, available: opened_budget)
+    monkeypatch.setattr(counterfactual_runner, "TokenBudget", lambda **kwargs: budget)
+    monkeypatch.setattr(counterfactual_runner.financebench, "client_from_env",
+                        lambda **kwargs: (client, "glm-5.3-flash", "open.bigmodel.cn"))
+    monkeypatch.setattr(counterfactual_runner.financebench, "ModelBackend", make_backend)
+
+    provider, returned_budget, ledger_hash = counterfactual_runner._provider_for_cell("CF0:test")
+
+    assert returned_budget is budget
+    assert not hasattr(returned_budget, "token_budget")
+    assert provider.client is client
+    assert captured["kwargs"]["max_retries"] == 0
+    assert len(ledger_hash) == 64
+
+
+@pytest.mark.skipif(platform.system() != "Linux" or shutil.which("unshare") is None,
+                    reason="requires Linux user/mount/network namespaces")
+def test_llm_runner_budget_initialization_and_broker_are_offline(monkeypatch, tmp_path):
+    class FakeBudget:
+        def __init__(self):
+            self.snapshots = 0
+
+        def capacity(self, *, experiment_id, phase):
+            return {"available": counterfactual_runner.EXPERIMENT_LIMIT}
+
+        def snapshot(self, *, experiment_id, phase):
+            self.snapshots += 1
+            return {"experiment_id": experiment_id, "phase": phase, "charged_tokens": 0}
+
+    class FakeClient:
+        def __init__(self):
+            self.closed = False
+
+        def close(self):
+            self.closed = True
+
+    class FakeProvider:
+        def __init__(self):
+            self.client = FakeClient()
+            self.call_log = []
+
+        def set_budget_context(self, **kwargs):
+            return None
+
+        def _call(self, messages, tools, **kwargs):
+            self.call_log.append({"actual_model": "offline-provider-mock", "charged_tokens": 0,
+                                  "status": "ok"})
+            return {"content": json.dumps({"status": "abstained", "answer": "",
+                                             "evidence_ids": []}),
+                    "finish_reason": "stop", "tool_calls": []}
+
+    providers, budgets = [], []
+
+    def fake_provider_for_cell(task_identity):
+        provider, budget = FakeProvider(), FakeBudget()
+        providers.append(provider)
+        budgets.append(budget)
+        return provider, budget, "a" * 64
+
+    monkeypatch.delenv("TALITE_API_KEY", raising=False)
+    monkeypatch.setattr(counterfactual_runner, "_provider_for_cell", fake_provider_for_cell)
+    output = tmp_path / "llm-broker-offline"
+    manifest = run(DEV, output, backend="llm", limit=1)
+
+    assert manifest["status"] == "complete"
+    assert manifest["recorded_cells"] == 2
+    assert len(providers) == 3  # preflight plus one trusted provider per experiment arm
+    assert all(provider.client.closed for provider in providers)
+    assert all(budget.snapshots >= 1 for budget in budgets[1:])
+    records = [json.loads(line) for line in (output / "predictions.jsonl").read_text().splitlines()]
+    assert len(records) == 2
+    assert all(row["status"] == "ok" and row["budget_tokens"] == 0 for row in records)
+    assert all(len(row["llm_calls"]) == 1 for row in records)
+    assert sum(len(provider.call_log) for provider in providers) == 2
+    assert manifest["token_budget"]["charged_tokens"] == 0

@@ -443,6 +443,7 @@ class _BrokerBackend:
         self.arm, self.task_id, self.channel = arm, task_id, channel
         self.reader = channel.makefile("r", encoding="utf-8")
         self.call_log = []
+        self.observations = []
 
     def _call(self, messages, tools, **kwargs):
         request = {"messages": messages, "tools": tools, "structured_stage": kwargs.get("structured_stage")}
@@ -699,10 +700,11 @@ def run(dataset, out, *, backend="mock", resume=False, limit=None):
                 _make_index(packet, stage / "index", stage / "models")
                 broker_thread = None
                 parent_channel = child_channel = None
+                provider = None
                 cell_budget = None
                 if backend == "llm":
                     provider, cell_budget, ledger_path_hash = _provider_for_cell(identity)
-                    provider_budget = cell_budget.token_budget
+                    provider_budget = cell_budget
                     parent_channel, child_channel = socket.socketpair()
                     broker_thread = Thread(target=_serve_broker,
                                            args=(parent_channel, provider, identity), daemon=True)
@@ -724,6 +726,8 @@ def run(dataset, out, *, backend="mock", resume=False, limit=None):
                         parent_channel.close()
                     if broker_thread:
                         broker_thread.join(timeout=2)
+                    if provider is not None:
+                        provider.client.close()
                 record["input_sha256"] = file_sha(task_path)
                 record = _sealed(record)
                 cell = out / "cells" / f"{task_id}-{arm}.json"
