@@ -1,0 +1,7 @@
+{
+  "retrieved_at": "2026-11-27T07:30:50.864056+00:00",
+  "series": "DFEDTARU",
+  "sha256": "ca010fb9865bc9ac1fd70f84c55f508b540d19873fbf6b22d70527507d292652",
+  "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARU&cosd=2025-07-01&coed=2026-11-25",
+  "version": "fred-v3-001"
+}

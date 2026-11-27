@@ -1,0 +1,23 @@
+{
+  "attack_window": 8,
+  "baseline_known_identity": 80,
+  "development_cases": 80,
+  "fingerprint_contains_true_issuer": 80,
+  "fingerprint_unique_issuer_hits": 80,
+  "information_loss": [
+    "absolute prices and dates",
+    "original titles and prose",
+    "unstructured Memory and agent reasoning",
+    "URLs and source transport metadata"
+  ],
+  "literal_ticker_or_date_leaks": 0,
+  "privacy_claim": "literal identity is removed; public return patterns remain linkable",
+  "private_synthetic_sha256": "45994ee118f9b4021dc6002a1e430165438a6ee95b0ba13598d4a69fcce0418b",
+  "reference": "all 20 issuers through the last Development date, no Holdout labels",
+  "return_invariant": 80,
+  "synthetic_cases": 4,
+  "synthetic_changed_decisions": 3,
+  "synthetic_distinct_plans": 2,
+  "synthetic_future_rejections": 1,
+  "synthetic_verifier_passes": 4
+}

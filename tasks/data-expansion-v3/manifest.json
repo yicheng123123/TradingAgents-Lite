@@ -1,0 +1,151 @@
+{
+  "data_through": "2026-11-25",
+  "decision_cutoff": "16:15 America/New_York on decision_date",
+  "development_pit_audit": {
+    "development_settlements_verified": 80,
+    "eligible_fact_instances_checked": 62090,
+    "future_bars": 0,
+    "future_evidence": 0,
+    "future_facts": 0,
+    "tasks_with_eligible_xbrl": 80,
+    "tasks_with_news": 25,
+    "tasks_with_sec_filing": 67,
+    "timestamp_level": "historical proxy",
+    "visible_evidence_records_checked": 280,
+    "visible_market_bars_checked": 15987
+  },
+  "holdout_agent_executed": false,
+  "holdout_label_exported": false,
+  "ir_manifest_sha256": "d04484e12dc168ba0297b6c7fac680b44164945db944615a12263d91b0f6aab9",
+  "ir_releases_manifest_sha256": "da189fd376e25376585a0c4fb4117b5d0b6652cf886395e14e53471bed8bdfbf",
+  "knowledge_audit_summary_sha256": "3ec7e389a126e3cc74c3f180eccb2178f54167de0d1b2e61adbf474b12d370c4",
+  "knowledge_boundary": {
+    "bootstrap_same_candidate": 0.855,
+    "candidate": null,
+    "identified": false
+  },
+  "known_probe_return_windows_excluded": 15,
+  "legacy_task_hashes": {
+    "tasks/data-expansion-v2/development.jsonl": "924455eed0b268ab30d7f89a4810918780174d60731ef7676d6f0531242016ab",
+    "tasks/data-expansion-v2/holdout.jsonl": "a21f64bbe567a4fdfb17cecdf7559812842f7790eb5abbc2691f3cce38cb1d27",
+    "tasks/data-expansion-v2/offline.jsonl": "e3980856ab69566ade18084cd6983ed5a0774395b215548cf6b509401c580a94",
+    "tasks/development.jsonl": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae"
+  },
+  "market_manifest_sha256": "b432387175f12f949344cfce1b96c68be37e2e9e94779ffe39779169bd37e08e",
+  "outcome_window_overlap": 0,
+  "partitions": {
+    "development": {
+      "count": 80,
+      "decision_range": [
+        "2026-01-01",
+        "2026-07-31"
+      ],
+      "max_tasks_on_one_date": 1,
+      "rejections": {
+        "overlap_or_duplicate": 10
+      },
+      "requested": 80,
+      "sample_dates": 80,
+      "sectors": {
+        "Communication Services": 8,
+        "Consumer Discretionary": 8,
+        "Consumer Staples": 8,
+        "Energy": 8,
+        "Financials": 12,
+        "Healthcare": 12,
+        "Industrials": 8,
+        "Technology": 16
+      },
+      "selected_range": [
+        "2026-01-02",
+        "2026-07-30"
+      ],
+      "sha256": "2453f2785cc81504dee71c5656efd071a5e2daa87b1824dfa185e3aa58148b4b",
+      "tickers": {
+        "AAPL": 4,
+        "AMD": 4,
+        "AMZN": 4,
+        "BA": 4,
+        "BAC": 4,
+        "CAT": 4,
+        "CVX": 4,
+        "GOOGL": 4,
+        "GS": 4,
+        "JNJ": 4,
+        "JPM": 4,
+        "KO": 4,
+        "META": 4,
+        "MSFT": 4,
+        "NVDA": 4,
+        "PFE": 4,
+        "TSLA": 4,
+        "UNH": 4,
+        "WMT": 4,
+        "XOM": 4
+      }
+    },
+    "holdout": {
+      "count": 100,
+      "decision_range": [
+        "2026-09-01",
+        "2026-11-25"
+      ],
+      "max_tasks_on_one_date": 3,
+      "rejections": {
+        "missing_market_window": 66,
+        "overlap_or_duplicate": 26
+      },
+      "requested": 100,
+      "sample_dates": 56,
+      "sectors": {
+        "Communication Services": 10,
+        "Consumer Discretionary": 10,
+        "Consumer Staples": 10,
+        "Energy": 10,
+        "Financials": 15,
+        "Healthcare": 15,
+        "Industrials": 10,
+        "Technology": 20
+      },
+      "selected_range": [
+        "2026-09-01",
+        "2026-11-18"
+      ],
+      "sha256": "85fac2965f9210fa25a3555ddca66eeaf6dbc5ff55f21ca95cffa81bb688b71d",
+      "tickers": {
+        "AAPL": 5,
+        "AMD": 5,
+        "AMZN": 5,
+        "BA": 5,
+        "BAC": 5,
+        "CAT": 5,
+        "CVX": 5,
+        "GOOGL": 5,
+        "GS": 5,
+        "JNJ": 5,
+        "JPM": 5,
+        "KO": 5,
+        "META": 5,
+        "MSFT": 5,
+        "NVDA": 5,
+        "PFE": 5,
+        "TSLA": 5,
+        "UNH": 5,
+        "WMT": 5,
+        "XOM": 5
+      }
+    }
+  },
+  "probe_sha256": "fb1a83001dc8e29cd9862b9cb023d11013e880782cfd7504141b33e7539374fc",
+  "protocol": "data-expansion-v3-001",
+  "public_model_release": "2026-08-27",
+  "sampling": "per-symbol equal-session strata; deterministic hash target, then favor less-used dates; complete 21-session warmup and 5-session outcome calendar for ticker, SPY and sector ETF",
+  "sec_manifest_sha256": "cbd0fe351eb4ecdade2e533b2cdd9ecf0a50d4c3547daf4e68a9e42720850909",
+  "settlement": {
+    "benchmark": "SPY",
+    "dividends": "excluded",
+    "entry": "next scheduled regular-session open",
+    "exit": "fifth scheduled session close",
+    "scale": "one Yahoo snapshot share scale per ticker across entry and exit"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "apple": {
+    "failures": [],
+    "provider": "Apple Newsroom",
+    "records": 119,
+    "requested": [
+      {
+        "bytes": 322793,
+        "ingested_at": "2026-11-27T07:28:02.634833+00:00",
+        "projection_sha256": "2c71c94ad922270cf88aff7259e9cc0c578aee2db01d2c04559f24df1a832120",
+        "retention": "metadata_only",
+        "source_sha256": "f85415f432a5a18c05fb3c45b93b878d43a91361c2e9f323647069e748ec8422",
+        "url": "https://www.apple.com/newsroom/archive/?page=1"
+      },
+      {
+        "bytes": 323484,
+        "ingested_at": "2026-11-27T07:28:04.991837+00:00",
+        "projection_sha256": "b55c6919718dd0da58997f175257f00ccbde7bde8e27a10c155297377830d996",
+        "retention": "metadata_only",
+        "source_sha256": "72b11979cefe8ecdb3d78103e33af621cc4c50766c3e135a7f83fb888dbe7f9b",
+        "url": "https://www.apple.com/newsroom/archive/?page=2"
+      },
+      {
+        "bytes": 323666,
+        "ingested_at": "2026-11-27T07:28:16.255781+00:00",
+        "projection_sha256": "3d773d0506a7a09c7f6d79188cf355c942130bb4c31093961fae19868df0ca57",
+        "retention": "metadata_only",
+        "source_sha256": "c7f247543d8767f669b9f8ae8068be84205d7a8e10c9e262b9bf4abac6f39d98",
+        "url": "https://www.apple.com/newsroom/archive/?page=3"
+      },
+      {
+        "bytes": 323704,
+        "ingested_at": "2026-11-27T07:28:18.856091+00:00",
+        "projection_sha256": "e22a45ffd92a874ebd0b1b817b8ea36ce197fd20e5bbc48089852c871b959978",
+        "retention": "metadata_only",
+        "source_sha256": "dce41d38309efba28baffad741dcc66878b86a49ecb55fb0700d216418052141",
+        "url": "https://www.apple.com/newsroom/archive/?page=4"
+      },
+      {
+        "bytes": 323841,
+        "ingested_at": "2026-11-27T07:28:21.446854+00:00",
+        "projection_sha256": "060c191c570826aa96f858b843535f2d9059b8cb6c0964bfbc17652b11a7c043",
+        "retention": "metadata_only",
+        "source_sha256": "df2535b0e53fb3a97bf93d58bb7018f8058b548e953032624dbe4579576f8b84",
+        "url": "https://www.apple.com/newsroom/archive/?page=5"
+      },
+      {
+        "bytes": 323362,
+        "ingested_at": "2026-11-27T07:28:23.836247+00:00",
+        "projection_sha256": "159f14d82aee7a5df3cff301f150f6d51a191f0f27819043166d9e8451756fe0",
+        "retention": "metadata_only",
+        "source_sha256": "ef90aad274078d2ebdd098c886ae61d7af6f4f1d581f30d9f232e9f55106cf30",
+        "url": "https://www.apple.com/newsroom/archive/?page=6"
+      },
+      {
+        "bytes": 323366,
+        "ingested_at": "2026-11-27T07:28:26.289143+00:00",
+        "projection_sha256": "03aeb7d0dada0e9d137a9909b255e9796b3f0484f137efab7b4895f687551707",
+        "retention": "metadata_only",
+        "source_sha256": "16204b1586cd203e84f84d4789bc0f3da34bbf38acd6ccf1e373e2e4c6a3c7f9",
+        "url": "https://www.apple.com/newsroom/archive/?page=7"
+      },
+      {
+        "bytes": 323712,
+        "ingested_at": "2026-11-27T07:28:28.660494+00:00",
+        "projection_sha256": "30fa12c18e1159e26f78c7e0f5d7e8f4208e34be6bbd9dd64004665ef5ea8522",
+        "retention": "metadata_only",
+        "source_sha256": "c346eb13fa81814b6f88996e5a8d974ed4fd4d4f769ce29363e43315779ddec7",
+        "url": "https://www.apple.com/newsroom/archive/?page=8"
+      },
+      {
+        "bytes": 324030,
+        "ingested_at": "2026-11-27T07:28:30.361763+00:00",
+        "projection_sha256": "23f873389fd77765de228e2e46f84eaab030d7733592512ddafadfedc692e9a7",
+        "retention": "metadata_only",
+        "source_sha256": "570eb2289f650ca3c4a2e93cea1d9c64d337883e2ba0639b44e5b829565d76cb",
+        "url": "https://www.apple.com/newsroom/archive/?page=9"
+      },
+      {
+        "bytes": 323817,
+        "ingested_at": "2026-11-27T07:28:32.782733+00:00",
+        "projection_sha256": "56e21a1bceeff1d350fc082bf9179d111875de040a4aac64bc0417878893c106",
+        "retention": "metadata_only",
+        "source_sha256": "4cdeabc9711d5617f972c34e32dfb336ce081c131c52a0da80f646022493ca38",
+        "url": "https://www.apple.com/newsroom/archive/?page=10"
+      },
+      {
+        "bytes": 323790,
+        "ingested_at": "2026-11-27T07:28:37.803550+00:00",
+        "projection_sha256": "a2f9edffa2e791c084e9e192d849c3675cee0ad24337c249e596385a9b413ec7",
+        "retention": "metadata_only",
+        "source_sha256": "7aeaa77f78653d1a6322b27ba70d1e19c94a32ef844222655f87e03c8eb06c1d",
+        "url": "https://www.apple.com/newsroom/archive/?page=11"
+      },
+      {
+        "bytes": 323498,
+        "ingested_at": "2026-11-27T07:28:41.209333+00:00",
+        "projection_sha256": "887baf60774058d661ba0787078f50dca4942cc8cfe7e7c1a8d19597e1f6059a",
+        "retention": "metadata_only",
+        "source_sha256": "2c396435a4b5bb170f5ac61990435845b0ddee1a2ba1c704ae6c89fb544f1ba3",
+        "url": "https://www.apple.com/newsroom/archive/?page=12"
+      }
+    ],
+    "scope": "issuer archive dated headlines only",
+    "source_type": "news",
+    "status": "available",
+    "ticker": "AAPL"
+  },
+  "direct_ir_missing": [
+    "AMD",
+    "AMZN",
+    "BA",
+    "BAC",
+    "CAT",
+    "CVX",
+    "GOOGL",
+    "GS",
+    "JNJ",
+    "JPM",
+    "KO",
+    "META",
+    "MSFT",
+    "NVDA",
+    "PFE",
+    "TSLA",
+    "UNH",
+    "WMT",
+    "XOM"
+  ],
+  "direct_ir_tickers": [
+    "AAPL"
+  ],
+  "headlines_sha256": "ed4e49b6d7136e0a50b89b325bdcd2f6375b3ff993cf4d171a7d781c292390f1",
+  "sec_mirror": "Earnings releases for other issuers are tracked separately as SEC Exhibit 99.1",
+  "through": "2026-11-25",
+  "version": "ir-v3-001"
+}

@@ -1,0 +1,42 @@
+{
+  "headlines_sha256": "0772964bc48b8934fe12dff00e6c93a6d9112c4381ea3424c3da73e1388058c4",
+  "issues": [],
+  "receipts": [
+    {
+      "published_date": "2026-01-28",
+      "retrieved_at": "2026-11-27T07:39:34.752146+00:00",
+      "sha256": "4ac401872bad3106c161f39928a942425763e76aa1cb182cb7c89af057b7edf2",
+      "ticker": "MSFT",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q2/press-release-webcast"
+    },
+    {
+      "published_date": "2026-04-29",
+      "retrieved_at": "2026-11-27T07:39:36.246897+00:00",
+      "sha256": "974608d8821af7451ec2270976680fb967c85e17c69ec51a06ac6a101a3fe5e4",
+      "ticker": "MSFT",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q3/press-release-webcast"
+    },
+    {
+      "published_date": "2026-07-29",
+      "retrieved_at": "2026-11-27T07:39:37.690256+00:00",
+      "sha256": "7358a536671aa9439d4a3b959f7949cd75055aa3bcd34af1819bd62b8556a02c",
+      "ticker": "MSFT",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast"
+    },
+    {
+      "published_date": "2026-10-28",
+      "retrieved_at": "2026-11-27T07:39:39.056785+00:00",
+      "sha256": "05af1b9870b63016af0648e085523f3e7065dc21e25eada6edf042db43be8617",
+      "ticker": "MSFT",
+      "url": "https://www.microsoft.com/en-us/Investor/earnings/FY-2027-Q1/press-release-webcast"
+    },
+    {
+      "published_date": "2026-11-03",
+      "retrieved_at": "2026-11-27T07:39:42.120922+00:00",
+      "sha256": "dabfa4070e749bb59b6f6284a0ce3e5674197d7db977adc56929dfb24685f838",
+      "ticker": "PFE",
+      "url": "https://www.pfizer.com/print/pdf/node/563670"
+    }
+  ],
+  "version": "direct-ir-releases-v3-001"
+}

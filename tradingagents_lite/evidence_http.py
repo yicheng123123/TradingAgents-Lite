@@ -42,7 +42,8 @@ class CachedHTTP:
         sec = parts.hostname in {"www.sec.gov", "data.sec.gov"}
         if (parts.scheme != "https" or parts.username or parts.password or
                 parts.hostname not in {"www.sec.gov", "data.sec.gov", "www.apple.com",
-                                       "blogs.microsoft.com", "news.microsoft.com", "www.microsoft.com"}):
+                                       "blogs.microsoft.com", "news.microsoft.com", "www.microsoft.com",
+                                       "www.pfizer.com"}):
             raise SourceError("URL is outside the source allowlist")
         if sec and (not self.sec_user_agent.strip() or any(c in self.sec_user_agent for c in "\r\n")):
             raise SourceError("Set a declared SEC User-Agent")

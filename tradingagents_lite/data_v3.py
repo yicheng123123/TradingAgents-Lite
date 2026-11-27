@@ -3,6 +3,7 @@ import argparse
 from collections import Counter
 from datetime import UTC, date, datetime, timedelta
 from hashlib import sha256 as hash_bytes
+from io import BytesIO
 import json
 from pathlib import Path
 from urllib.request import urlopen
@@ -10,6 +11,7 @@ from urllib.request import urlopen
 from .data import HistoricalData, NY, close_available, read_tasks, sha256
 from .data_v2_market import ISSUERS, atomic_write, snapshot_market, trading_sessions, write_json
 from .data_v2_sec import FACTS, SecCache, collector_lock, dated_filing, periodic_rows, write_rows
+from .evidence import Evidence, EvidenceStore, next_session_proxy
 from .evidence_http import CachedHTTP
 from .fundamentals import FundamentalsView, normalize
 from .news import collect_apple
@@ -62,6 +64,57 @@ def collect_macro(root, through):
     write_json(out / "receipt.json", {"url": url, "series": "DFEDTARU", "version": "fred-v3-001",
                                      "retrieved_at": datetime.now(UTC).isoformat(),
                                      "sha256": sha256(out / "DFEDTARU.csv")})
+
+
+def collect_ir_releases(root, through):
+    """Read dated official IR release metadata and discard all publisher body text."""
+    from bs4 import BeautifulSoup
+    from pypdf import PdfReader
+
+    out = root / "ir-releases"
+    out.mkdir(parents=True, exist_ok=True)
+    if (out / "manifest.json").exists():
+        raise FileExistsError("IR release supplement already frozen")
+    sessions = trading_sessions(date(2026, 1, 1), through)
+    base = "https://www.microsoft.com/en-us/Investor/earnings"
+    sources = [
+        ("MSFT", f"{base}/{quarter}/press-release-webcast", label, day, date_text, False)
+        for quarter, label, day, date_text in (
+            ("FY-2026-Q2", "FY2026 second quarter results", date(2026, 1, 28), "January 28, 2026"),
+            ("FY-2026-Q3", "FY2026 third quarter results", date(2026, 4, 29), "April 29, 2026"),
+            ("FY-2026-Q4", "FY2026 fourth quarter results", date(2026, 7, 29), "July 29, 2026"),
+            ("FY-2027-Q1", "FY2027 first quarter results", date(2026, 10, 28), "October 28, 2026"),
+        )
+    ] + [("PFE", "https://www.pfizer.com/print/pdf/node/563670",
+          "Third quarter 2026 earnings release", date(2026, 11, 3), "November 03, 2026", True)]
+    http = CachedHTTP(out / "cache", sec_user_agent="")
+    records, receipts, issues = [], [], []
+    for ticker, url, title, day, date_text, pdf in sources:
+        if day > through:
+            continue
+        try:
+            payload = http.get(url, cap=3_000_000, store_body=False)
+            if pdf:
+                body = PdfReader(BytesIO(payload.body)).pages[0].extract_text()
+            else:
+                body = BeautifulSoup(payload.body, "html.parser").get_text(" ", strip=True)
+            if date_text not in " ".join(body.split()):
+                raise ValueError("Release publication date not verified")
+            eligible = next_session_proxy(day, sessions)
+            records.append(Evidence(
+                ticker=ticker, source_type="news", document_id=url, source_url=url, excerpt=title,
+                ingested_at=payload.ingested_at, eligible_at=eligible, content_hash=payload.content_hash,
+                availability_basis="date_only_verified_issuer_release_next_session",
+                pit_level="historical_proxy" if eligible else "unavailable",
+                source_metadata={"title": title, "published_date": str(day), "hash_scope": "publisher_response"},
+            ).model_dump(mode="json"))
+            receipts.append({"ticker": ticker, "url": url, "published_date": str(day),
+                             "retrieved_at": payload.ingested_at.isoformat(), "sha256": payload.content_hash})
+        except (OSError, ValueError) as exc:
+            issues.append({"ticker": ticker, "url": url, "code": type(exc).__name__})
+    write_rows(out / "headlines.jsonl", records)
+    write_json(out / "manifest.json", {"version": "direct-ir-releases-v3-001", "receipts": receipts,
+                                      "issues": issues, "headlines_sha256": sha256(out / "headlines.jsonl")})
 
 
 def collect_probe_filings(root):
@@ -143,6 +196,19 @@ def freeze_tasks(root, out, audit, legacy_paths):
         for task in read_tasks(path):
             if task.decision_date in positions and task.symbol in used:
                 used[task.symbol].append(positions[task.decision_date])
+    probes = audit.parent / "probes.jsonl"
+    if sha256(probes) != json.loads((audit.parent / "freeze.json").read_text())["probe_sha256"]:
+        raise ValueError("Task eligibility requires the original frozen probe list")
+    probe_controls = 0
+    for line in probes.read_text().splitlines():
+        row = json.loads(line)
+        if row["feature"] != "return":
+            continue
+        symbol, first, _ = row["key"].split("/")
+        day = date.fromisoformat(first)
+        if day in positions and symbol in used:
+            used[symbol].append(positions[day])
+            probe_controls += 1
     boundary = audit_result["boundary"]
     earliest_holdout = max(date(2026, 9, 1), date.fromisoformat(RELEASE) + timedelta(days=1))
     if boundary["identified"]:
@@ -157,13 +223,15 @@ def freeze_tasks(root, out, audit, legacy_paths):
         "sampling": "per-symbol equal-session strata; deterministic hash target, then favor less-used dates; "
                     "complete 21-session warmup and 5-session outcome calendar for ticker, SPY and sector ETF",
         "knowledge_audit_summary_sha256": sha256(audit), "knowledge_boundary": boundary,
+        "probe_sha256": sha256(probes), "known_probe_return_windows_excluded": probe_controls,
         "public_model_release": RELEASE, "holdout_label_exported": False, "holdout_agent_executed": False,
         "market_manifest_sha256": sha256(market_path / "manifest.json"),
         "sec_manifest_sha256": sha256(sec_path / "source_manifest.json"),
         "ir_manifest_sha256": sha256(ir_path / "manifest.json"),
+        "ir_releases_manifest_sha256": sha256(root / "ir-releases" / "manifest.json"),
         "legacy_task_hashes": {str(path): sha256(path) for path in legacy_paths}, "partitions": {},
     }
-    dev = []
+    dev, all_tasks = [], []
     for partition, first, end, n in (
         ("development", date(2026, 1, 1), date(2026, 7, 31), 4),
         ("holdout", earliest_holdout, last, 5),
@@ -174,13 +242,19 @@ def freeze_tasks(root, out, audit, legacy_paths):
         manifest["partitions"][partition] = {
             "requested": n * len(ISSUERS), "count": len(tasks), "sha256": sha256(path),
             "decision_range": [str(first), str(end)], "sample_dates": len(density),
+            "selected_range": [str(tasks[0].decision_date), str(tasks[-1].decision_date)] if tasks else None,
             "max_tasks_on_one_date": max(density.values(), default=0), "rejections": dict(reasons),
             "sectors": dict(Counter(ISSUERS[task.symbol][0] for task in tasks)),
             "tickers": dict(Counter(task.symbol for task in tasks)),
         }
         if partition == "development":
             dev = tasks
-    manifest["development_pit_audit"] = audit_pit(sec_path, dev)
+        all_tasks.extend(tasks)
+    from .data_v2_tasks import window_overlap
+    manifest["outcome_window_overlap"] = window_overlap(all_tasks, sessions)
+    if manifest["outcome_window_overlap"]:
+        raise ValueError("V3 sample has overlapping same-stock settlement windows")
+    manifest["development_pit_audit"] = audit_pit(sec_path, dev) | audit_evidence(sec_path, ir_path, market, dev)
     write_json(out / "manifest.json", manifest)
     return manifest
 
@@ -209,9 +283,39 @@ def audit_pit(sec, tasks):
             "future_facts": future, "timestamp_level": "historical proxy"}
 
 
+def audit_evidence(sec, ir, market, tasks):
+    releases = ir.parent / "ir-releases"
+    files = (sec / "evidence.jsonl", ir / "headlines.jsonl", releases / "headlines.jsonl")
+    expected = (json.loads((sec / "source_manifest.json").read_text())["evidence_sha256"],
+                json.loads((ir / "manifest.json").read_text())["headlines_sha256"],
+                json.loads((releases / "manifest.json").read_text())["headlines_sha256"])
+    if tuple(sha256(path) for path in files) != expected:
+        raise ValueError("Evidence snapshot SHA-256 differs")
+    store = EvidenceStore([Evidence.model_validate_json(line) for path in files for line in path.read_text().splitlines()])
+    summary = Counter()
+    for task in tasks:
+        cutoff = close_available(task.decision_date)
+        view = store.view(task)
+        for source in ("sec_filing", "news"):
+            visible = view.visible(source)
+            summary[f"tasks_with_{source}"] += bool(visible)
+            for item in visible:
+                if item.eligible_at is None or item.eligible_at > cutoff or item.ticker != task.symbol:
+                    raise ValueError("Ineligible evidence in model view")
+                summary["visible_evidence_records_checked"] += 1
+        bars = market.view(task).history
+        if any(bar.available_at > cutoff or bar.day > task.decision_date for bar in bars):
+            raise ValueError("Future market data in Development input")
+        summary["visible_market_bars_checked"] += len(bars)
+        if market.outcome(task).available_at <= cutoff:
+            raise ValueError("Invalid Development settlement order")
+        summary["development_settlements_verified"] += 1
+    return dict(summary) | {"future_evidence": 0, "future_bars": 0}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("market", "ir", "macro", "probe-sec", "freeze"))
+    parser.add_argument("action", choices=("market", "ir", "ir-releases", "macro", "probe-sec", "freeze"))
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--output", type=Path, default=TASKS)
     parser.add_argument("--audit", type=Path, default=Path("results/temporal-knowledge-audit-001/summary.json"))
@@ -225,6 +329,8 @@ def main():
         print(snapshot_market(args.root / "market", start=START, end=through, snapshot_version="yahoo-us-v3-001")["failures"])
     elif args.action == "ir":
         collect_ir(args.root, through)
+    elif args.action == "ir-releases":
+        collect_ir_releases(args.root, through)
     elif args.action == "macro":
         collect_macro(args.root, through)
     elif args.action == "probe-sec":

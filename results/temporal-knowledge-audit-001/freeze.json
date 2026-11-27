@@ -1,0 +1,79 @@
+{
+  "api": {
+    "endpoint": "https://open.bigmodel.cn/api/paas/v4",
+    "history": false,
+    "max_output_tokens": 128,
+    "max_prompt_bytes": 2000,
+    "model": "glm-5.3-flash",
+    "reasoning_effort": "low",
+    "retries": 0,
+    "temperature": 0,
+    "tools": false
+  },
+  "budget_phase": "Reserve",
+  "cap": 60000,
+  "code_commit": "85ef778a096e080b139d18c354d2a2f59a9d1e35",
+  "code_hashes": {
+    "tradingagents_lite/provider.py": "9d26a4c0da6fd0362926d067e4cb0c1068f1d8d6dd22f6ea1344f8db07402651",
+    "tradingagents_lite/temporal_audit.py": "99a702fab4ea1586154d73854793d9acf7740c285c86efc007f99472bb6d5984",
+    "tradingagents_lite/temporal_probes.py": "ee43aaa052d6cc93edef212fa3fb7067c1f4930dc6f026a7c3be6419765880ed",
+    "tradingagents_lite/token_budget.py": "7f6112552deceb8088192b189c6f62dfe84cac3e710b2bffe3c7a2a79c9c2fe0",
+    "uv.lock": "346627b81870859b0ee2421c015db25eae33a454786a2aaf462b71656ecaf920"
+  },
+  "count": 60,
+  "features": {
+    "event": 12,
+    "filing": 18,
+    "price": 15,
+    "return": 15
+  },
+  "gold_positions": {
+    "A": 8,
+    "B": 8,
+    "C": 7,
+    "D": 7
+  },
+  "official_product_release": "2026-08-27",
+  "probe_sha256": "fb1a83001dc8e29cd9862b9cb023d11013e880782cfd7504141b33e7539374fc",
+  "prompt": "Answer this single dated financial recall question using only your existing knowledge. Return only the requested number, category, or letter. If unsure return UNKNOWN.",
+  "scoring": {
+    "abstention": "exact UNKNOWN is incorrect but tracked",
+    "boundary": "stratified bootstrap of balanced open and MC accuracy; first of two adjacent strata at least 20 points below the mean of strata 1 and 2; require 80% same-knot stability",
+    "choice": "one letter A through D only",
+    "exact": "trim and casefold; exact numeric means equality to rounded source answer",
+    "numeric": "absolute error no larger than the stated tolerance; units as asked"
+  },
+  "source_manifests": {
+    "ir": "d04484e12dc168ba0297b6c7fac680b44164945db944615a12263d91b0f6aab9",
+    "macro": "07db355289b38ae67837a8c9dbc76c59ca2262fd391df97b91f09e8d978be61b",
+    "market": "b432387175f12f949344cfce1b96c68be37e2e9e94779ffe39779169bd37e08e",
+    "probe_sec": "9f1850a363b3741ff866208f9039eaf8ccd4eee60129e06a7fde5421f2b111a0",
+    "sec": "cbd0fe351eb4ecdade2e533b2cdd9ecf0a50d4c3547daf4e68a9e42720850909"
+  },
+  "strata": [
+    [
+      "2025-08-01",
+      "2025-10-31"
+    ],
+    [
+      "2025-11-01",
+      "2025-11-19"
+    ],
+    [
+      "2025-11-20",
+      "2025-12-31"
+    ],
+    [
+      "2026-01-01",
+      "2026-03-31"
+    ],
+    [
+      "2026-04-01",
+      "2026-08-31"
+    ],
+    [
+      "2026-09-01",
+      "2026-11-25"
+    ]
+  ]
+}
