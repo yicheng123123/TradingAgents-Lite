@@ -11,6 +11,7 @@ from tradingagents_lite import counterfactual_runner
 from tradingagents_lite.counterfactual_runner import _hash, _sealed, _verify_sealed, run
 from tradingagents_lite.counterfactual_score import _correct, parse_answer, score_run
 from tradingagents_lite.data import sha256 as file_sha
+from tradingagents_lite.provider import ModelCallError
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +22,12 @@ DEV = ROOT / "data/counterfactual-development-v1-001"
     ("12.34 percent", "percent", "12.34"),
     ("12.34%", "percent", "12.34"),
     ("$12.34 million", "USD millions", "12.34"),
+    ("70.89 USD millions", "USD millions", "70.89"),
+    ("70.89 million USD", "USD millions", "70.89"),
+    ("USD 70.89 million", "USD millions", "70.89"),
+    ("1.25 billion USD", "USD millions", "1250.00"),
+    ("-2.50 USD millions", "USD millions", "-2.50"),
+    ("70.895 USD millions", "USD millions", "70.90"),
     ("$1.25 billion", "USD millions", "1250.00"),
     ("$12,340,000", "USD millions", "12.34"),
     ("($2,500,000)", "USD millions", "-2.50"),
@@ -31,6 +38,10 @@ def test_counterfactual_deterministic_numeric_units(answer, unit, expected):
 
 def test_counterfactual_numeric_rejects_ambiguous_or_wrong_dimension():
     assert parse_answer("12.34 or 13.00", "USD millions") is None
+    assert parse_answer("70.89 million USD (100.86 - 29.97)", "USD millions") is None
+    assert parse_answer("70.89 million EUR", "USD millions") is None
+    assert parse_answer("about 70.89 million USD after credits", "USD millions") is None
+    assert parse_answer("USD 70.89 USD million", "USD millions") is None
     assert parse_answer("$12.34 million", "percent") is None
     assert parse_answer("NaN", "USD millions") is None
 
@@ -50,6 +61,14 @@ def test_checkpoint_hash_detects_mutation():
     assert _verify_sealed(sealed)["status"] == "ok"
     with pytest.raises(ValueError, match="integrity"):
         _verify_sealed({**sealed, "status": "changed"})
+
+
+def test_v2_config_freezes_new_protocol_and_shares_existing_experiment_budget():
+    config = counterfactual_runner._config()
+
+    assert config["protocol"] == "counterfactual-phase2-v2"
+    assert counterfactual_runner.EXPERIMENT == "counterfactual-phase2-v1"
+    assert config["experiment_token_limit"] == 300_000
 
 
 def test_frozen_scorer_reports_pairs_planning_abstention_and_future_acceptance(tmp_path):
@@ -132,6 +151,137 @@ def test_frozen_scorer_reports_pairs_planning_abstention_and_future_acceptance(t
     (run_root / "manifest.json").write_text(json.dumps(manifest))
     preguessed = score_run(data_root, run_root, output)
     assert preguessed["summary"]["CF1"]["adaptive_planning_success_rate"] == {"success": 3, "total": 4}
+
+
+def _tool_call(call_id, query, *, name="rag_search", limit=4):
+    return {"id": call_id, "type": "function", "function": {
+        "name": name, "arguments": json.dumps({"query": query, "limit": limit})}}
+
+
+def _execute_cf1_with_replies(monkeypatch, replies):
+    class Context:
+        def __init__(self):
+            self.trace, self.exposed = [], {}
+
+    class Search:
+        def __init__(self, case, retriever, partition, context):
+            self.case, self.trace, self.exposed = case, context.trace, context.exposed
+
+        def search(self, query, limit, *, round_index, tool_call_id, **kwargs):
+            evidence_id = f"cf:version-{round_index}"
+            item = {"evidence_id": evidence_id, "document_id": f"doc-{round_index}",
+                    "page": round_index, "excerpt": f"Synthetic observation {round_index}.",
+                    "chunk_id": f"chunk-{round_index}"}
+            self.exposed[evidence_id] = {key: item[key] for key in ("evidence_id", "document_id", "page")}
+            delivered = [{key: item[key] for key in ("evidence_id", "document_id", "page", "excerpt")}]
+            self.trace.append({"query": query, "requested_limit": limit,
+                               "delivered_evidence": delivered})
+            return {"status": "available", "reason": None, "items": [item]}
+
+    class Backend:
+        def __init__(self):
+            self.requests, self.call_log, self.observations = [], [], []
+
+        def _call(self, messages, tools, **kwargs):
+            self.requests.append({"messages": json.loads(json.dumps(messages)), "tools": tools, **kwargs})
+            reply = replies[len(self.requests) - 1]
+            if isinstance(reply, Exception):
+                raise reply
+            return reply
+
+    context = Context()
+    backend = Backend()
+    monkeypatch.setattr(counterfactual_runner.financebench, "CaseSearch",
+                        lambda *args: context)
+    monkeypatch.setattr(counterfactual_runner, "_Search", Search)
+    packet = {"task_id": "offline-state-machine", "company": "Synthetic Co",
+              "question": "Find the synthetic value using the supplied evidence.",
+              "cutoff": "2025-01-01T00:00:00+00:00", "documents": []}
+    record = counterfactual_runner._execute_case(packet, "CF1", None, "offline", backend)
+    return record, backend
+
+
+def _assert_tool_message_pairs(messages):
+    for index, message in enumerate(messages):
+        if message.get("role") != "assistant" or not message.get("tool_calls"):
+            continue
+        assert index + 1 < len(messages)
+        tool_message = messages[index + 1]
+        assert tool_message["role"] == "tool"
+        assert tool_message["tool_call_id"] == message["tool_calls"][0]["id"]
+
+
+@pytest.mark.parametrize(("search_rounds", "stop_first", "expected_requests"), [
+    (0, True, 2),
+    (1, False, 3),
+    (2, False, 3),
+])
+def test_cf1_normal_stops_use_final_json_mode_once(monkeypatch, search_rounds, stop_first,
+                                                   expected_requests):
+    replies = []
+    if stop_first:
+        replies.append({"content": "natural language intermediate", "finish_reason": "stop", "tool_calls": []})
+    else:
+        replies.extend({"content": "", "finish_reason": "tool_calls",
+                        "tool_calls": [_tool_call(f"call-{turn}", f"query {turn}")]}
+                       for turn in range(1, search_rounds + 1))
+        if search_rounds < counterfactual_runner.MAX_ROUNDS:
+            replies.append({"content": "natural language intermediate", "finish_reason": "stop",
+                            "tool_calls": []})
+    replies.append({"content": json.dumps({"status": "answered", "answer": "1.25",
+                                             "evidence_ids": []}),
+                    "finish_reason": "stop", "tool_calls": []})
+
+    record, backend = _execute_cf1_with_replies(monkeypatch, replies)
+
+    assert record["status"] == "ok"
+    assert record["tool_calls"] == search_rounds
+    assert len(backend.requests) == expected_requests <= 3
+    assert len(record["retrieval_trace"]) == search_rounds <= 2
+    final_request = backend.requests[-1]
+    assert final_request["tools"] == []
+    assert final_request["structured_stage"] == "counterfactual"
+    assert final_request["messages"][-1] == {"role": "user", "content": counterfactual_runner.financebench.FINAL}
+    for request in backend.requests:
+        _assert_tool_message_pairs(request["messages"])
+
+
+def test_cf1_rejects_illegal_tool_call_without_final_retry(monkeypatch):
+    record, backend = _execute_cf1_with_replies(monkeypatch, [{
+        "content": "", "finish_reason": "tool_calls",
+        "tool_calls": [_tool_call("bad-call", "irrelevant", name="shell")],
+    }])
+
+    assert record["status"] == "invalid_output"
+    assert len(backend.requests) == 1
+    assert record["validation_error"]["phase"] == "tool_round_1"
+    assert record["validation_error"]["exception_type"] == "ValueError"
+
+
+def test_cf1_final_schema_failure_is_recorded_without_repair(monkeypatch):
+    record, backend = _execute_cf1_with_replies(monkeypatch, [
+        {"content": "", "finish_reason": "stop", "tool_calls": []},
+        {"content": "not-json with private details", "finish_reason": "stop", "tool_calls": []},
+    ])
+
+    assert record["status"] == "invalid_output"
+    assert len(backend.requests) == 2
+    diagnostic = record["validation_error"]
+    assert diagnostic["phase"] == "final_validation"
+    assert diagnostic["exception_type"] == "ValidationError"
+    assert diagnostic["error_count"] > 0
+    assert all(set(error) == {"loc", "type"} for error in diagnostic["errors"])
+    assert "private details" not in json.dumps(diagnostic)
+
+
+def test_cf1_budget_refusal_stops_without_final_call_or_retry(monkeypatch):
+    record, backend = _execute_cf1_with_replies(monkeypatch, [ModelCallError("token_budget_exhausted", 1,
+                                                                              budget_exhausted=True)])
+
+    assert record["status"] == "token_budget_exhausted"
+    assert len(backend.requests) == 1
+    assert record["validation_error"]["phase"] == "tool_round_1"
+    assert record["validation_error"]["exception_type"] == "ModelCallError"
 
 
 @pytest.mark.skipif(platform.system() != "Linux" or shutil.which("unshare") is None,
@@ -226,13 +376,17 @@ def test_llm_runner_budget_initialization_and_broker_are_offline(monkeypatch, tm
         def __init__(self):
             self.client = FakeClient()
             self.call_log = []
+            self.request_shapes = []
 
         def set_budget_context(self, **kwargs):
             return None
 
         def _call(self, messages, tools, **kwargs):
+            self.request_shapes.append({"tools": tools, "structured_stage": kwargs.get("structured_stage")})
             self.call_log.append({"actual_model": "offline-provider-mock", "charged_tokens": 0,
                                   "status": "ok"})
+            if tools:
+                return {"content": "Search complete.", "finish_reason": "stop", "tool_calls": []}
             return {"content": json.dumps({"status": "abstained", "answer": "",
                                              "evidence_ids": []}),
                     "finish_reason": "stop", "tool_calls": []}
@@ -258,6 +412,11 @@ def test_llm_runner_budget_initialization_and_broker_are_offline(monkeypatch, tm
     records = [json.loads(line) for line in (output / "predictions.jsonl").read_text().splitlines()]
     assert len(records) == 2
     assert all(row["status"] == "ok" and row["budget_tokens"] == 0 for row in records)
-    assert all(len(row["llm_calls"]) == 1 for row in records)
-    assert sum(len(provider.call_log) for provider in providers) == 2
+    assert [len(row["llm_calls"]) for row in records] == [1, 2]
+    assert providers[1].request_shapes == [{"tools": [], "structured_stage": "counterfactual"}]
+    assert providers[2].request_shapes == [
+        {"tools": counterfactual_runner.TOOLS, "structured_stage": "counterfactual"},
+        {"tools": [], "structured_stage": "counterfactual"},
+    ]
+    assert sum(len(provider.call_log) for provider in providers) == 3
     assert manifest["token_budget"]["charged_tokens"] == 0

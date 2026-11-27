@@ -13,10 +13,11 @@ from .data import sha256 as file_sha
 
 
 NUMBER = re.compile(
-    r"(?P<open>\()?(?P<sign>[+-]?)\s*(?P<currency>USD|\$)?\s*"
+    r"(?P<open>\()?(?P<sign>[+-]?)\s*(?P<prefix_currency>USD|\$)?\s*"
     r"(?P<number>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)\s*"
-    r"(?P<scale>thousands?|millions?|billions?|trillions?|[kmbt])?\s*"
-    r"(?P<unit>percent(?:s|age)?|%)?(?P<close>\))?",
+    r"(?:(?P<currency_first>USD|\$)\s*(?P<currency_scale>thousands?|millions?|billions?|trillions?|[kmbt])?"
+    r"|(?P<scale>thousands?|millions?|billions?|trillions?|[kmbt])\s*(?P<scale_currency>USD|\$)?"
+    r"|(?P<unit>percent(?:s|age)?|%))?\s*(?P<close>\))?",
     re.IGNORECASE,
 )
 CENT = Decimal("0.01")
@@ -44,18 +45,21 @@ def parse_answer(text, unit):
         number = -number
     if not number.is_finite():
         return None
-    suffix = (match["scale"] or "").lower()
+    suffix = (match["currency_scale"] or match["scale"] or "").lower()
     if suffix.endswith("s"):
         suffix = suffix[:-1]
     requested = unit.casefold()
     explicit_percent = bool(match["unit"])
+    currencies = [match[key] for key in ("prefix_currency", "currency_first", "scale_currency") if match[key]]
+    if len(currencies) > 1:
+        return None
+    has_currency = bool(currencies)
     if requested == "percent":
-        if match["currency"] or (suffix and suffix not in {"k"}):
+        if has_currency or (suffix and suffix not in {"k"}):
             return None
         # A percent suffix and a bare numeric value are both in percentage points;
         # fractional ratios are not silently converted to percent.
-        if explicit_percent or not explicit_percent:
-            return number.quantize(CENT, rounding=ROUND_HALF_UP)
+        return number.quantize(CENT, rounding=ROUND_HALF_UP)
     if requested == "usd millions":
         if explicit_percent:
             return None

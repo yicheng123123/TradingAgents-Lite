@@ -18,6 +18,8 @@ from time import perf_counter
 import uuid
 from types import SimpleNamespace
 
+from pydantic import ValidationError
+
 from . import b1, financebench
 from .data import sha256 as file_sha
 from .rag import RagConfig, Retriever
@@ -220,7 +222,8 @@ def _execute_case(packet, arm, retriever, partition, backend):
     status = "ok"
     result = {}
     started = perf_counter()
-    final_reply = None
+    failure_phase = "fixed_retrieval" if arm == "CF0" else "tool_selection"
+    retrieval_state = "active"
     try:
         if arm == "CF0":
             for turn, query in enumerate(financebench.fixed_queries(case.question), start=1):
@@ -233,11 +236,17 @@ def _execute_case(packet, arm, retriever, partition, backend):
                 count += 1
         else:
             for turn_index in range(MAX_ROUNDS):
+                failure_phase = f"tool_round_{turn_index + 1}"
                 reply = backend._call(messages, TOOLS, structured_stage="counterfactual")
-                tools_message = analyst_tool_turn(messages, reply, turn_index, allowed=True, maximum=1)
-                if tools_message is None:
-                    final_reply = reply
+                pending_calls = reply.get("tool_calls") or []
+                if not pending_calls:
+                    if reply.get("finish_reason") != "stop":
+                        raise ValueError("invalid_tool_phase_finish_reason")
+                    retrieval_state = "stopped"
                     break
+                if reply.get("finish_reason") != "tool_calls":
+                    raise ValueError("invalid_tool_phase_finish_reason")
+                tools_message = analyst_tool_turn(messages, reply, turn_index, allowed=True, maximum=1)
                 messages = tools_message["messages"]
                 call, = tools_message["pending"]
                 if call["function"]["name"] != TOOL:
@@ -250,8 +259,14 @@ def _execute_case(packet, arm, retriever, partition, backend):
                 messages.append(tool_message(call["id"], financebench.compact_json(observation)))
                 backend.observations.append(observation)
                 count += 1
-        reply = final_reply or backend._call([*messages, {"role": "user", "content": financebench.FINAL}], [],
-                                             structured_stage="counterfactual")
+            else:
+                retrieval_state = "stopped"
+        if arm == "CF1" and retrieval_state != "stopped":
+            raise RuntimeError("retrieval_state_transition_failure")
+        failure_phase = "final_generation"
+        reply = backend._call([*messages, {"role": "user", "content": financebench.FINAL}], [],
+                              structured_stage="counterfactual")
+        failure_phase = "final_validation"
         if reply.get("finish_reason") != "stop" or reply.get("tool_calls"):
             raise ValueError("invalid_final_response")
         body = reply["content"].strip()
@@ -270,11 +285,24 @@ def _execute_case(packet, arm, retriever, partition, backend):
         if str(exc) in {"future_evidence_in_retrieval", "retrieval_scope_violation",
                         "retrieval_content_hash_mismatch"}:
             status = str(exc)
+        errors = exc.errors(include_url=False) if isinstance(exc, ValidationError) else []
+        safe_errors = []
+        for error in errors[:8]:
+            location = [part if isinstance(part, (str, int)) else type(part).__name__
+                        for part in error.get("loc", ())[:8]]
+            safe_errors.append({"loc": location, "type": str(error.get("type", "validation_error"))[:80]})
+        result["validation_error"] = {
+            "phase": failure_phase,
+            "exception_type": type(exc).__name__,
+            "error_count": len(errors) if errors else 1,
+            "errors": safe_errors,
+        }
     return {
         "id": packet["task_id"], "task_id": f"{arm}:{packet['task_id']}", "arm": arm,
         "status": status, "input_availability": [], "answer": result.get("answer"),
         "answer_status": result.get("answer_status"), "citations": result.get("citations", []),
         "valid_citations": result.get("valid_citations", []), "exposed": list(context.exposed.values()),
+        "validation_error": result.get("validation_error"),
         "retrieval_trace": search.trace, "tool_calls": count,
         "latency_seconds": perf_counter() - started,
         "llm_calls": backend.call_log, "budget_tokens": sum(row.get("charged_tokens", 0) for row in backend.call_log),
@@ -495,7 +523,7 @@ def _config():
                   "counterfactual_score.py", "vectors.py", "provider.py", "workflow.py",
                   "token_budget.py", "financebench_score.py")
     model_dir = Path(__file__).resolve().parents[1] / "data/local-models/models" / LocalEmbedding.REVISION
-    return {"protocol": "counterfactual-phase2-v1", "model": MODEL, "temperature": 0,
+    return {"protocol": "counterfactual-phase2-v2", "model": MODEL, "temperature": 0,
             "reasoning_effort": "low", "max_output_tokens": MAX_TOKENS, "retries": 0, "repairs": 0,
             "max_tool_rounds": MAX_ROUNDS, "max_tool_calls_per_round": 1,
             "rag": {"mode": "R3", "candidate_k": 24, "top_k": 4, "context_bytes": 3200},
