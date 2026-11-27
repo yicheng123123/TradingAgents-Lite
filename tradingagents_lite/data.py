@@ -192,5 +192,6 @@ class HistoricalData:
                        benchmark_return=b.close / a.open - 1)
 
     def is_sealed(self, task: Task) -> bool:
-        return (task.task_id.startswith("v2-holdout-")
+        return (task.task_id.startswith(("v2-holdout-", "v3-holdout-"))
+                or (self.manifest.get("version") == "yahoo-us-v3-001" and task.decision_date >= date(2026, 9, 1))
                 or (self.manifest.get("version") == "yahoo-us-v2-001" and task.decision_date.year >= 2025))

@@ -50,16 +50,16 @@ def trading_sessions(start: date = START, end: date = END) -> tuple[date, ...]:
     return tuple(day for day in days if day != date(2025, 1, 9))
 
 
-def chart_url(symbol: str, end: date) -> str:
+def chart_url(symbol: str, end: date, *, start: date = START) -> str:
     def midnight(day: date):
         return int(datetime.combine(day, time.min, NY).timestamp())
 
-    query = urlencode({"period1": midnight(START), "period2": midnight(end + timedelta(days=1)),
+    query = urlencode({"period1": midnight(start), "period2": midnight(end + timedelta(days=1)),
                        "interval": "1d", "events": "div,splits", "includeAdjustedClose": "true"})
     return f"{ENDPOINT}{symbol}?{query}"
 
 
-def chart_rows(raw: bytes, symbol: str):
+def chart_rows(raw: bytes, symbol: str, *, start: date = START, end: date = END):
     chart = json.loads(raw)["chart"]
     if chart.get("error") or len(chart.get("result") or []) != 1:
         raise DataError("Unexpected Yahoo chart response")
@@ -79,7 +79,7 @@ def chart_rows(raw: bytes, symbol: str):
     dropped, duplicates, zero_volume, gaps = [], [], [], []
     for i, stamp in enumerate(stamps):
         day = datetime.fromtimestamp(stamp, NY).date()
-        if not START <= day <= END:
+        if not start <= day <= end:
             continue
         if day in bars:
             duplicates.append(str(day))
@@ -113,21 +113,25 @@ def chart_rows(raw: bytes, symbol: str):
                 if not (0 < numerator and 0 < denominator):
                     raise DataError("Malformed split ratio")
                 rows.append({"date": str(day), "numerator": numerator, "denominator": denominator})
-            elif START <= day <= END:
+            elif start <= day <= end:
                 rows.append({"date": str(day), "amount": event["amount"]})
         rows.sort(key=lambda row: row["date"])
     return ordered, adj, corporate, {"invalid_rows": dropped, "duplicates": duplicates,
                                      "zero_volume_sessions": zero_volume, "large_close_moves": gaps}
 
 
-def snapshot_market(root: Path, *, offline: bool = False) -> dict:
+def snapshot_market(root: Path, *, offline: bool = False, start: date = START, end: date = END,
+                    snapshot_version: str = MARKET_VERSION) -> dict:
     root.mkdir(parents=True, exist_ok=True)
     manifest_path = root / "manifest.json"
     if manifest_path.exists():
         from .data import HistoricalData
 
-        return HistoricalData(root).manifest
-    sessions = set(trading_sessions())
+        manifest = HistoricalData(root).manifest
+        if (manifest["start"], manifest["end"], manifest["version"]) != (str(start), str(end), snapshot_version):
+            raise DataError("Published snapshot has a different date range or version")
+        return manifest
+    sessions = set(trading_sessions(start, end))
     assets, failures = {}, {}
     for symbol in SYMBOLS:
         raw = root / f"{symbol}.raw.json"
@@ -142,17 +146,20 @@ def snapshot_market(root: Path, *, offline: bool = False) -> dict:
             else:
                 # Read through the completed session before retrieval to account for
                 # subsequent Yahoo split restatements without exposing later price rows.
-                source_end = max(END, datetime.now(NY).date() - timedelta(days=1))
-                url = chart_url(symbol, source_end)
+                source_end = max(end, datetime.now(NY).date() - timedelta(days=1))
+                url = chart_url(symbol, source_end, start=start)
                 with urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=20) as resp:
                     body = resp.read(4_000_001)
                 if not body or len(body) > 4_000_000:
                     raise DataError("Invalid market response size")
-                chart_rows(body, symbol)
+                chart_rows(body, symbol, start=start, end=end)
                 atomic_write(raw, body)
-                meta = {"url": url, "retrieved_at": datetime.now(UTC).isoformat(), "raw_sha256": sha256(raw)}
+                meta = {"url": url, "retrieved_at": datetime.now(UTC).isoformat(), "raw_sha256": sha256(raw),
+                        "requested_start": str(start), "requested_end": str(end)}
                 write_json(receipt, meta)
-            bars, adjusted, corporate, audit = chart_rows(raw.read_bytes(), symbol)
+            if (meta.get("requested_start", str(START)), meta.get("requested_end", str(END))) != (str(start), str(end)):
+                raise DataError("Cached market receipt date range differs")
+            bars, adjusted, corporate, audit = chart_rows(raw.read_bytes(), symbol, start=start, end=end)
             output = root / f"{symbol}.bars.jsonl"
             supplemental = root / f"{symbol}.actions.json"
             atomic_write(output, "".join(bar.model_dump_json() + "\n" for bar in bars).encode())
@@ -176,7 +183,7 @@ def snapshot_market(root: Path, *, offline: bool = False) -> dict:
             entry["missing_vs_spy"] = sorted(benchmark_days - dates)
             entry["extra_vs_spy"] = sorted(dates - benchmark_days)
     manifest = {
-        "version": MARKET_VERSION, "source": "Yahoo Finance daily chart", "start": str(START), "end": str(END),
+        "version": snapshot_version, "source": "Yahoo Finance daily chart", "start": str(start), "end": str(end),
         "benchmark": BENCHMARK, "calendar": f"XNYS/exchange-calendars {version('exchange-calendars')}",
         "expected_sessions": len(sessions), "failures": failures, "assets": assets,
         "data_class": "retrospective vendor snapshot; historical values and availability are not independently authenticated",

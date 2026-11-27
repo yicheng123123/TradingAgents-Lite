@@ -124,7 +124,8 @@ class ModelBackend:
         self.experiment_id, self.task_id, self.phase = experiment_id, task_id, phase
 
     def _call(self, messages: list[dict], tools: list[dict], *,
-              structured_stage: str | None = None, repair: bool = False) -> dict:
+              structured_stage: str | None = None, repair: bool = False,
+              record_version: bool = False) -> dict:
         options = {}
         if tools:
             options.update(tools=tools, tool_choice="auto")
@@ -287,6 +288,7 @@ class ModelBackend:
                 "error_code": response_error,
                 "response_id": getattr(result, "id", None), "actual_model": actual_model,
                 "finish_reason": finish_reason,
+                **({"system_fingerprint": getattr(result, "system_fingerprint", None)} if record_version else {}),
                 **({"structured_stage": structured_stage, "structured_repair": repair,
                     "response_format": "json_object" if not tools else None,
                     "response_bytes": len(content.encode("utf-8"))} if structured_stage else {}),

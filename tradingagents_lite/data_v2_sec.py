@@ -61,7 +61,8 @@ class NoRedirect(HTTPRedirectHandler):
 
 
 class SecCache:
-    def __init__(self, root: Path, legacy: Path, offline: bool, reuse: tuple[Path, ...] = ()):
+    def __init__(self, root: Path, legacy: Path, offline: bool, reuse: tuple[Path, ...] = (),
+                 *, fresh_metadata: bool = False):
         agent = os.getenv("SEC_USER_AGENT", "").strip()
         if not offline and (("\r" in agent or "\n" in agent)
                             or not re.fullmatch(r".+\s+[^\s@]+@[^\s@]+\.[^\s@]+", agent)):
@@ -73,6 +74,7 @@ class SecCache:
         self.fallback = [CachedHTTP(path, offline=True, **kwargs)
                          for path in dict.fromkeys((*reuse, legacy)) if path.resolve() != root.resolve()]
         self.blocked = False
+        self.fresh_metadata = fresh_metadata
         self.used = {}
         self.downloads = self.cache_hits = 0
 
@@ -83,7 +85,8 @@ class SecCache:
     def get(self, url, cap=30_000_000):
         key = sha256(url.encode()).hexdigest()
         cached = (self.current.root / f"{key}.json").is_file()
-        source = None if cached else next((item for item in self.fallback
+        refresh = self.fresh_metadata and not url.startswith(ARCHIVES)
+        source = None if cached or refresh else next((item for item in self.fallback
                                            if (item.root / f"{key}.json").is_file()), None)
         if source is not None:
             payload = source.get(url, cap)
@@ -108,7 +111,7 @@ class SecCache:
         return payload
 
 
-def periodic_rows(cache, ticker, cik, errors):
+def periodic_rows(cache, ticker, cik, errors, *, first="2019-01-01", last="2025-12-31"):
     cik_text = f"{cik:010}"
     submission = json.loads(cache.get(f"{BASE}CIK{cik_text}.json").body)
     if int(submission["cik"]) != cik or ticker not in submission.get("tickers", []) and ticker != "XOM":
@@ -116,7 +119,7 @@ def periodic_rows(cache, ticker, cik, errors):
     files = submission["filings"]
     tables = [files["recent"]]
     for entry in files["files"]:
-        if entry["filingTo"] < "2019-01-01" or entry["filingFrom"] > "2025-12-31":
+        if entry["filingTo"] < first or entry["filingFrom"] > last:
             continue
         name = entry["name"]
         if not re.fullmatch(rf"CIK{cik_text}-submissions-[0-9]+\.json", name):
@@ -134,7 +137,7 @@ def periodic_rows(cache, ticker, cik, errors):
         for values in zip(*(table[field] for field in fields), strict=True):
             row = dict(zip(fields, values, strict=True))
             if (row["form"] not in PERIODIC | {"8-K", "8-K/A"}
-                    or not "2019-01-01" <= row["filingDate"] <= "2025-12-31"):
+                    or not first <= row["filingDate"] <= last):
                 continue
             if (not re.fullmatch(r"[0-9]{10}-[0-9]{2}-[0-9]{6}", row["accessionNumber"])
                     or not ALLOWED_DOC.fullmatch(row["primaryDocument"])):
@@ -235,18 +238,19 @@ def write_rows(path, rows):
 
 
 def build_sec(root: Path, legacy: Path, *, offline: bool, reuse: tuple[Path, ...] = (),
-              warmup=False, on_progress=None):
+              warmup=False, on_progress=None, through: date | None = None):
     clock = perf_counter()
     output = root / "sec"
     if (output / "source_manifest.json").exists():
         raise FileExistsError("SEC snapshot already published. Use a new --root with --reuse-cache.")
     fundamentals = output / "fundamentals"
     fundamentals.mkdir(parents=True, exist_ok=True)
-    cache = SecCache(output / "cache", legacy, offline, reuse)
+    cache = SecCache(output / "cache", legacy, offline, reuse, fresh_metadata=through is not None)
     errors, receipts, evidence, cases, issuers = [], [], [], [], {}
     inline = defaultdict(list)
     inline_filings = defaultdict(dict)
-    sessions = trading_sessions(date(2019, 1, 1), date(2026, 1, 16))
+    last_session = through or date(2026, 1, 16)
+    sessions = trading_sessions(date(2019, 1, 1), last_session)
     def emit(stage, ticker, done, total, started):
         if on_progress is not None:
             on_progress(progress_event(stage, ticker, done, total, started, cache, receipts, errors))
@@ -254,7 +258,8 @@ def build_sec(root: Path, legacy: Path, *, offline: bool, reuse: tuple[Path, ...
     for i, (ticker, (_, _, cik)) in enumerate(ISSUERS.items()):
         emit("issuer metadata", ticker, i, len(ISSUERS), clock)
         try:
-            rows = periodic_rows(cache, ticker, cik, errors)
+            rows = (periodic_rows(cache, ticker, cik, errors, last=str(through)) if through else
+                    periodic_rows(cache, ticker, cik, errors))
             classified = [dated_filing(ticker, cik, row, sessions) for row in rows.values()]
             cases.extend(classified)
         except (ValueError, KeyError, OSError) as exc:
@@ -271,11 +276,17 @@ def build_sec(root: Path, legacy: Path, *, offline: bool, reuse: tuple[Path, ...
         except (ValueError, KeyError, OSError) as exc:
             errors.append({"ticker": ticker, "stage": "company_facts", "reason": str(exc) if isinstance(exc, SourceError) else type(exc).__name__})
     emit("issuer metadata", None, len(ISSUERS), len(ISSUERS), clock)
-    selected = choose_documents(cases, warmup=warmup)
+    if through:
+        selected = sorted((row for row in cases if row["filing_date"] >= "2026-01-01"
+                           and (row["form"] in PERIODIC or row["form"] in {"8-K", "8-K/A"}
+                                and "2.02" in row["items"].replace(" ", "").split(","))),
+                          key=lambda row: (row["form"] not in PERIODIC, row["filing_date"], row["accession"]))[:MAX_PRIMARY]
+    else:
+        selected = choose_documents(cases, warmup=warmup)
     reserved = sum(filing["form"] == "8-K" for filing in selected)
     seen = {row["accession"] for row in selected}
     supplemental = [row for row in cases if row["accession"] not in seen
-                    and row["filing_date"] >= (WARMUP_START if warmup else "2021-01-01")
+                    and row["filing_date"] >= ("2026-01-01" if through else WARMUP_START if warmup else "2021-01-01")
                     and cache.has(row["source_url"])]
     selected.extend(supplemental[:max(0, MAX_DOCUMENTS - len(selected) - reserved)])
     documents_clock = perf_counter()
@@ -334,9 +345,12 @@ def build_sec(root: Path, legacy: Path, *, offline: bool, reuse: tuple[Path, ...
     write_rows(output / "filings.jsonl", cases)
     write_rows(output / "documents.jsonl", receipts)
     write_rows(output / "evidence.jsonl", [item.model_dump(mode="json") for item in evidence])
-    write_json(fundamentals / "manifest.json", {"version": "sec-fundamentals-v2", "issuers": issuers | inline_issuers})
+    write_json(fundamentals / "manifest.json", {"version": "sec-fundamentals-v3" if through else "sec-fundamentals-v2",
+                                               "issuers": issuers | inline_issuers})
     summary = {
-        "version": "sec-accession-v2", "mode": "offline_cache" if offline else "declared_agent",
+        "version": "sec-accession-v3" if through else "sec-accession-v2",
+        **({"through": str(through), "document_selection": "2026 periodic filings and earnings 8-K/99.1"} if through else {}),
+        "mode": "offline_cache" if offline else "declared_agent",
         "market_sessions": "XNYS next session 16:15 ET", "selected_primary": len(selected),
         "ticker_rows": sorted({row["ticker"] for row in cases}), "ticker_mapping": {
             ticker: {"historical_cik": f"{cik:010}", "current_cik": current.get(ticker)}
@@ -367,9 +381,10 @@ if __name__ == "__main__":
     parser.add_argument("--warmup", action="store_true", help="Acquire periodic filings from late 2020 as input context")
     parser.add_argument("--offline", action="store_true")
     parser.add_argument("--progress", action="store_true")
+    parser.add_argument("--through", type=date.fromisoformat, help="Build fresh 2026 SEC metadata through this date")
     args = parser.parse_args()
     with collector_lock():
         summary = build_sec(args.root, args.legacy_cache, offline=args.offline, reuse=tuple(args.reuse_cache),
-                            warmup=args.warmup,
+                            warmup=args.warmup, through=args.through,
                             on_progress=(lambda row: print(json.dumps(row), flush=True)) if args.progress else None)
     print({key: summary[key] for key in ("document_count", "forms", "pit", "news_tickers", "cache_bytes_used")})
