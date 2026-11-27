@@ -95,13 +95,15 @@ def score_run(data_root, run_root, output):
     prediction_path = run_root / "predictions.jsonl"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     source_manifest = json.loads((data_root / "manifest.json").read_text(encoding="utf-8"))
-    for relative, digest in source_manifest.get("sha256", {}).items():
-        if file_sha(data_root / relative) != digest:
-            raise ValueError("frozen Development dataset hash mismatch")
     if (manifest.get("backend") not in {"mock", "llm"} or manifest.get("status") != "complete"
             or not prediction_path.is_file()
             or file_sha(prediction_path) != manifest.get("predictions_sha256")):
         raise ValueError("predictions are not complete and frozen")
+    scope = source_manifest.get("scope")
+    if scope not in {"development", "private_test"}:
+        raise ValueError("unsupported frozen Counterfactual data scope")
+    if manifest.get("dataset_manifest_sha256") != file_sha(data_root / "manifest.json"):
+        raise ValueError("run dataset manifest fingerprint mismatch")
     records = []
     for line in prediction_path.read_text(encoding="utf-8").splitlines():
         if line:
@@ -112,6 +114,28 @@ def score_run(data_root, run_root, output):
     identities = [row.get("task_id") for row in records]
     if len(identities) != len(set(identities)) or set(identities) != expected_plan:
         raise ValueError("prediction set differs from the frozen plan")
+
+    if scope == "private_test":
+        from .counterfactual_dev import validate_private_test_dataset
+        private_summary = validate_private_test_dataset(data_root)
+        if (manifest.get("scope") != "private_test"
+                or manifest.get("config_sha256") != source_manifest.get("config_sha256")
+                or manifest.get("data_fingerprint_sha256") != private_summary["data_fingerprint_sha256"]
+                or len(manifest.get("plan", [])) != 40):
+            raise ValueError("private_test_run_freeze_mismatch")
+        expected_order = []
+        for case_index, case in enumerate(source_manifest["case_order"]):
+            for task_id in case["task_ids"]:
+                for arm in ("CF0", "CF1"):
+                    expected_order.append((task_id, arm, case_index))
+        actual_order = [(cell.get("id"), cell.get("arm"), cell.get("mother_case_index"))
+                        for cell in manifest["plan"]]
+        if actual_order != expected_order:
+            raise ValueError("private_test_plan_order_mismatch")
+    else:
+        for relative, digest in source_manifest.get("sha256", {}).items():
+            if file_sha(data_root / relative) != digest:
+                raise ValueError("frozen Development dataset hash mismatch")
 
     # This scorer is a separate command/process. Gold is read only after the complete
     # prediction file and plan have passed the immutable-hash checks above.
@@ -232,7 +256,7 @@ def score_run(data_root, run_root, output):
             "backend_calls": sum(row["backend_calls"] for row in rows),
             "http_requests": sum(row["http_requests"] for row in rows),
         }
-    output_payload = {"protocol": manifest["protocol"], "backend": manifest["backend"],
+    output_payload = {"protocol": manifest["protocol"], "scope": scope, "backend": manifest["backend"],
                       "run_manifest_sha256": file_sha(manifest_path),
                       "predictions_sha256": manifest["predictions_sha256"],
                       "summary": summary, "per_task": scored}

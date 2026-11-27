@@ -6,7 +6,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from tradingagents_lite.counterfactual_dev import generate_development
+from tradingagents_lite import counterfactual_dev
+from tradingagents_lite.counterfactual_dev import generate_development, generate_private_test
 from tradingagents_lite import counterfactual_runner
 from tradingagents_lite.counterfactual_runner import _hash, _sealed, _verify_sealed, run
 from tradingagents_lite.counterfactual_score import _correct, parse_answer, score_run
@@ -71,6 +72,183 @@ def test_v2_config_freezes_new_protocol_and_shares_existing_experiment_budget():
     assert config["experiment_token_limit"] == 300_000
 
 
+def test_phase23_config_has_new_full_fingerprint_and_same_v2_core_strategy():
+    config = counterfactual_runner._config()
+
+    assert config["core_strategy_sha256"] == "8b57e1a1a0ec27da2825c45e5345b1ef27cc024225628b0bbfd86523d5d4ead1"
+    assert config["protocol"] == "counterfactual-phase2-v2"
+    assert config["model"] == "glm-5.3-flash"
+    assert config["temperature"] == 0 and config["reasoning_effort"] == "low"
+    assert config["thinking"] == {"type": "enabled"}
+    assert config["max_output_tokens"] == 512 and config["max_prompt_bytes"] == 8000
+    assert config["max_tool_rounds"] == 2 and config["max_tool_calls_per_round"] == 1
+    assert config["rag"] == {"mode": "R3", "candidate_k": 24, "top_k": 4, "context_bytes": 3200}
+    assert config["runtime"]["uv_lock_sha256"] and config["local_embedding_hashes"]
+    assert config["private_test"]["acceptance"]["os_random_seed_bytes"] == 32
+    assert config["private_test"]["acceptance"]["no_llm_generation"] is True
+
+
+def _make_private_fixture(tmp_path, monkeypatch, seed=b"\xC3" * 32):
+    freeze_path = tmp_path / "phase2.3-freeze.json"
+    monkeypatch.setattr(counterfactual_runner, "PRIVATE_FREEZE_PATH", freeze_path)
+    counterfactual_runner.write_private_freeze(freeze_path)
+    monkeypatch.setattr(counterfactual_dev.secrets, "token_bytes", lambda size: seed)
+    data_root = tmp_path / "private-data"
+    generate_private_test(data_root, freeze_path)
+    return data_root
+
+
+def test_private_runner_requires_confirmation_and_rejects_subsets(tmp_path, monkeypatch):
+    data_root = _make_private_fixture(tmp_path, monkeypatch)
+    monkeypatch.setattr(counterfactual_runner, "_provider_for_cell",
+                        lambda *_: pytest.fail("confirmation must be checked before provider initialization"))
+
+    with pytest.raises(ValueError, match="private_test_requires_explicit_confirmation"):
+        run(data_root, tmp_path / "unconfirmed", backend="llm")
+    with pytest.raises(ValueError, match="private_test_does_not_allow_task_subsets"):
+        run(data_root, tmp_path / "subset", backend="mock", limit=1, confirm_private_test=True)
+
+
+def test_private_runner_rejects_configuration_freeze_mismatch_before_execution(tmp_path, monkeypatch):
+    data_root = _make_private_fixture(tmp_path, monkeypatch, seed=b"\xC4" * 32)
+    manifest_path = data_root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["config_sha256"] = "0" * 64
+    manifest_path.write_text(json.dumps(manifest))
+    monkeypatch.setattr(counterfactual_runner, "_run_isolated",
+                        lambda *_args, **_kwargs: pytest.fail("must reject before starting a worker"))
+
+    with pytest.raises(ValueError, match="private_test_config_freeze_mismatch"):
+        run(data_root, tmp_path / "bad-freeze", backend="mock", confirm_private_test=True)
+
+
+def test_private_runner_orders_full_mother_cases_and_resumes_without_duplicates(tmp_path, monkeypatch):
+    data_root = _make_private_fixture(tmp_path, monkeypatch)
+    monkeypatch.setattr(counterfactual_runner, "_make_index", lambda *args, **kwargs: None)
+    execution_order = []
+    interrupt_after = {3}
+
+    def fake_isolated(repo, dataset, stage, task_id, forbidden, arm, backend, broker_fd):
+        if len(execution_order) + 1 in interrupt_after:
+            raise KeyboardInterrupt
+        execution_order.append((task_id, arm))
+        result = {"id": task_id, "task_id": f"{arm}:{task_id}", "arm": arm,
+                  "status": "ok", "answer": "", "answer_status": "abstained",
+                  "citations": [], "valid_citations": [], "exposed": [], "retrieval_trace": [],
+                  "tool_calls": 0, "latency_seconds": 0.01, "llm_calls": [], "budget_tokens": 0}
+        path = stage / "output" / "result.json"
+        path.write_text(json.dumps(result))
+        return path
+
+    monkeypatch.setattr(counterfactual_runner, "_run_isolated", fake_isolated)
+    output = tmp_path / "private-run"
+    with pytest.raises(KeyboardInterrupt):
+        run(data_root, output, backend="mock", confirm_private_test=True)
+    assert json.loads((output / "manifest.json").read_text())["recorded_cells"] == 2
+
+    interrupt_after.clear()
+    before_resume = list(execution_order)
+    result = run(data_root, output, backend="mock", resume=True, confirm_private_test=True)
+    assert result["status"] == "complete" and result["recorded_cells"] == 40
+    assert len(execution_order) == 40
+    assert before_resume == execution_order[:2]
+    assert execution_order == [
+        (task_id, arm)
+        for case in json.loads((data_root / "manifest.json").read_text())["case_order"]
+        for task_id in case["task_ids"] for arm in ("CF0", "CF1")
+    ]
+    plan = result["plan"]
+    assert len(plan) == 40
+    for start in range(0, 40, 4):
+        group = plan[start:start + 4]
+        assert [(cell["id"], cell["arm"]) for cell in group] == [
+            (group[0]["id"], "CF0"), (group[0]["id"], "CF1"),
+            (group[2]["id"], "CF0"), (group[2]["id"], "CF1"),
+        ]
+
+    scored = score_run(data_root, output, output / "scores.json")
+    assert scored["scope"] == "private_test"
+    assert scored["summary"]["CF0"]["answer_accuracy"]["total"] == 20
+    assert scored["summary"]["CF1"]["answer_accuracy"]["total"] == 20
+
+
+def test_private_runner_stops_at_mother_boundary_when_budget_preflight_fails(tmp_path, monkeypatch):
+    data_root = _make_private_fixture(tmp_path, monkeypatch, seed=b"\xD4" * 32)
+    monkeypatch.setattr(counterfactual_runner, "_make_index", lambda *args, **kwargs: None)
+    calls, providers = [], []
+
+    class SharedBudget:
+        capacity_calls = 0
+
+        def capacity(self, *, experiment_id, phase):
+            self.capacity_calls += 1
+            return {"available": 100_000 if self.capacity_calls == 1 else 0}
+
+        def snapshot(self, *, experiment_id, phase):
+            return {"experiment_id": experiment_id, "phase": phase, "charged_tokens": 0}
+
+    budget = SharedBudget()
+
+    class Provider:
+        def __init__(self):
+            self.client = SimpleNamespace(close=lambda: None)
+            self.call_log = []
+
+    def provider_for_cell(task_id):
+        provider = Provider()
+        providers.append((task_id, provider))
+        return provider, budget, "b" * 64
+
+    def fake_isolated(repo, dataset, stage, task_id, forbidden, arm, backend, broker_fd):
+        calls.append((task_id, arm))
+        path = stage / "output" / "result.json"
+        path.write_text(json.dumps({"id": task_id, "task_id": f"{arm}:{task_id}", "arm": arm,
+                                    "status": "ok", "answer": "", "answer_status": "abstained",
+                                    "citations": [], "valid_citations": [], "exposed": [],
+                                    "retrieval_trace": [], "tool_calls": 0, "latency_seconds": 0,
+                                    "llm_calls": [], "budget_tokens": 0}))
+        return path
+
+    monkeypatch.setattr(counterfactual_runner, "_provider_for_cell", provider_for_cell)
+    monkeypatch.setattr(counterfactual_runner, "_run_isolated", fake_isolated)
+    result = run(data_root, tmp_path / "budget-stop", backend="llm", confirm_private_test=True)
+
+    assert result["status"] == "partial"
+    assert result["stop_reason"] == "mother_case_budget_preflight"
+    assert result["recorded_cells"] == 4 and len(calls) == 4
+    assert result["budget_preflight"][0]["required_worst_case_tokens"] == 73_216
+    assert result["budget_preflight"][1]["available_tokens"] == 0
+    assert all(not provider.call_log for _, provider in providers)
+    with pytest.raises(ValueError, match="frozen stop condition"):
+        run(data_root, tmp_path / "budget-stop", backend="llm", resume=True,
+            confirm_private_test=True)
+
+
+@pytest.mark.skipif(platform.system() != "Linux" or shutil.which("unshare") is None,
+                    reason="requires Linux user/mount/network namespaces")
+def test_private_worker_cannot_read_gold_authoring_or_seed(tmp_path, monkeypatch):
+    data_root = _make_private_fixture(tmp_path, monkeypatch, seed=b"\xE5" * 32)
+    manifest = json.loads((data_root / "manifest.json").read_text())
+    packet_path = next((data_root / "agent-inputs").glob("*.json"))
+    packet = json.loads(packet_path.read_text())
+    stage = tmp_path / "worker-stage"
+    (stage / "output").mkdir(parents=True)
+    shutil.copyfile(packet_path, stage / "input.json")
+    counterfactual_runner._make_index(packet, stage / "index", stage / "models")
+    forbidden = [data_root / "manifest.json", *(data_root / path for path in manifest["sha256"])]
+    result_path = counterfactual_runner._run_isolated(
+        ROOT, data_root, stage, packet["task_id"], forbidden, "CF0", "mock", None)
+    record = json.loads(result_path.read_text())
+    probes = record["sandbox"]["host_paths"]
+
+    assert record["status"] == "ok"
+    assert probes[str((data_root / "scoring/reference.jsonl").resolve())] == "denied"
+    assert probes[str((data_root / "authoring" / f"{packet['task_id']}.json").resolve())] == "denied"
+    assert probes[str((data_root / "authoring" / ".private-seed").resolve())] == "denied"
+    assert record["sandbox"]["api_key_in_environment"] is False
+    assert record["sandbox"]["network_isolated"] is True
+
+
 def test_frozen_scorer_reports_pairs_planning_abstention_and_future_acceptance(tmp_path):
     data_root = tmp_path / "data"
     generate_development(data_root)
@@ -115,7 +293,8 @@ def test_frozen_scorer_reports_pairs_planning_abstention_and_future_acceptance(t
     predictions = run_root / "predictions.jsonl"
     predictions.write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in records))
     manifest = {"backend": "mock", "status": "complete", "protocol": "counterfactual-phase2-v1",
-                "plan": plan, "predictions_sha256": file_sha(predictions)}
+                "plan": plan, "predictions_sha256": file_sha(predictions),
+                "dataset_manifest_sha256": file_sha(data_root / "manifest.json")}
     (run_root / "manifest.json").write_text(json.dumps(manifest))
     output = tmp_path / "scores.json"
     scored = score_run(data_root, run_root, output)

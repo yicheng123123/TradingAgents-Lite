@@ -1,6 +1,8 @@
 """CF0/CF1 runner for isolated synthetic counterfactual tasks."""
 
 import argparse
+import ast
+import inspect
 from contextlib import ExitStack
 from datetime import datetime
 from decimal import Decimal
@@ -8,6 +10,7 @@ from hashlib import sha256
 import json
 import os
 from pathlib import Path
+import platform
 import shutil
 import socket
 import subprocess
@@ -24,7 +27,7 @@ from . import b1, financebench
 from .data import sha256 as file_sha
 from .rag import RagConfig, Retriever
 from .schema import Budget
-from .token_budget import TokenBudget
+from .token_budget import GLOBAL_TOKEN_LIMIT, PHASE_TOKEN_LIMITS, TokenBudget
 from .vectors import LocalEmbedding, VectorStore
 from .workflow import analyst_tool_turn, specs, tool_message
 
@@ -48,6 +51,8 @@ SYSTEM = (
     "Cite only exact evidence IDs you received, at most four."
 )
 AGENT = "Search at most twice, once per turn. Read the observation before choosing any follow-up query."
+PRIVATE_FREEZE_PATH = Path(__file__).resolve().parents[1] / "docs" / "counterfactual-phase2.3-freeze.json"
+PRIVATE_FREEZE_ID = "counterfactual-phase2.3-private-v1"
 
 
 def _hash(value):
@@ -519,23 +524,63 @@ def _make_index(packet, destination, model_root):
 
 def _config():
     source_root = Path(__file__).resolve().parent
+    repo_root = source_root.parent
     code_files = ("counterfactual_runner.py", "counterfactual_dev.py", "financebench.py", "rag.py",
                   "counterfactual_score.py", "vectors.py", "provider.py", "workflow.py",
                   "token_budget.py", "financebench_score.py")
     model_dir = Path(__file__).resolve().parents[1] / "data/local-models/models" / LocalEmbedding.REVISION
-    return {"protocol": "counterfactual-phase2-v2", "model": MODEL, "temperature": 0,
-            "reasoning_effort": "low", "max_output_tokens": MAX_TOKENS, "retries": 0, "repairs": 0,
-            "max_tool_rounds": MAX_ROUNDS, "max_tool_calls_per_round": 1,
-            "rag": {"mode": "R3", "candidate_k": 24, "top_k": 4, "context_bytes": 3200},
-            "prompt_sha256": _hash([SYSTEM, AGENT, financebench.FINAL]),
-            "endpoint": financebench.DEFAULT_BASE_URL,
-            "tools_sha256": _hash(TOOLS), "answer_schema_sha256": _hash(financebench.Answer.model_json_schema()),
-            "selector": "financebench-query-aware-v2",
-            "local_embedding_revision": LocalEmbedding.REVISION,
-            "local_embedding_hashes": {name: file_sha(model_dir / name)
-                                        for name in ("tokenizer.json", "onnx/model_quantized.onnx")},
-            "code_sha256": {name: file_sha(source_root / name) for name in code_files},
-            "experiment_token_limit": EXPERIMENT_LIMIT, "phase": PHASE}
+    from .counterfactual_dev import PRIVATE_TEST_PROFILE, PRIVATE_GENERATOR_VERSION
+
+    config = {
+        "protocol": "counterfactual-phase2-v2", "model": MODEL, "temperature": 0,
+        "reasoning_effort": "low", "thinking": {"type": "enabled"},
+        "max_output_tokens": MAX_TOKENS, "max_prompt_bytes": MAX_PROMPT_BYTES,
+        "retries": 0, "repairs": 0,
+        "max_tool_rounds": MAX_ROUNDS, "max_tool_calls_per_round": 1,
+        "rag": {"mode": "R3", "candidate_k": 24, "top_k": 4, "context_bytes": 3200},
+        "prompt_sha256": _hash([SYSTEM, AGENT, financebench.FINAL]),
+        "endpoint": financebench.DEFAULT_BASE_URL,
+        "tools_sha256": _hash(TOOLS), "answer_schema_sha256": _hash(financebench.Answer.model_json_schema()),
+        "selector": "financebench-query-aware-v2",
+        "local_embedding_revision": LocalEmbedding.REVISION,
+        "local_embedding_hashes": {name: file_sha(model_dir / name)
+                                    for name in ("tokenizer.json", "onnx/model_quantized.onnx")},
+        "code_sha256": {name: file_sha(source_root / name) for name in code_files},
+        "runtime": {"python_version": platform.python_version(),
+                    "pyproject_sha256": file_sha(repo_root / "pyproject.toml"),
+                    "uv_lock_sha256": file_sha(repo_root / "uv.lock")},
+        "task_order": {
+            "development": "counterfactual-dev-order-v1 company hash, then task_id",
+            "private_test": "manifest case_order, variant order, then arms CF0 and CF1",
+        },
+        "private_test": {
+            "generator_version": PRIVATE_GENERATOR_VERSION,
+            "profile": PRIVATE_TEST_PROFILE,
+            "confirmation_flag": "--confirm-private-test",
+            "require_all_tasks": True,
+            "acceptance": {
+                "os_random_seed_bytes": 32, "no_llm_generation": True,
+                "fictitious_companies_document_ids_and_references_disjoint_from_development": True,
+                "variant_gold_distinct_for_answerable_pairs": True,
+                "planning_codes_randomized_and_absent_from_question": True,
+                "agent_projection_cutoff_inclusive_and_future_filtered": True,
+                "time_answerability": {"answered": 4, "abstained": 4},
+                "manifest_hashes_every_data_file": True,
+                "reject_symlinks_and_unmanifested_files": True,
+                "private_files_mode": "0600", "private_directories_mode": "0700",
+            },
+        },
+        "budget": {
+            "experiment_id": EXPERIMENT, "experiment_limit": EXPERIMENT_LIMIT,
+            "global_limit": GLOBAL_TOKEN_LIMIT, "phase": PHASE,
+            "phase_limit": PHASE_TOKEN_LIMITS[PHASE],
+            "max_requests_per_mother_case": 8,
+            "atomic_pre_call_reservation": True, "stop_at_mother_boundary": True,
+        },
+        "experiment_token_limit": EXPERIMENT_LIMIT, "phase": PHASE,
+    }
+    config["core_strategy_sha256"] = _hash(_core_strategy_payload(config))
+    return config
 
 
 def _provider_for_cell(task_identity):
@@ -602,6 +647,90 @@ def _verify_sealed(record):
     return body
 
 
+def _core_strategy_payload(config):
+    strategy_fields = (
+        "model", "temperature", "reasoning_effort", "max_output_tokens", "retries", "repairs",
+        "max_tool_rounds", "max_tool_calls_per_round", "rag", "prompt_sha256", "endpoint",
+        "tools_sha256", "answer_schema_sha256", "selector", "local_embedding_revision",
+        "local_embedding_hashes", "experiment_token_limit", "phase", "thinking",
+    )
+    core_modules = ("financebench.py", "rag.py", "vectors.py",
+                    "provider.py", "workflow.py", "token_budget.py", "financebench_score.py")
+    execute_source = inspect.getsource(_execute_case).encode()
+    return {
+        "config": {key: config[key] for key in strategy_fields},
+        "max_prompt_bytes": MAX_PROMPT_BYTES,
+        "core_module_sha256": {name: config["code_sha256"][name] for name in core_modules},
+        "execute_case_sha256": sha256(execute_source).hexdigest(),
+        "scoring_core_sha256": _scoring_core_sha256(),
+    }
+
+
+def _scoring_core_sha256(source=None):
+    from . import counterfactual_score
+
+    scoring_source = source or inspect.getsource(counterfactual_score.score_run)
+    function = next(node for node in ast.parse(scoring_source).body
+                    if isinstance(node, ast.FunctionDef) and node.name == "score_run")
+    selected, in_core = [], False
+    for node in function.body:
+        targets = node.targets if isinstance(node, ast.Assign) else [node.target] if isinstance(node, ast.AnnAssign) else []
+        names = {target.id for target in targets if isinstance(target, ast.Name)}
+        if not in_core and "scored" in names:
+            in_core = True
+        if in_core and "output_payload" in names:
+            break
+        if in_core:
+            selected.append(node)
+    if not selected:
+        raise ValueError("counterfactual_scoring_core_unavailable")
+    stable_loop = ast.dump(ast.Module(body=selected, type_ignores=[]), include_attributes=False)
+    primitives = "\n".join((inspect.getsource(counterfactual_score.parse_answer),
+                             inspect.getsource(counterfactual_score._correct), stable_loop))
+    return sha256(primitives.encode()).hexdigest()
+
+
+def _private_freeze_payload():
+    config = _config()
+    from .counterfactual_dev import PRIVATE_TEST_PROFILE, PRIVATE_GENERATOR_VERSION
+
+    profile = PRIVATE_TEST_PROFILE
+    return {
+        "freeze_id": PRIVATE_FREEZE_ID,
+        "config": config,
+        "config_sha256": _hash(config),
+        "core_strategy_sha256": _hash(_core_strategy_payload(config)),
+        "private_generator_version": PRIVATE_GENERATOR_VERSION,
+        "private_profile": profile,
+        "private_profile_sha256": _hash(profile),
+    }
+
+
+def write_private_freeze(path):
+    path = Path(path)
+    if path.exists():
+        raise FileExistsError(path)
+    _write(path, _private_freeze_payload())
+    return _private_freeze_payload()
+
+
+def _verify_private_freeze(path=PRIVATE_FREEZE_PATH):
+    path = Path(path)
+    freeze = json.loads(path.read_text(encoding="utf-8"))
+    config = _config()
+    from .counterfactual_dev import PRIVATE_TEST_PROFILE, PRIVATE_GENERATOR_VERSION
+
+    if (freeze.get("freeze_id") != PRIVATE_FREEZE_ID
+            or freeze.get("config") != config
+            or freeze.get("config_sha256") != _hash(config)
+            or freeze.get("core_strategy_sha256") != _hash(_core_strategy_payload(config))
+            or freeze.get("private_generator_version") != PRIVATE_GENERATOR_VERSION
+            or freeze.get("private_profile") != PRIVATE_TEST_PROFILE
+            or freeze.get("private_profile_sha256") != _hash(PRIVATE_TEST_PROFILE)):
+        raise ValueError("private_test_freeze_mismatch")
+    return freeze
+
+
 def _load_checkpoints(out, plan):
     path = out / "predictions.jsonl"
     if not path.exists():
@@ -623,13 +752,24 @@ def _load_checkpoints(out, plan):
     return checkpoints
 
 
-def run(dataset, out, *, backend="mock", resume=False, limit=None):
+def run(dataset, out, *, backend="mock", resume=False, limit=None, confirm_private_test=False):
     if backend not in {"mock", "llm"}:
         raise ValueError("backend must be mock or llm")
     data_root = Path(dataset).resolve()
     source_manifest = json.loads((data_root / "manifest.json").read_text(encoding="utf-8"))
-    if source_manifest.get("scope") != "development" or source_manifest.get("synthetic") is not True:
-        raise ValueError("runner accepts only frozen synthetic Development data")
+    scope = source_manifest.get("scope")
+    if scope == "development":
+        if source_manifest.get("synthetic") is not True:
+            raise ValueError("development_dataset_not_synthetic")
+    elif scope == "private_test":
+        if not confirm_private_test:
+            raise ValueError("private_test_requires_explicit_confirmation")
+        if limit is not None:
+            raise ValueError("private_test_does_not_allow_task_subsets")
+        from .counterfactual_dev import validate_private_test_dataset
+        validate_private_test_dataset(data_root)
+    else:
+        raise ValueError("runner accepts only frozen synthetic Development or Private Test data")
     task_paths = sorted((data_root / "agent-inputs").glob("*.json"))
     tasks = [(path, json.loads(path.read_text(encoding="utf-8"))) for path in task_paths]
     for path, packet in tasks:
@@ -638,16 +778,33 @@ def run(dataset, out, *, backend="mock", resume=False, limit=None):
             raise ValueError("development_input_hash_mismatch")
         if packet.get("task_id") != path.stem:
             raise ValueError("development_task_identity_mismatch")
-    grouped = {}
-    for item in tasks:
-        grouped.setdefault(item[1]["company"], []).append(item)
-    tasks = [item for company in sorted(grouped, key=lambda name: _hash(["counterfactual-dev-order-v1", name]))
-             for item in sorted(grouped[company], key=lambda value: value[1]["task_id"])]
+    case_key_by_task = {}
+    if scope == "private_test":
+        by_id = {packet["task_id"]: (path, packet) for path, packet in tasks}
+        ordered_tasks = []
+        for case in source_manifest["case_order"]:
+            for task_id in case["task_ids"]:
+                ordered_tasks.append(by_id[task_id])
+                case_key_by_task[task_id] = case["case_key"]
+        tasks = ordered_tasks
+    else:
+        grouped = {}
+        for item in tasks:
+            grouped.setdefault(item[1]["company"], []).append(item)
+        tasks = [item for company in sorted(grouped, key=lambda name: _hash(["counterfactual-dev-order-v1", name]))
+                 for item in sorted(grouped[company], key=lambda value: value[1]["task_id"])]
     all_tasks = tasks
     if limit is not None:
         tasks = tasks[:limit]
-    plan = [{"id": packet["task_id"], "arm": arm, "input_sha256": file_sha(path)}
-            for path, packet in tasks for arm in ("CF0", "CF1")]
+    plan = []
+    for path, packet in tasks:
+        for arm in ("CF0", "CF1"):
+            cell = {"id": packet["task_id"], "arm": arm, "input_sha256": file_sha(path)}
+            if scope == "private_test":
+                cell["mother_case_index"] = next(
+                    index for index, case in enumerate(source_manifest["case_order"])
+                    if packet["task_id"] in case["task_ids"])
+            plan.append(cell)
     out = Path(out).resolve()
     repo = Path(__file__).resolve().parent.parent
     allowed_roots = (repo, Path(tempfile.gettempdir()).resolve(), Path("/mnt"))
@@ -656,10 +813,15 @@ def run(dataset, out, *, backend="mock", resume=False, limit=None):
     if not any(out.is_relative_to(root) for root in allowed_roots):
         raise ValueError("output must be inside the repository or an isolated temporary directory")
     config = _config()
-    frozen = {"protocol": config["protocol"], "backend": backend, "config": config,
+    frozen = {"protocol": config["protocol"], "scope": scope, "backend": backend, "config": config,
               "dataset_manifest_sha256": file_sha(data_root / "manifest.json"),
               "config_sha256": _hash(config), "plan_sha256": _hash(plan), "plan": plan,
               "status": "running"}
+    if scope == "private_test":
+        frozen.update({"freeze_id": source_manifest["freeze_id"],
+                       "config_sha256": source_manifest["config_sha256"],
+                       "data_fingerprint_sha256": source_manifest["data_fingerprint_sha256"],
+                       "freeze_file_sha256": source_manifest["freeze_file_sha256"]})
     provider_budget = None
     ledger_path_hash = None
     if backend == "llm":
@@ -692,14 +854,16 @@ def run(dataset, out, *, backend="mock", resume=False, limit=None):
             raise ValueError("completed counterfactual archive is incomplete")
         return manifest
     budget_worst_case = 8 * TokenBudget.reservation_size(MAX_PROMPT_BYTES, MAX_TOKENS)
-    current_company = None
+    current_mother_case = None
     stop = False
     for task_path, packet in tasks:
-        if backend == "llm" and packet["company"] != current_company:
-            current_company = packet["company"]
+        task_id = packet["task_id"]
+        mother_case = case_key_by_task.get(task_id, packet["company"])
+        if backend == "llm" and mother_case != current_mother_case:
+            current_mother_case = mother_case
             capacity = provider_budget.capacity(experiment_id=EXPERIMENT, phase=PHASE)
             manifest.setdefault("budget_preflight", []).append({
-                "mother_case_key_sha256": _hash(packet["company"]),
+                "mother_case_key_sha256": _hash(mother_case),
                 "required_worst_case_tokens": budget_worst_case,
                 "available_tokens": capacity["available"],
             })
@@ -709,11 +873,10 @@ def run(dataset, out, *, backend="mock", resume=False, limit=None):
                 _write(manifest_path, manifest)
                 stop = True
                 break
-        task_id = packet["task_id"]
         sibling_paths = [candidate.resolve() for candidate, other in all_tasks
                          if other["task_id"] != task_id]
-        forbidden = [data_root / "scoring/reference.jsonl", data_root / "manifest.json",
-                     data_root / "authoring" / f"{task_id}.json", *sibling_paths,
+        protected_data_paths = [data_root / relative for relative in source_manifest["sha256"]]
+        forbidden = [data_root / "manifest.json", *protected_data_paths, *sibling_paths,
                      b1._ledger_path(), out / "manifest.json", out / "predictions.jsonl",
                      out / "cells" / f"{task_id}-CF0.json", out / "cells" / f"{task_id}-CF1.json"]
         forbidden = list(dict.fromkeys(str(path.resolve()) for path in forbidden))
@@ -824,6 +987,7 @@ def main():
     run_parser.add_argument("--out", type=Path, required=True)
     run_parser.add_argument("--backend", choices=("mock", "llm"), default="mock")
     run_parser.add_argument("--resume", action="store_true")
+    run_parser.add_argument("--confirm-private-test", action="store_true")
     worker = sub.add_parser("sandbox-worker")
     worker.add_argument("--repo", type=Path, required=True)
     worker.add_argument("--dataset", type=Path, required=True)
@@ -838,7 +1002,8 @@ def main():
     if args.command == "sandbox-worker":
         _sandbox_worker(args)
     else:
-        result = run(args.data, args.out, backend=args.backend, resume=args.resume)
+        result = run(args.data, args.out, backend=args.backend, resume=args.resume,
+                     confirm_private_test=args.confirm_private_test)
         print(json.dumps({key: result.get(key) for key in ("status", "recorded_cells", "predictions_sha256")}))
 
 

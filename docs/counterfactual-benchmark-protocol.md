@@ -2,6 +2,8 @@
 
 基线提交为 `c52b494a0954e22b20f4d28ad2ef71160ecaf761`。本文件中的任务设计、实验组、数据分区和预算约束为冻结协议；Phase 2.1 已补齐离线 Runner、独立评分器及进程隔离验收。正式 Private Test 仍未生成，真实模型评测仍未执行。
 
+Phase 2.3 为该冻结协议新增正式 Private Test 本地生成器和显式确认 Runner。当前仍未生成正式私有数据或运行正式评测；实现、freeze 指纹及 WSL 命令见 [Phase 2.3 生成与执行说明](counterfactual-phase2.3.md)。
+
 ## 任务设计与分区
 
 | 类型 | Development 母案例 / 任务 | Private Test 母案例 / 任务 | 合计任务 |
