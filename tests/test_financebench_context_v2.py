@@ -198,3 +198,4 @@ def test_task_and_arm_contexts_are_instance_local():
     assert not other_arm.exposed and not other_task.exposed
     assert other_arm.remaining == other_task.remaining == financebench.RAG.context_bytes
     assert not hasattr(first, "memory") and not hasattr(first, "cache")
+

@@ -1,0 +1,216 @@
+{
+  "schema": "financebench-v2-formal-summary-1",
+  "created": "2026-11-27",
+  "protocol": "financebench-context-v2",
+  "status": "complete",
+  "git_base": "45de3852f24fa087f8057929feb1a23db3e8a308",
+  "scope": "test",
+  "task_count": 99,
+  "arms": ["FB0", "FB1", "FB2", "FB3"],
+  "planned_instances": 396,
+  "recorded_instances": 396,
+  "order": "question-major; each question runs FB0, FB1, FB2, FB3",
+  "plan_sha256": "1e9ebf769e709280f17702744821f72c3efd81f701de7dd4414f54a953d67003",
+  "configuration": {
+    "model": "glm-5.3-flash",
+    "temperature": 0,
+    "reasoning_effort": "low",
+    "max_output_tokens": 512,
+    "max_prompt_bytes": 8000,
+    "retrieval_mode": "R3",
+    "retrieval_candidate_k": 24,
+    "retrieval_top_k": 4,
+    "evidence_context_bytes": 3200,
+    "max_tool_rounds": 2,
+    "followup_reserve_ratio": 0.35,
+    "repairs": 0,
+    "retries": 0,
+    "prompt_sha256": "59be1a24cf13973e9aca13e4eb9d70fdf0f31aec263f7ad0eb2a30df03bc6c19",
+    "answer_schema_sha256": "3dcbfa559b77b51db4c030350a4b0263f10851cbd3c6c310e4350572ac1773bd",
+    "tool_schema_sha256": "bab8f8f11a0a530e2ca08dca81eec65461caf8ad0907124dce69fdc8d3bdfef0",
+    "config_sha256": "1a86f701102015ec437aedbe1816c18e8da3ddea9ddecbd5e2067ef7d2478a1a"
+  },
+  "smoke": {
+    "archive": "data/final-financebench-real-smoke-v2-001",
+    "manifest_sha256": "d4819f8b454533c762de1e0a6aa1cc329a39ffa4b053c5750ee5e58ee5f045e3",
+    "predictions_sha256": "4a8351c67f324f3189e8a304418cca0aff7544103f75bdb427cf708898763f40",
+    "instances": 8,
+    "http_requests": 12,
+    "tokens_charged": 11053
+  },
+  "data": {
+    "source_revision": "cc39aeb4afdf33909ee1412188bf89035950c2eb",
+    "input_manifest_sha256": "2f9afab593a2c8422af5aa6270b7fd005065d07b2238bd599f714b6fab4414a6",
+    "questions_sha256": "6045385a14fc84c7b7e0fb298e0c51957142f9a339833f123bed2691089a8573",
+    "oracle_sha256": "0d7dab08382ffc24db22ea0bfecd6244c9f885d7d8800e5165735d7ab0b3ff34",
+    "gold_sha256": "1b9a23bae5437db6d78ee2a39d2fb58b5189edd9d896fe95ec958f11d10365c8",
+    "index_sha256": "b5d0685d9d0b9110b9105cc88e7614065ba6f9c455bbc20992337eb4b9081498"
+  },
+  "run": {
+    "archive": "data/final-financebench-real-test-v2-001",
+    "manifest_sha256": "3352cb5a009262afce6c9f423fe189d400cb10a38bcc0fc78cd5a4f88d7e6bac",
+    "predictions_sha256": "f336271a0d004e4b2897f0186aa86a4f373d2de2db95939b89eda78803f3fbbc",
+    "actual_models": ["glm-5.3-flash"],
+    "http_attempts": 585,
+    "successful_http_attempts": 584,
+    "failed_http_attempts": 1,
+    "retries": 0,
+    "completed_tasks": 388,
+    "failed_tasks": 8
+  },
+  "scoring": {
+    "auto_unresolved": 228,
+    "adjudicated": 228,
+    "reviewer": "Codex independent review; not external human review",
+    "initial_auto_correct_incorrect_pending": {
+      "FB0": [2, 70, 27],
+      "FB1": [5, 47, 47],
+      "FB2": [6, 17, 76],
+      "FB3": [10, 11, 78]
+    },
+    "scorer_sha256": "45ad1f20bc9ae89fe45d837cf35cbfd95d5ff6c88673ca1e20f13cfd12727b5b",
+    "review_annotations_sha256_local_only": "9ed023b3329aba70ca0e304dd444da260f7bf993611564d670a80cc980dbcfe2",
+    "summary_sha256": "3f4197045cf54fcca9986c8c836eb1078d77c91e3092aaa1182aca5e24cc34a1"
+  },
+  "results": {
+    "FB0": {
+      "answer_correct": 12,
+      "answer_total": 99,
+      "numerical_correct": 4,
+      "numerical_total": 37,
+      "completion": 1.0,
+      "page_proxy_evidence_recall": 0.0,
+      "citation_valid": null,
+      "citation_count": 0,
+      "total_tokens": 23744,
+      "mean_tokens": 239.84,
+      "mean_tool_calls": 0.0,
+      "latency_mean_seconds": 2.548,
+      "latency_p50_seconds": 2.165,
+      "latency_p95_seconds": 6.110,
+      "failures": {}
+    },
+    "FB1": {
+      "answer_correct": 46,
+      "answer_total": 99,
+      "numerical_correct": 17,
+      "numerical_total": 37,
+      "completion": 1.0,
+      "page_proxy_evidence_recall": 0.348485,
+      "citation_valid": 1.0,
+      "citation_count": 70,
+      "total_tokens": 105878,
+      "mean_tokens": 1069.47,
+      "mean_tool_calls": 2.0,
+      "latency_mean_seconds": 4.753,
+      "latency_p50_seconds": 4.442,
+      "latency_p95_seconds": 9.890,
+      "failures": {}
+    },
+    "FB2": {
+      "answer_correct": 68,
+      "answer_total": 99,
+      "numerical_correct": 26,
+      "numerical_total": 37,
+      "completion": 0.929293,
+      "page_proxy_evidence_recall": 0.636364,
+      "citation_valid": 1.0,
+      "citation_count": 125,
+      "total_tokens": 261556,
+      "mean_tokens": 2641.98,
+      "mean_tool_calls": 1.474747,
+      "latency_mean_seconds": 15.625,
+      "latency_p50_seconds": 15.065,
+      "latency_p95_seconds": 26.642,
+      "failures": {
+        "tool_budget": 5,
+        "http_400": 1,
+        "invalid_output": 1
+      }
+    },
+    "FB3": {
+      "answer_correct": 70,
+      "answer_total": 99,
+      "numerical_correct": 25,
+      "numerical_total": 37,
+      "completion": 0.989899,
+      "page_proxy_evidence_recall": 0.994949,
+      "citation_valid": 1.0,
+      "citation_count": 106,
+      "total_tokens": 77526,
+      "mean_tokens": 783.09,
+      "mean_tool_calls": 0.0,
+      "latency_mean_seconds": 2.484,
+      "latency_p50_seconds": 2.029,
+      "latency_p95_seconds": 6.029,
+      "failures": {
+        "invalid_output": 1
+      }
+    }
+  },
+  "fb1_fb2_pairing": {
+    "wrong_to_right": 25,
+    "right_to_wrong": 3,
+    "fb1_correct": 46,
+    "fb2_correct": 68,
+    "accuracy_difference_pp": 22.2222,
+    "confidence_interval": {
+      "method": "company-cluster paired bootstrap percentile",
+      "level": 0.95,
+      "low_pp": 14.2857,
+      "high_pp": 31.9588,
+      "company_clusters": 21,
+      "resamples": 20000,
+      "seed": 20261127
+    },
+    "extra_tokens_fb2_vs_fb1": 155678,
+    "extra_tokens_per_task": 1572.51,
+    "fb2_to_fb1_token_ratio": 2.47
+  },
+  "retrieval_trace": {
+    "FB1": {
+      "no_anchor_page_candidate": 52,
+      "candidate_page_not_delivered": 9,
+      "anchor_page_delivered_and_correct": 31,
+      "anchor_page_delivered_but_wrong": 7
+    },
+    "FB2": {
+      "no_anchor_page_candidate": 20,
+      "candidate_page_not_delivered": 6,
+      "anchor_page_delivered_and_correct": 53,
+      "anchor_page_delivered_but_wrong": 13,
+      "execution_failures": 7
+    }
+  },
+  "token_budget": {
+    "formal_experiment_hard_limit": 2000000,
+    "formal_charged": 468704,
+    "formal_remaining": 1531296,
+    "known_usage": 462936,
+    "input_tokens": 414383,
+    "output_tokens_including_reasoning": 48553,
+    "reasoning_tokens_included_in_output": 16956,
+    "cached_tokens_reported": 128,
+    "missing_usage_attempts": 1,
+    "conservative_reservation_for_missing_usage": 5768,
+    "a1_used_after_run": 490951,
+    "a1_limit": 2500000,
+    "a1_remaining": 2009049,
+    "global_used_after_run": 531321,
+    "global_limit": 15000000,
+    "global_remaining": 14468679
+  },
+  "tests": {
+    "command": "uv run --locked pytest -q",
+    "passed": 210,
+    "skipped": 1,
+    "failed": 0
+  },
+  "public_item_score_file": "docs/financebench-v2-formal-item-scores.json",
+  "limitations": [
+    "FinanceBench is public and may have been present in model pretraining.",
+    "Evidence recall is a page-level proxy, not complete line-level evidence verification.",
+    "The 228 unresolved automatic assessments were adjudicated by Codex, not an external human expert.",
+    "The HTTP 400 root cause is unavailable because provider error details were sanitized."
+  ]
+}
