@@ -22,7 +22,7 @@ NUMBER = re.compile(
     r"(?P<sign>[+-]?)\s*(?P<currency>USD|EUR|GBP|CAD|\$|€|£)?\s*"
     r"(?P<value>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)\s*"
     r"(?P<scale>thousands?|millions?|billions?|trillions?|[kmbt])?\s*"
-    r"(?P<unit>USD|EUR|GBP|CAD|%|percent(?:age points?)?|bps|basis points?|x|times|shares)?",
+    r"(?P<unit>USD|EUR|GBP|CAD|%|percent(?:s|age(?:s)?(?:\s+points?)?)?|bps|basis points?|x|times|shares)?",
     re.IGNORECASE,
 )
 CONTEXT = re.compile(r"\b(USD|EUR|GBP|CAD)\s+(thousands?|millions?|billions?|trillions?)\b", re.I)
@@ -50,10 +50,15 @@ def numeric(text, question):
     if prefix and unit and prefix != unit:
         return None
     dimension = prefix or unit or hinted_currency
+    raw_amount = Decimal(match["value"].replace(",", ""))
     if dimension in {"usd", "eur", "gbp", "cad"} and not scale:
-        scale = hinted_scale if dimension == hinted_currency else ""
+        if dimension == hinted_currency:
+            # A magnitude in the question applies to an unscaled scalar. A grouped
+            # or already-large explicit amount is already expressed in base currency.
+            absolute_amount = abs(raw_amount) >= Decimal("1000000")
+            scale = "" if absolute_amount else hinted_scale
     if not dimension:
-        if re.search(r"(?:%|\bpercent(?:age)?\b)", question, re.I):
+        if re.search(r"(?:%|\bpercent(?:s|age(?:s)?)?\b)", question, re.I):
             dimension = "%"
         elif re.search(r"\bin (?:basis points|bps)\b", question, re.I):
             dimension = "bps"
@@ -65,7 +70,7 @@ def numeric(text, question):
         dimension = "%"
     if dimension == "times":
         dimension = "x"
-    amount = Decimal(match["value"].replace(",", "")) * factor
+    amount = raw_amount * factor
     if negated or match["sign"] == "-":
         amount = -amount
     # Floor is 0.01 in the displayed currency magnitude, or 0.01 percentage point.
