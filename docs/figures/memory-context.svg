@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 760 410" role="img" aria-labelledby="title desc">
+  <title id="title">Episodic Memory 上下文压缩</title>
+  <desc id="desc">20题离线回放。Memory M3将上下文从29620字节压缩到18534字节，减少37.4%。送达经验从34/48提高至48/48，48条引用保留。</desc>
+  <style>
+    .bg{fill:#F7FAFC}.title{font:700 28px Arial,sans-serif;fill:#163047}.sub{font:18px Arial,sans-serif;fill:#526577}.axis{font:17px Arial,sans-serif;fill:#526577}.value{font:700 23px Arial,sans-serif;fill:#163047}.label{font:700 20px Arial,sans-serif;fill:#243B53}.grid{stroke:#D7E0E8;stroke-width:1}.before{fill:#9AA9B8}.after{fill:#65A99C}.badge{fill:#E5F2F0;stroke:#79A99D}.badgeText{font:700 18px Arial,sans-serif;fill:#24594F}
+    @media (prefers-color-scheme:dark){.bg{fill:#111C26}.title,.value,.label{fill:#E5EDF5}.sub,.axis{fill:#B7C5D2}.grid{stroke:#354656}.badge{fill:#193630;stroke:#4D8B7E}.badgeText{fill:#B8E5D9}}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="410" rx="16"/>
+  <text class="title" x="32" y="42">Episodic Memory · Context Compression</text>
+  <text class="sub" x="32" y="68">20 题离线回放 · M3 紧凑上下文投影</text>
+  <rect class="badge" x="555" y="84" width="150" height="34" rx="17"/><text class="badgeText" x="630" y="106" text-anchor="middle">减少 37.4%</text>
+  <line class="grid" x1="112" y1="130" x2="690" y2="130"/><text class="axis" x="45" y="135">30k</text>
+  <line class="grid" x1="112" y1="185" x2="690" y2="185"/><text class="axis" x="45" y="190">22.5k</text>
+  <line class="grid" x1="112" y1="240" x2="690" y2="240"/><text class="axis" x="56" y="245">15k</text>
+  <line class="grid" x1="112" y1="295" x2="690" y2="295"/><text class="axis" x="56" y="300">7.5k</text>
+  <line class="grid" x1="112" y1="350" x2="690" y2="350"/><text class="axis" x="67" y="355">0</text>
+  <rect class="before" x="220" y="132.8" width="100" height="217.2" rx="7"/><text class="value" x="270" y="122" text-anchor="middle">29,620</text>
+  <rect class="after" x="475" y="214" width="100" height="136" rx="7"/><text class="value" x="525" y="203" text-anchor="middle">18,534</text>
+  <text class="label" x="270" y="376" text-anchor="middle">压缩前</text>
+  <text class="label" x="525" y="376" text-anchor="middle">M3</text>
+  <text class="sub" x="32" y="401">注入经验：34/48 → 48/48 · 48 条已送达经验引用全部保留</text>
+</svg>

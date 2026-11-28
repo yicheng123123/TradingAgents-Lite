@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 760 390" role="img" aria-labelledby="title desc">
+  <title id="title">FinanceBench 四组答案准确率</title>
+  <desc id="desc">公开基准99题每组，真实LLM四组共396实例。准确率 FB0 12.1%，FB1 46.5%，FB2 68.7%，FB3 70.7%。</desc>
+  <style>
+    .bg{fill:#F7FAFC}.title{font:700 28px Arial,sans-serif;fill:#163047}.sub{font:18px Arial,sans-serif;fill:#526577}.axis{font:17px Arial,sans-serif;fill:#526577}.value{font:700 23px Arial,sans-serif;fill:#163047}.label{font:700 18px Arial,sans-serif;fill:#243B53}.grid{stroke:#D7E0E8;stroke-width:1}.bar0{fill:#9AA9B8}.bar1{fill:#83B4D9}.bar2{fill:#65A99C}.bar3{fill:#A89ACB}
+    @media (prefers-color-scheme:dark){.bg{fill:#111C26}.title,.value,.label{fill:#E5EDF5}.sub,.axis{fill:#B7C5D2}.grid{stroke:#354656}}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="390" rx="16"/>
+  <text class="title" x="32" y="42">FinanceBench · 答案准确率</text>
+  <text class="sub" x="32" y="68">99 道公开测试题 / 组 · 396 个真实模型实例</text>
+  <line class="grid" x1="82" y1="112" x2="710" y2="112"/><text class="axis" x="40" y="117">100%</text>
+  <line class="grid" x1="82" y1="157" x2="710" y2="157"/><text class="axis" x="48" y="162">75%</text>
+  <line class="grid" x1="82" y1="202" x2="710" y2="202"/><text class="axis" x="48" y="207">50%</text>
+  <line class="grid" x1="82" y1="247" x2="710" y2="247"/><text class="axis" x="48" y="252">25%</text>
+  <line class="grid" x1="82" y1="292" x2="710" y2="292"/><text class="axis" x="56" y="297">0%</text>
+  <rect class="bar0" x="138" y="270.2" width="70" height="21.8" rx="7"/><text class="value" x="173" y="260" text-anchor="middle">12.1%</text>
+  <rect class="bar1" x="285" y="208.3" width="70" height="83.7" rx="7"/><text class="value" x="320" y="198" text-anchor="middle">46.5%</text>
+  <rect class="bar2" x="432" y="168.3" width="70" height="123.7" rx="7"/><text class="value" x="467" y="158" text-anchor="middle">68.7%</text>
+  <rect class="bar3" x="579" y="164.7" width="70" height="127.3" rx="7"/><text class="value" x="614" y="154" text-anchor="middle">70.7%</text>
+  <text class="label" x="173" y="324" text-anchor="middle">FB0</text><text class="axis" x="173" y="346" text-anchor="middle">LLM Only</text>
+  <text class="label" x="320" y="324" text-anchor="middle">FB1</text><text class="axis" x="320" y="346" text-anchor="middle">Fixed RAG</text>
+  <text class="label" x="467" y="324" text-anchor="middle">FB2</text><text class="axis" x="467" y="346" text-anchor="middle">Agentic RAG</text>
+  <text class="label" x="614" y="324" text-anchor="middle">FB3</text><text class="axis" x="614" y="346" text-anchor="middle">Oracle Evidence</text>
+  <text class="sub" x="32" y="376">真实 LLM · glm-5.3-flash · 公开基准复评</text>
+</svg>

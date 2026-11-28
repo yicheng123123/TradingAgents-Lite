@@ -1,135 +1,199 @@
 # TradingAgents-Lite
 
-一个可审计、可复现的轻量金融研究 Agent 项目。当前版本把历史任务、行情视图、时点证据、有限工具调用、结构化决策和独立结算连接起来。项目用于离线历史研究，不执行交易。
+**面向历史金融研究的 Agent 系统：**把时点受限的行情与金融证据，经由检索、工具调用、结构化决策和独立结算，形成可追踪的研究轨迹。
 
-上游设计参考 TauricResearch/TradingAgents；本项目独立实现。来源、许可证和声明见 [docs/upstream-audit.md](docs/upstream-audit.md)、[LICENSE](LICENSE) 和 [NOTICE](NOTICE)。
+![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![LangGraph](https://img.shields.io/badge/Workflow-LangGraph-5B8FF9)
+![Pydantic](https://img.shields.io/badge/Contracts-Pydantic-E92063)
+![Retrieval](https://img.shields.io/badge/Retrieval-BM25%20%2B%20BGE-4C8C7A)
+![Storage](https://img.shields.io/badge/Memory-SQLite%20%2B%20Qdrant-64748B)
+![UI](https://img.shields.io/badge/UI-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-Apache--2.0-6B7280)
 
-## 阶段状态
+项目用于离线历史研究，不连接券商、不提交订单，也不声称实现无污染回测或稳定投资收益。
 
-- **A0**：4 题确定性五日动量 smoke，结果保存在 results/smoke-a0-001。该归档保持不变。
-- **A0.5**：20 个 Development 时点的历史证据层。SEC 财报为 20/20 历史代理可用；Apple Newsroom 标题为 10/20；Microsoft 新闻显式缺失；严格版本时点认证为 0/20。逐题证据见 [A0.5 覆盖报告](results/evidence-dev-a05-001/REPORT.md)。
-- **B0**：20 题确定性 Development 基线，独立保存于 results/b0-development-001。
-- **B1**：真实 GLM 的 B1-M 行情组与 B1-E 行情加 A0.5 证据组。原 GLM-5.3 Smoke 归档保留且结果为 1/4 实例、0 个有效配对；独立 Flash V2 协议见 [B1 Flash V2](docs/b1-v2-protocol.md)。没有成功的真实调用时不会生成模型成绩。
-- **A1**：本地文档解析、Qdrant、BM25 / Dense / RRF / Cross Encoder，支持固定查询与 Analyst 自主查询。[A1 RAG](docs/learning/a1-rag.md)
-- **A2**：按结算事件推进的 SQLite / Qdrant 长期经验，提供 M0–M3 配置。[A2 Memory](docs/learning/a2-memory.md)
-- **A3**：可选 Bull/Bear、MCP STDIO、确定性 Verifier 和有界恢复。[离线评测](results/a3-offline-001/REPORT.md) · [A3 教学](docs/learning/a3-agents.md)
+[系统架构](#系统架构) · [实验结果](#benchmark-结果) · [源码导航](#源码导航) · [Quick Start](#quick-start) · [完整实验报告](docs/benchmark-results.md)
 
-**最终 Benchmark 准备**：已审计现有数据与账本，并为 FinanceBench 加入四组预测、独立评分和校准 Mock 入口。真实 FinanceBench、私有反事实及 V3 决策消融的执行条件与预算见 [最终 Benchmark 协议](docs/final-benchmark-protocol.md)。
+## 核心量化结果
 
-B1 V1 冻结协议默认 GLM-5.3；新协议单独使用准确模型 ID `glm-5.3-flash`，不回退到付费模型。两版结果不会混合。参考[Flash 官方模型文档](https://docs.bigmodel.cn/cn/guide/models/vlm/glm-5.3-flash)、[Thinking 文档](https://docs.bigmodel.cn/cn/guide/capabilities/thinking)与[Function Calling 文档](https://docs.bigmodel.cn/cn/guide/capabilities/function-calling)。
+- **FinanceBench Agentic RAG：**公开 99 题、四组共 396 个真实模型实例。动态检索组准确率为 **68.7%**，固定检索组为 **46.5%**，差 **+22.2 个百分点**；FB2 平均用量与延迟也更高。
+- **有界恢复：**离线配对故障注入中，启用恢复后的任务完成数从 **5/60（8.3%）**升至 **45/60（75.0%）**。这是故障注入结果，不是生产 SLA。
+- **Episodic Memory：**M3 将示例回放上下文从 **29,620** 压至 **18,534 bytes（−37.4%）**，48/48 条已选经验成功装入且保留引用。
+- **Counterfactual Private Test：**本地评分汇总为 CF0 **20/20**、CF1 **18/20**；两组 Planning 均为 **6/6**，严格 Adaptive Planning 的 CF1 为 **0/6**。正式题目、Gold、随机种子和原始预测不公开；当前只有本机聚合结果核验，尚无脱敏正式报告。
+- **检索重排实验：**独立 A1-V3 分支的 BGE Reranker 在公开测试集 Recall@5 为 **53.54%**，较 E0 的 39.90% 高 **13.64 个百分点**；热均值延迟约 **2.52×**，因此没有替换主线默认检索配置。
 
-Flash V2 使用原始冻结的 20 道 Development 任务、A0.5 数据和 B0 结算。Smoke 固定 `dev-01`、`dev-02`，按任务配对运行 B1-M/B1-E；只有成功的 Flash Smoke 才能续跑其余 18 题。运行命令、预算策略、数据 hash 和模型身份检查见 [B1 Flash V2 协议](docs/b1-v2-protocol.md)。
+详细口径、Token / 延迟代价及实验局限见[Benchmark 结果汇总](docs/benchmark-results.md)。
 
-## B1 V1 冻结协议（归档）
+## 系统架构
 
-B1 使用固定的 Development 20 题、A0.5 行情快照和证据快照。两个模型组共用核心提示、模型、temperature=0、每次调用最多 512 tokens、messages + tools 最多 5,000 bytes、最多 2 轮分析师工具调用、每轮至多 2 个工具调用、25 秒超时和同一风险门与结算代码。B1 不自动重试，OpenAI SDK 自动重试也关闭。
+```mermaid
+flowchart TD
+    TASK["用户金融研究任务<br/>股票 · 决策日期 · 预测周期"] --> PREP["Prepare<br/>按 cutoff 构造行情视图"]
+    PREP --> ANALYST
 
-- B1-M：行情工具。
-- B1-E：相同行情工具，另开放按决策时点过滤的财务证据工具。
-- 首轮 smoke 固定为 dev-01 / AAPL 与 dev-02 / MSFT，两题同一决策日期。
-- 模型生成不设置供应商 seed；seed 42 仅用于统计重采样。
-- 请求提示与工具定义的 SHA-256、模型调用次数、返回模型名、token 用量、延迟和失败状态都写入 run manifest 与逐题 trajectory JSONL。
-- 结算为决策后下一共同交易日开盘到第 N 个共同交易日收盘的价格收益，Alpha 减 SPY 同期价格收益；不含费用、股息、融券与组合执行。
-- 项目 GLM 总预算为 15,000,000 tokens；B1 阶段预算为 1,000,000，smoke 单次实验硬上限为 120,000。按 5,000-byte prompt、512 output tokens、额外 512 reasoning reserve 及 128 协议 allowance 计算，smoke 保守上限为 98,432 tokens，Full Development 为 984,320 tokens。调用前逐请求预留；失败或 usage 缺失时按完整预留量计费。
-- 对应智谱标准价的静态上限为 smoke ¥1.115136、Full Development ¥11.151360。它们是边界估算，不是已发生费用；详细阶段预算、局限和实现见[全局 Token 预算教学](docs/learning/token-budget.md)。
+    subgraph ANALYST_GROUP["Analyst · 有界工具循环"]
+        direction TB
+        ANALYST["LLM Analyst<br/>Function Calling"]
+        TOOLS["行情 · XBRL Fundamentals<br/>SEC 金融证据工具"]
+        RETRIEVER["Retriever<br/>BM25 + BGE Dense → RRF"]
+        SELECT["Context Selection<br/>FinanceBench V2 · 摘录选择 · 字节预算"]
+        MR["MarketReport<br/>稳定 Evidence IDs"]
+        ANALYST -->|"行情 / 财务工具调用"| TOOLS
+        TOOLS -->|"Tool Observation"| ANALYST
+        ANALYST -->|"rag_search(Query)"| RETRIEVER
+        RETRIEVER --> SELECT
+        SELECT -->|"检索 Observation"| ANALYST
+        ANALYST -->|"无待处理工具"| MR
+    end
 
-成本预估使用截至 2026-11-24 的智谱标准单价：GLM-5.3 输入 ¥8 / 百万 tokens，输出 ¥28 / 百万 tokens。账户折扣、缓存计费和平台最终账单可能不同。价格来源：[智谱 API 定价](https://docs.bigmodel.cn/cn/guide/start/pricing)。
+    MR --> ROUTE["Conditional Debate Router<br/>可选"]
+    ROUTE -->|"条件不满足：跳过"| TRADER["Trader<br/>Buy / Sell / Hold 提案"]
+    ROUTE -->|"条件满足"| BULL["Bull"]
+    BULL --> BEAR["Bear"]
+    BEAR --> ADJ["Adjudication"]
+    ADJ --> TRADER
 
-## 安装与测试
+    MEMORY["Episodic Memory · 可选<br/>SQLite 权威记录 + Qdrant 向量索引<br/>cutoff / 分区 / 实验组过滤"] -->|"合规 Top-3 经验 · 压缩上下文"| TRADER
+
+    TRADER -->|"Verifier 开启"| VERIFY["Verifier<br/>Schema · 引用 · 范围 · 时点"]
+    TRADER -->|"Verifier 关闭"| RISK["Risk Manager<br/>确定性风险门"]
+    VERIFY --> RISK
+    RISK --> DECISION["最终 Decision<br/>执行轨迹与 Trace"]
+    DECISION --> SETTLE["Independent Backtest<br/>按冻结规则独立结算"]
+    SETTLE --> REFLECT["Reflection<br/>仅在结果成熟后生成经验"]
+    REFLECT -->|"eligible_at 之后写入"| MEMORY
+
+    HARNESS["Agent Harness 贯穿工作流<br/>LangGraph State · Pydantic · Tool Contract<br/>TokenBudget · Trace · 有界 Recovery · 可选 MCP STDIO"]
+    HARNESS -.-> ANALYST
+    HARNESS -.-> TRADER
+    HARNESS -.-> RISK
+
+    classDef input fill:#EAF1F8,stroke:#8CA4BA,color:#163047,stroke-width:1.5px;
+    classDef agent fill:#E7F0FA,stroke:#7799B8,color:#15334B,stroke-width:1.5px;
+    classDef retrieval fill:#E5F2F0,stroke:#79A99D,color:#173E38,stroke-width:1.5px;
+    classDef optional fill:#F0ECF8,stroke:#A597C5,color:#30294B,stroke-width:1.5px;
+    classDef control fill:#EEF1F4,stroke:#8D99A6,color:#273746,stroke-width:1.5px;
+    classDef harness fill:#F2F4F7,stroke:#A5AFBA,color:#354454,stroke-dasharray:4 3;
+    class TASK,PREP input;
+    class ANALYST,TOOLS,MR,TRADER agent;
+    class RETRIEVER,SELECT retrieval;
+    class ROUTE,BULL,BEAR,ADJ,MEMORY,REFLECT optional;
+    class VERIFY,RISK,DECISION,SETTLE control;
+    class HARNESS harness;
+```
+
+图中箭头表示逻辑数据流，不表示 Agent 并行执行。Bull 与 Bear 依次运行；Debate、Memory、Verifier 和 MCP 都是可选能力。Risk Manager 做的是明确的规则检查，不是投资组合执行服务。更多原理图见[架构与技术图解](docs/technical-diagrams.md)。
+
+### 核心模块
+
+- **Analyst 与检索：**LLM 通过注册工具读取时点行情、XBRL 派生指标和金融证据；RAG Retriever 负责 BM25、BGE Dense 与 RRF 排序，Agent 决定是否发起下一轮检索。FinanceBench V2 的 Context Selection 做 query-aware 片段选择和请求字节预算；常规 RAG 工具保留 Top-K 与 excerpt 上限。
+- **Trader、Debate 与风险门：**MarketReport 和证据交给 Trader；条件路由可跳过或依次调用 Bull、Bear，再由 Trader 综合。独立风险节点按确定性阈值处理高波动与无效提案。
+- **Episodic Memory：**只读取已结算且满足决策时点、任务分区和实验组条件的历史经验；SQLite 保存权威记录，Qdrant 是可重建向量索引。
+- **Agent Harness：**LangGraph State 串联节点；Pydantic 校验参数与报告；Tool Registry 统一本地/MCP 工具契约；TokenBudget 逐请求预留；Trace 保存状态、引用与错误。Verifier 校验结构、引用身份/范围/可见时间和规则风险，**不做完整的自然语言事实蕴含核验**。
+
+## Benchmark 结果
+
+### FinanceBench：真实 LLM / 公开基准复评
+
+![FinanceBench 四组准确率对比](docs/figures/financebench-accuracy.svg)
+
+![FinanceBench 四组页级证据召回对比](docs/figures/financebench-evidence-recall.svg)
+
+| 组别 | 正确答案 | 任务完成 | 答案准确率 | 页级证据召回 | 平均记账 Tokens | 平均延迟 |
+|---|---:|---:|---:|---:|---:|---:|
+| FB0 · LLM Only | 12/99 | 99/99 | 12.1% | 0.0% | 239.8 | 2.55 s |
+| FB1 · Fixed RAG | 46/99 | 99/99 | 46.5% | 34.8% | 1,069.5 | 4.75 s |
+| FB2 · Agentic RAG | 68/99 | 92/99 | 68.7% | 63.6% | 2,642.0 | 15.63 s |
+| FB3 · Oracle Evidence | 70/99 | 98/99 | 70.7% | 99.5% | 783.1 | 2.48 s |
+
+FB2 比 FB1 多答对 22/99 题（**+22.2 个百分点**），但平均记账 Tokens 约为 2.47×、平均延迟约为 3.29×，且有 7 个执行失败保留在分母。总计 585 次 HTTP 请求，正式运行记账 468,704 Tokens。FB3 只提供本题获准的官方支持证据，不提供 Gold 答案。页级 Recall 是证据页覆盖代理，不保证财务行完整或结论正确。
+
+FinanceBench 是公开数据集，存在模型预训练污染风险。228 个不适合自动裁定的答案由 Codex 按冻结规则逐条裁定；这不是外部领域专家复核，复杂文本答案仍建议人工抽查。完整方法与逐组指标见[正式评测报告](docs/financebench-v2-formal-report.md)。
+
+### Harness 故障注入：离线
+
+![离线 Harness 故障注入完成率](docs/figures/harness-completion.svg)
+
+60 个配对故障场景，每种配置运行同一套离线注入；F0 完成 5/60，F1 完成 45/60。结果说明有界恢复和安全降级对这套注入用例的作用，不代表线上 SLA。见 [A3 离线报告](results/a3-offline-001/REPORT.md)。
+
+### Episodic Memory：离线回放
+
+![Memory 上下文压缩与经验送达](docs/figures/memory-context.svg)
+
+M3 的 Recall@3 为 **0.565**，低于 M2 的 **0.631**；因此本结果只支持“上下文更紧凑、所选经验送达率更高”，不支持“检索准确率提升”。详见 [Memory 报告](results/a2-memory-local-001/REPORT.md)。
+
+### Conditional Debate：离线任务
+
+![Conditional Debate 角色调用次数对比](docs/figures/debate-role-calls.svg)
+
+在 20 个离线任务上，D1 固定辩论产生 40 次角色调用，D2 条件辩论触发 9/20 题、产生 18 次角色调用（−55%）。角色调用次数不等于真实 Token 节省比例。见 [A3 离线报告](results/a3-offline-001/REPORT.md)。
+
+### 补充评测：私有任务与检索优化
+
+私有 Counterfactual Test 共 20 道合成任务、40 个真实模型实例，CF0 为 20/20、CF1 为 18/20，Planning 均为 6/6，CF1 严格 Adaptive Planning 为 0/6。当前只核验了本机评分聚合，未找到脱敏正式报告；隐私边界及完整指标见[结果汇总](docs/benchmark-results.md)。
+
+A1-V2 在公开 Test 的 Recall@5 从 39.90% 到 41.92%，配对区间包含零；独立 A1-V3 分支的 BGE Reranker 达 53.54%，但热均值延迟约为 E0 的 2.52×，未替换主线默认。BM25、Dense、Hybrid 与 Reranker 的完整对照和分支报告链接见[检索结果](docs/benchmark-results.md)。
+
+## Streamlit 界面
+
+项目提供 Research、Agent Trace、Evidence、Memory、Benchmark、Usage 与历史运行浏览页面。以下为已归档界面截图：
+
+![Research 界面截图](docs/screenshots/v2/research.png)
+
+![Agent Trace 界面截图](docs/screenshots/v2/agent-trace.png)
+
+![Benchmark 界面截图](docs/screenshots/v2/benchmark.png)
+
+[界面设计系统](docs/ui-design-system.md) · [Streamlit 教学](docs/learning/ui.md)
+
+## 源码导航
+
+| 面试关注点 | 实现入口 |
+|---|---|
+| LangGraph 工作流与节点路由 | [workflow.py](tradingagents_lite/workflow.py) |
+| GLM/OpenAI-compatible Provider、请求参数与重试/预算边界 | [provider.py](tradingagents_lite/provider.py) |
+| Function Calling 工具契约 | [tool_registry.py](tradingagents_lite/tool_registry.py) |
+| BM25、Dense、RRF 与时点过滤 | [rag.py](tradingagents_lite/rag.py) · [vectors.py](tradingagents_lite/vectors.py) |
+| FinanceBench 动态检索、Context Selection 与轨迹 | [financebench.py](tradingagents_lite/financebench.py) |
+| Episodic Memory、排序和压缩 | [memory.py](tradingagents_lite/memory.py) |
+| Analyst / Trader / Bull-Bear 与运行恢复 | [agents.py](tradingagents_lite/agents.py) |
+| 引用、范围、时点及风险规则校验 | [verifier.py](tradingagents_lite/verifier.py) |
+| SQLite TokenBudget 账本 | [token_budget.py](tradingagents_lite/token_budget.py) |
+| 私有 Counterfactual Runner 与隔离 | [counterfactual_runner.py](tradingagents_lite/counterfactual_runner.py) |
+| Counterfactual 独立评分 | [counterfactual_score.py](tradingagents_lite/counterfactual_score.py) |
+| 任务执行、历史结算与聚合 | [runner.py](tradingagents_lite/runner.py) |
+
+## Quick Start
+
+Python 3.12 与 uv。安装锁定依赖并运行离线回归：
 
 ~~~sh
-cd ~/projects/tradingagents-lite
-uv sync --locked
+git clone https://github.com/yicheng123123/TradingAgents-Lite.git
+cd TradingAgents-Lite
+uv sync --locked --group ui
 uv run --locked pytest -q
 ~~~
 
-核心依赖为 Python 3.12、LangGraph、Pydantic 与 OpenAI-compatible Python SDK。项目不需要 GPU，也不自动安装大型模型依赖。
-
-## 运行 B0
-
-首次为冻结的 Development 20 题生成离线规则基线：
+在准备好项目本地数据快照的环境中启动 Streamlit；启动命令不发起 GLM 请求：
 
 ~~~sh
-uv run --locked talite b0   --tasks tasks/development.jsonl   --data data/yahoo-2024-v1   --output results/b0-development-001   --seed 42
+uv run --locked --group ui streamlit run streamlit_app.py \
+  --server.address 127.0.0.1 \
+  --server.headless true \
+  --browser.gatherUsageStats false
 ~~~
 
-输出包括 run.json、summary.csv、REPORT.md、tasks.jsonl、trajectory.jsonl 和本地 SQLite 账本。SQLite 文件不纳入 Git。
+真实模型运行需要用户自行配置密钥、恢复已有 TokenBudget 账本并通过实验协议的预算预检。不要把 API Key 或本地实验私有数据写入仓库。
 
-## 配置 GLM 并运行两题 B1 smoke
+## 实验局限与后续计划
 
-模型名与 Base URL 有默认值。运行前还必须指向已有的项目 SQLite 账本；不要创建空账本替代它。只在 WSL 当前 shell 安全配置 Key，不要将 Key 写入仓库或聊天：
+- **历史行情不是 point-in-time 数据证明：**供应商可能事后修订行情或复权；SEC 文件披露时点与首次可见时点不同；历史新闻版本不完整。
+- **模型知识不可回溯锁定：**公开 FinanceBench 可能受到预训练污染。私有合成题可验证隔离流程，但不能证明闭源模型绝无污染。
+- **Verifier 能力有边界：**它检查结构、引用身份/范围、时点和确定性风险条件，不验证所有自然语言陈述都由证据蕴含。
+- **真实历史股票任务状态：**V3 已冻结 80 道 Development 与 100 道 Holdout；当前公开归档包含 4/4 实例的 GLM-5.3-Flash Smoke，不等于完成 80 题 Development。Holdout 仍封存，未评估交易表现。
+- **Benchmark 状态：**FinanceBench 99 题是已重复使用的公开测试集；Counterfactual Private Test 仅本机评分聚合可核验，暂无脱敏正式报告。两者不能替代独立、时间隔离的真实金融 Holdout。
+- 后续路线与冻结边界见[项目路线图](docs/roadmap.md)及[最终 Benchmark 协议](docs/final-benchmark-protocol.md)。旧首页的开发记录、运行命令与冻结说明已完整保存在[历史 README 快照](docs/project-history.md)。
 
-~~~sh
-# 先将此路径改为已存在且包含历史用量的项目账本。
-export TALITE_TOKEN_BUDGET_DB=/absolute/path/to/existing/token-budget.sqlite
-read -rsp "TALITE_API_KEY: " TALITE_API_KEY
-printf '\n'
-export TALITE_API_KEY
-uv run --locked talite b1 --scope smoke --output results/b1-smoke-004
-unset TALITE_API_KEY
-~~~
+## 上游来源与许可证
 
-若成功，输出含 B1-M、B1-E 两组独立 run manifest、逐题 JSONL trajectory、汇总 CSV、逐题配对 Alpha 和报告。smoke 输出目录必须是新路径，程序不会覆盖已有结果。API Key 缺失时会记录明确的 blocked 状态，不会发出请求；账本缺失时会失败关闭，不会创建一个空账本。
-
-两题 smoke 用于确认 GLM Function Calling、Pydantic 结构校验、证据引用、费用统计和结算链路。它不是性能结论。模型失败、无效引用与无法解析输出均留在失败分母，不会伪装成正常 Hold。
-
-## 复用 Smoke 完成 20 题
-
-Smoke 成功后，可复用 dev-01 / dev-02 的四条成功轨迹，仅执行另外 18 题。续跑前会核验原轨迹和 SQLite 账本记录；配置、模型身份或数据 hash 不一致时拒绝续跑。随后从两个只读来源生成完整 20 题归档，不会重算 Smoke Token，也不会改写来源归档。
-
-~~~sh
-uv run --locked talite b1 --scope development \
-  --resume-from results/b1-smoke-004 \
-  --budget-cap-cny 10.036224 \
-  --output results/b1-development-remainder-001
-
-uv run --locked talite b1-merge \
-  --smoke results/b1-smoke-004 \
-  --continuation results/b1-development-remainder-001 \
-  --output results/b1-development-001
-~~~
-
-剩余 18 题的保守请求上界是 885,888 tokens / ¥10.036224；与 Smoke 上界合计 984,320 tokens / ¥11.151360。Smoke 的独立硬上限仍是 120,000 tokens。实际执行还要求 `TALITE_API_KEY` 和已存在的项目账本；账本缺失时 B1 会停止，不会新建一个空账本并把历史累计当成零。密钥应在 Shell 中安全设置，不写进仓库。若价格、模型预算或重试协议变化，应冻结新协议并使用新目录。当前开发集不是 Holdout；本项目尚未访问最终 Holdout。
-
-续跑细节见[单独的 B1 Smoke 复用协议](docs/b1-resume-protocol.md)。
-
-## 指标和边界
-
-报告包含 Task Completion Rate、Structured Output Valid Rate、Tool Success / Recovery、Non-Hold Coverage、非 Hold 方向命中率及分母、Mean Alpha、日期聚类区间、B1-E−B1-M 配对 Alpha、有效/无效证据引用、输入/输出 tokens、模型调用、延迟与标准价格估算。按 AAPL、MSFT 和全体分别统计。样本很小的 smoke 不提供虚假的显著性结论。
-
-行情是历史下载的 Yahoo Finance 回溯快照，存在供应商事后修订和复权限制。A0.5 证据多数为历史代理，不是经首次可见时间认证的 point-in-time 数据。模型预训练知识也无法按历史日期截断。该实验只能称为冻结数据上的历史研究基线，不能称为严格历史回测、可交易策略或真实收益。
-
-## A3 离线运行
-
-~~~sh
-uv run --locked talite a3 --debate D2 --transport mcp --verifier --repair --output data/a3-dev-new
-uv run --locked talite a3-benchmark --output data/a3-benchmark-new
-~~~
-
-真实 GLM 实验仍待完整验收。
-
-## 本地研究界面
-
-~~~sh
-uv run --locked --group ui streamlit run streamlit_app.py --server.address 127.0.0.1 --server.headless true --browser.gatherUsageStats false
-~~~
-
-打开输出的本机地址。Frontend V2 默认使用 Offline。Research 提供冻结行情、Agent 配置和决策报告。Agent Trace、Evidence 与 Memory 共享同一归档。Benchmark、Usage 和 Run History 分别提供实验、账本和历史运行的浏览入口。
-
-![Frontend V2 Research](docs/screenshots/v2/research.png)
-
-![Frontend V2 Agent Trace](docs/screenshots/v2/agent-trace.png)
-
-[设计系统与七页截图](docs/ui-design-system.md) · [界面教学](docs/learning/ui.md)
-
-Usage 内 Token Dashboard 的项目硬上限显示为 **15.00M（15,000,000 Tokens）**。若启动应用的 WSL 进程已设置 `TALITE_API_KEY`，可在 **BigModel Account** 点击 **Refresh BigModel account** 查询人民币余额和明确适用于 GLM-5.3 的资源包。成功结果在当前页面会话缓存 60 秒。控制台接口可能因账户权限或返回结构变化而不可用。账户查询独立于项目 SQLite 账本和模型执行。[账户查询说明](docs/learning/ui.md#bigmodel-account)
-
-### Data Expansion V2
-
-V2 冻结了 20 只股票及 380 道五交易日任务。Offline Extended 200 题已完成确定性基线，Development V2 80 题可在 Research 中选择，Final Holdout 100 题保持封存。实时 SEC 批量采集依赖本机配置的 `SEC_USER_AGENT`。本轮使用官方缓存和发行人资料，真实 GLM 消耗为 0。[数据与复现命令](docs/data-expansion-v2.md) · [金融数据教学](docs/learning/financial-data.md)
-
-## 后续模块
-
-A1 与 A2 由通用实验入口单独开启。A3 可通过 `talite a3` 单独开启。B2 消融和 B3 Final Holdout 见[路线图](docs/roadmap.md)。B1 保持原有配对协议。
-
-完整调用链、状态传递与练习见 [docs/learning/b1.md](docs/learning/b1.md)；协议和字段定义见 [docs/b1-protocol.md](docs/b1-protocol.md)。
+本项目以 TauricResearch/TradingAgents 的设计为参考；经审计的上游版本为 9fa1196fffbcfd9de5146d2dd2869df84ab99838。本项目独立实现 Python、Prompt、测试与评测流程，没有复制上游 Python 代码或 Prompt。仓库保留上游 Apache-2.0 许可证文本及来源声明。详情：[上游审计](docs/upstream-audit.md) · [LICENSE](LICENSE) · [NOTICE](NOTICE) · [上游仓库](https://github.com/TauricResearch/TradingAgents/tree/9fa1196fffbcfd9de5146d2dd2869df84ab99838)。

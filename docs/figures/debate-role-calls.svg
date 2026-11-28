@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 760 390" role="img" aria-labelledby="title desc">
+  <title id="title">Conditional Debate 角色调用次数</title>
+  <desc id="desc">20个离线任务中，固定辩论D1调用角色40次；条件辩论D2调用18次，触发9/20，角色调用下降55%。</desc>
+  <style>
+    .bg{fill:#F7FAFC}.title{font:700 28px Arial,sans-serif;fill:#163047}.sub{font:18px Arial,sans-serif;fill:#526577}.axis{font:17px Arial,sans-serif;fill:#526577}.value{font:700 23px Arial,sans-serif;fill:#163047}.label{font:700 20px Arial,sans-serif;fill:#243B53}.grid{stroke:#D7E0E8;stroke-width:1}.fixed{fill:#83B4D9}.conditional{fill:#A89ACB}.badge{fill:#F0ECF8;stroke:#A597C5}.badgeText{font:700 18px Arial,sans-serif;fill:#40365E}
+    @media (prefers-color-scheme:dark){.bg{fill:#111C26}.title,.value,.label{fill:#E5EDF5}.sub,.axis{fill:#B7C5D2}.grid{stroke:#354656}.badge{fill:#2A2440;stroke:#8B7DB0}.badgeText{fill:#D3C8F0}}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="390" rx="16"/>
+  <text class="title" x="32" y="42">Conditional Debate · 角色调用次数</text>
+  <text class="sub" x="32" y="68">20 个离线任务 · 调用数不是 Token 节省比例</text>
+  <rect class="badge" x="555" y="84" width="150" height="34" rx="17"/><text class="badgeText" x="630" y="106" text-anchor="middle">下降 55%</text>
+  <line class="grid" x1="112" y1="140" x2="690" y2="140"/><text class="axis" x="62" y="145">50</text>
+  <line class="grid" x1="112" y1="176" x2="690" y2="176"/><text class="axis" x="62" y="181">40</text>
+  <line class="grid" x1="112" y1="212" x2="690" y2="212"/><text class="axis" x="62" y="217">30</text>
+  <line class="grid" x1="112" y1="248" x2="690" y2="248"/><text class="axis" x="62" y="253">20</text>
+  <line class="grid" x1="112" y1="284" x2="690" y2="284"/><text class="axis" x="62" y="289">10</text>
+  <line class="grid" x1="112" y1="320" x2="690" y2="320"/><text class="axis" x="62" y="325">0</text>
+  <rect class="fixed" x="220" y="176" width="100" height="144" rx="7"/><text class="value" x="270" y="164" text-anchor="middle">40</text>
+  <rect class="conditional" x="475" y="255.2" width="100" height="64.8" rx="7"/><text class="value" x="525" y="243" text-anchor="middle">18</text>
+  <text class="label" x="270" y="350" text-anchor="middle">D1 · 固定辩论</text>
+  <text class="label" x="525" y="350" text-anchor="middle">D2 · 条件路由</text>
+  <text class="sub" x="32" y="378">D2 在 9 / 20 题触发 · Bull / Bear 依序调用</text>
+</svg>

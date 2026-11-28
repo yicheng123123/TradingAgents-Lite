@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 760 390" role="img" aria-labelledby="title desc">
+  <title id="title">离线 Harness 故障注入完成率</title>
+  <desc id="desc">60个配对离线故障场景。F0无恢复完成5/60即8.3%；F1有界恢复完成45/60即75.0%。</desc>
+  <style>
+    .bg{fill:#F7FAFC}.title{font:700 28px Arial,sans-serif;fill:#163047}.sub{font:18px Arial,sans-serif;fill:#526577}.axis{font:17px Arial,sans-serif;fill:#526577}.value{font:700 23px Arial,sans-serif;fill:#163047}.label{font:700 20px Arial,sans-serif;fill:#243B53}.grid{stroke:#D7E0E8;stroke-width:1}.base{fill:#A6B3C0}.recovery{fill:#65A99C}
+    @media (prefers-color-scheme:dark){.bg{fill:#111C26}.title,.value,.label{fill:#E5EDF5}.sub,.axis{fill:#B7C5D2}.grid{stroke:#354656}}
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="390" rx="16"/>
+  <text class="title" x="32" y="42">Harness · 故障注入任务完成率</text>
+  <text class="sub" x="32" y="68">60 个配对离线场景 · 每组 n=60 · 不是生产 SLA</text>
+  <line class="grid" x1="112" y1="112" x2="690" y2="112"/><text class="axis" x="62" y="117">100%</text>
+  <line class="grid" x1="112" y1="157" x2="690" y2="157"/><text class="axis" x="70" y="162">75%</text>
+  <line class="grid" x1="112" y1="202" x2="690" y2="202"/><text class="axis" x="70" y="207">50%</text>
+  <line class="grid" x1="112" y1="247" x2="690" y2="247"/><text class="axis" x="70" y="252">25%</text>
+  <line class="grid" x1="112" y1="292" x2="690" y2="292"/><text class="axis" x="78" y="297">0%</text>
+  <rect class="base" x="220" y="277.1" width="100" height="14.9" rx="7"/><text class="value" x="270" y="264" text-anchor="middle">8.3%</text>
+  <rect class="recovery" x="475" y="157" width="100" height="135" rx="7"/><text class="value" x="525" y="145" text-anchor="middle">75.0%</text>
+  <text class="label" x="270" y="326" text-anchor="middle">F0 · 无恢复</text><text class="axis" x="270" y="350" text-anchor="middle">5 / 60 完成</text>
+  <text class="label" x="525" y="326" text-anchor="middle">F1 · 有界恢复</text><text class="axis" x="525" y="350" text-anchor="middle">45 / 60 完成</text>
+  <text class="sub" x="32" y="378">同一套注入故障设计 · 失败与降级按原分母记录</text>
+</svg>
