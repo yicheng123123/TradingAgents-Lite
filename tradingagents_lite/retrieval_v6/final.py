@@ -1,6 +1,7 @@
 """Structure ablation and one-shot frozen public evaluation."""
 from collections import Counter, defaultdict
 from hashlib import sha256 as hash_bytes
+import json
 from pathlib import Path
 from statistics import fmean
 import subprocess
