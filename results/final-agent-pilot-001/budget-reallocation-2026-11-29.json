@@ -1,0 +1,121 @@
+{
+  "after": {
+    "allocation": {
+      "global_limit": 15000000,
+      "phase_limits": {
+        "A1": 2500000,
+        "A2": 1500000,
+        "A3": 2000000,
+        "B1": 1000000,
+        "B2": 2500000,
+        "B3": 4000000,
+        "Reserve": 1500000
+      },
+      "pilot_limit": 900000
+    },
+    "balances": {
+      "B2_remaining": 2450781,
+      "Pilot_remaining": 850781,
+      "Reserve_remaining": 1491616,
+      "global_remaining": 14332442
+    },
+    "usage": {
+      "attempts": 871,
+      "by_phase": {
+        "A1": 490951,
+        "A3": 87018,
+        "B1": 31986,
+        "B2": 49219,
+        "Reserve": 8384
+      },
+      "global": 667558,
+      "max_attempt_id": 871,
+      "pending_reserved": 0,
+      "status_by_phase": {
+        "A1": {
+          "failed": 1,
+          "succeeded": 608
+        },
+        "A3": {
+          "succeeded": 152
+        },
+        "B1": {
+          "succeeded": 28
+        },
+        "B2": {
+          "succeeded": 22
+        },
+        "Reserve": {
+          "failed": 1,
+          "succeeded": 59
+        }
+      }
+    }
+  },
+  "applied_at_utc": "2026-11-28T17:06:44+00:00",
+  "before": {
+    "allocation": {
+      "global_limit": 15000000,
+      "phase_limits": {
+        "A1": 2500000,
+        "A2": 1500000,
+        "A3": 2000000,
+        "B1": 1000000,
+        "B2": 1000000,
+        "B3": 4000000,
+        "Reserve": 3000000
+      },
+      "pilot_limit": 500000
+    },
+    "balances": {
+      "B2_remaining": 950781,
+      "Pilot_remaining": 450781,
+      "Reserve_remaining": 2991616,
+      "global_remaining": 14332442
+    },
+    "usage": {
+      "attempts": 871,
+      "by_phase": {
+        "A1": 490951,
+        "A3": 87018,
+        "B1": 31986,
+        "B2": 49219,
+        "Reserve": 8384
+      },
+      "global": 667558,
+      "max_attempt_id": 871,
+      "pending_reserved": 0,
+      "status_by_phase": {
+        "A1": {
+          "failed": 1,
+          "succeeded": 608
+        },
+        "A3": {
+          "succeeded": 152
+        },
+        "B1": {
+          "succeeded": 28
+        },
+        "B2": {
+          "succeeded": 22
+        },
+        "Reserve": {
+          "failed": 1,
+          "succeeded": 59
+        }
+      }
+    }
+  },
+  "configuration_fingerprint": "0fbd9b75ecdd455f2daa8c45a19fb251ff2ee4b700ba9bcb60fdefde9ef7ea2a",
+  "freeze_sha256": "0ae6744862a09eae9b5a45acaeaa9e58dc425af03492fb974c8b7340960412db",
+  "migration_id": "phase-3.1-pilot-budget-reallocation-2026-11-29",
+  "reason": "User-authorized Phase 3.1 quota transfer: move 1,500,000 tokens from Reserve to B2 and raise the Pilot child cap; retain the 15,000,000 global cap and all other phase allocations.",
+  "request_history_preserved": true,
+  "source_commit": "5a7f34950fdc16d5a59fd1660ccad194f6d30505",
+  "token_attempt_count_before": 871,
+  "transfer": {
+    "from": "Reserve",
+    "to": "B2",
+    "tokens": 1500000
+  }
+}

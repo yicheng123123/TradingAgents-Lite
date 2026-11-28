@@ -21,14 +21,338 @@
           "triggered": false
         }
       ]
+    },
+    {
+      "paired_t3_action_changed": true,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "c46077cda9a2afe21cef6a51",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "b13b59169f16e5dbad9ac433",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": true,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "4641aa6be456250f743eefea",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "ca67a256c0d32b479ff3be47",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "71f54662f0403131ec816234",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": true,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "ceaae0cd91ed0d9ecd8fac45",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "3348cbeb50fedef208bdfdd7",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": true,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "ddd1584e14bbbe6d5c037658",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": true,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "190eca27466f5ca8943a1130",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": null,
+      "role_success": {
+        "bear": false,
+        "bull": true
+      },
+      "task_hash": "277f00a8bfc0c28fd0f2fe22",
+      "trace": [
+        {
+          "reason": [
+            "near_momentum_threshold"
+          ],
+          "triggered": true
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": true,
+        "bull": true
+      },
+      "task_hash": "e5d78fed39be1f220bcce1e5",
+      "trace": [
+        {
+          "reason": [
+            "near_momentum_threshold"
+          ],
+          "triggered": true
+        },
+        {
+          "conflict": true,
+          "reason": "stop_after_round",
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": true,
+        "bull": true
+      },
+      "task_hash": "0ce20cc9f5688197569bc06e",
+      "trace": [
+        {
+          "reason": [
+            "near_momentum_threshold"
+          ],
+          "triggered": true
+        },
+        {
+          "conflict": true,
+          "reason": "stop_after_round",
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": true,
+        "bull": true
+      },
+      "task_hash": "c7a06329f85d8c6d2ec7f259",
+      "trace": [
+        {
+          "reason": [
+            "near_momentum_threshold"
+          ],
+          "triggered": true
+        },
+        {
+          "conflict": false,
+          "reason": "stop_after_round",
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": true,
+        "bull": true
+      },
+      "task_hash": "ef46c01f6a02d12ecf42919f",
+      "trace": [
+        {
+          "reason": [
+            "risk_gate_expected"
+          ],
+          "triggered": true
+        },
+        {
+          "conflict": true,
+          "reason": "stop_after_round",
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": null,
+      "role_success": {
+        "bear": false,
+        "bull": true
+      },
+      "task_hash": "d07f1116571c11a501836184",
+      "trace": [
+        {
+          "reason": [
+            "near_momentum_threshold"
+          ],
+          "triggered": true
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": true,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "04eed059e4727d75d0669a96",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "f3f3e51c9e066c4df878828e",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "1643f0c739eb59ed468f5826",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
+    },
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": false,
+        "bull": false
+      },
+      "task_hash": "fcff90ec5116da8c07f2cd09",
+      "trace": [
+        {
+          "reason": [
+            "sufficient_evidence"
+          ],
+          "triggered": false
+        }
+      ]
     }
   ],
   "totals": {
-    "debate_completed_roles": 1,
-    "debate_conflict_count": 1,
-    "debate_latency_seconds": 12.369235091000292,
-    "debate_tokens": 5558,
-    "debate_trigger_count": 1,
-    "debate_trigger_rate": 0.05
+    "debate_completed_roles": 5,
+    "debate_conflict_count": 4,
+    "debate_latency_seconds": 91.61169938699959,
+    "debate_tokens": 40857,
+    "debate_trigger_count": 7,
+    "debate_trigger_rate": 0.35
   }
 }

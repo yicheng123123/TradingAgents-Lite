@@ -1,22 +1,22 @@
 {
   "actual": {
     "T3": {
-      "memory_context_bytes_mean": 385,
-      "memory_eligible_tasks": 1,
-      "memory_empty_rate_among_observed": 0.0,
-      "memory_injected_total": 1,
-      "memory_latency_ms_mean": 19.566718000078254,
-      "memory_use_rate": 0.05,
-      "memory_used_tasks": 1
+      "memory_context_bytes_mean": 829.6923076923077,
+      "memory_eligible_tasks": 13,
+      "memory_empty_rate_among_observed": 0.35,
+      "memory_injected_total": 28,
+      "memory_latency_ms_mean": 12.961756950005565,
+      "memory_use_rate": 0.65,
+      "memory_used_tasks": 13
     },
     "T4": {
-      "memory_context_bytes_mean": 385,
-      "memory_eligible_tasks": 1,
-      "memory_empty_rate_among_observed": 0.0,
-      "memory_injected_total": 1,
-      "memory_latency_ms_mean": 19.495091999942815,
-      "memory_use_rate": 0.05,
-      "memory_used_tasks": 1
+      "memory_context_bytes_mean": 805.4545454545455,
+      "memory_eligible_tasks": 11,
+      "memory_empty_rate_among_observed": 0.44999999999999996,
+      "memory_injected_total": 23,
+      "memory_latency_ms_mean": 11.592465666669543,
+      "memory_use_rate": 0.55,
+      "memory_used_tasks": 11
     }
   },
   "candidate_counts": {

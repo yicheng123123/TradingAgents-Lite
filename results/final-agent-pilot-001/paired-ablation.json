@@ -1,5 +1,109 @@
 {
-  "admission": {},
-  "comparisons": {},
-  "scored": false
+  "admission": {
+    "T2": {
+      "PIT": true,
+      "alpha": true,
+      "citations": true,
+      "completion": true,
+      "nonhold": true,
+      "p95": true,
+      "paired": true,
+      "tokens": true
+    },
+    "T3": {
+      "PIT": true,
+      "alpha": false,
+      "citations": true,
+      "completion": true,
+      "nonhold": true,
+      "p95": true,
+      "paired": true,
+      "tokens": true
+    },
+    "T4": {
+      "PIT": true,
+      "alpha": true,
+      "citations": true,
+      "completion": true,
+      "nonhold": true,
+      "p95": false,
+      "paired": true,
+      "tokens": true
+    }
+  },
+  "comparisons": {
+    "T1-T0": {
+      "bootstrap_95_ci": [
+        -0.0013016430628607109,
+        0.01699829873987996
+      ],
+      "excluded_from_full_20": 0,
+      "exploratory": true,
+      "mean_alpha_difference": 0.006112405342892835,
+      "median_alpha_difference": 0.0,
+      "paired": 20,
+      "time_blocks": 12
+    },
+    "T2-T1": {
+      "bootstrap_95_ci": [
+        -0.007469243792656801,
+        0.010504759403905661
+      ],
+      "excluded_from_full_20": 0,
+      "exploratory": true,
+      "mean_alpha_difference": 0.0021526866954076295,
+      "median_alpha_difference": 0.0,
+      "paired": 20,
+      "time_blocks": 12
+    },
+    "T3-T1": {
+      "bootstrap_95_ci": [
+        -0.010209249805577573,
+        0.0010175248244029683
+      ],
+      "excluded_from_full_20": 0,
+      "exploratory": true,
+      "mean_alpha_difference": -0.0037641708819341146,
+      "median_alpha_difference": 0.0,
+      "paired": 20,
+      "time_blocks": 12
+    },
+    "T3-T2": {
+      "bootstrap_95_ci": [
+        -0.013945411602539502,
+        0.001373168968548888
+      ],
+      "excluded_from_full_20": 0,
+      "exploratory": true,
+      "mean_alpha_difference": -0.005916857577341744,
+      "median_alpha_difference": 0.0,
+      "paired": 20,
+      "time_blocks": 12
+    },
+    "T4-T1": {
+      "bootstrap_95_ci": [
+        -0.0019790052320916873,
+        0.01600633830779691
+      ],
+      "excluded_from_full_20": 2,
+      "exploratory": true,
+      "mean_alpha_difference": 0.004533191767694795,
+      "median_alpha_difference": 0.0,
+      "paired": 18,
+      "time_blocks": 12
+    },
+    "T4-T3": {
+      "bootstrap_95_ci": [
+        -0.0014976918950355361,
+        0.019142077270141077
+      ],
+      "excluded_from_full_20": 2,
+      "exploratory": true,
+      "mean_alpha_difference": 0.007088565779983045,
+      "median_alpha_difference": 0.0,
+      "paired": 18,
+      "time_blocks": 12
+    }
+  },
+  "scored": true
 }
