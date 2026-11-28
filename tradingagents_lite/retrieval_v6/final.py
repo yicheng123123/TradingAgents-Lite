@@ -7,15 +7,16 @@ import subprocess
 from time import perf_counter
 
 from ..data import sha256
-from ..embedding_v4 import BGEM3Encoder
+from ..embedding_v4 import BGEM3Encoder, MODEL_REVISION
 from ..rag import rrf
+from ..reranker_v3 import BGE_REVISION
 from ..retrieval_v4 import jsonl_read, legacy_rows, paired_comparison
 from ..vectors import LocalEmbedding
 from .engine import ROOT, SOURCE, V3_INDEX, V4_INDEX, M3, Search, fused, scope_fingerprint, union
 from .experiment import (ARCHIVE_V4, LEGACY_V3, LEGACY_V4, eligible_stop, export_phase, feature_map,
                          inputs, load_models, package, project, read, score_all, score_logits,
                          split_ids, write, write_rows)
-from .features import expansions, parse, rank
+from .features import METRICS, expansions, parse, rank
 from .scoring import select, summarize
 
 
@@ -265,7 +266,10 @@ def measure_deployment(args, choice):
 
 
 def fingerprints(work):
-    answer = {"inputs":inputs(), "code":{file.name:sha256(file) for file in Path(__file__).parent.glob("*.py")},
+    dictionary = json.dumps(METRICS, sort_keys=True, separators=(",",":")).encode()
+    answer = {"inputs":inputs(), "dictionary_sha256":hash_bytes(dictionary).hexdigest(),
+              "model_revisions":{"bge_small":LocalEmbedding.REVISION,"bge_m3":MODEL_REVISION,"reranker":BGE_REVISION},
+              "code":{file.name:sha256(file) for file in Path(__file__).parent.glob("*.py")},
               "references":{name:sha256(ROOT/"tradingagents_lite"/name) for name in (
                   "retrieval_v4.py","retrieval_v3.py","reranker_v3.py","rag.py","evidence.py","embedding_v4.py",
                   "rag_benchmark.py","retrieval_v2_chunks.py","vectors.py")}}
