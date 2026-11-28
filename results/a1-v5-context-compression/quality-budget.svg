@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="510" viewBox="0 0 1040 510">
+<rect width="100%" height="100%" fill="#0B101A"/>
+<text x="84" y="42" fill="#E6EDF7" font-family="sans-serif" font-size="22" font-weight="700">Calibration · delivered page recall</text>
+<text x="84" y="68" fill="#94A3B8" font-family="sans-serif" font-size="13">49 Calibration questions · fixed S3 Top-5 · 35% first-turn reserve</text>
+<line x1="84" y1="405.0" x2="964" y2="405.0" stroke="#273244"/>
+<text x="72" y="409.0" text-anchor="end" fill="#94A3B8" font-family="monospace" font-size="12">0%</text>
+<line x1="84" y1="330.0" x2="964" y2="330.0" stroke="#273244"/>
+<text x="72" y="334.0" text-anchor="end" fill="#94A3B8" font-family="monospace" font-size="12">25%</text>
+<line x1="84" y1="255.0" x2="964" y2="255.0" stroke="#273244"/>
+<text x="72" y="259.0" text-anchor="end" fill="#94A3B8" font-family="monospace" font-size="12">50%</text>
+<line x1="84" y1="180.0" x2="964" y2="180.0" stroke="#273244"/>
+<text x="72" y="184.0" text-anchor="end" fill="#94A3B8" font-family="monospace" font-size="12">75%</text>
+<line x1="84" y1="105.0" x2="964" y2="105.0" stroke="#273244"/>
+<text x="72" y="109.0" text-anchor="end" fill="#94A3B8" font-family="monospace" font-size="12">100%</text>
+<line x1="84" y1="105" x2="84" y2="405" stroke="#536174"/>
+<line x1="84" y1="405" x2="964" y2="405" stroke="#536174"/>
+<text x="84" y="429" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">1,040</text>
+<text x="964" y="429" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">2,080</text>
+<text x="524.0" y="452" text-anchor="middle" fill="#94A3B8" font-family="sans-serif" font-size="13">Context budget / first-turn capacity (bytes)</text>
+<polyline points="84,340.7142857142857 964,303.9795918367347" fill="none" stroke="#748094" stroke-width="2.5"/>
+<circle cx="84" cy="340.7142857142857" r="4.5" fill="#748094"/>
+<circle cx="964" cy="303.9795918367347" r="4.5" fill="#748094"/>
+<line x1="84" y1="468" x2="104" y2="468" stroke="#748094" stroke-width="3"/>
+<text x="111" y="472" fill="#C8D3E2" font-family="sans-serif" font-size="11">C0 · raw prefix</text>
+<polyline points="84,300.9183673469388 964,294.795918367347" fill="none" stroke="#38BDF8" stroke-width="2.5"/>
+<circle cx="84" cy="300.9183673469388" r="4.5" fill="#38BDF8"/>
+<circle cx="964" cy="294.795918367347" r="4.5" fill="#38BDF8"/>
+<line x1="384" y1="468" x2="404" y2="468" stroke="#38BDF8" stroke-width="3"/>
+<text x="411" y="472" fill="#C8D3E2" font-family="sans-serif" font-size="11">C1 · query-aware</text>
+<polyline points="84,310.1020408163265 964,285.61224489795916" fill="none" stroke="#FBBF24" stroke-width="2.5"/>
+<circle cx="84" cy="310.1020408163265" r="4.5" fill="#FBBF24"/>
+<circle cx="964" cy="285.61224489795916" r="4.5" fill="#FBBF24"/>
+<line x1="684" y1="468" x2="704" y2="468" stroke="#FBBF24" stroke-width="3"/>
+<text x="711" y="472" fill="#C8D3E2" font-family="sans-serif" font-size="11">C2 · BGE-M3 extractive</text>
+<polyline points="84,310.1020408163265 964,285.61224489795916" fill="none" stroke="#A78BFA" stroke-width="2.5"/>
+<circle cx="84" cy="310.1020408163265" r="4.5" fill="#A78BFA"/>
+<circle cx="964" cy="285.61224489795916" r="4.5" fill="#A78BFA"/>
+<line x1="84" y1="486" x2="104" y2="486" stroke="#A78BFA" stroke-width="3"/>
+<text x="111" y="490" fill="#C8D3E2" font-family="sans-serif" font-size="11">C3 · MMR λ=0.80</text>
+<polyline points="84,346.8367346938776 964,328.46938775510205" fill="none" stroke="#34D399" stroke-width="2.5"/>
+<circle cx="84" cy="346.8367346938776" r="4.5" fill="#34D399"/>
+<circle cx="964" cy="328.46938775510205" r="4.5" fill="#34D399"/>
+<line x1="384" y1="486" x2="404" y2="486" stroke="#34D399" stroke-width="3"/>
+<text x="411" y="490" fill="#C8D3E2" font-family="sans-serif" font-size="11">C4 · header/global λ=0.65</text>
+<text x="84" y="504" fill="#64748B" font-family="sans-serif" font-size="10">Source: calibration-summary.json; archived metrics, no synthetic datapoints</text>
+</svg>

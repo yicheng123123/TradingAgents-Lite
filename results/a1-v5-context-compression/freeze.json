@@ -1,0 +1,129 @@
+{
+  "base_commit": "8b561a9d28b23aba73f2ecb900b1e757f89c8027",
+  "branch": "experiment/a1-v5-context-compression",
+  "budgets_bytes": [
+    3200,
+    1600
+  ],
+  "calibration": {
+    "inputs_sha256": "e619a9d2feb4cad62f75a00012a661cb86edaadd327bf677e7fc2d4dca42f77d",
+    "labels_sha256": "691ff1de10d98d240a107a7cbd965945cff00482fd3e96d5a85762d8603c3091",
+    "n": 49,
+    "rows_sha256": "5ea4381bf7d20333865308c5b7c063944f5912b746788affaeef6b7a1e5fd69c",
+    "summary_sha256": "99b0b27bc47c7d9d0edaf657e79a8edd01699b927b21093f96efd9ac0e61e38c"
+  },
+  "calibration_selection": {
+    "best_c3_mmr_lambda": 0.8,
+    "best_c4_mmr_lambda": 0.65,
+    "best_new": {
+      "arm": "C4",
+      "mmr_lambda": 0.65
+    },
+    "best_new_metrics_key": "C4|lambda=0.65|budget=3200",
+    "best_overall": {
+      "arm": "C1",
+      "mmr_lambda": null
+    },
+    "best_overall_metrics_key": "C1|budget=3200",
+    "compression_space_saved_vs_c1_bytes": 12.061224489795904,
+    "top10_expansion_triggered": false,
+    "top10_trigger_rule": "Best new config saves >=100 serialized context bytes vs C1 and does not lower delivered page recall."
+  },
+  "experiment": "A1-V5 Financial RAG Context Compression",
+  "fingerprints": {
+    "base_commit": "8b561a9d28b23aba73f2ecb900b1e757f89c8027",
+    "branch": "experiment/a1-v5-context-compression",
+    "budgets": [
+      3200,
+      1600
+    ],
+    "calibration_n": 49,
+    "candidate_k": 5,
+    "fingerprints": {
+      "candidate_input_sha256": "6095e13a78ad3591c691ffb5dc48e6d6d9b8bcb24da9d5a2d0cd126c00ab32a1",
+      "n": 49,
+      "s3_results_sha256": "016cabc54373764d6f9404a69d5f935e07397ff61135e14429228409934ca21d",
+      "s3_trace_sha256": "a35939ba209c3c0aedf3c9aef555f8952aa6db84b8a862499e2b623af82f5a7a",
+      "source_sha256": "a5a2aa673e573e55675fc3c0f9aa38c1cf59d2abc91edb077534f71f10a71877"
+    },
+    "followup_reserve": 0.35,
+    "glm_requests": 0,
+    "glm_tokens": 0,
+    "index_sha256": {
+      "chunks-encoder.json": "53903c6d597e7cd702937a037b49f6a6e2a34508ecf8f7174ac1ae2defeed811",
+      "collection/chunks/storage.sqlite": "6a46bb273cb0dd64da517d510d9ba1351d039d997865c5d114cf7ec3d0801409",
+      "meta.json": "e7f6534d40c0f33720da30d56668f1524f4f54344fcd2ac712bcd23932740b73"
+    },
+    "inputs_sha256": "e619a9d2feb4cad62f75a00012a661cb86edaadd327bf677e7fc2d4dca42f77d",
+    "labels_sha256": "691ff1de10d98d240a107a7cbd965945cff00482fd3e96d5a85762d8603c3091",
+    "max_request_bytes": 8000,
+    "model_sha256": {
+      "1_Pooling/config.json": "e54c164a07274f2eb45bb724f54a79d1efcc90c41573887cd9a29aeee0597352",
+      "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+      "config_sentence_transformers.json": "1eef72430e7194a1e59680e635aed81ffa083f05668dbc5bb1c56c04c0999c38",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+      "onnx/config.json": "f24afd5de914fba8c668426c43d208a1a54022500c63b2c160be20891686fce8",
+      "onnx/sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+      "onnx/special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "onnx/tokenizer.json": "6710678b12670bc442b99edc952c4d996ae309a7020c1fa0096dd245c2faf790",
+      "onnx/tokenizer_config.json": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4",
+      "pytorch_model.bin": "b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38",
+      "sentence_bert_config.json": "eb9b44b13c0f52a3b3685c3b1cbdea1ba8b04bea123b98f61610048940776eb1",
+      "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+      "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "tokenizer.json": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+      "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+    },
+    "private_test_or_v3_holdout_accessed": false,
+    "schema": "a1-v5-inputs",
+    "test_data_opened": false,
+    "v3_freeze_sha256": "dd00c90dc3a0ce65bba15bf6321b9a1e25a3eb9b711709ba19abe979161bb2b7",
+    "v4_freeze_sha256": "e40d6d1c1a67da7e4b197ea08ad141e2a6273ea85d47b36663b18e72d166ea7f"
+  },
+  "fixed_retrieval": {
+    "baseline": "A1-V3 S3",
+    "candidate_count": 5,
+    "query": "original FinanceBench question"
+  },
+  "followup_reserve_ratio": 0.35,
+  "formal_test_plan": {
+    "arms": [
+      "C1",
+      "frozen selected compression"
+    ],
+    "budgets_bytes": [
+      3200,
+      1600
+    ],
+    "n": 99
+  },
+  "glm_requests": 0,
+  "glm_tokens": 0,
+  "max_request_bytes": 8000,
+  "mmr_grid": [
+    0.35,
+    0.5,
+    0.65,
+    0.8
+  ],
+  "private_test_or_v3_holdout_accessed": false,
+  "schema": "a1-v5-context-compression-freeze",
+  "selected_configuration": {
+    "arm": "C4",
+    "mmr_lambda": 0.65
+  },
+  "source_code_sha256": {
+    "tests/test_financebench_compression_v5.py": "8e93c5372882a81e4be2312075596e8f72f6cf8a255febedc4e31c834aaa2190",
+    "tradingagents_lite/embedding_v4.py": "b8f90e8d672d582cab27152fd4d283e7e946b29361aac10786bd0587eb81c55b",
+    "tradingagents_lite/financebench.py": "e6118cb9fe415c8465acc258d56bf2c0807cbfbf35597fe6a51ef598c2f9ef51",
+    "tradingagents_lite/financebench_compression_v5.py": "9e8c1e0b1a8136f86d8fa9d6b20cd5580b43900b7cb2aeeca5d18a4bb995f543"
+  },
+  "test_data_opened": false,
+  "top10_expansion": {
+    "candidate_expansion_contribution": null,
+    "compression_contribution": null,
+    "executed": false,
+    "reason": "skipped: no >=100-byte saving against C1 at non-inferior page recall",
+    "trigger": false
+  }
+}
