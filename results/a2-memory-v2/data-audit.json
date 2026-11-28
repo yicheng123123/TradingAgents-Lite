@@ -1,0 +1,135 @@
+{
+  "episode_count": 100,
+  "inputs": [
+    {
+      "archive_sha256": "40692ae059ed18b19e0cdd6e294362739baab6ed984ac80c33b00b4b61cf5292",
+      "market_manifest_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+      "source": "A2 historical M3 archived offline MomentumBackend",
+      "tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae"
+    },
+    {
+      "bars_prefix_sha256": {
+        "AAPL": "879f1b0a66c8b09793c97a380d04dde4c976798259aa85a161db05e0724e0873",
+        "AMD": "0dc950f0753d858645bc5c8c4e4a084fddbd6f491ff718c9b99ef493a61fe6fd",
+        "AMZN": "2cfdca7fe488af29de2a7c902d1f6052fce48a705bc1be326364c4f7aabbfecb",
+        "BA": "bc026dfe1ece29ff358ebafef8543790f228bae9ba2c4677b4069b4dcce552d1",
+        "BAC": "896f869773b562226186fae652d15a7110f30e215dad3e5d5d8ce4c5b4ba5bd3",
+        "CAT": "77f62e0b30a3b46ba9112d14756a6881611b67792ef351f634755fc9471440d2",
+        "CVX": "5dedc614410ca6edb03f099a2e30e80dae0dd3a838059ec570c6582241d7329e",
+        "GOOGL": "d86b84fe26d75ca8e51756511d6c376bb1fc7335955443374ad5abfa188d744b",
+        "GS": "153a9420cb10b78005d33f2df7fab99a797559610fa50cd6e2bc104cf889e16c",
+        "JNJ": "ccd8b65ca4f6fe66866d01350186946319bad76f7a49d7e2417ec8dd2c8e1ea6",
+        "JPM": "87eaa7e30b18f435fd413853b534b983eac1d45a5523332ba0702820599229a8",
+        "KO": "f3601fe7fd66db07fb7a6743e4a9f08f556e55862d0f1dd00887603ada1e96f4",
+        "META": "0f6c7e9f63ec0090585df7e8638c0decf6e7a647b507253f659afb1e91f1ba71",
+        "MSFT": "cdbee6d51898842dbd26a531ebb223516d9e7865ef44012e7044eff508c1e048",
+        "NVDA": "cc124663f929889110b3fdc6e5e336250794fb8ae662b5345edb71b0208c1b2f",
+        "PFE": "f90545d44a60970b99cd194edb290cdcd7caa7012e52c864ea1165cfc7194bcb",
+        "SPY": "10c943854fe355ab9a23b819a9b16122f3151cf5107f1748c93cc94ef510ee5f",
+        "TSLA": "494d6a0a556139af1d54c0a897d890ac4729211bc77251a9318301c72e4eb5c6",
+        "UNH": "d54bf4f9305b67b9055c2b20c1a271f9c42a718099c80050fd280bd5a797223a",
+        "WMT": "6ca787ca6e998637fb131477aeda65423b93e1511c2b01bb7bf8c7528edd1fd3",
+        "XOM": "e2baf38830c923462f718089fe3c5412e66521538e30618ac346d7c10254d3b8"
+      },
+      "last_read_market_date": "2026-08-07",
+      "manifest_sha256": "b432387175f12f949344cfce1b96c68be37e2e9e94779ffe39779169bd37e08e",
+      "source": "V3 Development retrospective vendor bars with offline MomentumBackend replay",
+      "tasks_sha256": "2453f2785cc81504dee71c5656efd071a5e2daa87b1824dfa185e3aa58148b4b"
+    }
+  ],
+  "queries": {
+    "calibration/a2-development": {
+      "cross_ticker_candidates_excluded": 24,
+      "empty": 0,
+      "empty_fraction": 0.0,
+      "first_decision": "2024-03-05",
+      "histogram": {
+        "3": 2,
+        "4": 2,
+        "5": 2
+      },
+      "last_decision": "2024-03-19",
+      "legacy_relevant_queries": 5,
+      "more_than_three": 4,
+      "one_to_three": 2,
+      "queries": 6,
+      "relevant_queries": 5,
+      "same_ticker_candidates": 24
+    },
+    "calibration/v3-development": {
+      "cross_ticker_candidates_excluded": 942,
+      "empty": 0,
+      "empty_fraction": 0.0,
+      "first_decision": "2026-03-06",
+      "histogram": {
+        "1": 16,
+        "2": 12
+      },
+      "last_decision": "2026-05-18",
+      "legacy_relevant_queries": 13,
+      "more_than_three": 0,
+      "one_to_three": 28,
+      "queries": 28,
+      "relevant_queries": 13,
+      "same_ticker_candidates": 40
+    },
+    "validation/a2-development": {
+      "cross_ticker_candidates_excluded": 60,
+      "empty": 0,
+      "empty_fraction": 0.0,
+      "first_decision": "2024-03-26",
+      "histogram": {
+        "6": 2,
+        "7": 2,
+        "8": 2,
+        "9": 2
+      },
+      "last_decision": "2024-04-16",
+      "legacy_relevant_queries": 8,
+      "more_than_three": 8,
+      "one_to_three": 0,
+      "queries": 8,
+      "relevant_queries": 8,
+      "same_ticker_candidates": 60
+    },
+    "validation/v3-development": {
+      "cross_ticker_candidates_excluded": 1703,
+      "empty": 0,
+      "empty_fraction": 0.0,
+      "first_decision": "2026-05-22",
+      "histogram": {
+        "2": 8,
+        "3": 20
+      },
+      "last_decision": "2026-07-30",
+      "legacy_relevant_queries": 21,
+      "more_than_three": 0,
+      "one_to_three": 28,
+      "queries": 28,
+      "relevant_queries": 21,
+      "same_ticker_candidates": 76
+    }
+  },
+  "relevance": {
+    "grades": "3=same momentum and risk regimes; 2=same momentum only; 1=same risk only; 0=neither",
+    "legacy": "same ticker and action, scoring only",
+    "relevant": "grade >= 2",
+    "type": "rule regime proxy"
+  },
+  "sealed_gold_accessed": false,
+  "splits": {
+    "calibration": {
+      "a2-development": 6,
+      "v3-development": 28
+    },
+    "validation": {
+      "a2-development": 8,
+      "v3-development": 28
+    },
+    "warmup": {
+      "a2-development": 6,
+      "v3-development": 24
+    }
+  },
+  "synthetic_mixed_into_historical": false
+}

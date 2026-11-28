@@ -1,0 +1,28 @@
+{
+  "c4_trigger_fraction": 0.17647058823529413,
+  "compression": [
+    "C1",
+    1800
+  ],
+  "compression_modes": [
+    "C0",
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "protocol_sha256": "cee56b5ad683c64bad5676d1b4f07ee4deb2da5008c327bd379ba18ae691ac86",
+  "ranking": {
+    "best_exploratory": [
+      "E2",
+      "R0"
+    ],
+    "calibration_gate_passed": false,
+    "config": [
+      "E0",
+      "R4"
+    ],
+    "queries_with_gt3_and_relevant": 3
+  },
+  "validation_evaluated": false
+}

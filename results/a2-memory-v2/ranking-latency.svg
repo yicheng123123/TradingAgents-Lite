@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" role="img">
+<title>Warm memory query latency</title>
+<rect width="920" height="470" fill="#fafbfc"/>
+<text x="92.0" y="34.0" fill="#1a2637" font-size="21" text-anchor="start" font-family="system-ui,sans-serif">Warm memory query latency</text>
+<text x="92.0" y="56.0" fill="#546376" font-size="13" text-anchor="start" font-family="system-ui,sans-serif">Development Validation · 36 tasks · A2 and V3 development</text>
+<path d="M 92,363.0 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="367.0" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">0.0</text>
+<path d="M 92,291.5 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="295.5" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">5.7</text>
+<path d="M 92,220.0 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="224.0" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">11.4</text>
+<path d="M 92,148.5 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="152.5" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">17.1</text>
+<path d="M 92,77.0 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="81.0" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">22.8</text>
+<g transform="translate(19 220.0) rotate(-90)">
+<text x="0.0" y="0.0" fill="#1a2637" font-size="13" text-anchor="middle" font-family="system-ui,sans-serif">Latency (ms)</text>
+</g>
+<text x="170.4" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">R0</text>
+<text x="327.2" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">R1</text>
+<text x="484.0" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">R2</text>
+<text x="640.8" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">R3</text>
+<text x="797.6" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">R4</text>
+<text x="484.0" y="408.0" fill="#1a2637" font-size="13" text-anchor="middle" font-family="system-ui,sans-serif">Ranking mode · fixed E0</text>
+<rect x="114.0" y="212.6" width="54.4" height="150.4" fill="#1d4ed8"><title>Mean 11.973</title></rect>
+<rect x="270.8" y="176.9" width="54.4" height="186.1" fill="#1d4ed8"><title>Mean 14.818</title></rect>
+<rect x="427.6" y="176.9" width="54.4" height="186.1" fill="#1d4ed8"><title>Mean 14.817</title></rect>
+<rect x="584.4" y="176.9" width="54.4" height="186.1" fill="#1d4ed8"><title>Mean 14.815</title></rect>
+<rect x="741.2" y="176.9" width="54.4" height="186.1" fill="#1d4ed8"><title>Mean 14.813</title></rect>
+<rect x="92" y="422" width="14" height="11" fill="#1d4ed8"/>
+<text x="112.0" y="432.0" fill="#1a2637" font-size="12" text-anchor="start" font-family="system-ui,sans-serif">Mean</text>
+<rect x="170.4" y="150.9" width="54.4" height="212.1" fill="#087f75"><title>P95 16.888</title></rect>
+<rect x="327.2" y="107.6" width="54.4" height="255.4" fill="#087f75"><title>P95 20.329</title></rect>
+<rect x="484.0" y="107.7" width="54.4" height="255.3" fill="#087f75"><title>P95 20.327</title></rect>
+<rect x="640.8" y="107.7" width="54.4" height="255.3" fill="#087f75"><title>P95 20.323</title></rect>
+<rect x="797.6" y="107.7" width="54.4" height="255.3" fill="#087f75"><title>P95 20.321</title></rect>
+<rect x="245" y="422" width="14" height="11" fill="#087f75"/>
+<text x="265.0" y="432.0" fill="#1a2637" font-size="12" text-anchor="start" font-family="system-ui,sans-serif">P95</text>
+<text x="92.0" y="456.0" fill="#546376" font-size="11" text-anchor="start" font-family="system-ui,sans-serif">Source: results/a2-memory-v2/summary.json · proxy labels</text>
+</svg>

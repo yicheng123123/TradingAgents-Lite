@@ -1,0 +1,224 @@
+{
+  "groups": {
+    "calibration/E0/R1": {
+      "delivered_recall_c1": 0.9166666666666666,
+      "latency_ms": 10.552731176530601,
+      "mrr": 0.7361111111111112,
+      "n": 34,
+      "ndcg@3": 0.9037659614658212,
+      "ndcg_defined_n": 34,
+      "old_recall@1": 0.5,
+      "old_recall@3": 0.9166666666666666,
+      "old_recall@5": 1.0,
+      "oracle_recall": 1.0,
+      "p95_ms": 17.32754899990141,
+      "positive_n": 18,
+      "recall@1": 0.5,
+      "recall@3": 0.9166666666666666,
+      "recall@5": 1.0,
+      "scope_ms": 7.8729613823778735,
+      "vector_ms": 2.6684905588501135
+    },
+    "calibration/E1/R1": {
+      "delivered_recall_c1": 0.9166666666666666,
+      "latency_ms": 9.329241382408114,
+      "mrr": 0.7240740740740741,
+      "n": 34,
+      "ndcg@3": 0.9030810078215274,
+      "ndcg_defined_n": 34,
+      "old_recall@1": 0.4722222222222222,
+      "old_recall@3": 0.9166666666666666,
+      "old_recall@5": 1.0,
+      "oracle_recall": 1.0,
+      "p95_ms": 14.0357299999323,
+      "positive_n": 18,
+      "recall@1": 0.4722222222222222,
+      "recall@3": 0.9166666666666666,
+      "recall@5": 1.0,
+      "scope_ms": 7.8729613823778735,
+      "vector_ms": 1.4454527647223907
+    },
+    "calibration/E2/R1": {
+      "delivered_recall_c1": 0.8888888888888888,
+      "latency_ms": 9.3224216470911,
+      "mrr": 0.8333333333333334,
+      "n": 34,
+      "ndcg@3": 0.9296696044448018,
+      "ndcg_defined_n": 34,
+      "old_recall@1": 0.6944444444444444,
+      "old_recall@3": 0.8888888888888888,
+      "old_recall@5": 1.0,
+      "oracle_recall": 1.0,
+      "p95_ms": 13.978278000195132,
+      "positive_n": 18,
+      "recall@1": 0.6944444444444444,
+      "recall@3": 0.8888888888888888,
+      "recall@5": 1.0,
+      "scope_ms": 7.8729613823778735,
+      "vector_ms": 1.4395326470682501
+    },
+    "validation/E0/R1": {
+      "delivered_recall_c1": 0.9022988505747126,
+      "latency_ms": 14.817705555534152,
+      "mrr": 0.725287356321839,
+      "n": 36,
+      "ndcg@3": 0.8250448095035822,
+      "ndcg_defined_n": 35,
+      "old_recall@1": 0.27873563218390807,
+      "old_recall@3": 0.9022988505747126,
+      "old_recall@5": 0.9396551724137931,
+      "oracle_recall": 1.0,
+      "p95_ms": 20.329067000147916,
+      "positive_n": 29,
+      "recall@1": 0.2959770114942529,
+      "recall@3": 0.9022988505747126,
+      "recall@5": 0.9396551724137931,
+      "scope_ms": 11.941313777785783,
+      "vector_ms": 2.8574822499712758
+    },
+    "validation/E1/R1": {
+      "delivered_recall_c1": 0.896551724137931,
+      "latency_ms": 14.026249666686555,
+      "mrr": 0.6896551724137931,
+      "n": 36,
+      "ndcg@3": 0.8143297849773075,
+      "ndcg_defined_n": 35,
+      "old_recall@1": 0.27586206896551724,
+      "old_recall@3": 0.896551724137931,
+      "old_recall@5": 0.9568965517241379,
+      "oracle_recall": 1.0,
+      "p95_ms": 20.777223999857597,
+      "positive_n": 29,
+      "recall@1": 0.29310344827586204,
+      "recall@3": 0.896551724137931,
+      "recall@5": 0.9568965517241379,
+      "scope_ms": 11.941313777785783,
+      "vector_ms": 2.0687816110896367
+    },
+    "validation/E2/R1": {
+      "delivered_recall_c1": 0.7902298850574713,
+      "latency_ms": 13.974597833320482,
+      "mrr": 0.7655172413793103,
+      "n": 36,
+      "ndcg@3": 0.8074852674149935,
+      "ndcg_defined_n": 35,
+      "old_recall@1": 0.35344827586206895,
+      "old_recall@3": 0.7902298850574713,
+      "old_recall@5": 0.9511494252873564,
+      "oracle_recall": 1.0,
+      "p95_ms": 19.717097000011563,
+      "positive_n": 29,
+      "recall@1": 0.3706896551724138,
+      "recall@3": 0.7902298850574713,
+      "recall@5": 0.9511494252873564,
+      "scope_ms": 11.941313777785783,
+      "vector_ms": 2.0163464444383155
+    }
+  },
+  "index_build": {
+    "validation_append": {
+      "consistency": {
+        "E0": {
+          "mismatched": [],
+          "missing": [],
+          "orphaned": []
+        },
+        "E1": {
+          "mismatched": [],
+          "missing": [],
+          "orphaned": []
+        },
+        "E2": {
+          "mismatched": [],
+          "missing": [],
+          "orphaned": []
+        }
+      },
+      "index_and_sqlite_ms": 1538.5956210000131,
+      "representations": {
+        "E0": {
+          "cached_or_batch_reused": 3,
+          "cold_misses": 33,
+          "documents": 36,
+          "encode_ms": 206.68238600001132,
+          "max_input_tokens": 42,
+          "mean_input_tokens": 41.02777777777778,
+          "truncated": 0,
+          "unique": 35
+        },
+        "E1": {
+          "cached_or_batch_reused": 3,
+          "cold_misses": 33,
+          "documents": 36,
+          "encode_ms": 267.97123599999395,
+          "max_input_tokens": 59,
+          "mean_input_tokens": 57.69444444444444,
+          "truncated": 0,
+          "unique": 35
+        },
+        "E2": {
+          "cached_or_batch_reused": 0,
+          "cold_misses": 36,
+          "documents": 36,
+          "encode_ms": 427.2270840001511,
+          "max_input_tokens": 79,
+          "mean_input_tokens": 76.02777777777777,
+          "truncated": 0,
+          "unique": 36
+        }
+      }
+    },
+    "warmup_calibration": {
+      "consistency": {
+        "E0": {
+          "mismatched": [],
+          "missing": [],
+          "orphaned": []
+        },
+        "E1": {
+          "mismatched": [],
+          "missing": [],
+          "orphaned": []
+        },
+        "E2": {
+          "mismatched": [],
+          "missing": [],
+          "orphaned": []
+        }
+      },
+      "index_and_sqlite_ms": 2649.9808870000834,
+      "representations": {
+        "E0": {
+          "cached_or_batch_reused": 2,
+          "cold_misses": 62,
+          "documents": 64,
+          "encode_ms": 378.05963300002077,
+          "max_input_tokens": 43,
+          "mean_input_tokens": 41.125,
+          "truncated": 0,
+          "unique": 62
+        },
+        "E1": {
+          "cached_or_batch_reused": 2,
+          "cold_misses": 62,
+          "documents": 64,
+          "encode_ms": 546.0258789998989,
+          "max_input_tokens": 60,
+          "mean_input_tokens": 58.125,
+          "truncated": 0,
+          "unique": 62
+        },
+        "E2": {
+          "cached_or_batch_reused": 0,
+          "cold_misses": 64,
+          "documents": 64,
+          "encode_ms": 726.7327780000414,
+          "max_input_tokens": 80,
+          "mean_input_tokens": 76.453125,
+          "truncated": 0,
+          "unique": 64
+        }
+      }
+    }
+  }
+}

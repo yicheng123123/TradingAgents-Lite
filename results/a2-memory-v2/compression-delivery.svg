@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" role="img">
+<title>Context size and experience delivery</title>
+<rect width="920" height="470" fill="#fafbfc"/>
+<text x="92.0" y="34.0" fill="#1a2637" font-size="21" text-anchor="start" font-family="system-ui,sans-serif">Context size and experience delivery</text>
+<text x="92.0" y="56.0" fill="#546376" font-size="13" text-anchor="start" font-family="system-ui,sans-serif">Development Validation · 36 tasks · A2 and V3 development</text>
+<path d="M 92,363.0 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="367.0" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">0.0</text>
+<path d="M 92,291.5 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="295.5" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">0.3</text>
+<path d="M 92,220.0 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="224.0" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">0.6</text>
+<path d="M 92,148.5 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="152.5" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">0.9</text>
+<path d="M 92,77.0 h 784" stroke="#d8dfe8"/>
+<text x="83.0" y="81.0" fill="#1a2637" font-size="12" text-anchor="end" font-family="system-ui,sans-serif">1.2</text>
+<g transform="translate(19 220.0) rotate(-90)">
+<text x="0.0" y="0.0" fill="#1a2637" font-size="13" text-anchor="middle" font-family="system-ui,sans-serif">Fraction of reference (0–1.25)</text>
+</g>
+<text x="170.4" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">C0</text>
+<text x="327.2" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">C1</text>
+<text x="484.0" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">C2</text>
+<text x="640.8" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">C3</text>
+<text x="797.6" y="384.0" fill="#1a2637" font-size="12" text-anchor="middle" font-family="system-ui,sans-serif">C4</text>
+<text x="484.0" y="408.0" fill="#1a2637" font-size="13" text-anchor="middle" font-family="system-ui,sans-serif">Compression variant · 1800 bytes</text>
+<rect x="114.0" y="193.5" width="54.4" height="169.5" fill="#1d4ed8"><title>Bytes / raw bytes 0.741</title></rect>
+<rect x="270.8" y="219.9" width="54.4" height="143.1" fill="#1d4ed8"><title>Bytes / raw bytes 0.625</title></rect>
+<rect x="427.6" y="117.6" width="54.4" height="245.4" fill="#1d4ed8"><title>Bytes / raw bytes 1.073</title></rect>
+<rect x="584.4" y="117.5" width="54.4" height="245.5" fill="#1d4ed8"><title>Bytes / raw bytes 1.073</title></rect>
+<rect x="741.2" y="118.3" width="54.4" height="244.7" fill="#1d4ed8"><title>Bytes / raw bytes 1.070</title></rect>
+<rect x="92" y="422" width="14" height="11" fill="#1d4ed8"/>
+<text x="112.0" y="432.0" fill="#1a2637" font-size="12" text-anchor="start" font-family="system-ui,sans-serif">Bytes / raw bytes</text>
+<rect x="170.4" y="198.3" width="54.4" height="164.7" fill="#087f75"><title>Delivered / selected 0.720</title></rect>
+<rect x="327.2" y="134.2" width="54.4" height="228.8" fill="#087f75"><title>Delivered / selected 1.000</title></rect>
+<rect x="484.0" y="198.3" width="54.4" height="164.7" fill="#087f75"><title>Delivered / selected 0.720</title></rect>
+<rect x="640.8" y="198.3" width="54.4" height="164.7" fill="#087f75"><title>Delivered / selected 0.720</title></rect>
+<rect x="797.6" y="134.2" width="54.4" height="228.8" fill="#087f75"><title>Delivered / selected 1.000</title></rect>
+<rect x="245" y="422" width="14" height="11" fill="#087f75"/>
+<text x="265.0" y="432.0" fill="#1a2637" font-size="12" text-anchor="start" font-family="system-ui,sans-serif">Delivered / selected</text>
+<text x="92.0" y="456.0" fill="#546376" font-size="11" text-anchor="start" font-family="system-ui,sans-serif">Source: results/a2-memory-v2/summary.json · proxy labels</text>
+</svg>

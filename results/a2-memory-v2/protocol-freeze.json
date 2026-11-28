@@ -1,0 +1,236 @@
+{
+  "base_commit": "341c4414cb9e4cccc12dc2909e98183ef8479f94",
+  "code_sha256": {
+    "__init__.py": "cb40bf8b7218b4673d158ab4c8169a8952f6553b633a05218ecd872d845e911f",
+    "benchmark.py": "2bc300b55ad736f4c7429b5a36447d36ea45c5d55265629ef23cdc8750fbd80a",
+    "compression.py": "456c7a7ad0a6e3e0db272e8a60a7fe313b4d3ceac5360447f20ed865a0d81521",
+    "dataset.py": "689391fb7210f7971a726569d6e8f2e73a7b5e4f8bfc9612d3a20a0a349a7c1d",
+    "evaluation.py": "7a92592c19b09ebff3b5a0fab2b25650e1d9a0c96f3119b9776c3fec15741a3c",
+    "exports.py": "4466c44eeded9a73137d3b249724707d955b17fce45e955e40dc1d37c43aad65",
+    "reflection.py": "fec47c66d86561a236a251797f2ac8cd7da4411b4cb74ba19cec74f0cf9d9c57",
+    "retrieval.py": "bc6a8129f6009179d67033d115ae93ce9554dad1cf36f7338b9d3b4eee127996"
+  },
+  "concurrency": 1,
+  "environment": {
+    "load_average_start": [
+      0.42529296875,
+      0.6591796875,
+      0.3876953125
+    ],
+    "logical_cpus": 16
+  },
+  "glm_requests": 0,
+  "glm_tokens": 0,
+  "inputs": [
+    {
+      "archive_sha256": "40692ae059ed18b19e0cdd6e294362739baab6ed984ac80c33b00b4b61cf5292",
+      "market_manifest_sha256": "f5e4c5095953ce737b7b99bba71b2ad26a9f30d2f34b9fba8320027e46e0f3cb",
+      "source": "A2 historical M3 archived offline MomentumBackend",
+      "tasks_sha256": "2d0e4f92d583d64ceba729b4e3ffa0004b3bd29a5a00d990434dcdab5fceedae"
+    },
+    {
+      "bars_prefix_sha256": {
+        "AAPL": "879f1b0a66c8b09793c97a380d04dde4c976798259aa85a161db05e0724e0873",
+        "AMD": "0dc950f0753d858645bc5c8c4e4a084fddbd6f491ff718c9b99ef493a61fe6fd",
+        "AMZN": "2cfdca7fe488af29de2a7c902d1f6052fce48a705bc1be326364c4f7aabbfecb",
+        "BA": "bc026dfe1ece29ff358ebafef8543790f228bae9ba2c4677b4069b4dcce552d1",
+        "BAC": "896f869773b562226186fae652d15a7110f30e215dad3e5d5d8ce4c5b4ba5bd3",
+        "CAT": "77f62e0b30a3b46ba9112d14756a6881611b67792ef351f634755fc9471440d2",
+        "CVX": "5dedc614410ca6edb03f099a2e30e80dae0dd3a838059ec570c6582241d7329e",
+        "GOOGL": "d86b84fe26d75ca8e51756511d6c376bb1fc7335955443374ad5abfa188d744b",
+        "GS": "153a9420cb10b78005d33f2df7fab99a797559610fa50cd6e2bc104cf889e16c",
+        "JNJ": "ccd8b65ca4f6fe66866d01350186946319bad76f7a49d7e2417ec8dd2c8e1ea6",
+        "JPM": "87eaa7e30b18f435fd413853b534b983eac1d45a5523332ba0702820599229a8",
+        "KO": "f3601fe7fd66db07fb7a6743e4a9f08f556e55862d0f1dd00887603ada1e96f4",
+        "META": "0f6c7e9f63ec0090585df7e8638c0decf6e7a647b507253f659afb1e91f1ba71",
+        "MSFT": "cdbee6d51898842dbd26a531ebb223516d9e7865ef44012e7044eff508c1e048",
+        "NVDA": "cc124663f929889110b3fdc6e5e336250794fb8ae662b5345edb71b0208c1b2f",
+        "PFE": "f90545d44a60970b99cd194edb290cdcd7caa7012e52c864ea1165cfc7194bcb",
+        "SPY": "10c943854fe355ab9a23b819a9b16122f3151cf5107f1748c93cc94ef510ee5f",
+        "TSLA": "494d6a0a556139af1d54c0a897d890ac4729211bc77251a9318301c72e4eb5c6",
+        "UNH": "d54bf4f9305b67b9055c2b20c1a271f9c42a718099c80050fd280bd5a797223a",
+        "WMT": "6ca787ca6e998637fb131477aeda65423b93e1511c2b01bb7bf8c7528edd1fd3",
+        "XOM": "e2baf38830c923462f718089fe3c5412e66521538e30618ac346d7c10254d3b8"
+      },
+      "last_read_market_date": "2026-08-07",
+      "manifest_sha256": "b432387175f12f949344cfce1b96c68be37e2e9e94779ffe39779169bd37e08e",
+      "source": "V3 Development retrospective vendor bars with offline MomentumBackend replay",
+      "tasks_sha256": "2453f2785cc81504dee71c5656efd071a5e2daa87b1824dfa185e3aa58148b4b"
+    }
+  ],
+  "model": {
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "device": "CPUExecutionProvider",
+    "dimension": 384,
+    "max_model_tokens": 512,
+    "name": "Xenova/bge-small-en-v1.5",
+    "normalization": "CLS then L2",
+    "revision": "ea104dacec62c0de699686887e3f920caeb4f3e3",
+    "weight_hashes": {
+      "model_quantized.onnx": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    }
+  },
+  "rank_weights": {
+    "R0": [
+      0,
+      1,
+      0
+    ],
+    "R1": [
+      1,
+      0,
+      0
+    ],
+    "R2": [
+      0.75,
+      0.25,
+      0
+    ],
+    "R3": [
+      0.9,
+      0,
+      0.1
+    ],
+    "R4": [
+      0.65,
+      0.25,
+      0.1
+    ]
+  },
+  "reference_code_sha256": {
+    "data.py": "fbb3e279756b106b76d8cb53e1b799a8afe6ecc771631d79fcdca5c5451117da",
+    "memory.py": "f28fefeebd0a61666240127b9cc5459652f1b3b6848575783a149fc91dd45de9",
+    "vectors.py": "401a7606d3a3f3640abb6e703f84ac80c5d9312bb7dbea521221a2e2fd858a91",
+    "workflow.py": "e1fd55fcb4a2efb0df665f4910a7681f3764a9d557249f583f1530c449f2c0d0"
+  },
+  "relevance": {
+    "grades": "3=same momentum and risk regimes; 2=same momentum only; 1=same risk only; 0=neither",
+    "legacy": "same ticker and action, scoring only",
+    "relevant": "grade >= 2",
+    "type": "rule regime proxy"
+  },
+  "scope": "separate cohort partitions, same ticker, matured historical simulation",
+  "seed": 4202,
+  "selection_rule": {
+    "C4_trigger": "C2 or C3 delivers fewer whole records than C1 on >=10% of eligible Calibration queries at 1800 bytes",
+    "E3_X1_X2": "skip when candidate support or independent transfer labels are insufficient",
+    "compression": "safety and C1 lesson/recall parity plus quality gain at 1800 or 25% bytes saved at 900; tie by recall, lessons, bytes",
+    "promotion": ">=10 Calibration queries with >3 candidates and a relevant result, >=5% relative nDCG gain vs E0/R4, Recall@3 >= selected E/R1",
+    "ranking": "maximize Calibration nDCG@3 at selected representation; ties R0 to R4",
+    "representation": "maximize R1 nDCG@3 on Calibration; ties E0/E1/E2"
+  },
+  "splits": {
+    "calibration": [
+      "5c753ea815ab34bafc76",
+      "8261096ae9940c272dca",
+      "589282fbfc14fce1f303",
+      "9bcd7bdd1703ff82d3b7",
+      "bc6b84970458e10c187f",
+      "7c72f6a4adf585476862",
+      "7bc2bfb24f162fae45fe",
+      "1403fe6735d041c6c202",
+      "1a53f07d9e0c0227dd89",
+      "41ed2891643e62a49505",
+      "51285117fc3f9b5cd551",
+      "f001258f3a452338a409",
+      "0ea08914198506ba654a",
+      "f9d7115f9e4bd349d602",
+      "20cd66a42d88bb831ae7",
+      "f58d1355d51a5e5bc159",
+      "2a7963b1bc4d71477df4",
+      "67d0a0cc5b30c60f97df",
+      "ba3286ab1627a861f0f6",
+      "95c3412c8389dbc5f9fb",
+      "64f78a8b196f5f8b4519",
+      "ccfe8e1bce642a050b07",
+      "83c94a4cc52b62bcc3ec",
+      "80c94c806ccd3d956c98",
+      "d30e6963bb7f1af050fd",
+      "368fc5d28be6eadc36eb",
+      "f25dd4957769cf30feda",
+      "fa3200b4233a4e2de532",
+      "2fef4d1805f56836e9ac",
+      "8191f3ac3f3f17637c48",
+      "34bef4bcd8594d3752c4",
+      "9ef1035ecd2a930d0e2b",
+      "d1f8b8d2ef3e0c27bdcd",
+      "f4eebcd992b80fa3526d"
+    ],
+    "validation": [
+      "d585df6e02d7c0cd4931",
+      "921016da669ceba2851a",
+      "6c6f401c12a26160cd88",
+      "eca3d7b8500ec09fb93c",
+      "091aa3ee17aa239cc7a3",
+      "79bc1418d23ed08c3b32",
+      "20391447bcf0b825664a",
+      "ddeaf15cc2ff37595126",
+      "a34b457a1cd392e2dca8",
+      "0c1385740c92313fa854",
+      "4880de5403cc705c554c",
+      "de51dc3506419f1d7b9b",
+      "791b6ca3fdb665afd374",
+      "60505adc453a69eba53b",
+      "2864efcd690539e58851",
+      "56a0d7f8618a9331e515",
+      "ee91bbe9a85b9a78e1e2",
+      "c628362df0703aca6826",
+      "7ff7373e55217401d754",
+      "fd480089a6be85a76184",
+      "25eab03f188767c602e7",
+      "48da302dabf1da358643",
+      "216b36dfb1e30c3fd853",
+      "c609be5f4a396f127a94",
+      "f865469d3c1dc9a45ed7",
+      "20ae10698a2707d37680",
+      "e8154d6ce2edec4d6c14",
+      "f67e7172f0d0fa3eb740",
+      "c149617bb619b59329eb",
+      "2dd8362d06122cfafe62",
+      "71b4b61d2bfddbac3641",
+      "231780385f3a73d09547",
+      "dd8b313a33e06d8c192b",
+      "3cf2b3a83f8d58f572ed",
+      "2e433fd377b12dfe379e",
+      "20719f278acd20160b94"
+    ],
+    "warmup": [
+      "db3a2b3655433cf8b340",
+      "b2c04137a23b9659e76c",
+      "a1867177f9abaab59c32",
+      "1136181aab4fbd4c10a0",
+      "c9675542975ae447e112",
+      "0919db3058b28df805b5",
+      "7d6a6b87639f9ce7b288",
+      "89d99ac5ea420c160287",
+      "8379e86671276da65d41",
+      "09b480cf8e84b6ee3ce4",
+      "56df843d71d631662b64",
+      "cfba3b92780b5611938e",
+      "fb748eb6bcf418245bdc",
+      "bb16cfead4f9cd214b70",
+      "3cc7f1ff78bffcc0c887",
+      "ba0843c909cf77bada37",
+      "19eb7d33f77821e495d2",
+      "015998380e267e877eb6",
+      "061e41bc0713ab6b127c",
+      "4a8120be224e763321c7",
+      "fa308747a0366c235a1b",
+      "a193b1cf223d61877634",
+      "46b7c0134ea47965e105",
+      "982bd6b8ab5f1dcc4e8b",
+      "8aa47e5e1eb49fd3e08a",
+      "34c5bef31f4d5a65ff5d",
+      "dc74dbdbc4c3cab99c96",
+      "f33e4eaac9da37fa7252",
+      "73ecc87f1b2cf1fd6462",
+      "7bcb92527bad78f8bc4d"
+    ]
+  },
+  "starting_cohorts": {
+    "a2-development": 20,
+    "v3-development": 80
+  },
+  "threads": 2
+}
