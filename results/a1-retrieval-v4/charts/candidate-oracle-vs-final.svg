@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="456" viewBox="0 0 1120 456">
+<rect width="100%" height="100%" fill="#0b101a"/>
+<text x="24" y="34" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="600" fill="#dbe6f3" text-anchor="start">Public Test · Candidate Oracle vs Final Recall@5</text>
+<text x="24" y="64" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="normal" fill="#94a3b8" text-anchor="start">Same 99-question denominator · page-level mean · real archived retrieval results</text>
+<line x1="310.0" y1="92" x2="310.0" y2="432" stroke="#273244" stroke-width="1"/>
+<text x="310.0" y="85" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">0%</text>
+<line x1="440.0" y1="92" x2="440.0" y2="432" stroke="#273244" stroke-width="1"/>
+<text x="440.0" y="85" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">20%</text>
+<line x1="570.0" y1="92" x2="570.0" y2="432" stroke="#273244" stroke-width="1"/>
+<text x="570.0" y="85" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">40%</text>
+<line x1="700.0" y1="92" x2="700.0" y2="432" stroke="#273244" stroke-width="1"/>
+<text x="700.0" y="85" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">60%</text>
+<line x1="830.0" y1="92" x2="830.0" y2="432" stroke="#273244" stroke-width="1"/>
+<text x="830.0" y="85" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">80%</text>
+<line x1="960.0" y1="92" x2="960.0" y2="432" stroke="#273244" stroke-width="1"/>
+<text x="960.0" y="85" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">100%</text>
+<text x="294" y="119" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="normal" fill="#dbe6f3" text-anchor="end">E0-S3</text>
+<rect x="310" y="100" width="515.4" height="14" rx="3" fill="#38bdf8"/>
+<text x="833.4040404040404" y="112" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">79.29%</text>
+<rect x="310" y="122" width="348.0" height="14" rx="3" fill="#34d399"/>
+<text x="665.9797979797979" y="134" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">53.54%</text>
+<text x="1000" y="111" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#38bdf8" text-anchor="start">Oracle</text>
+<text x="1000" y="133" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#34d399" text-anchor="start">Final</text>
+<text x="294" y="175" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="normal" fill="#dbe6f3" text-anchor="end">E1-small@50</text>
+<rect x="310" y="156" width="443.2" height="14" rx="3" fill="#38bdf8"/>
+<text x="761.1818181818181" y="168" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">68.18%</text>
+<rect x="310" y="178" width="239.6" height="14" rx="3" fill="#34d399"/>
+<text x="557.6464646464647" y="190" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">36.87%</text>
+<text x="1000" y="167" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#38bdf8" text-anchor="start">Oracle</text>
+<text x="1000" y="189" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#34d399" text-anchor="start">Final</text>
+<text x="294" y="231" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="normal" fill="#dbe6f3" text-anchor="end">E1-m3@50</text>
+<rect x="310" y="212" width="487.0" height="14" rx="3" fill="#38bdf8"/>
+<text x="804.952861952862" y="224" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">74.92%</text>
+<rect x="310" y="234" width="236.4" height="14" rx="3" fill="#34d399"/>
+<text x="554.3636363636364" y="246" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">36.36%</text>
+<text x="1000" y="223" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#38bdf8" text-anchor="start">Oracle</text>
+<text x="1000" y="245" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#34d399" text-anchor="start">Final</text>
+<text x="294" y="287" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="normal" fill="#dbe6f3" text-anchor="end">E2-small</text>
+<rect x="310" y="268" width="515.4" height="14" rx="3" fill="#38bdf8"/>
+<text x="833.4040404040404" y="280" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">79.29%</text>
+<rect x="310" y="290" width="223.2" height="14" rx="3" fill="#34d399"/>
+<text x="541.2323232323232" y="302" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">34.34%</text>
+<text x="1000" y="279" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#38bdf8" text-anchor="start">Oracle</text>
+<text x="1000" y="301" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#34d399" text-anchor="start">Final</text>
+<text x="294" y="343" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="normal" fill="#dbe6f3" text-anchor="end">E2-m3</text>
+<rect x="310" y="324" width="539.5" height="14" rx="3" fill="#38bdf8"/>
+<text x="857.4781144781145" y="336" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">83.00%</text>
+<rect x="310" y="346" width="233.1" height="14" rx="3" fill="#34d399"/>
+<text x="551.0808080808081" y="358" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">35.86%</text>
+<text x="1000" y="335" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#38bdf8" text-anchor="start">Oracle</text>
+<text x="1000" y="357" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#34d399" text-anchor="start">Final</text>
+<text x="294" y="399" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="normal" fill="#dbe6f3" text-anchor="end">E3-m3</text>
+<rect x="310" y="380" width="539.5" height="14" rx="3" fill="#38bdf8"/>
+<text x="857.4781144781145" y="392" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">83.00%</text>
+<rect x="310" y="402" width="357.8" height="14" rx="3" fill="#34d399"/>
+<text x="675.8282828282828" y="414" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#e6edf7" text-anchor="start">55.05%</text>
+<text x="1000" y="391" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#38bdf8" text-anchor="start">Oracle</text>
+<text x="1000" y="413" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="normal" fill="#34d399" text-anchor="start">Final</text>
+</svg>

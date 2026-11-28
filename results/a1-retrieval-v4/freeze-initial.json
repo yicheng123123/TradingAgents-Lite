@@ -1,0 +1,129 @@
+{
+  "base_commit": "ee7998438ffeee4d786eed46dcb925d1798afaf9",
+  "bootstrap": {
+    "repetitions": 10000,
+    "seed": 47185,
+    "statistic": "question-weighted paired mean page Recall@5",
+    "unit": "company"
+  },
+  "branch": "experiment/a1-retrieval-v4-embedding",
+  "calibration": {
+    "candidate_cache_sha256": "bbd080abe89322646e8604a40d4518283712050fc326c2bd91a4c779e7a3447d",
+    "legacy_s3_calibration_sha256": "016cabc54373764d6f9404a69d5f935e07397ff61135e14429228409934ca21d",
+    "n": 49,
+    "question_hashes_sha256": "06c861fb4eba0a7206594d092307fb09613628c3675d4b3ddbba8f9778478c20",
+    "summary_sha256": "f42d230c62f959ef0dd21f34aaac878de46ae6e986ab555b9d35904ebf058e8d"
+  },
+  "candidate_config": {
+    "bm25_k": 50,
+    "candidate_union_dedup_key": "Chunk ID",
+    "dense_k": 50,
+    "final_top_k": 5,
+    "reranker": "same BGE-reranker-v2-m3 as S3",
+    "reranker_before_truncation": true,
+    "rrf_k": 60,
+    "rrf_weights": "equal"
+  },
+  "e4": {
+    "e3_B_in_pool_not_top5": 23,
+    "e3_C_not_in_pool": 10,
+    "e3_oracle_at_5": 0.8639455782312926,
+    "executed": false,
+    "trigger": "E3 oracle@5 < 0.90 and C > B on Calibration"
+  },
+  "experiment": "A1-V4 Stronger Embedding Retrieval Ablation",
+  "formal_plan": [
+    "E0-S3",
+    "E1-small@1/5/10/24/50/100",
+    "E1-m3@1/5/10/24/50/100",
+    "E2-small",
+    "E2-m3",
+    "E3-m3"
+  ],
+  "formal_test_accessed": false,
+  "glm_requests": 0,
+  "glm_tokens": 0,
+  "index": {
+    "chunks": 36622,
+    "collection": "chunks_bge_m3_v4",
+    "documents": 83,
+    "manifest_sha256": "1f2c907f43edf3bbbc62ae2a523546e9ab7f4a1933b3f6322947a4a9038e8a53",
+    "path_local_only": "data/a1-retrieval-v4/001/bge-m3-index",
+    "payload_sha256": "0b7b417b5051c7e08b2651a0d5009c1e7051f7193b54e85222d969bbd85d70ac",
+    "vector_sha256": "dd62e04e1bee6a2bf4ab9a4791c1aad788d09c19e0881136c5216357b0586945"
+  },
+  "model": {
+    "device": "cuda",
+    "dimension": 1024,
+    "files_sha256": {
+      "1_Pooling/config.json": "e54c164a07274f2eb45bb724f54a79d1efcc90c41573887cd9a29aeee0597352",
+      "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+      "config_sentence_transformers.json": "1eef72430e7194a1e59680e635aed81ffa083f05668dbc5bb1c56c04c0999c38",
+      "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+      "onnx/config.json": "f24afd5de914fba8c668426c43d208a1a54022500c63b2c160be20891686fce8",
+      "onnx/sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+      "onnx/special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "onnx/tokenizer.json": "6710678b12670bc442b99edc952c4d996ae309a7020c1fa0096dd245c2faf790",
+      "onnx/tokenizer_config.json": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4",
+      "pytorch_model.bin": "b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38",
+      "sentence_bert_config.json": "eb9b44b13c0f52a3b3685c3b1cbdea1ba8b04bea123b98f61610048940776eb1",
+      "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+      "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "tokenizer.json": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+      "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+    },
+    "id": "BAAI/bge-m3",
+    "input_limit": 512,
+    "normalization": "L2",
+    "pooling": "CLS",
+    "query_prefix": null,
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+  },
+  "public_dataset_sha256_from_v3_freeze": {
+    "financebench_document_information.jsonl": "1c69127783879de8cdadb159d2181f39bc3123b8e0ebf74031c3969d69189575",
+    "financebench_open_source.jsonl": "a5a2aa673e573e55675fc3c0f9aa38c1cf59d2abc91edb077534f71f10a71877"
+  },
+  "reranker": {
+    "files_sha256": {
+      "config.json": "13dcd6c31d9fec9d1d8e158702072f62d7fa7d312a64b9fe057bec9a08cfe41a",
+      "model.safetensors": "d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286",
+      "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+      "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "tokenizer.json": "69564b696052886ed0ac63fa393e928384e0f8caada38c1f4864a9bfbf379c15",
+      "tokenizer_config.json": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4"
+    },
+    "id": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "weights_sha256": "d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286"
+  },
+  "selection": {
+    "best_hybrid_no_reranker": "E2-m3",
+    "best_hybrid_with_reranker": "E3-m3",
+    "deployment_candidate": "E0-S3",
+    "e4_executed": false,
+    "quality_best": "E3-m3",
+    "selection_rules": {
+      "deployment_gate": "Recall@5 gain; Recall@1/10 and MRR loss <=0.03; cold/hot mean latency <=2x E0",
+      "primary": "Calibration page Recall@5",
+      "tie_breaks": [
+        "Recall@1",
+        "Recall@10",
+        "MRR@10",
+        "nDCG@10",
+        "numeric-line coverage@5",
+        "hot latency"
+      ]
+    }
+  },
+  "source_code_sha256": {
+    "tradingagents_lite/embedding_v4.py": "7c04e071345c1e1697d239e912036c7dcd86dc00f4feeb2634a9f1f310422c73",
+    "tradingagents_lite/rag.py": "c0ef5f16113fe41d57ee514e551831df4a809555ff851f973789ae5824fe96d2",
+    "tradingagents_lite/rag_benchmark.py": "26e77e0a9c7588beacd03c67f81b399397abc32ee8bbe5d5f9646a79767c9e88",
+    "tradingagents_lite/reranker_v3.py": "a2c4e5638767cd0f037e03b98709bb885429d52146df165d8f25b9472ea15793",
+    "tradingagents_lite/retrieval_v2_chunks.py": "5263eaa51f3d5a2463ebd382dc7f2cedaabc10a5e63828ba3672d9bcf3912326",
+    "tradingagents_lite/retrieval_v4.py": "abec547ea0b998a63e0fb2963ef4331b9d58e1e7f83150b791e1c9edcfe113c3",
+    "tradingagents_lite/vectors.py": "401a7606d3a3f3640abb6e703f84ac80c5d9312bb7dbea521221a2e2fd858a91"
+  },
+  "test_split_note": "The 99-question set is a repeatedly evaluated public benchmark; it is not an unseen test.",
+  "v3_freeze_sha256": "dd00c90dc3a0ce65bba15bf6321b9a1e25a3eb9b711709ba19abe979161bb2b7"
+}

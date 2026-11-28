@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+<rect width="100%" height="100%" fill="#0b101a"/>
+<text x="28" y="35" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="600" fill="#dbe6f3" text-anchor="start">Public Test · Recall@5 and Hot Latency</text>
+<text x="28" y="57" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="normal" fill="#94a3b8" text-anchor="start">Latency includes scope scan, BM25, query encoding, Qdrant search and ranking</text>
+<line x1="100" y1="540.0" x2="1000" y2="540.0" stroke="#273244"/>
+<text x="88" y="544.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="end">0%</text>
+<text x="100.0" y="564" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">0 ms</text>
+<line x1="100" y1="446.0" x2="1000" y2="446.0" stroke="#273244"/>
+<text x="88" y="450.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="end">20%</text>
+<text x="280.0" y="564" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">548 ms</text>
+<line x1="100" y1="352.0" x2="1000" y2="352.0" stroke="#273244"/>
+<text x="88" y="356.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="end">40%</text>
+<text x="460.0" y="564" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">1096 ms</text>
+<line x1="100" y1="258.0" x2="1000" y2="258.0" stroke="#273244"/>
+<text x="88" y="262.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="end">60%</text>
+<text x="640.0" y="564" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">1644 ms</text>
+<line x1="100" y1="164.0" x2="1000" y2="164.0" stroke="#273244"/>
+<text x="88" y="168.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="end">80%</text>
+<text x="820.0" y="564" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">2191 ms</text>
+<line x1="100" y1="70.0" x2="1000" y2="70.0" stroke="#273244"/>
+<text x="88" y="74.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="end">100%</text>
+<text x="1000.0" y="564" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="middle">2739 ms</text>
+<circle cx="842.0" cy="288.4" r="7" fill="#fbbf24" stroke="#0b101a" stroke-width="2"/>
+<text x="853.0238766669893" y="283.3838383838384" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#fbbf24" text-anchor="start">E0-S3</text>
+<circle cx="393.1" cy="366.7" r="7" fill="#a78bfa" stroke="#0b101a" stroke-width="2"/>
+<text x="404.12624494616364" y="361.7171717171717" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#a78bfa" text-anchor="start">E1-small@50</text>
+<circle cx="443.4" cy="369.1" r="7" fill="#38bdf8" stroke="#0b101a" stroke-width="2"/>
+<text x="454.41001695238185" y="364.09090909090907" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#38bdf8" text-anchor="start">E1-m3@50</text>
+<circle cx="393.2" cy="378.6" r="7" fill="#94a3b8" stroke="#0b101a" stroke-width="2"/>
+<text x="404.1581621000716" y="373.5858585858586" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#94a3b8" text-anchor="start">E2-small</text>
+<circle cx="443.5" cy="371.5" r="7" fill="#60a5fa" stroke="#0b101a" stroke-width="2"/>
+<text x="454.4758444655072" y="366.4646464646465" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#60a5fa" text-anchor="start">E2-m3</text>
+<circle cx="903.6" cy="281.3" r="7" fill="#34d399" stroke="#0b101a" stroke-width="2"/>
+<text x="914.5714285714284" y="276.26262626262627" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="normal" fill="#34d399" text-anchor="start">E3-m3</text>
+<text x="550.0" y="602" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="normal" fill="#94a3b8" text-anchor="middle">Hot mean end-to-end latency</text>
+<text x="22" y="305.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="normal" fill="#94a3b8" text-anchor="start">Recall@5</text>
+</svg>
