@@ -1,0 +1,344 @@
+{
+  "arm_order": [
+    "T0",
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+  ],
+  "development_count": 80,
+  "execution_order": {
+    "T0": [
+      "v3-development-pfe-01",
+      "v3-development-cat-01",
+      "v3-development-ko-01",
+      "v3-development-amzn-01",
+      "v3-development-aapl-01",
+      "v3-development-ba-01",
+      "v3-development-googl-01",
+      "v3-development-jpm-02",
+      "v3-development-nvda-02",
+      "v3-development-xom-02",
+      "v3-development-msft-03",
+      "v3-development-bac-03",
+      "v3-development-jnj-03",
+      "v3-development-unh-03",
+      "v3-development-amd-03",
+      "v3-development-cvx-04",
+      "v3-development-tsla-04",
+      "v3-development-gs-04",
+      "v3-development-wmt-04",
+      "v3-development-meta-04"
+    ],
+    "T1": [
+      "v3-development-pfe-01",
+      "v3-development-cat-01",
+      "v3-development-ko-01",
+      "v3-development-amzn-01",
+      "v3-development-aapl-01",
+      "v3-development-ba-01",
+      "v3-development-googl-01",
+      "v3-development-jpm-02",
+      "v3-development-nvda-02",
+      "v3-development-xom-02",
+      "v3-development-msft-03",
+      "v3-development-bac-03",
+      "v3-development-jnj-03",
+      "v3-development-unh-03",
+      "v3-development-amd-03",
+      "v3-development-cvx-04",
+      "v3-development-tsla-04",
+      "v3-development-gs-04",
+      "v3-development-wmt-04",
+      "v3-development-meta-04"
+    ],
+    "T2": [
+      "v3-development-pfe-01",
+      "v3-development-cat-01",
+      "v3-development-ko-01",
+      "v3-development-amzn-01",
+      "v3-development-aapl-01",
+      "v3-development-ba-01",
+      "v3-development-googl-01",
+      "v3-development-jpm-02",
+      "v3-development-nvda-02",
+      "v3-development-xom-02",
+      "v3-development-msft-03",
+      "v3-development-bac-03",
+      "v3-development-jnj-03",
+      "v3-development-unh-03",
+      "v3-development-amd-03",
+      "v3-development-cvx-04",
+      "v3-development-tsla-04",
+      "v3-development-gs-04",
+      "v3-development-wmt-04",
+      "v3-development-meta-04"
+    ],
+    "T3": [
+      "v3-development-pfe-01",
+      "v3-development-cat-01",
+      "v3-development-ko-01",
+      "v3-development-amzn-01",
+      "v3-development-aapl-01",
+      "v3-development-ba-01",
+      "v3-development-googl-01",
+      "v3-development-jpm-02",
+      "v3-development-nvda-02",
+      "v3-development-xom-02",
+      "v3-development-msft-03",
+      "v3-development-bac-03",
+      "v3-development-jnj-03",
+      "v3-development-unh-03",
+      "v3-development-amd-03",
+      "v3-development-cvx-04",
+      "v3-development-tsla-04",
+      "v3-development-gs-04",
+      "v3-development-wmt-04",
+      "v3-development-meta-04"
+    ],
+    "T4": [
+      "v3-development-pfe-01",
+      "v3-development-cat-01",
+      "v3-development-ko-01",
+      "v3-development-amzn-01",
+      "v3-development-aapl-01",
+      "v3-development-ba-01",
+      "v3-development-googl-01",
+      "v3-development-jpm-02",
+      "v3-development-nvda-02",
+      "v3-development-xom-02",
+      "v3-development-msft-03",
+      "v3-development-bac-03",
+      "v3-development-jnj-03",
+      "v3-development-unh-03",
+      "v3-development-amd-03",
+      "v3-development-cvx-04",
+      "v3-development-tsla-04",
+      "v3-development-gs-04",
+      "v3-development-wmt-04",
+      "v3-development-meta-04"
+    ]
+  },
+  "fingerprints": {
+    "development_tasks": "2453f2785cc81504dee71c5656efd071a5e2daa87b1824dfa185e3aa58148b4b",
+    "ir": "ed4e49b6d7136e0a50b89b325bdcd2f6375b3ff993cf4d171a7d781c292390f1",
+    "ir-releases": "0772964bc48b8934fe12dff00e6c93a6d9112c4381ea3424c3da73e1388058c4",
+    "market_manifest": "b432387175f12f949344cfce1b96c68be37e2e9e94779ffe39779169bd37e08e",
+    "market_prefixes": {
+      "AAPL": "879f1b0a66c8b09793c97a380d04dde4c976798259aa85a161db05e0724e0873",
+      "AMD": "0dc950f0753d858645bc5c8c4e4a084fddbd6f491ff718c9b99ef493a61fe6fd",
+      "AMZN": "2cfdca7fe488af29de2a7c902d1f6052fce48a705bc1be326364c4f7aabbfecb",
+      "BA": "bc026dfe1ece29ff358ebafef8543790f228bae9ba2c4677b4069b4dcce552d1",
+      "BAC": "896f869773b562226186fae652d15a7110f30e215dad3e5d5d8ce4c5b4ba5bd3",
+      "CAT": "77f62e0b30a3b46ba9112d14756a6881611b67792ef351f634755fc9471440d2",
+      "CVX": "5dedc614410ca6edb03f099a2e30e80dae0dd3a838059ec570c6582241d7329e",
+      "GOOGL": "d86b84fe26d75ca8e51756511d6c376bb1fc7335955443374ad5abfa188d744b",
+      "GS": "153a9420cb10b78005d33f2df7fab99a797559610fa50cd6e2bc104cf889e16c",
+      "JNJ": "ccd8b65ca4f6fe66866d01350186946319bad76f7a49d7e2417ec8dd2c8e1ea6",
+      "JPM": "87eaa7e30b18f435fd413853b534b983eac1d45a5523332ba0702820599229a8",
+      "KO": "f3601fe7fd66db07fb7a6743e4a9f08f556e55862d0f1dd00887603ada1e96f4",
+      "META": "0f6c7e9f63ec0090585df7e8638c0decf6e7a647b507253f659afb1e91f1ba71",
+      "MSFT": "cdbee6d51898842dbd26a531ebb223516d9e7865ef44012e7044eff508c1e048",
+      "NVDA": "cc124663f929889110b3fdc6e5e336250794fb8ae662b5345edb71b0208c1b2f",
+      "PFE": "f90545d44a60970b99cd194edb290cdcd7caa7012e52c864ea1165cfc7194bcb",
+      "SPY": "10c943854fe355ab9a23b819a9b16122f3151cf5107f1748c93cc94ef510ee5f",
+      "TSLA": "494d6a0a556139af1d54c0a897d890ac4729211bc77251a9318301c72e4eb5c6",
+      "UNH": "d54bf4f9305b67b9055c2b20c1a271f9c42a718099c80050fd280bd5a797223a",
+      "WMT": "6ca787ca6e998637fb131477aeda65423b93e1511c2b01bb7bf8c7528edd1fd3",
+      "XOM": "e2baf38830c923462f718089fe3c5412e66521538e30618ac346d7c10254d3b8"
+    },
+    "sec": "dda658e9025f2fff87adee3cdd59394b4b21de154aacb7a2214d9c4c2d5bf597",
+    "task_manifest": "3a40e2761117343f2b3dcbd4b28f223279665b2bb5a76e3c899c5d546cb27f88"
+  },
+  "hash_key": "final-agent-pilot-001:<task_id>",
+  "market_read_through": "2026-08-07",
+  "pilot_count": 20,
+  "prediction_packets": {
+    "v3-development-aapl-01": "bc67f0338fbbff308b2565a534bf366f9d6ef77c03969ace7a21a860b9fb8a7e",
+    "v3-development-amd-03": "a27a34e6ff82597a57814f653a2bc3bae6ee19cbddf5f6dda0a3409505bd50c3",
+    "v3-development-amzn-01": "2b31120285fc2dcdfd240bc99e9bd88a8682a5cce6f807a336699fe0ab895b37",
+    "v3-development-ba-01": "20046aa2d9fbc8eb0957a7a55276690bc5838383979ef4bc38b471371c272b65",
+    "v3-development-bac-03": "56a63a65a2e13846a96872b41053c8867d4435e151d5dad9e8d869652cd3f6c2",
+    "v3-development-cat-01": "1985d215f8267c49b7a83bc464f16d7e2d3a68c4992d8ddf709fe98b4b730cfe",
+    "v3-development-cvx-04": "dcfd95a01832aa7dc36d22990d4072d0f18731b1c98a8d4ab7530627c202fa8a",
+    "v3-development-googl-01": "0e6213667cae71bdc271a7779af084fef1df3991f60648c3b44c6adfdef4ace9",
+    "v3-development-gs-04": "908a8665f3161e627e074b522c1a953896e1a41d216355b5b8a4fdd7ea8464a7",
+    "v3-development-jnj-03": "0dab1ec176b6b0e4d82ad31d44ad67372ca0fb2cd05cfe94c0abec2c6c97a63e",
+    "v3-development-jpm-02": "4ada48acd1348f4168504b3ff0a5273f5272ef297894756199960eef3dde3b89",
+    "v3-development-ko-01": "c9ece333a908e42eeaa0ed04172a212b1c317b64131f4d24a7e529ebb7556ea1",
+    "v3-development-meta-04": "c8da067e36df6c74530937460513aa3f04e15dad8059804934ca485fb42c074e",
+    "v3-development-msft-03": "dffad95beb630d47611aef1444089dd6bfcd572338852745fec41628c2fe67f1",
+    "v3-development-nvda-02": "2f2aa2dd45b8ebfc757ffe1fd244d4aee23d2454b8c4ce1c7a1422a4cbce9868",
+    "v3-development-pfe-01": "3d005bc14c9a1623a7c26b84254fd0f858e9154fe27d9d2edab04300aaeee12b",
+    "v3-development-tsla-04": "f57aeb431eb501749e927fcc2e353bcbd3ad8d34855f7b885aba1abe0ab561cf",
+    "v3-development-unh-03": "c42a6ebbfcdf98fcbc062f57c3dbe9cbe960dc6f564df8cc02c4f71323a80fd4",
+    "v3-development-wmt-04": "dad5171b3791e353be5b9190a1360d470954aa8899e8a32445ef7ea472fbf337",
+    "v3-development-xom-02": "d495b2aeb75e4e411819adc0dcada3474369537c25cef7e330563fc94351358d"
+  },
+  "sectors": [
+    "Communication Services",
+    "Consumer Discretionary",
+    "Consumer Staples",
+    "Energy",
+    "Financials",
+    "Healthcare",
+    "Industrials",
+    "Technology"
+  ],
+  "smoke_tasks": [
+    "v3-development-jpm-02"
+  ],
+  "stocks": 20,
+  "tasks": [
+    {
+      "decision_date": "2026-01-06",
+      "horizon_sessions": 5,
+      "symbol": "PFE",
+      "task_id": "v3-development-pfe-01"
+    },
+    {
+      "decision_date": "2026-01-15",
+      "horizon_sessions": 5,
+      "symbol": "CAT",
+      "task_id": "v3-development-cat-01"
+    },
+    {
+      "decision_date": "2026-02-02",
+      "horizon_sessions": 5,
+      "symbol": "KO",
+      "task_id": "v3-development-ko-01"
+    },
+    {
+      "decision_date": "2026-02-04",
+      "horizon_sessions": 5,
+      "symbol": "AMZN",
+      "task_id": "v3-development-amzn-01"
+    },
+    {
+      "decision_date": "2026-02-06",
+      "horizon_sessions": 5,
+      "symbol": "AAPL",
+      "task_id": "v3-development-aapl-01"
+    },
+    {
+      "decision_date": "2026-02-09",
+      "horizon_sessions": 5,
+      "symbol": "BA",
+      "task_id": "v3-development-ba-01"
+    },
+    {
+      "decision_date": "2026-02-10",
+      "horizon_sessions": 5,
+      "symbol": "GOOGL",
+      "task_id": "v3-development-googl-01"
+    },
+    {
+      "decision_date": "2026-03-02",
+      "horizon_sessions": 5,
+      "symbol": "JPM",
+      "task_id": "v3-development-jpm-02"
+    },
+    {
+      "decision_date": "2026-03-24",
+      "horizon_sessions": 5,
+      "symbol": "NVDA",
+      "task_id": "v3-development-nvda-02"
+    },
+    {
+      "decision_date": "2026-03-31",
+      "horizon_sessions": 5,
+      "symbol": "XOM",
+      "task_id": "v3-development-xom-02"
+    },
+    {
+      "decision_date": "2026-04-24",
+      "horizon_sessions": 5,
+      "symbol": "MSFT",
+      "task_id": "v3-development-msft-03"
+    },
+    {
+      "decision_date": "2026-04-29",
+      "horizon_sessions": 5,
+      "symbol": "BAC",
+      "task_id": "v3-development-bac-03"
+    },
+    {
+      "decision_date": "2026-05-01",
+      "horizon_sessions": 5,
+      "symbol": "JNJ",
+      "task_id": "v3-development-jnj-03"
+    },
+    {
+      "decision_date": "2026-05-28",
+      "horizon_sessions": 5,
+      "symbol": "UNH",
+      "task_id": "v3-development-unh-03"
+    },
+    {
+      "decision_date": "2026-06-08",
+      "horizon_sessions": 5,
+      "symbol": "AMD",
+      "task_id": "v3-development-amd-03"
+    },
+    {
+      "decision_date": "2026-06-09",
+      "horizon_sessions": 5,
+      "symbol": "CVX",
+      "task_id": "v3-development-cvx-04"
+    },
+    {
+      "decision_date": "2026-06-11",
+      "horizon_sessions": 5,
+      "symbol": "TSLA",
+      "task_id": "v3-development-tsla-04"
+    },
+    {
+      "decision_date": "2026-07-10",
+      "horizon_sessions": 5,
+      "symbol": "GS",
+      "task_id": "v3-development-gs-04"
+    },
+    {
+      "decision_date": "2026-07-20",
+      "horizon_sessions": 5,
+      "symbol": "WMT",
+      "task_id": "v3-development-wmt-04"
+    },
+    {
+      "decision_date": "2026-07-29",
+      "horizon_sessions": 5,
+      "symbol": "META",
+      "task_id": "v3-development-meta-04"
+    }
+  ],
+  "warmup_ids": [
+    "v3-development-amd-01",
+    "v3-development-amd-02",
+    "v3-development-bac-01",
+    "v3-development-bac-02",
+    "v3-development-cvx-01",
+    "v3-development-cvx-02",
+    "v3-development-cvx-03",
+    "v3-development-gs-01",
+    "v3-development-gs-02",
+    "v3-development-gs-03",
+    "v3-development-jnj-01",
+    "v3-development-jnj-02",
+    "v3-development-jpm-01",
+    "v3-development-meta-01",
+    "v3-development-meta-02",
+    "v3-development-meta-03",
+    "v3-development-msft-01",
+    "v3-development-msft-02",
+    "v3-development-nvda-01",
+    "v3-development-tsla-01",
+    "v3-development-tsla-02",
+    "v3-development-tsla-03",
+    "v3-development-unh-01",
+    "v3-development-unh-02",
+    "v3-development-wmt-01",
+    "v3-development-wmt-02",
+    "v3-development-wmt-03",
+    "v3-development-xom-01"
+  ]
+}

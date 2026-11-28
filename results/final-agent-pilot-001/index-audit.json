@@ -1,0 +1,23 @@
+{
+  "chunks": 8717,
+  "corpus": "V3 Development SEC and issuer releases",
+  "documents": {
+    "news": 6,
+    "sec_filing": 53
+  },
+  "embedding_model": {
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "device": "CPUExecutionProvider",
+    "dimension": 384,
+    "max_model_tokens": 512,
+    "name": "Xenova/bge-small-en-v1.5",
+    "normalization": "CLS then L2",
+    "revision": "ea104dacec62c0de699686887e3f920caeb4f3e3",
+    "weight_hashes": {
+      "model_quantized.onnx": "6c9c6101a956d62dfb5e7190c538226c0c5bb9cb27b651234b6df063ee7dbfe4",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+    }
+  },
+  "index_elapsed_seconds": 466.84883085800016,
+  "positions_valid": true
+}

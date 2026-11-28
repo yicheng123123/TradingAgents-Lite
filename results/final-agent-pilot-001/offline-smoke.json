@@ -1,0 +1,21 @@
+{
+  "checks": {
+    "all_arms_ok": true,
+    "budget_refused": true,
+    "citation_repair_ok": true,
+    "cold_memory_empty": true,
+    "debate_not_triggered": true,
+    "debate_triggered": true,
+    "fixed_rag_delivered": true,
+    "memory_injected": true,
+    "structured_repair_ok": true
+  },
+  "cold_task": "v3-development-pfe-01",
+  "context": "C1-segments",
+  "fallback": [],
+  "main_task": "v3-development-jpm-02",
+  "passed": true,
+  "real_glm_requests": 0,
+  "real_glm_tokens": 0,
+  "retriever": "S3"
+}
