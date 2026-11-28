@@ -1,0 +1,23 @@
+{
+  "E3": {
+    "matching_oracle": 49,
+    "matching_page_metrics": 49,
+    "n": 49
+  },
+  "S3": {
+    "matching_oracle": 49,
+    "matching_page_metrics": 49,
+    "n": 49
+  },
+  "exact_search": {
+    "bm25_top50_order": 49,
+    "exact_dense_top50_order": 37,
+    "exact_dense_top50_set": 49
+  },
+  "s3_archive_order": 49,
+  "source_locator_audit": {
+    "independent_pdf_reextraction_checked": 25,
+    "metadata_checked": 7665,
+    "violations": 0
+  }
+}
