@@ -2,6 +2,66 @@
 
 本文按当前主线源码描述逻辑数据流。A1-V3 Cross-Encoder 是独立离线实验分支，不代表主线默认检索器。原有 B1 工作流、时点与结算说明保留在[架构历史说明](architecture.md)。
 
+## 详细系统工作流
+
+```mermaid
+flowchart TD
+    TASK["用户金融研究任务<br/>股票 · 决策日期 · 预测周期"] --> PREP["Prepare<br/>按 cutoff 构造行情视图"]
+    PREP --> ANALYST
+
+    subgraph ANALYST_GROUP["Analyst · 有界工具循环"]
+        direction TB
+        ANALYST["LLM Analyst<br/>Function Calling"]
+        TOOLS["行情 · XBRL Fundamentals<br/>SEC 金融证据工具"]
+        RETRIEVER["Retriever<br/>BM25 + BGE Dense → RRF"]
+        SELECT["Context Selection<br/>FinanceBench V2 · 摘录选择 · 字节预算"]
+        MR["MarketReport<br/>稳定 Evidence IDs"]
+        ANALYST -->|"行情 / 财务工具调用"| TOOLS
+        TOOLS -->|"Tool Observation"| ANALYST
+        ANALYST -->|"rag_search(Query)"| RETRIEVER
+        RETRIEVER --> SELECT
+        SELECT -->|"检索 Observation"| ANALYST
+        ANALYST -->|"无待处理工具"| MR
+    end
+
+    MR --> ROUTE["Conditional Debate Router<br/>可选"]
+    ROUTE -->|"条件不满足：跳过"| TRADER["Trader<br/>Buy / Sell / Hold 提案"]
+    ROUTE -->|"条件满足"| BULL["Bull"]
+    BULL --> BEAR["Bear"]
+    BEAR --> ADJ["Adjudication"]
+    ADJ --> TRADER
+
+    MEMORY["Episodic Memory · 可选<br/>SQLite 权威记录 + Qdrant 向量索引<br/>cutoff / 分区 / 实验组过滤"] -->|"合规 Top-3 经验 · 压缩上下文"| TRADER
+
+    TRADER -->|"Verifier 开启"| VERIFY["Verifier<br/>Schema · 引用 · 范围 · 时点"]
+    TRADER -->|"Verifier 关闭"| RISK["Risk Manager<br/>确定性风险门"]
+    VERIFY --> RISK
+    RISK --> DECISION["最终 Decision<br/>执行轨迹与 Trace"]
+    DECISION --> SETTLE["Independent Backtest<br/>按冻结规则独立结算"]
+    SETTLE --> REFLECT["Reflection<br/>仅在结果成熟后生成经验"]
+    REFLECT -->|"eligible_at 之后写入"| MEMORY
+
+    HARNESS["Agent Harness 贯穿工作流<br/>LangGraph State · Pydantic · Tool Contract<br/>TokenBudget · Trace · 有界 Recovery · 可选 MCP STDIO"]
+    HARNESS -.-> ANALYST
+    HARNESS -.-> TRADER
+    HARNESS -.-> RISK
+
+    classDef input fill:#EAF1F8,stroke:#8CA4BA,color:#163047,stroke-width:1.5px;
+    classDef agent fill:#E7F0FA,stroke:#7799B8,color:#15334B,stroke-width:1.5px;
+    classDef retrieval fill:#E5F2F0,stroke:#79A99D,color:#173E38,stroke-width:1.5px;
+    classDef optional fill:#F0ECF8,stroke:#A597C5,color:#30294B,stroke-width:1.5px;
+    classDef control fill:#EEF1F4,stroke:#8D99A6,color:#273746,stroke-width:1.5px;
+    classDef harness fill:#F2F4F7,stroke:#A5AFBA,color:#354454,stroke-dasharray:4 3;
+    class TASK,PREP input;
+    class ANALYST,TOOLS,MR,TRADER agent;
+    class RETRIEVER,SELECT retrieval;
+    class ROUTE,BULL,BEAR,ADJ,MEMORY,REFLECT optional;
+    class VERIFY,RISK,DECISION,SETTLE control;
+    class HARNESS harness;
+```
+
+MarketReport 可直接进入 Trader。条件式辩论开启时，Bull、Bear 与 Adjudication 按顺序执行。Memory 部分展示 Trader 读取已结算经验的关系。Reflection 在独立结算的结果成熟后生成，更新后的经验受后续任务的时点约束。图中的 Context Selection 标明 FinanceBench V2 的独立实现。
+
 ## Agentic RAG
 
 Retriever 是确定性的混合检索组件；Agentic Retrieval Loop 是上层 Analyst 根据观察决定是否继续检索的有界控制流。固定检索组不拥有动态 Query 决策权。

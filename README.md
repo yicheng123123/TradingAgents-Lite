@@ -26,63 +26,15 @@
 
 ## 系统架构
 
-```mermaid
-flowchart TD
-    TASK["用户金融研究任务<br/>股票 · 决策日期 · 预测周期"] --> PREP["Prepare<br/>按 cutoff 构造行情视图"]
-    PREP --> ANALYST
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/figures/system-architecture-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/figures/system-architecture.svg">
+  <img alt="TradingAgents-Lite 系统架构：Analyst 生成 MarketReport，Trader 综合可选辩论和历史经验，经校验和风险规则形成最终决策。" src="docs/figures/system-architecture.svg" width="1000">
+</picture>
 
-    subgraph ANALYST_GROUP["Analyst · 有界工具循环"]
-        direction TB
-        ANALYST["LLM Analyst<br/>Function Calling"]
-        TOOLS["行情 · XBRL Fundamentals<br/>SEC 金融证据工具"]
-        RETRIEVER["Retriever<br/>BM25 + BGE Dense → RRF"]
-        SELECT["Context Selection<br/>FinanceBench V2 · 摘录选择 · 字节预算"]
-        MR["MarketReport<br/>稳定 Evidence IDs"]
-        ANALYST -->|"行情 / 财务工具调用"| TOOLS
-        TOOLS -->|"Tool Observation"| ANALYST
-        ANALYST -->|"rag_search(Query)"| RETRIEVER
-        RETRIEVER --> SELECT
-        SELECT -->|"检索 Observation"| ANALYST
-        ANALYST -->|"无待处理工具"| MR
-    end
+MarketReport 可直接送给 Trader。Debate、Memory、Verifier、MCP 为可选模块。布局展示逻辑模块关系，不代表并行执行。
 
-    MR --> ROUTE["Conditional Debate Router<br/>可选"]
-    ROUTE -->|"条件不满足：跳过"| TRADER["Trader<br/>Buy / Sell / Hold 提案"]
-    ROUTE -->|"条件满足"| BULL["Bull"]
-    BULL --> BEAR["Bear"]
-    BEAR --> ADJ["Adjudication"]
-    ADJ --> TRADER
-
-    MEMORY["Episodic Memory · 可选<br/>SQLite 权威记录 + Qdrant 向量索引<br/>cutoff / 分区 / 实验组过滤"] -->|"合规 Top-3 经验 · 压缩上下文"| TRADER
-
-    TRADER -->|"Verifier 开启"| VERIFY["Verifier<br/>Schema · 引用 · 范围 · 时点"]
-    TRADER -->|"Verifier 关闭"| RISK["Risk Manager<br/>确定性风险门"]
-    VERIFY --> RISK
-    RISK --> DECISION["最终 Decision<br/>执行轨迹与 Trace"]
-    DECISION --> SETTLE["Independent Backtest<br/>按冻结规则独立结算"]
-    SETTLE --> REFLECT["Reflection<br/>仅在结果成熟后生成经验"]
-    REFLECT -->|"eligible_at 之后写入"| MEMORY
-
-    HARNESS["Agent Harness 贯穿工作流<br/>LangGraph State · Pydantic · Tool Contract<br/>TokenBudget · Trace · 有界 Recovery · 可选 MCP STDIO"]
-    HARNESS -.-> ANALYST
-    HARNESS -.-> TRADER
-    HARNESS -.-> RISK
-
-    classDef input fill:#EAF1F8,stroke:#8CA4BA,color:#163047,stroke-width:1.5px;
-    classDef agent fill:#E7F0FA,stroke:#7799B8,color:#15334B,stroke-width:1.5px;
-    classDef retrieval fill:#E5F2F0,stroke:#79A99D,color:#173E38,stroke-width:1.5px;
-    classDef optional fill:#F0ECF8,stroke:#A597C5,color:#30294B,stroke-width:1.5px;
-    classDef control fill:#EEF1F4,stroke:#8D99A6,color:#273746,stroke-width:1.5px;
-    classDef harness fill:#F2F4F7,stroke:#A5AFBA,color:#354454,stroke-dasharray:4 3;
-    class TASK,PREP input;
-    class ANALYST,TOOLS,MR,TRADER agent;
-    class RETRIEVER,SELECT retrieval;
-    class ROUTE,BULL,BEAR,ADJ,MEMORY,REFLECT optional;
-    class VERIFY,RISK,DECISION,SETTLE control;
-    class HARNESS harness;
-```
-
-图中箭头表示逻辑数据流，不表示 Agent 并行执行。Bull 与 Bear 依次运行；Debate、Memory、Verifier 和 MCP 都是可选能力。Risk Manager 做的是明确的规则检查，不是投资组合执行服务。更多原理图见[架构与技术图解](docs/technical-diagrams.md)。
+图中的 **Context Engineering** 是概括名称。常规金融 Agent 的 **Context Delivery** 按工具输出限制送达证据，FinanceBench V2 的 **Query-aware Context Selection** 另外按查询选择证据片段并限制请求字节数。完整工作流与专题图解见[架构与技术图解](docs/technical-diagrams.md#详细系统工作流)。
 
 ### 核心模块
 
