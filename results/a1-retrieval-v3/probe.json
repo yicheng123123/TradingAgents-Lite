@@ -1,0 +1,70 @@
+{
+  "bge": {
+    "metadata": {
+      "batch_limit": 24,
+      "cuda": "12.6",
+      "device": "cuda",
+      "dtype": "torch.float16",
+      "files_sha256": {
+        "config.json": "13dcd6c31d9fec9d1d8e158702072f62d7fa7d312a64b9fe057bec9a08cfe41a",
+        "model.safetensors": "d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286",
+        "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+        "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+        "tokenizer.json": "69564b696052886ed0ac63fa393e928384e0f8caada38c1f4864a9bfbf379c15",
+        "tokenizer_config.json": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4"
+      },
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "input_limit": 512,
+      "name": "BAAI/bge-reranker-v2-m3",
+      "padded_token_limit": 8192,
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "torch": "2.14.0+cu126",
+      "transformers": "5.24.0",
+      "truncation": "only_second"
+    },
+    "pairs": 24,
+    "sample": {
+      "milliseconds": 164.31096200039974,
+      "oom_batch_splits": 0,
+      "peak_allocated_bytes": 1257727488,
+      "peak_reserved_bytes": 1335885824
+    },
+    "sample_pairs_per_second": 146.06450907360406,
+    "warmup": {
+      "milliseconds": 576.2452670001039,
+      "oom_batch_splits": 0,
+      "peak_allocated_bytes": 1146197504,
+      "peak_reserved_bytes": 1168113664
+    }
+  },
+  "mini": {
+    "metadata": {
+      "batch_limit": 8,
+      "device": "cpu",
+      "dtype": "quantized ONNX",
+      "input_limit": 512,
+      "max_model_tokens": 512,
+      "name": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+      "runtime": "1.32.0",
+      "weight_hashes": {
+        "model_quantized.onnx": "e9d8ebf845c413e981c175bfe49a3bfa9b3dcce2a3ba54875ee5df5a58639fbe",
+        "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+      }
+    },
+    "pairs": 24,
+    "sample": {
+      "milliseconds": 439.75267799987705,
+      "oom_batch_splits": 0,
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    },
+    "sample_pairs_per_second": 54.57613154093563,
+    "warmup": {
+      "milliseconds": 9.848700000020472,
+      "oom_batch_splits": 0,
+      "peak_allocated_bytes": null,
+      "peak_reserved_bytes": null
+    }
+  }
+}
