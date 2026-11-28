@@ -243,15 +243,23 @@ def measure_deployment(args, choice):
         selected.setdefault(q["company"],q)
     from .scoring import percentiles
     result={"startup_ms":load,"warmup_ms":warm["milliseconds"],"n":len(selected),"arms":{}}
-    for arm,search,enc in (("S3",small,small_encoder),(choice,small if choice.startswith("S3") else old,
-                                                    small_encoder if choice.startswith("S3") else encoder)):
+    timing_arms = {"S3":(small,small_encoder),"E3":(old,encoder)}
+    if (out := Path(args.output)/"query-expansion-ablation.json").exists():
+        reduced = "Q4-100/F5-weighted-distinct"
+        if reduced in read(out)["groups"]:
+            timing_arms[reduced] = (old,encoder)
+    timing_arms[choice] = (small,small_encoder) if choice.startswith("S3") else (old,encoder)
+    for arm,(search,enc) in timing_arms.items():
         phases={}
         for temperature in ("cold","warm"):
             timings=[make_prediction(q,arm,search,new,enc,model,temperature)["latency"] for q in selected.values()]
             phases[temperature]=percentiles([row["total_ms"] for row in timings])
         result["arms"][arm]=phases
-    result["passes"] = all(result["arms"][choice][temp]["mean"]<=1.25*result["arms"]["S3"][temp]["mean"]
-                           for temp in ("cold","warm"))
+    result["within_latency_ceiling"] = [
+        arm for arm,phases in result["arms"].items()
+        if all(phases[temp]["mean"]<=1.25*result["arms"]["S3"][temp]["mean"] for temp in ("cold","warm"))
+    ]
+    result["passes"] = choice in result["within_latency_ceiling"]
     write(work/"deployment.json",result)
     return result
 

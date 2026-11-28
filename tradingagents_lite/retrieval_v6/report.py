@@ -83,8 +83,12 @@ def figures(out,s,f):
             [("Before cap",[query[k]["pre_cap_oracle_at_5"] for k in qnames]),
              ("After cap",[query[k]["candidate_oracle_at_5"] for k in qnames])])
     same=s["deployment"]["arms"]
-    points=[("S3",same["S3"]["warm"]["mean"],feat["S3/F0-residual-none"]["page"]["recall@5"]),
-            ("V6",same[s["choice"]]["warm"]["mean"],s["calibration"]["page"]["recall@5"])]
+    timing_recipes = {"S3":"S3/F0-residual-none","E3":"E3/F0-residual-none"}
+    points=[]
+    for arm,latency in same.items():
+        key=timing_recipes.get(arm,arm)
+        label="V6" if arm==s["choice"] else arm.split("/")[0]
+        points.append((label,latency["warm"]["mean"],s["ranked_recipes"][key]["page"]["recall@5"]))
     svg(out,"quality-latency","Quality and warm latency","Calibration quality (49 questions) · same-process timing (one per company)",
         [],[],points=points)
     names=["previously_top5","previously_6_10","previously_11_20","previously_21_plus","previously_absent"]
@@ -123,6 +127,7 @@ def generate(out):
         f"Candidate Oracle@5 为 {pct(oracle)}，与最终召回相差 {100*(oracle-r5):.2f} 个百分点。","",
         f"同进程 Calibration 延迟对照中，V6 的热均值为 S3 的 {timing:.2f} 倍，{dep}预注册的 1.25 倍部署门槛。"
         "生产替换还需要独立泛化验证。公开 99 题已多次用于 A1 历史实验，本轮在配置冻结后只评分一次。","",
+        "达到延迟上限的实测配置包括 "+ "、".join(bench["within_latency_ceiling"])+"。", "",
         "## 校准与模块消融","",
         "同一套 49 题、11 家公司。所有规则都只读取问题与候选原文。留一公司选择用其余公司选择固定配置，"
         "再在被留出的公司评分。逐题结果保留全部固定配置和 OOF 选中记录。C1 上下文选择不变。","",
