@@ -1,0 +1,115 @@
+{
+  "budget": {
+    "max_tokens": 768,
+    "max_tool_rounds": 1,
+    "momentum_threshold": 0.006,
+    "volatility_limit": 0.04
+  },
+  "code_git_sha": "127bdd94b442764b75a1c6a98ce2b770b8d5ef48",
+  "context": "C1-segments",
+  "debate": "D2 without supplementary round",
+  "fixed_retrieval_query": "Recent financial results, risks and company outlook",
+  "formal_arm_order": [
+    "T0",
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+  ],
+  "initial_budget": {
+    "available": 483089,
+    "can_continue": true,
+    "experiment_id": "final-agent-pilot-001",
+    "experiment_limit": 500000,
+    "experiment_remaining": 483089,
+    "experiment_used": 16911,
+    "global_limit": 15000000,
+    "global_remaining": 14364750,
+    "global_used": 635250,
+    "phase": "B2",
+    "phase_limit": 1000000,
+    "phase_remaining": 983089,
+    "phase_used": 16911
+  },
+  "max_model_calls_per_cell": 8,
+  "max_prompt_bytes": 12000,
+  "max_reservation_per_call": 13664,
+  "max_retries": 0,
+  "memory": "M3 static deterministic Warm-up",
+  "model": "glm-5.3-flash",
+  "offline_smoke_sha256": "081432e6d0fa0ae225675e1b3e803d91178c540e8612043e57673e2149ead191",
+  "phase": "B2",
+  "pilot_limit": 500000,
+  "prediction_frozen_before_settlement": true,
+  "prediction_inputs": {
+    "manifest_sha256": "61ab44c387224d71297e249d1ca7eff2a316c462926ad8ce77e4947ae2872bd3",
+    "memory": {
+      "T3": {
+        "episodes.sqlite": "0f8e06bca67b9204b7cc416a3aac8e49c49f441ab80177dd826361dd76afdd5c",
+        "vectors/collection/episodes/storage.sqlite": "caf1f0e69bedca05cca02bedbe358195f0b4032e66f34619b9897219a094d96d",
+        "vectors/episodes-encoder.json": "53903c6d597e7cd702937a037b49f6a6e2a34508ecf8f7174ac1ae2defeed811",
+        "vectors/meta.json": "ad446229e113f1fd47ca3f3b35719acfeb9aa96a172260cf4107747137124713"
+      },
+      "T4": {
+        "episodes.sqlite": "f69b5327b0826321544d1be21b57e9e16e346c68a666423734ac677dcde381da",
+        "vectors/collection/episodes/storage.sqlite": "af11957aff3e37bbaf6ff3bf27bbc1ba960129a42b0758c0a32ab5572f472a00",
+        "vectors/episodes-encoder.json": "53903c6d597e7cd702937a037b49f6a6e2a34508ecf8f7174ac1ae2defeed811",
+        "vectors/meta.json": "ad446229e113f1fd47ca3f3b35719acfeb9aa96a172260cf4107747137124713"
+      }
+    },
+    "packets": {
+      "v3-development-aapl-01": "bc67f0338fbbff308b2565a534bf366f9d6ef77c03969ace7a21a860b9fb8a7e",
+      "v3-development-amd-03": "a27a34e6ff82597a57814f653a2bc3bae6ee19cbddf5f6dda0a3409505bd50c3",
+      "v3-development-amzn-01": "2b31120285fc2dcdfd240bc99e9bd88a8682a5cce6f807a336699fe0ab895b37",
+      "v3-development-ba-01": "20046aa2d9fbc8eb0957a7a55276690bc5838383979ef4bc38b471371c272b65",
+      "v3-development-bac-03": "56a63a65a2e13846a96872b41053c8867d4435e151d5dad9e8d869652cd3f6c2",
+      "v3-development-cat-01": "1985d215f8267c49b7a83bc464f16d7e2d3a68c4992d8ddf709fe98b4b730cfe",
+      "v3-development-cvx-04": "dcfd95a01832aa7dc36d22990d4072d0f18731b1c98a8d4ab7530627c202fa8a",
+      "v3-development-googl-01": "0e6213667cae71bdc271a7779af084fef1df3991f60648c3b44c6adfdef4ace9",
+      "v3-development-gs-04": "908a8665f3161e627e074b522c1a953896e1a41d216355b5b8a4fdd7ea8464a7",
+      "v3-development-jnj-03": "0dab1ec176b6b0e4d82ad31d44ad67372ca0fb2cd05cfe94c0abec2c6c97a63e",
+      "v3-development-jpm-02": "4ada48acd1348f4168504b3ff0a5273f5272ef297894756199960eef3dde3b89",
+      "v3-development-ko-01": "c9ece333a908e42eeaa0ed04172a212b1c317b64131f4d24a7e529ebb7556ea1",
+      "v3-development-meta-04": "c8da067e36df6c74530937460513aa3f04e15dad8059804934ca485fb42c074e",
+      "v3-development-msft-03": "dffad95beb630d47611aef1444089dd6bfcd572338852745fec41628c2fe67f1",
+      "v3-development-nvda-02": "2f2aa2dd45b8ebfc757ffe1fd244d4aee23d2454b8c4ce1c7a1422a4cbce9868",
+      "v3-development-pfe-01": "3d005bc14c9a1623a7c26b84254fd0f858e9154fe27d9d2edab04300aaeee12b",
+      "v3-development-tsla-04": "f57aeb431eb501749e927fcc2e353bcbd3ad8d34855f7b885aba1abe0ab561cf",
+      "v3-development-unh-03": "c42a6ebbfcdf98fcbc062f57c3dbe9cbe960dc6f564df8cc02c4f71323a80fd4",
+      "v3-development-wmt-04": "dad5171b3791e353be5b9190a1360d470954aa8899e8a32445ef7ea472fbf337",
+      "v3-development-xom-02": "d495b2aeb75e4e411819adc0dcada3474369537c25cef7e330563fc94351358d"
+    },
+    "rag": {
+      "collection/pilot_chunks/storage.sqlite": "3f4a4e4fa4286fb4bfabf61f1b958e563595f3d34daad903822a1a67f2beca9e",
+      "meta.json": "3902e6d3d0fe9ef254e77b46b92288a3f2091d5a31138806b203d3f9b0a72236",
+      "pilot_chunks-encoder.json": "53903c6d597e7cd702937a037b49f6a6e2a34508ecf8f7174ac1ae2defeed811"
+    },
+    "weight_files": {
+      "config.json": "13dcd6c31d9fec9d1d8e158702072f62d7fa7d312a64b9fe057bec9a08cfe41a",
+      "model.safetensors": "d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286",
+      "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+      "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "tokenizer.json": "69564b696052886ed0ac63fa393e928384e0f8caada38c1f4864a9bfbf379c15",
+      "tokenizer_config.json": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4"
+    }
+  },
+  "prompt_hashes": {
+    "analyst": "55c51c94f600687b12a46b1ebb7bec0b4f0bd026877a5770bd476393b8b65611",
+    "trader": "35a230f63bf9690ab532504add6199add1cafcf15a2b422995c18d82a65e5ee5"
+  },
+  "protocol_amendment_sha256": "8f74254b7bd381b3717f48ff1690975147440fbd8be0157a9dac4cb3f3d02956",
+  "rag_context_bytes": 3200,
+  "reasoning": "low",
+  "retriever": "S3",
+  "schemas": {
+    "market_report": "bc761e711049bddc69b3ccc582ab1c6050214df15cd3ea6e88a639aa572168ed",
+    "proposal": "61c2be7341885f40c92f7e21a8b30e374c0b7b76140a506cceaa1086b4bd8ebe"
+  },
+  "smoke_tasks": [
+    "v3-development-jpm-02"
+  ],
+  "source_tree": "19a347c7c431aaf5064c709286edd1a3ab0d8e58",
+  "temperature": 0,
+  "tools_per_round": 4,
+  "transport": "local"
+}
