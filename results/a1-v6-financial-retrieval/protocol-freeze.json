@@ -1,0 +1,108 @@
+{
+  "base_commit": "8b561a9d28b23aba73f2ecb900b1e757f89c8027",
+  "historical": {
+    "S3": "ee7998438ffeee4d786eed46dcb925d1798afaf9",
+    "E3": "8b561a9d28b23aba73f2ecb900b1e757f89c8027",
+    "diagnosis": "6d9e99f042e456b6bd5be0482c0a4a9b8db6dcdc"
+  },
+  "split": {
+    "calibration": 49,
+    "publicTest": 99,
+    "group": "leave one company out; select on training companies, report every held-out prediction",
+    "test": "one frozen configuration, one run; old baselines archived"
+  },
+  "metrics": {
+    "primary": "historical mean page Recall@5",
+    "return_k": 5,
+    "diagnostic_k": 10,
+    "oracle": "min(5, unique gold pages retrieved)/gold pages",
+    "lines": "V3 normalized proxy plus V5.1-style punctuation-preserving, date/section-filtered source proxy"
+  },
+  "phase1": {
+    "pools": [
+      "S3",
+      "E3"
+    ],
+    "features": [
+      "S",
+      "M",
+      "Y",
+      "F",
+      "H",
+      "N",
+      "D"
+    ],
+    "ablations": [
+      "F0",
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "fusion": [
+      "rank-percentile bounded weighted",
+      "raw-logit bounded residual"
+    ],
+    "weights": {
+      "M": 0.17,
+      "Y": 0.09,
+      "F": 0.06,
+      "H": 0.04,
+      "N": 0.1,
+      "D": 0.04
+    },
+    "max_residual_logit": 0.5,
+    "normalized_semantic_weight": 0.8,
+    "pages": [
+      "none",
+      "first distinct page then backfill",
+      "soft repeated-page penalty 0.10"
+    ],
+    "safety": "Fallback F0 unless a metric is parsed; period from source text, no hard year filters; keep candidates intact."
+  },
+  "phase2": {
+    "base": "E3 fixed raw query channels",
+    "variants": [
+      "Q0",
+      "Q1 lexical",
+      "Q2 dense",
+      "Q3 lexical+dense RRF/BGE controls",
+      "Q4 Q3 plus selected Phase 1 rank"
+    ],
+    "rrf_k": 60,
+    "cap": [
+      100,
+      150
+    ],
+    "max_query_forms": 3,
+    "base_channel_weight": 2,
+    "per_expansion_depth": 35,
+    "selection": "pool coverage and Recall@5 with fixed phase-1 ranking; no additional query weights"
+  },
+  "phase3": {
+    "trigger": "If single full-calibration and OOF policy both fail >=.70 quality target, do structure smoke on first six lexicographic eligible Calibration document IDs; then build if at least one independently bound header and >=10 auditable financial rows across smoke docs.",
+    "scope": "same 83 PDFs and zero-based page IDs; paragraphs on statement pages and conservative rows/blocks; keep legacy evidence elsewhere/alongside as described; no gold-derived page selection"
+  },
+  "phase4": {
+    "gate": "Only if still below 0.70 after phase 3, at least 8 Calibration company groups, and a fixed recipe shows complementarity versus raw BGE on >=3 company groups."
+  },
+  "selection": {
+    "order": [
+      "Recall@5",
+      "Recall@1",
+      "MRR@10",
+      "corrected financial row count",
+      "smaller candidate cap"
+    ],
+    "stability": "quality stop only if full-calibration best and crossfitted policy both >=0.70, no relevant metric drop >.03 and corrected line coverage not worse by >.03 vs corresponding baseline.",
+    "deployment": "warm and cold mean <= 1.25x same-hardware rerun of S3, show Pareto and cold startup separately.",
+    "bootstrap": {
+      "groups": "company",
+      "draws": 10000,
+      "seed": 47185
+    }
+  },
+  "glm_requests": 0,
+  "glm_tokens": 0
+}

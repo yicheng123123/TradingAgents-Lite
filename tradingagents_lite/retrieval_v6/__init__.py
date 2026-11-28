@@ -1,0 +1,1 @@
+"""Isolated financial retrieval experiment."""
