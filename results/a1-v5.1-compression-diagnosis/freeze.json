@@ -1,0 +1,100 @@
+{
+  "ablation": {
+    "D0": "untouched FinanceBench V2 C1 selector",
+    "D1": "preserve existing rank, try source row/header extension then the original option",
+    "D2": "skipped",
+    "D3": "skipped"
+  },
+  "base_commit": "9e659536eba66baa97f3ff868ed678160f79a7bd",
+  "base_freeze_sha256": "d241cbfc037f296186b873eb49d881f82123f89826caee3f799c2b295f8c41e0",
+  "bootstrap": {
+    "draws": 4000,
+    "seed": 5101,
+    "unit": "company"
+  },
+  "budgets": [
+    3200,
+    1600
+  ],
+  "calibration": {
+    "historical_deliveries_sha256": "bde23c69942dc53a6a73c44383babaa9c62e5ca9c99785a01d611929aae73b3e",
+    "inputs_sha256": "e619a9d2feb4cad62f75a00012a661cb86edaadd327bf677e7fc2d4dca42f77d",
+    "labels_sha256": "691ff1de10d98d240a107a7cbd965945cff00482fd3e96d5a85762d8603c3091",
+    "n": 49,
+    "rows_sha256": "5ea4381bf7d20333865308c5b7c063944f5912b746788affaeef6b7a1e5fd69c",
+    "summary_sha256": "99b0b27bc47c7d9d0edaf657e79a8edd01699b927b21093f96efd9ac0e61e38c"
+  },
+  "candidates": {
+    "baseline": "A1-V3 S3",
+    "candidate_count": 5,
+    "query": "original FinanceBench question"
+  },
+  "decision_rule": {
+    "budget_failures": 0,
+    "citation_validity": 1,
+    "consider_cluster_bootstrap_uncertainty": true,
+    "maximum_mean_latency_ratio": 2,
+    "maximum_page_recall_drop": 0.02,
+    "relative_row_gain_at_least": 0.1,
+    "retention": "no material decline",
+    "source_exactness": 1
+  },
+  "followup_reserve": 0.35,
+  "glm_requests": 0,
+  "glm_tokens": 0,
+  "historical_index_hashes": {
+    "chunks-encoder.json": "53903c6d597e7cd702937a037b49f6a6e2a34508ecf8f7174ac1ae2defeed811",
+    "collection/chunks/storage.sqlite": "6a46bb273cb0dd64da517d510d9ba1351d039d997865c5d114cf7ec3d0801409",
+    "meta.json": "e7f6534d40c0f33720da30d56668f1524f4f54344fcd2ac712bcd23932740b73"
+  },
+  "historical_replay": {
+    "C2": null,
+    "C3": 0.8,
+    "C4": 0.65,
+    "verified_against_archive": 294
+  },
+  "max_request_bytes": 8000,
+  "pit_cutoff_utc_timestamp": 1767225600.0,
+  "private_test_opened": false,
+  "public_artifact_sha256": {
+    "COMMANDS.md": "2493bd90d6993847c4b92dd8369c9f4cc5c3f269cb6aa02d7950add5a3b414d8",
+    "REPORT.md": "cdec377ba79f0df0eabd912596a8fb71744cb839d95e0b0fcc7376f45e5a12ae",
+    "ablation-rows.jsonl": "ec61576304bf30f7d11129b076465dcf729f34395896a7292ffa293e7a9c1e82",
+    "cases.jsonl": "dc4da5c54434dc5f1c8e1a344d034b16d5899118d525079dfd4726d8441e0bb8",
+    "evidence-stage-loss.svg": "f4107bc7fa200cd41cccfe6af4db67814968904178aac847076f4b3f5bd0f31d",
+    "failure-attribution.json": "dc7bc049a200b1ba5df3edfbe82e369c5cb07ab68c6c3b7dcdf1e5ec1d521f68",
+    "failure-distribution.svg": "fb85c9525472f50d3b585900f82fc08abea732cd21629ebf7d3fdd382d621c1c",
+    "render_figures.py": "eaf19fcfa0f51029f6bbaaf1a37d80fc2672c6f8d5239bd35449205b5df83350",
+    "summary.json": "592e428a75e14f79d7b143895af00e6976cedc9e002be0b362862413b234bffd"
+  },
+  "public_test_opened": false,
+  "result": "retain C1; end current A1 tuning; no additional inference",
+  "schema": "a1-v5.1-compression-diagnosis-v1",
+  "source_sha256": {
+    "tests/test_financebench_compression_diagnosis.py": "aab82c1cc6a9f66e78d1d31bb3147da1a55d7af770d7b204e1851a12fdf691dd",
+    "tradingagents_lite/documents.py": "0a33f7dc2ca97774e2c10f3d5a183f281a9c0965d41fa85622b799e2f78e0939",
+    "tradingagents_lite/embedding_v4.py": "b8f90e8d672d582cab27152fd4d283e7e946b29361aac10786bd0587eb81c55b",
+    "tradingagents_lite/financebench.py": "e6118cb9fe415c8465acc258d56bf2c0807cbfbf35597fe6a51ef598c2f9ef51",
+    "tradingagents_lite/financebench_compression_diagnosis.py": "c7299c58d0228f2ad1ea1efd1ac8e3afea2c9017b095268030e4448f4aca8e7f",
+    "tradingagents_lite/financebench_compression_repair.py": "cb0587c8a6189554bfe22bf040bd0d00fc531fa5a417b00ca5aadc2474a2ff66",
+    "tradingagents_lite/financebench_compression_v5.py": "9e8c1e0b1a8136f86d8fa9d6b20cd5580b43900b7cb2aeeca5d18a4bb995f543"
+  },
+  "v3_holdout_opened": false,
+  "verified_model_files": {
+    "1_Pooling/config.json": "e54c164a07274f2eb45bb724f54a79d1efcc90c41573887cd9a29aeee0597352",
+    "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+    "config_sentence_transformers.json": "1eef72430e7194a1e59680e635aed81ffa083f05668dbc5bb1c56c04c0999c38",
+    "modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+    "onnx/config.json": "f24afd5de914fba8c668426c43d208a1a54022500c63b2c160be20891686fce8",
+    "onnx/sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+    "onnx/special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+    "onnx/tokenizer.json": "6710678b12670bc442b99edc952c4d996ae309a7020c1fa0096dd245c2faf790",
+    "onnx/tokenizer_config.json": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4",
+    "pytorch_model.bin": "b5e0ce3470abf5ef3831aa1bd5553b486803e83251590ab7ff35a117cf6aad38",
+    "sentence_bert_config.json": "eb9b44b13c0f52a3b3685c3b1cbdea1ba8b04bea123b98f61610048940776eb1",
+    "sentencepiece.bpe.model": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865",
+    "special_tokens_map.json": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+    "tokenizer.json": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+    "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4"
+  }
+}

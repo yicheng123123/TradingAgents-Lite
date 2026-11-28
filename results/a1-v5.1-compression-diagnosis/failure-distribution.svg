@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 385" role="img" aria-labelledby="title">
+<title id="title">Where reference rows first go missing</title>
+<rect x="0" y="0" width="860" height="385" fill="#f8fafc"/>
+<g font-family="system-ui,sans-serif">
+<text x="25" y="33" fill="#334155" font-size="22" text-anchor="start" font-weight="650">Where reference rows first go missing</text>
+<text x="25" y="57" fill="#334155" font-size="13" text-anchor="start" font-weight="400">FinanceBench Calibration · 49 questions · 200 corrected reference rows per arm and byte budget</text>
+<rect x="120" y="77" width="12" height="12" fill="#65758a"/>
+<text x="137" y="88" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F1  Missing in Top-5</text>
+<rect x="296" y="77" width="12" height="12" fill="#ca8655"/>
+<text x="313" y="88" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F2  No complete unit</text>
+<rect x="472" y="77" width="12" height="12" fill="#8375ad"/>
+<text x="489" y="88" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F3  Relevance</text>
+<rect x="648" y="77" width="12" height="12" fill="#9a6487"/>
+<text x="665" y="88" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F4  Redundancy / MMR</text>
+<rect x="120" y="100" width="12" height="12" fill="#2f688d"/>
+<text x="137" y="111" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F5  Byte limits</text>
+<rect x="296" y="100" width="12" height="12" fill="#aa8645"/>
+<text x="313" y="111" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F6  Missing header</text>
+<rect x="472" y="100" width="12" height="12" fill="#9a7070"/>
+<text x="489" y="111" fill="#334155" font-size="12" text-anchor="start" font-weight="400">F7  Scorer mismatch</text>
+<rect x="648" y="100" width="12" height="12" fill="#397765"/>
+<text x="665" y="111" fill="#334155" font-size="12" text-anchor="start" font-weight="400">Delivered</text>
+<text x="25" y="151" fill="#334155" font-size="14" text-anchor="start" font-weight="650">C2 · 3200</text>
+<rect x="120" y="135" width="495.6" height="23" fill="#65758a"/>
+<text x="367.8" y="151" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">140</text>
+<rect x="615.6" y="135" width="7.08" height="23" fill="#ca8655"/>
+<rect x="622.6800000000001" y="135" width="194.7" height="23" fill="#2f688d"/>
+<text x="720.03" y="151" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">55</text>
+<rect x="817.3800000000001" y="135" width="10.62" height="23" fill="#397765"/>
+<text x="25" y="185" fill="#334155" font-size="14" text-anchor="start" font-weight="650">C3 · 3200</text>
+<rect x="120" y="169" width="495.6" height="23" fill="#65758a"/>
+<text x="367.8" y="185" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">140</text>
+<rect x="615.6" y="169" width="7.08" height="23" fill="#ca8655"/>
+<rect x="622.6800000000001" y="169" width="194.7" height="23" fill="#2f688d"/>
+<text x="720.03" y="185" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">55</text>
+<rect x="817.3800000000001" y="169" width="10.62" height="23" fill="#397765"/>
+<text x="25" y="219" fill="#334155" font-size="14" text-anchor="start" font-weight="650">C4 · 3200</text>
+<rect x="120" y="203" width="495.6" height="23" fill="#65758a"/>
+<text x="367.8" y="219" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">140</text>
+<rect x="615.6" y="203" width="7.08" height="23" fill="#ca8655"/>
+<rect x="622.6800000000001" y="203" width="24.78" height="23" fill="#9a6487"/>
+<rect x="647.46" y="203" width="134.52" height="23" fill="#2f688d"/>
+<text x="714.72" y="219" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">38</text>
+<rect x="781.98" y="203" width="46.02" height="23" fill="#397765"/>
+<text x="804.99" y="219" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">13</text>
+<text x="25" y="265" fill="#334155" font-size="14" text-anchor="start" font-weight="650">C2 · 1600</text>
+<rect x="120" y="249" width="495.6" height="23" fill="#65758a"/>
+<text x="367.8" y="265" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">140</text>
+<rect x="615.6" y="249" width="7.08" height="23" fill="#ca8655"/>
+<rect x="622.6800000000001" y="249" width="198.24" height="23" fill="#2f688d"/>
+<text x="721.8" y="265" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">56</text>
+<rect x="820.9200000000001" y="249" width="7.08" height="23" fill="#397765"/>
+<text x="25" y="299" fill="#334155" font-size="14" text-anchor="start" font-weight="650">C3 · 1600</text>
+<rect x="120" y="283" width="495.6" height="23" fill="#65758a"/>
+<text x="367.8" y="299" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">140</text>
+<rect x="615.6" y="283" width="7.08" height="23" fill="#ca8655"/>
+<rect x="622.6800000000001" y="283" width="198.24" height="23" fill="#2f688d"/>
+<text x="721.8" y="299" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">56</text>
+<rect x="820.9200000000001" y="283" width="7.08" height="23" fill="#397765"/>
+<text x="25" y="333" fill="#334155" font-size="14" text-anchor="start" font-weight="650">C4 · 1600</text>
+<rect x="120" y="317" width="495.6" height="23" fill="#65758a"/>
+<text x="367.8" y="333" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">140</text>
+<rect x="615.6" y="317" width="7.08" height="23" fill="#ca8655"/>
+<rect x="622.6800000000001" y="317" width="3.54" height="23" fill="#9a6487"/>
+<rect x="626.22" y="317" width="201.78" height="23" fill="#2f688d"/>
+<text x="727.11" y="333" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="400">57</text>
+<text x="120" y="366" fill="#334155" font-size="13" text-anchor="start" font-weight="400">First-loss categories are mutually exclusive. Segment labels are row counts.</text>
+</g>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" role="img" aria-labelledby="title">
+<title id="title">Reference rows remaining by stage</title>
+<rect x="0" y="0" width="860" height="380" fill="#f8fafc"/>
+<g font-family="system-ui,sans-serif">
+<text x="25" y="33" fill="#334155" font-size="22" text-anchor="start" font-weight="650">Reference rows remaining by stage</text>
+<text x="25" y="57" fill="#334155" font-size="13" text-anchor="start" font-weight="400">FinanceBench Calibration · 3200-byte budget · cumulative survival by first-loss classification</text>
+<rect x="135" y="91" width="640" height="1" fill="#dce3ec"/>
+<text x="120" y="96" fill="#334155" font-size="12" text-anchor="end" font-weight="400">200</text>
+<rect x="135" y="141" width="640" height="1" fill="#dce3ec"/>
+<text x="120" y="146" fill="#334155" font-size="12" text-anchor="end" font-weight="400">150</text>
+<rect x="135" y="191" width="640" height="1" fill="#dce3ec"/>
+<text x="120" y="196" fill="#334155" font-size="12" text-anchor="end" font-weight="400">100</text>
+<rect x="135" y="241" width="640" height="1" fill="#dce3ec"/>
+<text x="120" y="246" fill="#334155" font-size="12" text-anchor="end" font-weight="400">50</text>
+<rect x="135" y="291" width="640" height="1" fill="#dce3ec"/>
+<text x="120" y="296" fill="#334155" font-size="12" text-anchor="end" font-weight="400">0</text>
+<text x="170" y="312" fill="#334155" font-size="12" text-anchor="middle" font-weight="400">Expected</text>
+<text x="305" y="312" fill="#334155" font-size="12" text-anchor="middle" font-weight="400">In S3 Top-5</text>
+<text x="440" y="312" fill="#334155" font-size="12" text-anchor="middle" font-weight="400">After unit stage</text>
+<text x="575" y="312" fill="#334155" font-size="12" text-anchor="middle" font-weight="400">After relevance / MMR</text>
+<text x="710" y="312" fill="#334155" font-size="12" text-anchor="middle" font-weight="400">Delivered</text>
+<polyline points="170,91.00 305,231.00 440,233.00 575,233.00 710,288.00" fill="none" stroke="#2f688d" stroke-width="4"/>
+<circle cx="170" cy="91.00" r="4" fill="#2f688d"/>
+<circle cx="305" cy="231.00" r="4" fill="#2f688d"/>
+<circle cx="440" cy="233.00" r="4" fill="#2f688d"/>
+<circle cx="575" cy="233.00" r="4" fill="#2f688d"/>
+<circle cx="710" cy="288.00" r="4" fill="#2f688d"/>
+<rect x="137" y="329" width="18" height="3" fill="#2f688d"/>
+<text x="163" y="337" fill="#334155" font-size="13" text-anchor="start" font-weight="400">C2 / C3 (same counts)</text>
+<text x="370" y="337" fill="#334155" font-size="13" text-anchor="start" font-weight="400">200 → 60 → 58 → 58 → 3</text>
+<polyline points="170,91.00 305,231.00 440,233.00 575,240.00 710,278.00" fill="none" stroke="#9a6440" stroke-width="2.5"/>
+<circle cx="170" cy="91.00" r="4" fill="#9a6440"/>
+<circle cx="305" cy="231.00" r="4" fill="#9a6440"/>
+<circle cx="440" cy="233.00" r="4" fill="#9a6440"/>
+<circle cx="575" cy="240.00" r="4" fill="#9a6440"/>
+<circle cx="710" cy="278.00" r="4" fill="#9a6440"/>
+<rect x="137" y="352" width="18" height="3" fill="#9a6440"/>
+<text x="163" y="360" fill="#334155" font-size="13" text-anchor="start" font-weight="400">C4</text>
+<text x="370" y="360" fill="#334155" font-size="13" text-anchor="start" font-weight="400">200 → 60 → 58 → 51 → 13</text>
+</g>
+</svg>

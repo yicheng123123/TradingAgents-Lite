@@ -1,0 +1,702 @@
+{
+  "corrected_scoring": {
+    "legacy_metrics_preserved": true,
+    "reference_target_exclusions": "date-only and section headings, identical for all arms",
+    "retention": "page-scoped token sets with sign- and unit-aware numeric matching",
+    "source_match": "canonical tokens, one contiguous original source span"
+  },
+  "d1_context_changed_cases": {
+    "1600": 0,
+    "3200": 0
+  },
+  "glm_requests": 0,
+  "glm_tokens": 0,
+  "groups": {
+    "C2|budget=1600": {
+      "arm": "C2",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.011450381679389313,
+      "configured_context_budget_bytes": 1600,
+      "coverage_corrected": 0.01,
+      "delivered_page_recall_mean": 0.3163265306122449,
+      "effective_first_round_capacity_bytes": 1040,
+      "embedding_latency_mean_ms": 256.8251137755093,
+      "financial_rows_covered": 3,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": 1.0,
+      "header_binding_attempts": 1,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 1972,
+      "mean_context_bytes": 792.1836734693877,
+      "mean_effective_capacity_utilization": 0.7617150706436421,
+      "mean_proxy_evidence_tokens": 73.59183673469387,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 1635.061224489796,
+      "mean_source_compression_ratio": 0.038855333169333144,
+      "mmr_lambda": null,
+      "n": 49,
+      "proxy_token_reduction": 0.9553894677337564,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 2,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 262.8098197551034,
+      "selection_latency_p50_ms": 216.47900099998196,
+      "selection_latency_p95_ms": 341.4238419999549,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.03067484662576687,
+      "unit_retention_micro": 0.036231884057971016,
+      "value_corrected": 0.00684931506849315,
+      "value_retention_micro": 0.007039499413375049,
+      "year_corrected": 0.03676470588235294,
+      "year_retention_micro": 0.044642857142857144
+    },
+    "C2|budget=3200": {
+      "arm": "C2",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.015267175572519083,
+      "configured_context_budget_bytes": 3200,
+      "coverage_corrected": 0.015,
+      "delivered_page_recall_mean": 0.3979591836734694,
+      "effective_first_round_capacity_bytes": 2080,
+      "embedding_latency_mean_ms": 256.8251137755093,
+      "financial_rows_covered": 4,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": 0.5,
+      "header_binding_attempts": 2,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 2921,
+      "mean_context_bytes": 1488.3673469387754,
+      "mean_effective_capacity_utilization": 0.7155612244897959,
+      "mean_proxy_evidence_tokens": 216.3877551020408,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 2331.2448979591836,
+      "mean_source_compression_ratio": 0.11576874901953371,
+      "mmr_lambda": null,
+      "n": 49,
+      "proxy_token_reduction": 0.8673901660489571,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 3,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 269.9879012244842,
+      "selection_latency_p50_ms": 224.16776299996855,
+      "selection_latency_p95_ms": 356.64683799996055,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.049079754601226995,
+      "unit_retention_micro": 0.057971014492753624,
+      "value_corrected": 0.010273972602739725,
+      "value_retention_micro": 0.010950332420805632,
+      "year_corrected": 0.04411764705882353,
+      "year_retention_micro": 0.05357142857142857
+    },
+    "C3|lambda=0.8|budget=1600": {
+      "arm": "C3",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.011450381679389313,
+      "configured_context_budget_bytes": 1600,
+      "coverage_corrected": 0.01,
+      "delivered_page_recall_mean": 0.3163265306122449,
+      "effective_first_round_capacity_bytes": 1040,
+      "embedding_latency_mean_ms": 256.8251137755093,
+      "financial_rows_covered": 3,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": 1.0,
+      "header_binding_attempts": 1,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 1979,
+      "mean_context_bytes": 796.1224489795918,
+      "mean_effective_capacity_utilization": 0.765502354788069,
+      "mean_proxy_evidence_tokens": 73.91836734693878,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 1639,
+      "mean_source_compression_ratio": 0.039064982554388145,
+      "mmr_lambda": 0.8,
+      "n": 49,
+      "proxy_token_reduction": 0.9551759246821584,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 2,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 262.83578906122176,
+      "selection_latency_p50_ms": 216.31327599999395,
+      "selection_latency_p95_ms": 341.32412599996087,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.03067484662576687,
+      "unit_retention_micro": 0.036231884057971016,
+      "value_corrected": 0.005707762557077625,
+      "value_retention_micro": 0.005866249511145874,
+      "year_corrected": 0.03676470588235294,
+      "year_retention_micro": 0.044642857142857144
+    },
+    "C3|lambda=0.8|budget=3200": {
+      "arm": "C3",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.015267175572519083,
+      "configured_context_budget_bytes": 3200,
+      "coverage_corrected": 0.015,
+      "delivered_page_recall_mean": 0.3979591836734694,
+      "effective_first_round_capacity_bytes": 2080,
+      "embedding_latency_mean_ms": 256.8251137755093,
+      "financial_rows_covered": 4,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": 0.5,
+      "header_binding_attempts": 2,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 2921,
+      "mean_context_bytes": 1487.265306122449,
+      "mean_effective_capacity_utilization": 0.7150313971742542,
+      "mean_proxy_evidence_tokens": 216.51020408163265,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 2330.1428571428573,
+      "mean_source_compression_ratio": 0.11512941838063677,
+      "mmr_lambda": 0.8,
+      "n": 49,
+      "proxy_token_reduction": 0.8673374111565255,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 3,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 271.7761427142849,
+      "selection_latency_p50_ms": 227.32152099996483,
+      "selection_latency_p95_ms": 362.7736699999673,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.05521472392638037,
+      "unit_retention_micro": 0.06521739130434782,
+      "value_corrected": 0.0106544901065449,
+      "value_retention_micro": 0.010950332420805632,
+      "year_corrected": 0.04411764705882353,
+      "year_retention_micro": 0.05357142857142857
+    },
+    "C4|lambda=0.65|budget=1600": {
+      "arm": "C4",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.0,
+      "configured_context_budget_bytes": 1600,
+      "coverage_corrected": 0.0,
+      "delivered_page_recall_mean": 0.19387755102040816,
+      "effective_first_round_capacity_bytes": 1040,
+      "embedding_latency_mean_ms": 256.8251137755093,
+      "financial_rows_covered": 0,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": null,
+      "header_binding_attempts": 0,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 2083,
+      "mean_context_bytes": 932.9795918367347,
+      "mean_effective_capacity_utilization": 0.8970957613814756,
+      "mean_proxy_evidence_tokens": 141.87755102040816,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 1775.857142857143,
+      "mean_source_compression_ratio": 0.0702237131884805,
+      "mmr_lambda": 0.65,
+      "n": 49,
+      "proxy_token_reduction": 0.9145913635264644,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 0,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 266.05802848979437,
+      "selection_latency_p50_ms": 222.06556999998384,
+      "selection_latency_p95_ms": 347.5327269999866,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.012269938650306749,
+      "unit_retention_micro": 0.014492753623188406,
+      "value_corrected": 0.00684931506849315,
+      "value_retention_micro": 0.007430582714118107,
+      "year_corrected": 0.03676470588235294,
+      "year_retention_micro": 0.044642857142857144
+    },
+    "C4|lambda=0.65|budget=3200": {
+      "arm": "C4",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.06870229007633588,
+      "configured_context_budget_bytes": 3200,
+      "coverage_corrected": 0.065,
+      "delivered_page_recall_mean": 0.25510204081632654,
+      "effective_first_round_capacity_bytes": 2080,
+      "embedding_latency_mean_ms": 256.8251137755093,
+      "financial_rows_covered": 18,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": 1.0,
+      "header_binding_attempts": 4,
+      "headers_verified": 1,
+      "max_request_bytes_observed": 3142,
+      "mean_context_bytes": 1932.5714285714287,
+      "mean_effective_capacity_utilization": 0.9291208791208792,
+      "mean_proxy_evidence_tokens": 355.7142857142857,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 2775.4489795918366,
+      "mean_source_compression_ratio": 0.1824901817086559,
+      "mmr_lambda": 0.65,
+      "n": 49,
+      "proxy_token_reduction": 0.7872605848645796,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 13,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 276.83184359183747,
+      "selection_latency_p50_ms": 236.77360699997507,
+      "selection_latency_p95_ms": 366.8068189999758,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.06134969325153374,
+      "unit_retention_micro": 0.07246376811594203,
+      "value_corrected": 0.021689497716894976,
+      "value_retention_micro": 0.022291748142354323,
+      "year_corrected": 0.11029411764705882,
+      "year_retention_micro": 0.13392857142857142
+    },
+    "D0|budget=1600": {
+      "arm": "D0",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.05725190839694656,
+      "configured_context_budget_bytes": 1600,
+      "coverage_corrected": 0.01,
+      "delivered_page_recall_mean": 0.3469387755102041,
+      "effective_first_round_capacity_bytes": 1040,
+      "embedding_latency_mean_ms": 0,
+      "financial_rows_covered": 15,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": null,
+      "header_binding_attempts": 0,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 2099,
+      "mean_context_bytes": 927.734693877551,
+      "mean_effective_capacity_utilization": 0.8920525902668759,
+      "mean_proxy_evidence_tokens": 132.81632653061226,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 1770.6122448979593,
+      "mean_source_compression_ratio": 0.07506076912111409,
+      "mmr_lambda": null,
+      "n": 49,
+      "proxy_token_reduction": 0.920787342741297,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 2,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 21.444710979585114,
+      "selection_latency_p50_ms": 16.13020799993592,
+      "selection_latency_p95_ms": 47.75244400002521,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.12883435582822086,
+      "unit_retention_micro": 0.15217391304347827,
+      "value_corrected": 0.033105022831050226,
+      "value_retention_micro": 0.0422369964802503,
+      "year_corrected": 0.16911764705882354,
+      "year_retention_micro": 0.20535714285714285
+    },
+    "D0|budget=3200": {
+      "arm": "D0",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.11450381679389313,
+      "configured_context_budget_bytes": 3200,
+      "coverage_corrected": 0.06,
+      "delivered_page_recall_mean": 0.3673469387755102,
+      "effective_first_round_capacity_bytes": 2080,
+      "embedding_latency_mean_ms": 0,
+      "financial_rows_covered": 30,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": null,
+      "header_binding_attempts": 0,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 3142,
+      "mean_context_bytes": 1944.6326530612246,
+      "mean_effective_capacity_utilization": 0.9349195447409734,
+      "mean_proxy_evidence_tokens": 384.59183673469386,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 2787.5102040816328,
+      "mean_source_compression_ratio": 0.2180878378976254,
+      "mmr_lambda": null,
+      "n": 49,
+      "proxy_token_reduction": 0.7724166957648777,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 12,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 22.299955142863595,
+      "selection_latency_p50_ms": 20.47848500001237,
+      "selection_latency_p95_ms": 50.984867000011036,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.25766871165644173,
+      "unit_retention_micro": 0.3115942028985507,
+      "value_corrected": 0.13203957382039574,
+      "value_retention_micro": 0.14861165428236214,
+      "year_corrected": 0.3014705882352941,
+      "year_retention_micro": 0.36607142857142855
+    },
+    "D1|budget=1600": {
+      "arm": "D1",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.05725190839694656,
+      "configured_context_budget_bytes": 1600,
+      "coverage_corrected": 0.01,
+      "delivered_page_recall_mean": 0.3469387755102041,
+      "effective_first_round_capacity_bytes": 1040,
+      "embedding_latency_mean_ms": 0,
+      "financial_rows_covered": 15,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": null,
+      "header_binding_attempts": 0,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 2099,
+      "mean_context_bytes": 927.734693877551,
+      "mean_effective_capacity_utilization": 0.8920525902668759,
+      "mean_proxy_evidence_tokens": 132.81632653061226,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 1770.6122448979593,
+      "mean_source_compression_ratio": 0.07506076912111409,
+      "mmr_lambda": null,
+      "n": 49,
+      "proxy_token_reduction": 0.920787342741297,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 2,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 24.519913204095914,
+      "selection_latency_p50_ms": 20.340805000046203,
+      "selection_latency_p95_ms": 51.53035900002578,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.12883435582822086,
+      "unit_retention_micro": 0.15217391304347827,
+      "value_corrected": 0.033105022831050226,
+      "value_retention_micro": 0.0422369964802503,
+      "year_corrected": 0.16911764705882354,
+      "year_retention_micro": 0.20535714285714285
+    },
+    "D1|budget=3200": {
+      "arm": "D1",
+      "budget_failures": 0,
+      "citation_integrity_rate": 1,
+      "complete_financial_row_coverage_micro": 0.11450381679389313,
+      "configured_context_budget_bytes": 3200,
+      "coverage_corrected": 0.06,
+      "delivered_page_recall_mean": 0.3673469387755102,
+      "effective_first_round_capacity_bytes": 2080,
+      "embedding_latency_mean_ms": 0,
+      "financial_rows_covered": 30,
+      "financial_rows_total": 262,
+      "header_binding_accuracy": null,
+      "header_binding_attempts": 0,
+      "headers_verified": 0,
+      "max_request_bytes_observed": 3142,
+      "mean_context_bytes": 1944.6326530612246,
+      "mean_effective_capacity_utilization": 0.9349195447409734,
+      "mean_proxy_evidence_tokens": 384.59183673469386,
+      "mean_raw_proxy_tokens": 1709.6734693877552,
+      "mean_request_bytes": 2787.5102040816328,
+      "mean_source_compression_ratio": 0.2180878378976254,
+      "mmr_lambda": null,
+      "n": 49,
+      "proxy_token_reduction": 0.7724166957648777,
+      "retrieval_recall_at_5_mean": 0.5306122448979592,
+      "rows_corrected": 12,
+      "rows_corrected_total": 200,
+      "selection_latency_mean_ms": 28.256272673469798,
+      "selection_latency_p50_ms": 23.247109000067212,
+      "selection_latency_p95_ms": 74.20940300005441,
+      "source_fact_consistency_rate": 1,
+      "split": "calibration",
+      "unit_corrected": 0.25766871165644173,
+      "unit_retention_micro": 0.3115942028985507,
+      "value_corrected": 0.13203957382039574,
+      "value_retention_micro": 0.14861165428236214,
+      "year_corrected": 0.3014705882352941,
+      "year_retention_micro": 0.36607142857142855
+    }
+  },
+  "n": 49,
+  "pairs": {
+    "C2": {
+      "1600": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "better": 8,
+            "tie": 32,
+            "worse": 9
+          },
+          "ci95": [
+            -0.1574074074074074,
+            0.12745098039215685
+          ],
+          "clusters": 11,
+          "delta": -0.030612244897959183,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "better": 1,
+            "tie": 27,
+            "worse": 1
+          },
+          "ci95": [
+            -0.015463917525773196,
+            0.00946372239747634
+          ],
+          "clusters": 10,
+          "delta": 0.0,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      },
+      "3200": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "better": 7,
+            "tie": 36,
+            "worse": 6
+          },
+          "ci95": [
+            -0.0703125,
+            0.13513513513513514
+          ],
+          "clusters": 11,
+          "delta": 0.030612244897959183,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "better": 1,
+            "tie": 23,
+            "worse": 5
+          },
+          "ci95": [
+            -0.15217391304347827,
+            -0.0029411764705882353
+          ],
+          "clusters": 10,
+          "delta": -0.045,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      }
+    },
+    "C3": {
+      "1600": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "better": 8,
+            "tie": 32,
+            "worse": 9
+          },
+          "ci95": [
+            -0.1574074074074074,
+            0.12745098039215685
+          ],
+          "clusters": 11,
+          "delta": -0.030612244897959183,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "better": 1,
+            "tie": 27,
+            "worse": 1
+          },
+          "ci95": [
+            -0.015463917525773196,
+            0.00946372239747634
+          ],
+          "clusters": 10,
+          "delta": 0.0,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      },
+      "3200": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "better": 7,
+            "tie": 36,
+            "worse": 6
+          },
+          "ci95": [
+            -0.0703125,
+            0.13513513513513514
+          ],
+          "clusters": 11,
+          "delta": 0.030612244897959183,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "better": 1,
+            "tie": 23,
+            "worse": 5
+          },
+          "ci95": [
+            -0.15217391304347827,
+            -0.0029411764705882353
+          ],
+          "clusters": 10,
+          "delta": -0.045,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      }
+    },
+    "C4": {
+      "1600": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "better": 6,
+            "tie": 30,
+            "worse": 13
+          },
+          "ci95": [
+            -0.3111111111111111,
+            0.022222222222222223
+          ],
+          "clusters": 11,
+          "delta": -0.15306122448979592,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "tie": 27,
+            "worse": 2
+          },
+          "ci95": [
+            -0.031055900621118012,
+            0.0
+          ],
+          "clusters": 10,
+          "delta": -0.01,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      },
+      "3200": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "better": 5,
+            "tie": 33,
+            "worse": 11
+          },
+          "ci95": [
+            -0.24468085106382978,
+            0.0
+          ],
+          "clusters": 11,
+          "delta": -0.11224489795918367,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "better": 5,
+            "tie": 20,
+            "worse": 4
+          },
+          "ci95": [
+            -0.12173913043478261,
+            0.06324110671936758
+          ],
+          "clusters": 10,
+          "delta": 0.005,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      }
+    },
+    "D1": {
+      "1600": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "tie": 49
+          },
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "clusters": 11,
+          "delta": 0.0,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "tie": 29
+          },
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "clusters": 10,
+          "delta": 0.0,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      },
+      "3200": {
+        "delivered_page_recall": {
+          "case_directions": {
+            "tie": 49
+          },
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "clusters": 11,
+          "delta": 0.0,
+          "draws": 4000,
+          "scorable_cases": 49
+        },
+        "rows_corrected": {
+          "case_directions": {
+            "tie": 29
+          },
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "clusters": 10,
+          "delta": 0.0,
+          "draws": 4000,
+          "scorable_cases": 29
+        }
+      }
+    }
+  },
+  "regression": {
+    "baseline_restored_fixtures": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 266,
+      "skipped": 3
+    },
+    "new_code_restored_fixtures": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 277,
+      "skipped": 3
+    },
+    "new_synthetic_tests": 11,
+    "pristine_missing_fixtures": {
+      "errors": 13,
+      "failed": 15,
+      "passed": 239,
+      "skipped": 2
+    },
+    "python": "3.12.3"
+  },
+  "selected_for_deployment": "C1 (unchanged)",
+  "skipped": {
+    "D2": "Semantic-only C2/C3 lost most complete rows and original encoding latency alone exceeded 2x C1. No additional semantic configuration was fit.",
+    "D3": "D2 was not run; no complementary benefit established."
+  },
+  "test_opened": false
+}
