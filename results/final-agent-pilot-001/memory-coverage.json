@@ -1,4 +1,24 @@
 {
+  "actual": {
+    "T3": {
+      "memory_context_bytes_mean": 385,
+      "memory_eligible_tasks": 1,
+      "memory_empty_rate_among_observed": 0.0,
+      "memory_injected_total": 1,
+      "memory_latency_ms_mean": 19.566718000078254,
+      "memory_use_rate": 0.05,
+      "memory_used_tasks": 1
+    },
+    "T4": {
+      "memory_context_bytes_mean": 385,
+      "memory_eligible_tasks": 1,
+      "memory_empty_rate_among_observed": 0.0,
+      "memory_injected_total": 1,
+      "memory_latency_ms_mean": 19.495091999942815,
+      "memory_use_rate": 0.05,
+      "memory_used_tasks": 1
+    }
+  },
   "candidate_counts": {
     "v3-development-aapl-01": 0,
     "v3-development-amd-03": 2,

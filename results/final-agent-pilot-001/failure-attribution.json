@@ -1,0 +1,13 @@
+{
+  "formal_gate": {
+    "available": 450781,
+    "estimated_remaining": 613852,
+    "path_checks_passed": true,
+    "reason": "budget_projection_exceeds_pilot_cap",
+    "reserved_headroom": 10133,
+    "status": "stopped_before_formal"
+  },
+  "system_stop": null,
+  "task_error_counts": {},
+  "unexecuted": 96
+}

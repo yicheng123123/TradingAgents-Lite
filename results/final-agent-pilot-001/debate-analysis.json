@@ -1,0 +1,34 @@
+{
+  "note": "Observed cross-arm action contrast, not a one-instance counterfactual",
+  "tasks": [
+    {
+      "paired_t3_action_changed": false,
+      "role_success": {
+        "bear": true,
+        "bull": true
+      },
+      "task_hash": "f313a884fc963a018dbb1002",
+      "trace": [
+        {
+          "reason": [
+            "near_momentum_threshold"
+          ],
+          "triggered": true
+        },
+        {
+          "conflict": true,
+          "reason": "stop_after_round",
+          "triggered": false
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "debate_completed_roles": 1,
+    "debate_conflict_count": 1,
+    "debate_latency_seconds": 12.369235091000292,
+    "debate_tokens": 5558,
+    "debate_trigger_count": 1,
+    "debate_trigger_rate": 0.05
+  }
+}

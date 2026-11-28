@@ -1,0 +1,93 @@
+{
+  "actual_b2_requests": 22,
+  "actual_glm_tokens": 49219,
+  "pilot": {
+    "attempts_recorded": 22,
+    "available": 450781,
+    "cached_tokens": 0,
+    "can_continue": true,
+    "conservatively_charged_tokens": 49219,
+    "denied_attempts": 0,
+    "experiment_id": "final-agent-pilot-001",
+    "experiment_limit": 500000,
+    "experiment_remaining": 450781,
+    "experiment_used": 49219,
+    "failed_attempts": 0,
+    "global_limit": 15000000,
+    "global_remaining": 14332442,
+    "global_used": 667558,
+    "http_attempts": 22,
+    "input_tokens": 46559,
+    "ledger": "token-budget.sqlite",
+    "missing_cached_details": 0,
+    "missing_reasoning_details": 0,
+    "missing_usage_attempts": 0,
+    "output_tokens": 2660,
+    "phase": "B2",
+    "phase_limit": 1000000,
+    "phase_remaining": 950781,
+    "phase_used": 49219,
+    "reasoning_tokens": 524,
+    "retries": 0,
+    "usage_known_tokens": 49219
+  },
+  "remaining_development": {
+    "available": false,
+    "b2_remaining": 950781
+  },
+  "smoke": {
+    "budget_fit": false,
+    "largest_request_reservation_by_arm": {
+      "T1": 6792,
+      "T2": 9793,
+      "T3": 10133,
+      "T4": 10121
+    },
+    "ledger": {
+      "attempts_recorded": 22,
+      "available": 450781,
+      "cached_tokens": 0,
+      "can_continue": true,
+      "conservatively_charged_tokens": 49219,
+      "denied_attempts": 0,
+      "experiment_id": "final-agent-pilot-001",
+      "experiment_limit": 500000,
+      "experiment_remaining": 450781,
+      "experiment_used": 49219,
+      "failed_attempts": 0,
+      "global_limit": 15000000,
+      "global_remaining": 14332442,
+      "global_used": 667558,
+      "http_attempts": 22,
+      "input_tokens": 46559,
+      "ledger": "token-budget.sqlite",
+      "missing_cached_details": 0,
+      "missing_reasoning_details": 0,
+      "missing_usage_attempts": 0,
+      "output_tokens": 2660,
+      "phase": "B2",
+      "phase_limit": 1000000,
+      "phase_remaining": 950781,
+      "phase_used": 49219,
+      "reasoning_tokens": 524,
+      "retries": 0,
+      "usage_known_tokens": 49219
+    },
+    "observed_rate_estimate_development_60_by_final_arm": {
+      "T2": 709680,
+      "T3": 712860,
+      "T4": 1084140
+    },
+    "observed_rate_estimate_remaining": 613852,
+    "observed_tokens_by_arm": {
+      "T1": 4735,
+      "T2": 7093,
+      "T3": 7146,
+      "T4": 13334
+    },
+    "original_protocol_stress_estimate_remaining": 1227704,
+    "passed": false,
+    "paths_passed": true,
+    "reason_if_failed": "smoke_path_or_budget_gate"
+  }
+}
