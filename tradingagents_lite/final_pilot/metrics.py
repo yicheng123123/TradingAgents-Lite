@@ -10,7 +10,7 @@ from statistics import mean,median
 from ..data import close_available,sha256
 from ..schema import Action,Task
 from .data import DevelopmentMarket,OUT,PUBLIC,WORK,atomic,load
-from .run import EXPERIMENT,PHASE,open_budget,reconcile,record_db
+from .run import EXPERIMENT,PHASE,open_budget,previous_smoke,reconcile,record_db
 
 ARMS=("T0","T1","T2","T3","T4")
 PAIRS=(("T1","T0"),("T2","T1"),("T3","T2"),("T4","T3"),("T4","T1"))
@@ -177,7 +177,7 @@ def export(allow_settlement=False,work=WORK,out=OUT):
     rows={}
     if config and (work/"predictions.sqlite").exists():
         with closing(record_db(work/"predictions.sqlite")) as db:
-            rows=reconcile(ledger,db,sha256(out/"freeze.json"))
+            rows=reconcile(ledger,db,sha256(out/"freeze.json"),previous_smoke(work,out))
     assembled=list(rows.values())
     selected=None
     pairs={}

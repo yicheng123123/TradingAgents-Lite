@@ -1,0 +1,48 @@
+{
+  "phase": "initial technical smoke",
+  "settlement_opened": false,
+  "formal_pilot_opened": false,
+  "http_attempts": 8,
+  "charged_tokens": 16911,
+  "cells": [
+    {
+      "arm": "T1",
+      "status": "failed",
+      "errors": [
+        {
+          "stage": "analyst",
+          "code": "tool_budget"
+        }
+      ],
+      "model_identity_checked": true
+    },
+    {
+      "arm": "T2",
+      "status": "failed",
+      "errors": [
+        {
+          "stage": "analyst",
+          "code": "tool_budget"
+        }
+      ],
+      "model_identity_checked": true
+    },
+    {
+      "arm": "T3",
+      "status": "failed",
+      "errors": [
+        {
+          "stage": "analyst",
+          "code": "tool_budget"
+        }
+      ],
+      "model_identity_checked": true
+    },
+    {
+      "arm": "T4",
+      "status": "ok",
+      "errors": [],
+      "model_identity_checked": true
+    }
+  ]
+}

@@ -30,6 +30,7 @@ PHASE = "B2"
 LIMIT = 500_000
 MAX_PROMPT_BYTES = 12_000
 MAX_CALLS = 8
+TOOLS_PER_ROUND = 4
 EXPERIMENT = "final-agent-pilot-001"
 LEDGER = SOURCE/"data/token-budget.sqlite"
 RERANKER = ROOT.parent/"tradingagents-a1-retrieval-v3/data/a1-retrieval-v3/bge-reranker-v2-m3"
@@ -74,6 +75,11 @@ class PilotBackend(ModelBackend):
         if self.usage["logical_calls"]>=MAX_CALLS:
             raise ModelCallError("instance_call_limit",0)
         tools = [tool for tool in tools if tool["function"]["name"]!="rag_search"]
+        if kwargs.get("structured_stage")=="market_report":
+            system=messages[0]["content"].replace(
+                "At most 4 calls per round and 2 rounds total.",
+                "At most 4 tool calls in one round total.")
+            messages=[{**messages[0],"content":system},*messages[1:]]
         if kwargs.get("structured_stage")=="proposal" and self.trader_evidence is not None:
             supplied=dict(messages[1])
             context=json.loads(supplied["content"])
@@ -176,7 +182,7 @@ def predict(arm, packet, backend, retrieval, memory, config, *, faults=None):
     try:
         state=build_workflow(view,backend,BUDGET,a3=runtime,compact_tool_results=False,
              financial=financial if arm!="T0" else None,rag=rag,memory=memory,
-             fundamentals=fundamentals if arm!="T0" else None,max_tool_calls_per_round=2,
+             fundamentals=fundamentals if arm!="T0" else None,max_tool_calls_per_round=TOOLS_PER_ROUND,
              flash_v3=arm!="T0").invoke({},{"recursion_limit":40})
         decision=Decision.model_validate(state["decision"]).model_dump(mode="json")
     except Exception as exc:
@@ -222,26 +228,42 @@ def record_db(path):
     return db
 
 
-def reconcile(ledger,db,frozen_hash):
+def reconcile(ledger,db,frozen_hash,previous=()):
     rows={}
     for cell,line,identity in db.execute("SELECT name,row,frozen_hash FROM cells"):
         if identity!=frozen_hash:
             raise ValueError("Checkpoint belongs to a different freeze")
         rows[cell]=json.loads(line)
+    historic=list(previous)
+    permitted=set(rows)|{cell for cell,_ in historic}
     pending=Counter()
     observed=Counter()
     for attempt in ledger.attempts(experiment_id=EXPERIMENT):
-        if attempt["status"]=="reserved" or attempt["task_id"] not in rows:
+        if attempt["status"]=="reserved" or attempt["task_id"] not in permitted:
             raise ValueError("Unmatched or unsettled B2 attempt; reconcile before sending another request")
         if attempt["status"]!="denied":
             pending[attempt["task_id"],attempt["request_sha256"],attempt["charged_tokens"]]+=1
-    for cell,row in rows.items():
+    for cell,row in [*historic,*rows.items()]:
         for call in row["calls"]:
             if call.get("charged_tokens") is not None and call.get("attempt",0)>0 and call.get("status")!="blocked":
                 observed[cell,call["request_sha256"],call["charged_tokens"]]+=1
     if pending!=observed:
         raise ValueError("Checkpoint/ledger receipt mismatch")
     return rows
+
+
+def previous_smoke(work,out):
+    archived=work/"precheck-v1"/"predictions.sqlite"
+    if not archived.exists():
+        return []
+    expected=sha256(out/"freeze-before-tool-limit-fix.json")
+    with closing(sqlite3.connect(archived.resolve().as_uri()+"?mode=ro",uri=True)) as db:
+        rows=[(cell,json.loads(value),identity) for cell,value,identity in db.execute(
+             "SELECT name,row,frozen_hash FROM cells")]
+    if len(rows)!=4 or any(identity!=expected or not cell.startswith(("T1:","T2:","T3:","T4:"))
+                           for cell,_,identity in rows):
+        raise ValueError("Previously archived Smoke does not match its freeze")
+    return [(cell,row) for cell,row,_ in rows]
 
 
 def freeze(work=WORK,out=OUT):
@@ -254,12 +276,17 @@ def freeze(work=WORK,out=OUT):
         raise ValueError("Offline integration smoke failed")
     manifest=load(out/"pilot-manifest.json")
     capacity=open_budget().capacity(experiment_id=EXPERIMENT,phase=PHASE)
-    if capacity["experiment_used"] or capacity["available"]<=0:
-        raise ValueError("Pilot budget is not untouched or lacks capacity")
+    prior=previous_smoke(work,out)
+    ledger=open_budget()
+    with closing(sqlite3.connect(":memory:")) as empty:
+        empty.execute("CREATE TABLE cells (name TEXT, row TEXT, frozen_hash TEXT)")
+        reconcile(ledger,empty,"not-issued",prior)
+    if capacity["available"]<=0:
+        raise ValueError("Pilot has no remaining capacity")
     config={
         "retriever":smoke["retriever"],"context":smoke["context"],"model":MODEL,"temperature":0,
         "reasoning":"low","max_retries":0,"max_prompt_bytes":MAX_PROMPT_BYTES,"budget":BUDGET.model_dump(),
-        "max_model_calls_per_cell":MAX_CALLS,"max_reservation_per_call":TokenBudget.reservation_size(MAX_PROMPT_BYTES,BUDGET.max_tokens),
+        "max_model_calls_per_cell":MAX_CALLS,"tools_per_round":TOOLS_PER_ROUND,"max_reservation_per_call":TokenBudget.reservation_size(MAX_PROMPT_BYTES,BUDGET.max_tokens),
         "fixed_retrieval_query":QUERY,"rag_context_bytes":EVIDENCE_BYTES,"memory":"M3 static deterministic Warm-up",
         "transport":"local","debate":"D2 without supplementary round",
         "phase":PHASE,"pilot_limit":LIMIT,"code_git_sha":git("rev-parse","HEAD"),
@@ -318,9 +345,10 @@ def execute(scope,work=WORK,out=OUT,device="cuda"):
     identity=sha256(out/"freeze.json")
     packets=read_packets(work,out)
     ledger=open_budget()
+    prior=previous_smoke(work,out)
     with (work/"runner.lock").open("a+") as lock, closing(record_db(work/"predictions.sqlite")) as db, ExitStack() as stack:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-        rows=reconcile(ledger,db,identity)
+        rows=reconcile(ledger,db,identity,prior)
         if any(row["system_fault"] for row in rows.values()):
             raise ValueError("A recorded system fault requires review before further real requests")
         if scope=="formal" and (not (work/"real-smoke.json").exists() or not load(work/"real-smoke.json")["passed"]):
@@ -346,7 +374,7 @@ def execute(scope,work=WORK,out=OUT,device="cuda"):
                 with db:
                     db.execute("INSERT INTO cells VALUES (?,?,?)",(cell,json.dumps(row,ensure_ascii=False),identity))
                 rows[cell]=row
-                reconcile(ledger,db,identity)
+                reconcile(ledger,db,identity,prior)
                 print(scope,arm,key,row["status"],row["system_fault"] or "",flush=True)
                 if row["system_fault"]:
                     atomic(work/"stop.json",{"cell":cell,"fault":row["system_fault"],

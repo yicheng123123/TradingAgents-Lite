@@ -113,3 +113,27 @@ def test_resume_stops_unmatched_attempt_and_preserves_finished_cell(tmp_path):
                        logical_call=1,attempt_number=1,request_sha256="x",request_bytes=100,max_output_tokens=100)
         with pytest.raises(ValueError,match="Unmatched"):
             reconcile(ledger,db,"frozen")
+
+
+def test_advertised_four_tool_limit_accepts_three_legitimate_calls(packet,tmp_path):
+    from types import SimpleNamespace
+    from tradingagents_lite.final_pilot.run import provider
+    from tradingagents_lite.final_pilot.smoke import MockEndpoint
+
+    class ThreeCalls(MockEndpoint):
+        def create(self,**request):
+            result=super().create(**request)
+            if request.get("tools"):
+                assert "4 tool calls in one round total" in request["messages"][0]["content"]
+                calls=result.choices[0].message.tool_calls
+                calls.extend(SimpleNamespace(id=name,type="function",
+                    function=SimpleNamespace(name=name,arguments="{}"))
+                    for name in ("market_bars","market_indicators"))
+            return result
+
+    ledger=TokenBudget(tmp_path/"mock.sqlite")
+    backend=provider(ThreeCalls(),ledger)
+    backend.set_budget_context(experiment_id="offline-"+EXPERIMENT,task_id="three-tools",phase=PHASE)
+    result=predict("T1",packet,backend,None,None,pilot_config())
+    assert result["status"]=="ok"
+    assert len([t for t in result["tool_trace"] if t.get("dispatch")=="react"])==3
